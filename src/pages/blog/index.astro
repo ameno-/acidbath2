@@ -9,9 +9,9 @@ const sortedPosts = allPosts.sort(
 );
 ---
 
-<BaseLayout title="Blog" description="All blog posts from Acidbath">
-  <h1>Blog</h1>
-  <p class="text-alt">All posts about technology, AI, and systems.</p>
+<BaseLayout title="AI Engineering Blog" description="Deep dives on agentic AI patterns, Claude Code, context engineering, and production LLM systems. Code-first tutorials for senior engineers.">
+  <h1>AI Engineering Articles</h1>
+  <p class="subtitle">Production patterns, agent architecture, and honest engineering.</p>
 
   <hr />
 
@@ -33,6 +33,12 @@ const sortedPosts = allPosts.sort(
 </BaseLayout>
 
 <style>
+  .subtitle {
+    color: var(--color-text-muted, #888);
+    margin-top: calc(var(--spacing-line) * -0.5);
+    margin-bottom: var(--spacing-line);
+  }
+
   .posts-list {
     margin-top: var(--spacing-line);
   }

@@ -4,6 +4,7 @@ description: "Skills generate Excel, PowerPoint, and PDF files in minutes, not h
 pubDate: 2025-12-17
 author: "Acidbath"
 tags: ["ai", "claude", "skills", "automation", "document-generation", "excel", "powerpoint", "pdf"]
+banner: "/assets/posts/document-generation-skills-banner.png"
 ---
 
 Document generation is the unsexy automation that saves hours.

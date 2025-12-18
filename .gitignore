@@ -49,3 +49,15 @@ __pycache__/
 # Audio files in analysis output
 *.m4a
 *.mp3
+
+# Local MCP configuration
+.mcp.json
+
+# AI documentation (local)
+ai_docs/
+
+# Generated images (working files)
+generated_imgs/
+
+# Root assets folder (use public/assets)
+/assets/

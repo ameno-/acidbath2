@@ -9,15 +9,9 @@ const recentPosts = allPosts
   .slice(0, 3);
 ---
 
-<BaseLayout title="Home" description="Acidbath - Technology and AI focused blog">
-  <section class="hero">
-    <h1>ACIDBATH</h1>
-    <p class="tagline">
-      Exploring technology, artificial intelligence, and the systems that shape our digital world.
-    </p>
-  </section>
+<BaseLayout title="Production AI Engineering" description="Code-first deep dives on AI agents, context engineering, and production LLM patterns. No hype, just what works.">
 
-  <hr />
+  <h1 class="page-title">Production AI Patterns for Senior Engineers</h1>
 
   <section class="recent-posts">
     <h2>Recent Posts</h2>
@@ -45,21 +39,12 @@ const recentPosts = allPosts
 </BaseLayout>
 
 <style>
-  .hero {
-    text-align: center;
-    padding: calc(var(--spacing-line) * 2) 0;
-  }
-
-  .hero h1 {
-    font-size: 3rem;
-    letter-spacing: 0.2em;
-    margin-bottom: var(--spacing-line);
-  }
-
-  .tagline {
-    color: var(--color-foreground-alt);
-    max-width: 50ch;
-    margin: 0 auto;
+  .page-title {
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: var(--color-text-muted, #888);
+    margin-bottom: calc(var(--spacing-line) * 1.5);
+    letter-spacing: 0.02em;
   }
 
   .recent-posts h2 {

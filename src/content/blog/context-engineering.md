@@ -4,6 +4,7 @@ description: "Progressive disclosure and semantic search are the difference betw
 pubDate: 2025-12-15
 author: "Acidbath"
 tags: ["ai", "context-window", "mcp", "semantic-search", "optimization"]
+banner: "/assets/posts/context-engineering-banner.png"
 ---
 
 Context is finite. Every token your agent loads before it starts working is a tax on productivity.

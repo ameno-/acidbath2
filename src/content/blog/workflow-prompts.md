@@ -4,6 +4,7 @@ description: "The workflow section drives 90% of the value in agentic prompts. L
 pubDate: 2025-12-15
 author: "Acidbath"
 tags: ["ai", "prompts", "claude-code", "workflow", "automation"]
+banner: "/assets/posts/workflow-prompts-banner.png"
 ---
 
 The workflow section is the most important thing you'll write in any agentic prompt.

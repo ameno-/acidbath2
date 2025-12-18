@@ -4,6 +4,7 @@ description: "System prompts define agent identity. File systems enable delegati
 pubDate: 2025-12-15
 author: "Acidbath"
 tags: ["ai", "agents", "claude-code", "sub-agents", "sdk", "architecture"]
+banner: "/assets/posts/agent-architecture-banner.png"
 ---
 
 The system prompt is everything. Change it and you change the product entirely.

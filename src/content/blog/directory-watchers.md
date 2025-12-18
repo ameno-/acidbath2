@@ -4,6 +4,7 @@ description: "Turn your file system into an AI interface. Build drop zones that 
 pubDate: 2025-12-15
 author: "Acidbath"
 tags: ["ai", "automation", "file-system", "python", "production"]
+banner: "/assets/posts/directory-watchers-banner.png"
 ---
 
 Directory watchers turn your file system into an AI interface.

@@ -1,0 +1,83 @@
+{
+  "primary": {
+    "prompt-engineering": {
+      "term": "prompt engineering framework",
+      "volume": "high",
+      "posts": ["prompts-are-the-new-code"],
+      "related": ["agentic prompts", "claude code prompts", "prompt engineering 2025"]
+    },
+    "mcp-alternatives": {
+      "term": "mcp server alternatives",
+      "volume": "medium",
+      "posts": ["context-window-bleeding"],
+      "related": ["context window optimization", "claude code context", "token optimization"]
+    },
+    "sub-agents": {
+      "term": "claude code sub agents",
+      "volume": "medium",
+      "posts": ["subagents-wrong"],
+      "related": ["ai agent patterns", "sub agent architecture", "agent orchestration"]
+    },
+    "drop-zones": {
+      "term": "agentic drop zones",
+      "volume": "low",
+      "posts": ["chat-ui-is-dead"],
+      "related": ["ai workflow automation", "beyond chat ui", "file-based automation"]
+    },
+    "custom-agents": {
+      "term": "custom claude agents",
+      "volume": "medium",
+      "posts": ["agent-endgame"],
+      "related": ["agent engineering", "claude code sdk agents", "system prompts"]
+    },
+    "large-codebases": {
+      "term": "ai coding large codebase",
+      "volume": "high",
+      "posts": ["55k-files-5-minutes"],
+      "related": ["mcp semantic search", "legacy code refactoring ai", "code indexing"]
+    }
+  },
+  "secondary": [
+    "claude code",
+    "anthropic claude",
+    "ai agents",
+    "llm engineering",
+    "context window management",
+    "token optimization",
+    "agentic workflows",
+    "ai automation",
+    "prompt design",
+    "agent architecture",
+    "mcp servers",
+    "semantic code search",
+    "ai coding assistants",
+    "developer productivity",
+    "engineering paradigm shift"
+  ],
+  "longTail": [
+    "how to build custom claude agents",
+    "reduce context window consumption claude code",
+    "sub agent patterns for ai workflows",
+    "file based ai automation drop zones",
+    "ai agents for large legacy codebases",
+    "7 level prompt engineering framework",
+    "mcp server token consumption",
+    "claude code best practices 2025",
+    "stakeholder trifecta prompt engineering",
+    "research vs implementation sub agents"
+  ],
+  "trending": [
+    "agentic coding",
+    "prompt engineering 2025",
+    "claude opus",
+    "ai software development",
+    "context engineering"
+  ],
+  "competitors": [
+    "cursor ai",
+    "github copilot",
+    "windsurf",
+    "codeium",
+    "tabnine"
+  ]
+}

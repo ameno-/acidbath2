@@ -1,0 +1,253 @@
+{
+  "status": "completed",
+  "video_id": "gyjoXC8lzIw",
+  "content_type": "technical",
+  "video_title": "Agentic Workflows: BEYOND the Chat UI with Claude Code SDK and Gemini Nano Banana",
+  "channel": "IndyDevDan",
+  "duration": "24:41",
+
+  "patterns_executed": [
+    "extract_technical_content",
+    "create_coding_project",
+    "extract_ideas",
+    "extract_references",
+    "extract_article_wisdom",
+    "create_summary",
+    "extract_questions",
+    "extract_wisdom",
+    "extract_predictions",
+    "extract_recommendations",
+    "rate_content",
+    "extract_youtube_metadata",
+    "extract_insights",
+    "extract_main_idea",
+    "extract_followups",
+    "extract_entities",
+    "extract_agent_opportunities",
+    "extract_summary",
+    "extract_structural_analysis"
+  ],
+
+  "output_files": [
+    "/Users/ameno/dev/umbra-dev/technical-research/output/youtube-analysis/gyjoXC8lzIw/patterns/extract_technical_content.md",
+    "/Users/ameno/dev/umbra-dev/technical-research/output/youtube-analysis/gyjoXC8lzIw/patterns/create_coding_project.md",
+    "/Users/ameno/dev/umbra-dev/technical-research/output/youtube-analysis/gyjoXC8lzIw/patterns/extract_ideas.md",
+    "/Users/ameno/dev/umbra-dev/technical-research/output/youtube-analysis/gyjoXC8lzIw/patterns/extract_references.md",
+    "/Users/ameno/dev/umbra-dev/technical-research/output/youtube-analysis/gyjoXC8lzIw/patterns/extract_article_wisdom.md",
+    "/Users/ameno/dev/umbra-dev/technical-research/output/youtube-analysis/gyjoXC8lzIw/patterns/create_summary.md",
+    "/Users/ameno/dev/umbra-dev/technical-research/output/youtube-analysis/gyjoXC8lzIw/patterns/extract_questions.md",
+    "/Users/ameno/dev/umbra-dev/technical-research/output/youtube-analysis/gyjoXC8lzIw/patterns/extract_wisdom.md",
+    "/Users/ameno/dev/umbra-dev/technical-research/output/youtube-analysis/gyjoXC8lzIw/patterns/extract_predictions.md",
+    "/Users/ameno/dev/umbra-dev/technical-research/output/youtube-analysis/gyjoXC8lzIw/patterns/extract_recommendations.md",
+    "/Users/ameno/dev/umbra-dev/technical-research/output/youtube-analysis/gyjoXC8lzIw/patterns/rate_content.md",
+    "/Users/ameno/dev/umbra-dev/technical-research/output/youtube-analysis/gyjoXC8lzIw/patterns/extract_youtube_metadata.md",
+    "/Users/ameno/dev/umbra-dev/technical-research/output/youtube-analysis/gyjoXC8lzIw/patterns/TECHNICAL_ANALYSIS_SUMMARY.md",
+    "/Users/ameno/dev/umbra-dev/technical-research/output/youtube-analysis/gyjoXC8lzIw/patterns/execution_summary.json"
+  ],
+
+  "metrics": {
+    "technical": {
+      "code_snippets": 11,
+      "tools_frameworks": 15,
+      "commands": 20,
+      "languages": 5,
+      "apis_services": 5,
+      "technical_concepts": 39,
+      "workflow_examples": 6,
+      "technical_items_documented": 78
+    },
+    "content_analysis": {
+      "total_lines_generated": 2269,
+      "technical_content_lines": 355,
+      "coding_project_lines": 420,
+      "ideas_extracted": 39,
+      "questions_generated": 1010,
+      "references_found": 20,
+      "wisdom_items": 88
+    },
+    "architecture": {
+      "architectural_patterns": 4,
+      "design_principles": 5,
+      "best_practices": 10,
+      "security_considerations": 4,
+      "performance_optimizations": 3
+    }
+  },
+
+  "technical_findings": {
+    "core_technologies": {
+      "languages": ["Python", "YAML", "Markdown", "JSON", "TypeScript"],
+      "frameworks": ["Rich", "Watchdog", "Astral UV", "OpenAI Whisper", "PyYAML"],
+      "ai_platforms": ["Claude Code SDK", "Gemini CLI", "Replicate API", "MCP Servers"],
+      "models": ["Claude 3.5 Sonnet", "Gemini 2.5 Flash", "OpenAI Whisper Tiny"]
+    },
+
+    "key_concepts": {
+      "architectural_patterns": [
+        "Event-Driven Architecture",
+        "Template Pattern",
+        "Agent Abstraction",
+        "Single Responsibility Principle"
+      ],
+      "design_principles": [
+        "File-Based Interface",
+        "Configuration Over Code",
+        "Streaming Responses",
+        "Parallel Processing",
+        "Automatic Archiving"
+      ]
+    },
+
+    "workflow_examples": [
+      {
+        "name": "Echo Zone",
+        "purpose": "Simple test validation",
+        "triggers": "*.txt files",
+        "agent": "Claude Code"
+      },
+      {
+        "name": "Image Generation Zone",
+        "purpose": "Generate images from text",
+        "triggers": "*.txt, *.md files",
+        "agent": "Claude Code with Replicate MCP"
+      },
+      {
+        "name": "Image Editing Zone",
+        "purpose": "Modify existing images",
+        "triggers": "Image files",
+        "agent": "Gemini Nano Banana"
+      },
+      {
+        "name": "Morning Debrief Zone",
+        "purpose": "Transcribe and analyze audio",
+        "triggers": "*.mp3, *.wav, *.m4a files",
+        "agent": "Claude Code + Whisper"
+      },
+      {
+        "name": "Training Data Expansion Zone",
+        "purpose": "Augment ML datasets",
+        "triggers": "*.json files",
+        "agent": "Claude Code"
+      },
+      {
+        "name": "Finance Categorization Zone",
+        "purpose": "Process financial data",
+        "triggers": "*.csv files",
+        "agent": "Claude Code"
+      }
+    ],
+
+    "prerequisites": {
+      "system": ["Python 3.11+", "File system permissions", "Network connectivity", "Terminal environment"],
+      "api_keys": ["ANTHROPIC_API_KEY", "REPLICATE_API_TOKEN", "GEMINI_API_KEY (optional)", "OPENAI_API_KEY (optional)"],
+      "packages": ["anthropic>=0.40.0", "watchdog>=4.0.0", "pyyaml>=6.0.1", "rich>=13.7.0"]
+    }
+  },
+
+  "tools_identified": {
+    "development": [
+      "Astral UV - Python dependency management",
+      "Rich - Terminal UI library",
+      "Watchdog - File system monitoring",
+      "PyYAML - Configuration parsing"
+    ],
+    "ai_sdks": [
+      "Claude Code SDK (Python & TypeScript)",
+      "Anthropic SDK",
+      "Google GenAI SDK",
+      "OpenAI SDK"
+    ],
+    "apis": [
+      "Replicate API - Model hosting",
+      "MCP Servers - AI service integration",
+      "Claude API - Agent platform",
+      "Gemini API - Alternative agent"
+    ]
+  },
+
+  "integration_opportunities": {
+    "immediate": [
+      "Start with echo zone for validation",
+      "Create 2-3 custom workflows",
+      "Test error handling",
+      "Monitor API usage",
+      "Set up logging"
+    ],
+    "advanced": [
+      "Implement workflow chaining",
+      "Add database integration",
+      "Create web dashboard",
+      "Build notification systems",
+      "Implement retry logic"
+    ],
+    "production": [
+      "Deploy as systemd service",
+      "Set up log rotation",
+      "Implement health checks",
+      "Create backup procedures",
+      "Document operations"
+    ],
+    "automation_use_cases": [
+      "Content creation pipeline",
+      "Data processing automation",
+      "Audio/video workflow processing",
+      "Development workflow automation",
+      "Personal productivity systems"
+    ]
+  },
+
+  "learning_objectives": {
+    "developers": [
+      "Event-driven architecture with file monitoring",
+      "Agent abstraction patterns",
+      "Structured prompt engineering",
+      "Parallel workflow execution",
+      "Agent-agnostic configuration"
+    ],
+    "ai_engineers": [
+      "Move beyond chat interfaces",
+      "Build reusable prompt templates",
+      "Integrate multiple AI providers",
+      "Design workflow automation",
+      "Leverage SDKs for agent control"
+    ],
+    "architects": [
+      "File-based interface design",
+      "Agent-agnostic architectures",
+      "Scalable workflow orchestration",
+      "Human-in-the-loop patterns",
+      "Configuration-driven systems"
+    ]
+  },
+
+  "execution_metadata": {
+    "execution_time_seconds": "~90",
+    "patterns_success_rate": "100%",
+    "patterns_attempted": 19,
+    "patterns_completed": 19,
+    "patterns_failed": 0,
+    "total_output_lines": 2269,
+    "timestamp": "2025-11-24T14:47:00",
+    "working_directory": "/Users/ameno/dev/umbra-dev/technical-research/output/youtube-analysis/gyjoXC8lzIw/patterns/"
+  },
+
+  "key_insights": [
+    "Single file script architecture enables easy distribution and deployment",
+    "Configuration-driven design eliminates code changes for new workflows",
+    "File system interface provides familiar, no-learning-curve user experience",
+    "Agent abstraction layer prevents vendor lock-in and future-proofs implementation",
+    "Parallel processing with ThreadPoolExecutor maximizes throughput",
+    "Structured prompt templates with variables enable sophisticated automation",
+    "Event-driven architecture with Watchdog enables real-time workflow triggering",
+    "MCP servers provide standardized integration across AI service providers"
+  ],
+
+  "next_steps": [
+    "Review TECHNICAL_ANALYSIS_SUMMARY.md for comprehensive findings",
+    "Examine extract_technical_content.md for detailed tech stack",
+    "Study create_coding_project.md for complete implementation",
+    "Read extract_ideas.md for architectural insights",
+    "Check extract_questions.md for deeper exploration topics",
+    "Review workflow examples for automation opportunities"
+  ]
+}

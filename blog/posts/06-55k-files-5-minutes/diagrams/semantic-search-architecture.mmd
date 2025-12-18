@@ -1,0 +1,43 @@
+flowchart TD
+    Start([Large Codebase<br/>55,000 files<br/>1.2M lines of code])
+
+    Problem{Traditional Approach<br/>Text-Based Search}
+    Solution{MCP Approach<br/>Semantic Tools}
+
+    Start --> Problem
+    Start --> Solution
+
+    Problem --> P1[Scan All Files]
+    P1 --> P2[Text Matching<br/>No Context]
+    P2 --> P3[Make Changes]
+    P3 --> P4{Build<br/>Success?}
+    P4 -->|No| P5[Compilation Error]
+    P5 --> P6[Find What Broke]
+    P6 --> P1
+    P4 -->|Yes| P7[Done After<br/>3 Hours]
+
+    Solution --> S1[Serena MCP:<br/>Semantic Indexing]
+    S1 --> S2[Embedding-Based<br/>Code Navigation]
+    S2 --> S3[Find Symbol<br/>Operations]
+    S3 --> S4[Refactor MCP:<br/>AST-Level Changes]
+    S4 --> S5[Compiler-Aware<br/>Refactoring]
+    S5 --> S6{Build<br/>Success?}
+    S6 -->|Yes| S7[Done in<br/>5 Minutes]
+    S6 -->|No| S8[Rare:<br/>Semantic Aware]
+    S8 --> S4
+
+    P7 --> Results1[28M tokens<br/>$14 cost<br/>4 rebuild cycles<br/>Constant supervision]
+    S7 --> Results2[1M tokens<br/>$0.60 cost<br/>One-shot execution<br/>Autonomous operation]
+
+    style Start fill:#FFE4B5
+    style Problem fill:#FFB6C6
+    style Solution fill:#87CEEB
+    style P7 fill:#FFB6C6
+    style S7 fill:#90EE90
+    style Results1 fill:#FFB6C6,stroke:#333,stroke-width:3px
+    style Results2 fill:#90EE90,stroke:#333,stroke-width:3px
+    style S1 fill:#DDA0DD
+    style S4 fill:#DDA0DD
+
+    classDef doom fill:#FF6B6B,stroke:#333,stroke-width:2px
+    class P5,P6 doom

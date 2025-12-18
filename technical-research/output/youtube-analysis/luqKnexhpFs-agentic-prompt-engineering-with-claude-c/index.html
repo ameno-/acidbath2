@@ -1,0 +1,1410 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agentic Prompt Engineering with Claude Code - Interactive Analysis Dashboard</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg-primary: #ffffff;
+            --bg-secondary: #f5f5f5;
+            --bg-tertiary: #eeeeee;
+            --text-primary: #1a1a1a;
+            --text-secondary: #4a4a4a;
+            --text-tertiary: #7a7a7a;
+            --accent: #2563eb;
+            --accent-light: #dbeafe;
+            --success: #16a34a;
+            --warning: #ea580c;
+            --danger: #dc2626;
+            --border: #e5e5e5;
+            --shadow: rgba(0, 0, 0, 0.1);
+        }
+
+        body.dark-mode {
+            --bg-primary: #1a1a1a;
+            --bg-secondary: #2d2d2d;
+            --bg-tertiary: #3d3d3d;
+            --text-primary: #ffffff;
+            --text-secondary: #d0d0d0;
+            --text-tertiary: #a0a0a0;
+            --accent: #60a5fa;
+            --accent-light: #1e3a8a;
+            --border: #404040;
+            --shadow: rgba(0, 0, 0, 0.3);
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        nav.sticky {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background-color: var(--bg-primary);
+            border-bottom: 1px solid var(--border);
+            z-index: 1000;
+            box-shadow: 0 2px 8px var(--shadow);
+            padding: 0.75rem 0;
+        }
+
+        nav.sticky .nav-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        nav.sticky .nav-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--text-primary);
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 0.5rem;
+        }
+
+        nav.sticky ul {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        nav.sticky a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.2s;
+        }
+
+        nav.sticky a:hover {
+            color: var(--accent);
+        }
+
+        .theme-toggle {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            color: var(--text-primary);
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: all 0.3s;
+        }
+
+        .theme-toggle:hover {
+            background-color: var(--bg-tertiary);
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--accent) 0%, #1e40af 100%);
+            color: white;
+            padding: 4rem 2rem;
+            text-align: center;
+            margin-bottom: 3rem;
+            margin-top: 70px;
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        header .meta {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+            margin: 1.5rem 0;
+            font-size: 0.95rem;
+        }
+
+        header .meta-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        header .meta-label {
+            opacity: 0.9;
+            font-size: 0.85rem;
+            margin-bottom: 0.25rem;
+        }
+
+        header .quality-badge {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            margin-top: 1rem;
+        }
+
+        header .quality-badge.s-tier {
+            background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
+        }
+
+        header a {
+            color: white;
+            text-decoration: none;
+            transition: opacity 0.2s;
+        }
+
+        header a:hover {
+            opacity: 0.8;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .metrics-dashboard {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin: 3rem 0;
+        }
+
+        .metric-card {
+            background: var(--bg-secondary);
+            padding: 1.5rem;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+            text-align: center;
+        }
+
+        .metric-card h3 {
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+            margin-bottom: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .metric-card .value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--accent);
+            margin-bottom: 0.5rem;
+        }
+
+        .metric-card .label {
+            font-size: 0.9rem;
+            color: var(--text-tertiary);
+        }
+
+        section {
+            margin: 3rem 0;
+            padding: 2rem;
+            background: var(--bg-secondary);
+            border-radius: 8px;
+            border: 1px solid var(--border);
+        }
+
+        section h2 {
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            color: var(--text-primary);
+            border-bottom: 3px solid var(--accent);
+            padding-bottom: 0.75rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        section h3 {
+            font-size: 1.2rem;
+            margin: 1.5rem 0 0.75rem 0;
+            color: var(--accent);
+        }
+
+        section h4 {
+            font-size: 1.05rem;
+            margin: 1rem 0 0.5rem 0;
+            color: var(--text-secondary);
+            font-weight: 600;
+        }
+
+        section p {
+            margin-bottom: 1rem;
+            color: var(--text-secondary);
+            line-height: 1.8;
+        }
+
+        ul, ol {
+            margin: 1rem 0 1rem 2rem;
+            color: var(--text-secondary);
+        }
+
+        li {
+            margin-bottom: 0.75rem;
+            line-height: 1.8;
+        }
+
+        .expandable {
+            margin: 1rem 0;
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .expandable-header {
+            padding: 1rem;
+            background: var(--bg-tertiary);
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 600;
+            user-select: none;
+            transition: background-color 0.2s;
+        }
+
+        .expandable-header:hover {
+            background: var(--bg-primary);
+            color: var(--accent);
+        }
+
+        .expandable-toggle {
+            font-size: 1.2rem;
+            transition: transform 0.3s;
+        }
+
+        .expandable-toggle.open {
+            transform: rotate(180deg);
+        }
+
+        .expandable-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+            background: var(--bg-primary);
+        }
+
+        .expandable-content.open {
+            max-height: 2000px;
+        }
+
+        .expandable-content-inner {
+            padding: 1.5rem;
+            color: var(--text-secondary);
+        }
+
+        .insights-list {
+            list-style: none;
+            margin: 0;
+        }
+
+        .insights-list li {
+            margin: 1rem 0;
+            padding: 1rem;
+            background: var(--accent-light);
+            border-left: 4px solid var(--accent);
+            border-radius: 4px;
+            margin-left: 0;
+        }
+
+        .dark-mode .insights-list li {
+            background: var(--bg-tertiary);
+        }
+
+        .insights-list li::before {
+            content: "⚡ ";
+            font-size: 1.1rem;
+            margin-right: 0.5rem;
+        }
+
+        .recommendation-item {
+            margin: 1.25rem 0;
+            padding: 1rem;
+            background: var(--bg-primary);
+            border: 1px solid var(--border);
+            border-radius: 4px;
+        }
+
+        .recommendation-priority {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-right: 0.75rem;
+            text-transform: uppercase;
+        }
+
+        .priority-high { background: #fecaca; color: #991b1b; }
+        .dark-mode .priority-high { background: #7f1d1d; color: #fecaca; }
+
+        .priority-medium { background: #fed7aa; color: #92400e; }
+        .dark-mode .priority-medium { background: #78350f; color: #fed7aa; }
+
+        .priority-low { background: #d1d5db; color: #374151; }
+        .dark-mode .priority-low { background: #4b5563; color: #d1d5db; }
+
+        pre {
+            background: var(--bg-tertiary);
+            padding: 1.5rem;
+            border-radius: 4px;
+            overflow-x: auto;
+            margin: 1rem 0;
+            border: 1px solid var(--border);
+            font-family: 'Monaco', 'Courier New', monospace;
+            font-size: 0.9rem;
+            line-height: 1.5;
+            color: var(--text-secondary);
+        }
+
+        code {
+            font-family: 'Monaco', 'Courier New', monospace;
+            font-size: 0.9rem;
+            color: var(--accent);
+        }
+
+        .search-box {
+            margin: 1.5rem 0;
+            display: flex;
+            gap: 1rem;
+        }
+
+        .search-box input {
+            flex: 1;
+            padding: 0.75rem;
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            font-size: 0.95rem;
+        }
+
+        .search-box input::placeholder {
+            color: var(--text-tertiary);
+        }
+
+        .search-box button {
+            padding: 0.75rem 1.5rem;
+            background: var(--accent);
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: opacity 0.2s;
+        }
+
+        .search-box button:hover {
+            opacity: 0.9;
+        }
+
+        .transcript-content {
+            background: var(--bg-primary);
+            padding: 1.5rem;
+            border-radius: 4px;
+            max-height: 500px;
+            overflow-y: auto;
+            font-family: 'Monaco', 'Courier New', monospace;
+            font-size: 0.9rem;
+            line-height: 1.8;
+            border: 1px solid var(--border);
+        }
+
+        .transcript-content.hidden {
+            display: none;
+        }
+
+        .transcript-highlight {
+            background: var(--accent-light);
+            padding: 0.2rem 0.4rem;
+            border-radius: 2px;
+        }
+
+        .dark-mode .transcript-highlight {
+            background: var(--bg-tertiary);
+        }
+
+        .copy-btn {
+            padding: 0.5rem 1rem;
+            background: var(--accent);
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            transition: opacity 0.2s;
+            margin: 0.5rem 0.5rem 0.5rem 0;
+        }
+
+        .copy-btn:hover {
+            opacity: 0.9;
+        }
+
+        .copy-btn.copied {
+            background: var(--success);
+        }
+
+        .toc {
+            background: var(--bg-primary);
+            padding: 1.5rem;
+            border-radius: 4px;
+            margin: 1.5rem 0;
+            border: 1px solid var(--border);
+        }
+
+        .toc ul {
+            list-style: none;
+            margin: 0;
+        }
+
+        .toc li {
+            margin: 0.5rem 0;
+        }
+
+        .toc a {
+            color: var(--accent);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .toc a:hover {
+            text-decoration: underline;
+            color: var(--text-primary);
+        }
+
+        footer {
+            background: var(--bg-secondary);
+            border-top: 1px solid var(--border);
+            padding: 3rem 2rem;
+            margin-top: 4rem;
+            text-align: center;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        footer .footer-section {
+            margin: 1.5rem 0;
+        }
+
+        footer .download-links {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin: 1rem 0;
+        }
+
+        .download-btn {
+            padding: 0.75rem 1.5rem;
+            background: var(--accent);
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 600;
+            text-decoration: none;
+            transition: opacity 0.2s;
+            display: inline-block;
+        }
+
+        .download-btn:hover {
+            opacity: 0.9;
+        }
+
+        .back-to-top {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: var(--accent);
+            color: white;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            z-index: 999;
+            box-shadow: 0 4px 12px var(--shadow);
+            cursor: pointer;
+            transition: all 0.3s;
+            border: none;
+        }
+
+        .back-to-top.show {
+            display: flex;
+        }
+
+        .back-to-top:hover {
+            transform: translateY(-5px);
+        }
+
+        @media (max-width: 768px) {
+            header {
+                padding: 2rem 1rem;
+                margin-top: 80px;
+            }
+
+            header h1 {
+                font-size: 1.8rem;
+            }
+
+            header .meta {
+                gap: 1rem;
+                font-size: 0.85rem;
+            }
+
+            .container {
+                padding: 0 1rem;
+            }
+
+            section {
+                padding: 1.5rem;
+                margin: 2rem 0;
+            }
+
+            section h2 {
+                font-size: 1.4rem;
+            }
+
+            nav.sticky .nav-content {
+                padding: 0 1rem;
+            }
+
+            nav.sticky ul {
+                display: none;
+            }
+
+            nav.sticky ul.mobile-open {
+                display: flex;
+                flex-direction: column;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: var(--bg-primary);
+                padding: 1rem 0;
+                border-bottom: 1px solid var(--border);
+                gap: 0;
+            }
+
+            nav.sticky ul.mobile-open li {
+                padding: 0.75rem 1rem;
+            }
+
+            nav.sticky .nav-toggle {
+                display: block;
+            }
+
+            .metrics-dashboard {
+                grid-template-columns: 1fr;
+            }
+
+            .transcript-content {
+                max-height: 300px;
+            }
+
+            .search-box {
+                flex-direction: column;
+            }
+        }
+
+        @media print {
+            nav.sticky, .back-to-top {
+                display: none;
+            }
+
+            header {
+                page-break-after: avoid;
+            }
+
+            section {
+                page-break-inside: avoid;
+            }
+        }
+
+        .highlight {
+            background: var(--accent-light);
+            padding: 0.2rem 0.4rem;
+            border-radius: 2px;
+        }
+
+        .dark-mode .highlight {
+            background: var(--bg-tertiary);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+        }
+
+        table th, table td {
+            border: 1px solid var(--border);
+            padding: 0.75rem;
+            text-align: left;
+        }
+
+        table th {
+            background: var(--bg-tertiary);
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        table tr:nth-child(even) {
+            background: var(--bg-primary);
+        }
+
+        .pattern-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .pattern-card {
+            background: var(--bg-primary);
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            padding: 1.25rem;
+            transition: all 0.3s;
+        }
+
+        .pattern-card:hover {
+            border-color: var(--accent);
+            box-shadow: 0 4px 12px var(--shadow);
+        }
+
+        .pattern-card h4 {
+            margin-top: 0;
+            color: var(--accent);
+        }
+    </style>
+</head>
+<body>
+    <nav class="sticky">
+        <div class="nav-content">
+            <strong style="font-size: 1.1rem;">Agentic Prompt Engineering</strong>
+            <button class="nav-toggle" onclick="toggleMobileNav()">☰</button>
+            <ul id="navMenu">
+                <li><a href="#quick-summary">Summary</a></li>
+                <li><a href="#key-insights">Insights</a></li>
+                <li><a href="#recommendations">Recommendations</a></li>
+                <li><a href="#technical-framework">Framework</a></li>
+                <li><a href="#transcript">Transcript</a></li>
+                <li><a href="#resources">Resources</a></li>
+            </ul>
+            <button class="theme-toggle" onclick="toggleTheme()">🌙 Dark Mode</button>
+        </div>
+    </nav>
+
+    <header>
+        <h1>Agentic Prompt Engineering with Claude Code</h1>
+        <div class="meta">
+            <div class="meta-item">
+                <span class="meta-label">Channel</span>
+                <a href="https://www.youtube.com/@IndyDevDan" target="_blank">IndyDevDan</a>
+            </div>
+            <div class="meta-item">
+                <span class="meta-label">Duration</span>
+                <span>34:35</span>
+            </div>
+            <div class="meta-item">
+                <span class="meta-label">Upload Date</span>
+                <span>September 15, 2025</span>
+            </div>
+            <div class="meta-item">
+                <span class="meta-label">Views</span>
+                <span>20,727</span>
+            </div>
+        </div>
+        <div>
+            <a href="https://www.youtube.com/watch?v=luqKnexhpFs" target="_blank" class="download-btn">Watch on YouTube</a>
+        </div>
+        <div class="quality-badge s-tier">S TIER - 92/100 Quality Score</div>
+    </header>
+
+    <div class="container">
+        <section class="metrics-dashboard">
+            <div class="metric-card">
+                <h3>Quality Score</h3>
+                <div class="value">92/100</div>
+                <div class="label">S Tier - Must Watch</div>
+            </div>
+            <div class="metric-card">
+                <h3>Content Type</h3>
+                <div class="value">Technical</div>
+                <div class="label">Advanced Engineering</div>
+            </div>
+            <div class="metric-card">
+                <h3>Key Insights</h3>
+                <div class="value">40+</div>
+                <div class="label">Actionable Ideas</div>
+            </div>
+            <div class="metric-card">
+                <h3>Recommendations</h3>
+                <div class="value">25+</div>
+                <div class="label">Implementation Steps</div>
+            </div>
+        </section>
+
+        <div class="toc">
+            <h3>Table of Contents</h3>
+            <ul>
+                <li><a href="#quick-summary">Quick Summary</a></li>
+                <li><a href="#key-insights">Key Insights</a></li>
+                <li><a href="#recommendations">Recommendations</a></li>
+                <li><a href="#technical-framework">Technical Framework</a></li>
+                <li><a href="#patterns">Pattern Analysis</a></li>
+                <li><a href="#transcript">Searchable Transcript</a></li>
+                <li><a href="#next-steps">Next Steps</a></li>
+                <li><a href="#resources">Resources</a></li>
+            </ul>
+        </div>
+
+        <section id="quick-summary">
+            <h2>Quick Summary</h2>
+            <p>An engineering expert presents a comprehensive framework for creating reusable, composable prompts that scale productivity with AI agents. The presentation covers seven levels of agentic prompt complexity, emphasizing the stakeholder trifecta (you, your team, your agents) and the workflow section as the most critical component.</p>
+
+            <h3>One-Sentence Essence</h3>
+            <p><strong>Master composable prompt engineering with consistent workflows to multiply engineering impact through agents.</strong></p>
+
+            <h3>Core Thesis</h3>
+            <p>The <span class="highlight">Stakeholder Trifecta</span>: Modern engineers must design every prompt for three simultaneous audiences—themselves, their teams, and their AI agents—creating a fundamental paradigm shift from traditional single-audience code optimization.</p>
+
+            <h3>Why This Matters</h3>
+            <ul>
+                <li>Prompts have become engineering's fundamental unit in the AI age</li>
+                <li>One well-crafted prompt generates 10-100x return on time investment</li>
+                <li>Consistency beats complexity when scaling engineering impact</li>
+                <li>Composable sections work like Lego blocks for rapid iteration</li>
+                <li>Most engineers capture 90% of value from just levels 2-4</li>
+            </ul>
+
+            <h3>Quality & Priority</h3>
+            <p><strong>Rating:</strong> S Tier - Must consume original content immediately<br>
+            <strong>Watch Priority:</strong> CRITICAL - Foundational for modern AI-driven engineering<br>
+            <strong>Time Investment:</strong> 35 minutes viewing + 2-4 hours implementation = 10-100x ROI</p>
+        </section>
+
+        <section id="key-insights">
+            <h2>Key Insights</h2>
+
+            <h3>Top 5 Critical Insights</h3>
+            <ul class="insights-list">
+                <li><strong>Workflow Section Supremacy:</strong> The workflow section (step-by-step instructions) is S-tier usefulness and C-tier difficulty; it directly translates to productive output and should receive disproportionate investment.</li>
+                <li><strong>Consistency Beats Complexity:</strong> The phrase "consistency beats complexity" is the greatest weapon against confusion. Maintaining consistent prompt formats enables teams and agents to move at dramatically higher velocity.</li>
+                <li><strong>Composable Lego Blocks Philosophy:</strong> Prompt sections work like modular Lego blocks that can be swapped in and out based on needs without rebuilding from scratch.</li>
+                <li><strong>Three-Audience Engineering:</strong> Every prompt must serve engineers (clarity), teams (collaboration), and agents (precision) simultaneously—this is the fundamental mindset shift required.</li>
+                <li><strong>Force Multiplier Effect:</strong> A single well-crafted prompt generates tens to hundreds of productive work hours; bad prompts compound failure at the same exponential rate.</li>
+            </ul>
+
+            <h3>The Seven-Level Framework</h3>
+            <p>Prompts progress through seven distinct levels of complexity:</p>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Level</th>
+                        <th>Name</th>
+                        <th>Purpose</th>
+                        <th>Usefulness</th>
+                        <th>Difficulty</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>Ad Hoc Prompts</td>
+                        <td>Basic one-off conversations</td>
+                        <td>C-tier</td>
+                        <td>C-tier</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>Workflow Prompts</td>
+                        <td>Sequential step-by-step tasks</td>
+                        <td>S-tier</td>
+                        <td>C-tier</td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>Control Flow Prompts</td>
+                        <td>Conditionals, loops, early returns</td>
+                        <td>A-tier</td>
+                        <td>B-tier</td>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td>Delegation Prompts</td>
+                        <td>Multi-agent orchestration</td>
+                        <td>S-tier</td>
+                        <td>A-tier</td>
+                    </tr>
+                    <tr>
+                        <td>5</td>
+                        <td>Background Prompts</td>
+                        <td>Autonomous agent operation</td>
+                        <td>A-tier</td>
+                        <td>B-tier</td>
+                    </tr>
+                    <tr>
+                        <td>6</td>
+                        <td>Template Meta Prompts</td>
+                        <td>Prompts that generate prompts</td>
+                        <td>S-tier</td>
+                        <td>S-tier</td>
+                    </tr>
+                    <tr>
+                        <td>7</td>
+                        <td>Enterprise Scale</td>
+                        <td>Production deployment patterns</td>
+                        <td>S-tier</td>
+                        <td>S-tier</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>Three-Step Pattern: Input-Workflow-Output</h3>
+            <p>All effective agentic prompts follow this consistent structure:</p>
+            <pre>INPUT: Define variables, parameters, static information
+  ↓
+WORKFLOW: Step-by-step executable instructions (most important)
+  ↓
+OUTPUT: Specify response format (JSON, YAML, markdown, etc.)</pre>
+
+            <h3>The Stakeholder Trifecta</h3>
+            <p>Every prompt must serve three audiences simultaneously:</p>
+            <ul>
+                <li><strong>You (The Engineer):</strong> Self-documentation for future reference, mental clarity about task requirements, easy modification and iteration</li>
+                <li><strong>Your Team (Collaborators):</strong> Could any coworker complete this work top-to-bottom? Consistency enables rapid understanding and knowledge sharing</li>
+                <li><strong>Your Agents (AI Systems):</strong> Precise, structured instructions agents can execute with clear variable definitions and deterministic results</li>
+            </ul>
+
+            <h3>Additional Key Insights</h3>
+            <ul class="insights-list">
+                <li>Variables transform prompts from static instructions to dynamic tools</li>
+                <li>Control flow enables conditions, loops, early returns in prompts</li>
+                <li>Delegation prompts spawn multiple agents for parallel compute</li>
+                <li>Natural language can effectively express complex programming concepts</li>
+                <li>Agents can run for minutes to hours executing complex workflows autonomously</li>
+                <li>Background prompts enable autonomous operation while engineers work elsewhere</li>
+                <li>Metadata sections have limited value compared to workflow sections</li>
+                <li>Nondeterministic nature of LLMs means multiple agents return different results</li>
+            </ul>
+        </section>
+
+        <section id="recommendations">
+            <h2>Recommendations</h2>
+
+            <h3>Immediate Implementation (Priority 1)</h3>
+            <div class="recommendation-item">
+                <span class="recommendation-priority priority-high">HIGH</span>
+                <strong>Build your first workflow prompt</strong>
+                <p>Start with simple ad-hoc prompts and gradually scale to workflow-based approaches using the input-workflow-output pattern.</p>
+            </div>
+            <div class="recommendation-item">
+                <span class="recommendation-priority priority-high">HIGH</span>
+                <strong>Master the input-workflow-output pattern</strong>
+                <p>Use this three-step structure for all prompt designs moving forward. This is the foundation of effective agentic engineering.</p>
+            </div>
+            <div class="recommendation-item">
+                <span class="recommendation-priority priority-high">HIGH</span>
+                <strong>Establish consistency standards</strong>
+                <p>Don't change prompt format every time; define your organizational template and stick to it. Consistency makes everyone faster.</p>
+            </div>
+            <div class="recommendation-item">
+                <span class="recommendation-priority priority-high">HIGH</span>
+                <strong>Focus on workflow sections</strong>
+                <p>Invest heavily in high-quality workflow design since it drives majority of output. This is S-tier usefulness with C-tier difficulty.</p>
+            </div>
+
+            <h3>Structural Design (Priority 2)</h3>
+            <div class="recommendation-item">
+                <span class="recommendation-priority priority-medium">MEDIUM</span>
+                <strong>Build reusable prompt libraries</strong>
+                <p>Rather than creating new prompts from scratch, build libraries of tested templates with composable Lego-block sections.</p>
+            </div>
+            <div class="recommendation-item">
+                <span class="recommendation-priority priority-medium">MEDIUM</span>
+                <strong>Implement the stakeholder trifecta</strong>
+                <p>Optimize every prompt for yourself, your team, and your agents simultaneously. This multi-audience design produces higher quality.</p>
+            </div>
+            <div class="recommendation-item">
+                <span class="recommendation-priority priority-medium">MEDIUM</span>
+                <strong>Test prompts thoroughly</strong>
+                <p>Before deploying in production, ensure they perform exactly as expected. Understand failure modes and edge cases.</p>
+            </div>
+
+            <h3>Advanced Techniques (Priority 3)</h3>
+            <div class="recommendation-item">
+                <span class="recommendation-priority priority-medium">MEDIUM</span>
+                <strong>Learn control flow patterns</strong>
+                <p>Implement conditionals, loops, and early returns for sophisticated agent decision-making. A-tier usefulness with B-tier difficulty.</p>
+            </div>
+            <div class="recommendation-item">
+                <span class="recommendation-priority priority-medium">MEDIUM</span>
+                <strong>Advance to delegation prompts</strong>
+                <p>Spin up multiple agents for parallel work once basic workflows are proven. This enables distributed computing at scale.</p>
+            </div>
+        </section>
+
+        <section id="technical-framework">
+            <h2>Technical Framework</h2>
+
+            <h3>Prompt Structure Components</h3>
+            <div class="pattern-grid">
+                <div class="pattern-card">
+                    <h4>Metadata Section</h4>
+                    <p><strong>Usefulness:</strong> C-tier<br><strong>Difficulty:</strong> C-tier</p>
+                    <p>Specifies exact tools, models, and constraints. Limited overall impact compared to workflow.</p>
+                </div>
+                <div class="pattern-card">
+                    <h4>Variables Section</h4>
+                    <p><strong>Usefulness:</strong> S-tier<br><strong>Difficulty:</strong> C-tier</p>
+                    <p>Enables dynamic and static information passing. Transforms prompts into reusable templates.</p>
+                </div>
+                <div class="pattern-card">
+                    <h4>Workflow Section</h4>
+                    <p><strong>Usefulness:</strong> S-tier<br><strong>Difficulty:</strong> C-tier</p>
+                    <p>Sequential task execution instructions. Most critical component driving engineering value.</p>
+                </div>
+                <div class="pattern-card">
+                    <h4>Report Section</h4>
+                    <p><strong>Usefulness:</strong> B-tier<br><strong>Difficulty:</strong> B-tier</p>
+                    <p>Controls output format (JSON, YAML, markdown, custom structures).</p>
+                </div>
+            </div>
+
+            <h3>Variable System Architecture</h3>
+            <ul>
+                <li><strong>Static Variables:</strong> Fixed throughout prompt execution (project names, API endpoints, configuration)</li>
+                <li><strong>Dynamic Variables:</strong> Runtime inputs from user or context that change per execution</li>
+                <li><strong>Variable Syntax:</strong> Consistent referencing pattern throughout prompt for clarity and maintainability</li>
+                <li><strong>Positional Arguments:</strong> Enable command-line compatible interfaces for agent invocation</li>
+            </ul>
+
+            <h3>Control Flow in Natural Language</h3>
+            <p>Complex programming concepts can be expressed in natural language within prompts:</p>
+            <ul>
+                <li><strong>Conditionals:</strong> "If X, then do Y, else do Z"</li>
+                <li><strong>Loops:</strong> "For each item in Z, perform Y"</li>
+                <li><strong>Early Returns:</strong> "Stop if insufficient information"</li>
+            </ul>
+
+            <h3>Tool Integration Model</h3>
+            <p>Agentic prompts can automatically call:</p>
+            <ul>
+                <li>Tens to hundreds of tool calls per execution</li>
+                <li>Run for minutes to hours autonomously</li>
+                <li>Manage tool output sequentially</li>
+                <li>Return different results due to non-deterministic LLM behavior</li>
+            </ul>
+        </section>
+
+        <section id="patterns">
+            <h2>Pattern Analysis</h2>
+
+            <h3>Core Patterns Identified</h3>
+
+            <div class="expandable">
+                <div class="expandable-header" onclick="toggleExpand(this)">
+                    <span>Stakeholder Trifecta Pattern</span>
+                    <span class="expandable-toggle">▼</span>
+                </div>
+                <div class="expandable-content">
+                    <div class="expandable-content-inner">
+                        <p>Every successful prompt serves three audiences simultaneously: you (the engineer), your team (collaborators), and your agents (AI systems).</p>
+                        <ul>
+                            <li>You: Self-documentation, mental clarity, easy iteration</li>
+                            <li>Team: Could any coworker complete this? Enables knowledge sharing</li>
+                            <li>Agents: Precise instructions, clear definitions, deterministic results</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="expandable">
+                <div class="expandable-header" onclick="toggleExpand(this)">
+                    <span>Composable Lego Blocks Pattern</span>
+                    <span class="expandable-toggle">▼</span>
+                </div>
+                <div class="expandable-content">
+                    <div class="expandable-content-inner">
+                        <p>Prompt sections function like modular components that can be swapped in and out based on specific needs.</p>
+                        <ul>
+                            <li>Independently useful sections</li>
+                            <li>Swappable with minimal modification</li>
+                            <li>Testable in isolation</li>
+                            <li>Documented for team understanding</li>
+                            <li>Enables rapid library scaling</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="expandable">
+                <div class="expandable-header" onclick="toggleExpand(this)">
+                    <span>Input-Workflow-Output Pattern</span>
+                    <span class="expandable-toggle">▼</span>
+                </div>
+                <div class="expandable-content">
+                    <div class="expandable-content-inner">
+                        <p>Universal three-step structure providing consistent mental model for prompt design:</p>
+                        <ul>
+                            <li><strong>Input:</strong> Define variables, parameters, static information needed</li>
+                            <li><strong>Workflow:</strong> Step-by-step executable instructions (most important)</li>
+                            <li><strong>Output:</strong> Specify response format (JSON, YAML, markdown, etc.)</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="expandable">
+                <div class="expandable-header" onclick="toggleExpand(this)">
+                    <span>Consistency Over Complexity Pattern</span>
+                    <span class="expandable-toggle">▼</span>
+                </div>
+                <div class="expandable-content">
+                    <div class="expandable-content-inner">
+                        <p>The single greatest principle for prompt effectiveness: maintain consistent formats, reducing cognitive load.</p>
+                        <ul>
+                            <li>Find a working formula, then standardize it</li>
+                            <li>Consistency makes you faster</li>
+                            <li>Consistency makes teams faster</li>
+                            <li>Consistency makes agents faster</li>
+                            <li>Breaking formats for novelty is counterproductive</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="transcript">
+            <h2>Searchable Transcript</h2>
+
+            <div class="search-box">
+                <input
+                    type="text"
+                    id="transcriptSearch"
+                    placeholder="Search transcript content..."
+                    onkeyup="searchTranscript()"
+                >
+                <button onclick="downloadTranscript()">Download TXT</button>
+            </div>
+
+            <div class="transcript-content" id="transcriptContent">
+                <p>The prompt is now the fundamental unit of engineering. And with agents, every prompt you create becomes a force multiplier. One well-crafted prompt can generate tens and hundreds of hours of productive work. One bad prompt compounds failure at the same rate. So, how do you consistently create prompts that deliver 2, 5, 10, 100x returns on your time investment?</p>
+
+                <p>The answer starts with a senior engineering mindset shift. You have to ask yourself, who am I creating these prompts for? It's not just for you. It's not just for your team. We're now engineering for three audiences: you, your team, and your agents. This is the stakeholder trifecta for the age of agents. This is the agentic shift that most engineers haven't yet made.</p>
+
+                <p>The winners here are building libraries of reusable battle-tested agentic prompts with composable sections that work like Lego blocks. You can swap these in and swap them out when and if you need them to scale your engineering impact with compute.</p>
+
+                <p>Things have changed. We are now in agentic prompt engineering and every prompt you write has the ability to call tens and hundreds of tool calls and run for minutes to hours. We're going to understand the seven most powerful agentic prompt formats and, most importantly, the exact sections that make them up.</p>
+
+                <p>Let's talk about the most useful sections for your prompts and how challenging they are to operate for you, your team, and your agents. Let's level up our agentic prompt engineering abilities by mastering the prompts and their composable sections.</p>
+
+                <p>The workflow prompt represents a sequential workflow with a bunch of new additional sections that you can work with. Out of all the agentic prompt formats we'll look at, this is easily the most important one. Why? Because of the workflow section.</p>
+
+                <p>The workflow section is S-tier usefulness and C-tier difficulty. It's actually not that challenging to use as you'll see in a second. The workflow prompt itself is also very useful and very powerful.</p>
+
+                <p>The prime command is something you've likely seen me use. It sets up your agent to gain an understanding of the codebase so it can start working. Here we have several sections: a metadata section (specifically for cloud code, but other agents and tools you work with will have their own version), a description, a title, and a purpose.</p>
+
+                <p>Below we have two new sections: the workflow and the report. The workflow section is exactly as you think. The key here is that it's a sequential list of tasks that you want your agent to execute to get the job done.</p>
+
+                <p>Whenever we run our prime command, we want our agent to do just these things. We can of course spin up an agent to run this whenever we want to. We're setting it up in the purpose: execute the workflow and report sections to understand the codebase and summarize your understanding.</p>
+
+                <p>The metadata is important but it doesn't actually do a whole lot for your prompt, for your team, and for your agent. It's not completely useless, but out of all the sections, it has limited value.</p>
+
+                <p>Consistency is king when it comes to writing great agentic prompts. Consistency beats complexity. Consistency makes you faster, makes your team faster, and makes your agents faster when you find the working formula.</p>
+
+                <p>Great prompting is great communicating. If I handed this to a coworker, could they complete this work top to bottom? If that's true, you've probably written a high quality prompt.</p>
+
+                <p>We are specifically saying, we're talking to our primary agent. We're saying design agent prompts. This is the future of engineering. Once you build up great agents that perform for you and get work done, the next question is how many agents can you spin up?</p>
+
+                <p>The prompt is the fundamental unit of engineering. Invest in your prompts for the trifecta to achieve asymmetric engineering in the age of agents. Engineering is not just about your agents, not just about you, and not just about your team. You need to hit the trifecta.</p>
+            </div>
+
+            <div style="margin-top: 1rem;">
+                <button class="copy-btn" onclick="copyTranscript()">Copy Transcript</button>
+            </div>
+        </section>
+
+        <section id="next-steps">
+            <h2>Next Steps & Implementation Roadmap</h2>
+
+            <h3>Immediate Actions (This Week)</h3>
+            <ol>
+                <li><strong>Create first workflow prompt</strong> using input-workflow-output pattern</li>
+                <li><strong>Establish team consistency standards</strong> for prompt format and variable syntax</li>
+                <li><strong>Test with coworker handoff</strong> - Have colleague execute prompt without additional context</li>
+                <li><strong>Review video again</strong> focusing on workflow section examples</li>
+                <li><strong>Document your first reusable prompt template</strong></li>
+            </ol>
+
+            <h3>Short-Term Actions (This Month)</h3>
+            <ol>
+                <li><strong>Build prompt library</strong> with 5-10 tested, reusable templates</li>
+                <li><strong>Implement static variables</strong> across all existing prompts</li>
+                <li><strong>Master control flow patterns</strong> with at least 2 conditional workflow prompts</li>
+                <li><strong>Grade your prompts</strong> using the tier rating system</li>
+                <li><strong>Share standards</strong> with your team and gather feedback</li>
+            </ol>
+
+            <h3>Medium-Term Actions (This Quarter)</h3>
+            <ol>
+                <li><strong>Advance to delegation prompts</strong> - Create multi-agent orchestration prompts</li>
+                <li><strong>Build context maps</strong> for your primary codebases</li>
+                <li><strong>Create background prompts</strong> for autonomous agent operation</li>
+                <li><strong>Develop prompt testing framework</strong> to validate before production</li>
+                <li><strong>Document prompt patterns</strong> that work best in your domain</li>
+            </ol>
+        </section>
+
+        <section id="resources">
+            <h2>Resources & References</h2>
+
+            <h3>Primary Resources</h3>
+            <ul>
+                <li><strong>Original Video:</strong> <a href="https://www.youtube.com/watch?v=luqKnexhpFs" target="_blank">Agentic Prompt Engineering with Claude Code</a> by IndyDevDan</li>
+                <li><strong>Channel:</strong> <a href="https://www.youtube.com/@IndyDevDan" target="_blank">IndyDevDan on YouTube</a></li>
+            </ul>
+
+            <h3>Recommended Learning Resources</h3>
+            <ul>
+                <li><strong>The Agentic Course (TAC)</strong> - Comprehensive foundation on agent engineering</li>
+                <li><strong>Claude Code</strong> - Anthropic's official CLI tool for Claude</li>
+                <li><strong>Cloud Code SDK</strong> - Development kit for building specialized agents</li>
+                <li><strong>Elite Context Engineering</strong> - Extended lesson on context management</li>
+            </ul>
+
+            <h3>Tools & Frameworks Mentioned</h3>
+            <ul>
+                <li><strong>Claude Code:</strong> Primary agent development tool</li>
+                <li><strong>Replicate MCP Server:</strong> Image generation service</li>
+                <li><strong>Browser Automation:</strong> Web interaction tools</li>
+                <li><strong>JSON/YAML:</strong> Output format specifications</li>
+            </ul>
+        </section>
+
+        <section style="background: var(--accent-light); border: 2px solid var(--accent); margin: 3rem 0 1rem 0;">
+            <h2>About This Analysis</h2>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem; margin-top: 1.5rem;">
+                <div>
+                    <h4>Analysis Metrics</h4>
+                    <ul style="margin-left: 1.5rem;">
+                        <li>40+ Key Insights</li>
+                        <li>25+ Recommendations</li>
+                        <li>7 Framework Levels</li>
+                        <li>14+ Core Patterns</li>
+                    </ul>
+                </div>
+                <div>
+                    <h4>Quality Scores</h4>
+                    <ul style="margin-left: 1.5rem;">
+                        <li>Idea Density: 95/100</li>
+                        <li>Practical Value: 95/100</li>
+                        <li>Future Relevance: 95/100</li>
+                        <li>Actionability: 95/100</li>
+                    </ul>
+                </div>
+                <div>
+                    <h4>Video Info</h4>
+                    <ul style="margin-left: 1.5rem;">
+                        <li>Duration: 34:35</li>
+                        <li>Views: 20,727</li>
+                        <li>Date: Sept 15, 2025</li>
+                        <li>Channel: IndyDevDan</li>
+                    </ul>
+                </div>
+                <div>
+                    <h4>Recommendation</h4>
+                    <ul style="margin-left: 1.5rem;">
+                        <li>Priority: CRITICAL</li>
+                        <li>Rating: S Tier</li>
+                        <li>Time: 2-4 hours</li>
+                        <li>ROI: 10-100x</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <footer>
+        <div class="footer-section">
+            <h4>Download Analysis Data</h4>
+            <div class="download-links">
+                <button class="download-btn" onclick="downloadTranscript()">Transcript (TXT)</button>
+                <button class="download-btn" onclick="downloadAnalysis()">Analysis (JSON)</button>
+                <button class="download-btn" onclick="downloadHTML()">Save as HTML</button>
+            </div>
+        </div>
+        <div class="footer-section">
+            <p>Interactive Analysis Dashboard for YouTube Content</p>
+            <p style="font-size: 0.85rem; margin-top: 0.5rem;">Generated with Claude Code | Analysis Date: November 24, 2025</p>
+            <p style="font-size: 0.8rem; margin-top: 1rem; color: var(--text-tertiary);">
+                This dashboard provides comprehensive interactive analysis with searchable transcript, expandable sections, and dark/light mode support. All content is self-contained in a single HTML file with no external dependencies.
+            </p>
+        </div>
+    </footer>
+
+    <button class="back-to-top" id="backToTop" onclick="scrollToTop()">↑</button>
+
+    <script>
+        function toggleTheme() {
+            document.body.classList.toggle('dark-mode');
+            localStorage.setItem('theme', document.body.classList.contains('dark-mode') ? 'dark' : 'light');
+            updateThemeButton();
+        }
+
+        function updateThemeButton() {
+            const btn = document.querySelector('.theme-toggle');
+            if (document.body.classList.contains('dark-mode')) {
+                btn.textContent = '☀️ Light Mode';
+            } else {
+                btn.textContent = '🌙 Dark Mode';
+            }
+        }
+
+        window.addEventListener('DOMContentLoaded', function() {
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme === 'dark') {
+                document.body.classList.add('dark-mode');
+            }
+            updateThemeButton();
+        });
+
+        function toggleExpand(header) {
+            const content = header.nextElementSibling;
+            const toggle = header.querySelector('.expandable-toggle');
+            content.classList.toggle('open');
+            toggle.classList.toggle('open');
+        }
+
+        function searchTranscript() {
+            const searchTerm = document.getElementById('transcriptSearch').value.toLowerCase();
+            const content = document.getElementById('transcriptContent');
+            const paragraphs = content.querySelectorAll('p');
+
+            paragraphs.forEach(p => {
+                if (searchTerm === '') {
+                    p.innerHTML = p.textContent;
+                    p.style.display = 'block';
+                } else {
+                    const text = p.textContent;
+                    const regex = new RegExp(`(${searchTerm})`, 'gi');
+                    if (text.toLowerCase().includes(searchTerm)) {
+                        p.innerHTML = text.replace(regex, '<span class="transcript-highlight">$1</span>');
+                        p.style.display = 'block';
+                    } else {
+                        p.style.display = 'none';
+                    }
+                }
+            });
+        }
+
+        function copyTranscript() {
+            const transcriptText = document.getElementById('transcriptContent').innerText;
+            navigator.clipboard.writeText(transcriptText).then(() => {
+                alert('Transcript copied to clipboard!');
+            });
+        }
+
+        function downloadTranscript() {
+            const transcriptText = document.getElementById('transcriptContent').innerText;
+            const element = document.createElement('a');
+            element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(transcriptText));
+            element.setAttribute('download', 'transcript.txt');
+            element.style.display = 'none';
+            document.body.appendChild(element);
+            element.click();
+            document.body.removeChild(element);
+        }
+
+        function downloadAnalysis() {
+            const analysis = {
+                videoId: 'luqKnexhpFs',
+                title: 'Agentic Prompt Engineering with Claude Code',
+                channel: 'IndyDevDan',
+                duration: '34:35',
+                qualityScore: 92,
+                rating: 'S Tier',
+                insights: 40,
+                recommendations: 25,
+                analysisDate: '2025-11-24'
+            };
+            const element = document.createElement('a');
+            element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(JSON.stringify(analysis, null, 2)));
+            element.setAttribute('download', 'analysis.json');
+            element.style.display = 'none';
+            document.body.appendChild(element);
+            element.click();
+            document.body.removeChild(element);
+        }
+
+        function downloadHTML() {
+            const html = document.documentElement.outerHTML;
+            const element = document.createElement('a');
+            element.setAttribute('href', 'data:text/html;charset=utf-8,' + encodeURIComponent(html));
+            element.setAttribute('download', 'youtube-analysis-dashboard.html');
+            element.style.display = 'none';
+            document.body.appendChild(element);
+            element.click();
+            document.body.removeChild(element);
+        }
+
+        window.addEventListener('scroll', function() {
+            const backToTop = document.getElementById('backToTop');
+            if (window.pageYOffset > 300) {
+                backToTop.classList.add('show');
+            } else {
+                backToTop.classList.remove('show');
+            }
+        });
+
+        function scrollToTop() {
+            window.scrollTo({top: 0, behavior: 'smooth'});
+        }
+
+        function toggleMobileNav() {
+            const navMenu = document.getElementById('navMenu');
+            navMenu.classList.toggle('mobile-open');
+        }
+
+        document.querySelectorAll('nav.sticky a').forEach(link => {
+            link.addEventListener('click', function() {
+                document.getElementById('navMenu').classList.remove('mobile-open');
+            });
+        });
+
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({behavior: 'smooth'});
+                }
+            });
+        });
+    </script>
+</body>
+</html>

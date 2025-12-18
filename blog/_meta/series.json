@@ -1,0 +1,86 @@
+{
+  "series": {
+    "title": "The Agentic Engineering Playbook",
+    "description": "A 6-part series on mastering AI agents, prompt engineering, and the future of software development. Based on deep analysis of cutting-edge technical content from leading practitioners.",
+    "slug": "agentic-engineering-playbook",
+    "author": "ameno",
+    "created": "2025-12-15",
+    "totalPosts": 6,
+    "category": "AI Engineering",
+    "license": "CC BY-NC-SA 4.0"
+  },
+  "posts": [
+    {
+      "order": 1,
+      "slug": "prompts-are-the-new-code",
+      "title": "Prompts Are the New Code",
+      "subtitle": "The 7-Level Framework That's Making Traditional Programming Obsolete",
+      "tier": "S",
+      "readTime": "12 min",
+      "themes": ["prompt-engineering", "paradigm-shift", "frameworks"]
+    },
+    {
+      "order": 2,
+      "slug": "context-window-bleeding",
+      "title": "Your Context Window Is Bleeding",
+      "subtitle": "Why MCP Servers Are a Bandaid on a Bullet Wound",
+      "tier": "B",
+      "readTime": "10 min",
+      "themes": ["optimization", "context-management", "mcp"]
+    },
+    {
+      "order": 3,
+      "slug": "subagents-wrong",
+      "title": "You're Using Sub-Agents Wrong",
+      "subtitle": "90% of Developers Are Sabotaging Their AI Workflows",
+      "tier": "A",
+      "readTime": "9 min",
+      "themes": ["sub-agents", "architecture", "anti-patterns"]
+    },
+    {
+      "order": 4,
+      "slug": "chat-ui-is-dead",
+      "title": "Chat UI Is Dead",
+      "subtitle": "Why Agentic Drop Zones Are the Future of AI Automation",
+      "tier": "A",
+      "readTime": "11 min",
+      "themes": ["automation", "workflows", "drop-zones"]
+    },
+    {
+      "order": 5,
+      "slug": "agent-endgame",
+      "title": "The Agent Endgame",
+      "subtitle": "Stop Renting Default Agents and Start Building Your Own",
+      "tier": "A",
+      "readTime": "13 min",
+      "themes": ["custom-agents", "sdk", "production"]
+    },
+    {
+      "order": 6,
+      "slug": "55k-files-5-minutes",
+      "title": "55,000 Files in 5 Minutes",
+      "subtitle": "How to Make AI Coding Agents Actually Work on Large Codebases",
+      "tier": "A",
+      "readTime": "10 min",
+      "themes": ["large-codebases", "semantic-search", "performance"]
+    }
+  ],
+  "sources": {
+    "channels": ["IndyDevDan", "AI Jason", "Jo Van Eyck"],
+    "platform": "YouTube",
+    "analysisMethod": "Multi-pattern fabric analysis with Claude",
+    "totalAnalysisSize": "32.5 MB"
+  },
+  "seo": {
+    "siteName": "The Agentic Engineering Playbook",
+    "locale": "en_US",
+    "type": "article",
+    "twitterCard": "summary_large_image",
+    "canonicalBase": ""
+  },
+  "navigation": {
+    "prevLabel": "Previous",
+    "nextLabel": "Next",
+    "seriesLabel": "Part {n} of 6"
+  }
+}

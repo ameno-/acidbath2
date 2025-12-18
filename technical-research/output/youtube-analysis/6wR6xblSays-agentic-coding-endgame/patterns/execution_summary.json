@@ -1,0 +1,310 @@
+{
+  "status": "completed",
+  "video_id": "6wR6xblSays",
+  "video_title": "Agentic Coding ENDGAME: Build your Claude Code SDK Custom Agents",
+  "channel": "IndyDevDan",
+  "duration": "16:56",
+  "content_type": "technical",
+  "analysis_timestamp": "2025-11-24",
+
+  "patterns_executed": [
+    "extract_technical_content",
+    "technical_summary",
+    "integration_opportunities",
+    "learning_objectives",
+    "quick_start_guide"
+  ],
+
+  "output_files": [
+    "/Users/ameno/dev/umbra-dev/technical-research/output/youtube-analysis/6wR6xblSays-agentic-coding-endgame/patterns/extract_technical_content.md",
+    "/Users/ameno/dev/umbra-dev/technical-research/output/youtube-analysis/6wR6xblSays-agentic-coding-endgame/patterns/technical_summary.md",
+    "/Users/ameno/dev/umbra-dev/technical-research/output/youtube-analysis/6wR6xblSays-agentic-coding-endgame/patterns/integration_opportunities.md",
+    "/Users/ameno/dev/umbra-dev/technical-research/output/youtube-analysis/6wR6xblSays-agentic-coding-endgame/patterns/learning_objectives.md",
+    "/Users/ameno/dev/umbra-dev/technical-research/output/youtube-analysis/6wR6xblSays-agentic-coding-endgame/patterns/quick_start_guide.md",
+    "/Users/ameno/dev/umbra-dev/technical-research/output/youtube-analysis/6wR6xblSays-agentic-coding-endgame/patterns/execution_summary.json"
+  ],
+
+  "metrics": {
+    "technical": {
+      "code_snippets": 5,
+      "code_blocks": 13,
+      "tools_frameworks": 14,
+      "commands_extracted": 8,
+      "technical_concepts": 12,
+      "architecture_patterns": 4,
+      "best_practices": 8,
+      "common_pitfalls": 6,
+      "workflow_steps": 4,
+      "automation_opportunities": 5
+    },
+
+    "content_analysis": {
+      "languages_identified": [
+        "Python",
+        "JavaScript",
+        "TypeScript",
+        "HTML"
+      ],
+      "frameworks_identified": [
+        "Claude Code SDK",
+        "Rich",
+        "WebSockets",
+        "UV"
+      ],
+      "models_mentioned": [
+        "Claude Haiku",
+        "Claude Sonnet",
+        "Claude Opus"
+      ],
+      "apis_identified": [
+        "Anthropic Claude API",
+        "Model Context Protocol (MCP)"
+      ]
+    },
+
+    "integration_opportunities": {
+      "total_identified": 10,
+      "high_priority": 3,
+      "medium_priority": 5,
+      "low_priority": 2,
+      "quick_wins": 3,
+      "estimated_implementation_weeks": "1-4 per opportunity"
+    },
+
+    "learning_materials": {
+      "learning_levels": 6,
+      "total_exercises": 16,
+      "practical_projects": 4,
+      "checkpoints": 5,
+      "total_learning_hours": "34-44 hours",
+      "skill_assessments": 5
+    },
+
+    "quick_start_examples": {
+      "setup_time_minutes": 5,
+      "first_agent_time_minutes": 10,
+      "custom_tool_time_minutes": 20,
+      "multi_agent_time_minutes": 30,
+      "total_quick_wins": 5
+    }
+  },
+
+  "technical_findings": {
+    "core_technologies": {
+      "primary_framework": "Claude Code SDK",
+      "primary_language": "Python",
+      "package_manager": "UV",
+      "protocol": "Model Context Protocol (MCP)",
+      "ui_library": "Rich"
+    },
+
+    "key_concepts": [
+      "System Prompt Override - Complete agent behavior transformation",
+      "Custom Tool Creation - Extending agent capabilities with deterministic functions",
+      "MCP Server Integration - Packaging custom tools into reusable servers",
+      "Multi-Agent Orchestration - Building complex workflows with specialized agents",
+      "Model Selection Strategy - Matching model capability to task complexity"
+    ],
+
+    "architecture_patterns": [
+      {
+        "name": "Single-Purpose Agent",
+        "use_case": "Focused, specialized tasks",
+        "model": "Claude Haiku",
+        "complexity": "Low"
+      },
+      {
+        "name": "Tool-Enhanced Agent",
+        "use_case": "Domain-specific operations",
+        "model": "Haiku or Sonnet",
+        "complexity": "Medium"
+      },
+      {
+        "name": "Multi-Agent Workflow",
+        "use_case": "Complex, multi-step processes",
+        "model": "Varied by agent role",
+        "complexity": "High"
+      }
+    ],
+
+    "core_four_elements": [
+      "User Prompt - Input to the agent",
+      "Agent Response - Output from the agent",
+      "Tool Calls - Deterministic functions available to agent",
+      "System Prompt - Behavior control (most powerful)"
+    ]
+  },
+
+  "integration_opportunities_summary": {
+    "highest_priority": [
+      {
+        "name": "Development Workflow Automation",
+        "agents": ["Planner", "Builder", "Reviewer", "Shipper"],
+        "impact": "High",
+        "complexity": "High",
+        "time_to_value": "2-3 weeks"
+      },
+      {
+        "name": "Claude Code Extension Development",
+        "agents": ["Test Generator", "Code Refactorer", "Documentation Generator"],
+        "impact": "High",
+        "complexity": "Medium",
+        "time_to_value": "1-2 weeks"
+      },
+      {
+        "name": "Content Processing Pipeline Enhancement",
+        "agents": ["Technical Classifier", "Code Extractor", "Learning Path Generator"],
+        "impact": "Medium",
+        "complexity": "Medium",
+        "time_to_value": "1 week"
+      }
+    ],
+
+    "quick_wins": [
+      "Content Processing Pipeline Enhancement (< 1 week)",
+      "Simple Code Review Agent (< 1 week)",
+      "FAQ Support Agent (< 1 week)"
+    ],
+
+    "recommended_starting_point": {
+      "opportunity": "Claude Code Extension Development - Test Generation Agent",
+      "rationale": "Medium complexity, manageable scope, immediate value, 1-2 week timeline",
+      "implementation_steps": [
+        "Week 1: Build basic test generation agent with Haiku",
+        "Week 2: Add Sonnet for complex test scenarios",
+        "Week 3: Integrate into CI/CD pipeline",
+        "Week 4: Monitor and iterate based on usage"
+      ]
+    }
+  },
+
+  "best_practices_extracted": {
+    "system_prompt_design": [
+      "Be specific and focused",
+      "Define exact behavior expectations",
+      "Include tool usage guidelines",
+      "Test iteratively with real prompts"
+    ],
+    "tool_development": [
+      "Keep tools deterministic",
+      "Write clear descriptions for the agent",
+      "Validate inputs thoroughly",
+      "Return structured, predictable outputs"
+    ],
+    "agent_configuration": [
+      "Minimize tool sets to essentials",
+      "Choose cheapest model that works",
+      "Monitor context consumption",
+      "Use Client for multi-turn, query for one-off"
+    ],
+    "multi_agent_systems": [
+      "Define clear agent roles",
+      "Establish handoff protocols",
+      "Implement monitoring and logging",
+      "Design for failure scenarios"
+    ]
+  },
+
+  "common_pitfalls": [
+    "Tool Bloat - Including unnecessary tools",
+    "Wrong Model Selection - Using expensive models for simple tasks",
+    "Vague System Prompts - Not being specific enough",
+    "Ignoring Context Window - Not tracking context usage",
+    "Poor Tool Descriptions - Agent doesn't know when to use tools",
+    "Missing Validation - Custom tools without input checks"
+  ],
+
+  "prerequisites": {
+    "knowledge": [
+      "Python programming fundamentals",
+      "Understanding of async/await patterns",
+      "API integration concepts",
+      "Command-line tool usage",
+      "TAC Framework (Think, Act, Check)"
+    ],
+    "system": [
+      "Python 3.8+",
+      "Node.js (for frontend demos)",
+      "Terminal/shell access",
+      "Internet connectivity for API calls"
+    ],
+    "accounts": [
+      "Anthropic API account and key",
+      "Claude API access"
+    ]
+  },
+
+  "learning_path_summary": {
+    "total_levels": 6,
+    "total_hours": "34-44 hours",
+    "recommended_pace": "5-10 hours per week",
+    "estimated_completion": "4-9 weeks",
+    "skill_levels": [
+      "Beginner - Single-purpose agents",
+      "Intermediate - Custom tools and MCP servers",
+      "Advanced - Multi-agent orchestration",
+      "Expert - Large-scale agent systems"
+    ]
+  },
+
+  "code_examples_repository": {
+    "mentioned_agents": 8,
+    "detailed_in_video": 3,
+    "examples": [
+      "Pong Agent - System prompt override",
+      "Echo Agent - Custom tools",
+      "Micro-SDLC System - Multi-agent orchestration"
+    ]
+  },
+
+  "performance_optimization": {
+    "model_economics": {
+      "haiku_use_cases": "Simple tasks, high-volume operations, cost optimization",
+      "sonnet_use_cases": "Complex reasoning, balanced performance",
+      "opus_use_cases": "Extremely complex tasks, highest quality needed"
+    },
+    "optimization_strategies": [
+      "Use Haiku for >80% of simple tasks",
+      "Reserve Sonnet for complex reasoning",
+      "Monitor token usage and costs",
+      "Optimize system prompts for clarity",
+      "Minimize tool count per agent"
+    ]
+  },
+
+  "security_considerations": [
+    "API key management - environment variables, never commit",
+    "Tool input validation - sanitize user-provided data",
+    "System prompt security - review for unintended behaviors",
+    "Rate limiting - implement for production",
+    "Audit logging - track tool usage"
+  ],
+
+  "execution_time_seconds": "estimated 60-90 seconds",
+
+  "next_steps": {
+    "immediate": [
+      "Review extract_technical_content.md for detailed code examples",
+      "Follow quick_start_guide.md to build first agent in 10 minutes",
+      "Study integration_opportunities.md for practical applications"
+    ],
+    "short_term": [
+      "Complete Level 1-2 of learning_objectives.md",
+      "Build 2-3 single-purpose agents",
+      "Experiment with different models and system prompts"
+    ],
+    "long_term": [
+      "Implement one of the 10 integration opportunities",
+      "Build multi-agent orchestration system",
+      "Create production-ready agent framework"
+    ]
+  },
+
+  "quality_metrics": {
+    "pattern_outputs_comprehensive": true,
+    "code_examples_properly_formatted": true,
+    "technical_accuracy": "high",
+    "practical_applicability": "high",
+    "implementation_ready": true
+  }
+}

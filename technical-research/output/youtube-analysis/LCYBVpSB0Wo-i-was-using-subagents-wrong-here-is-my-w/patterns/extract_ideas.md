@@ -1,0 +1,45 @@
+# IDEAS
+
+- Claude Code introduced sub-agent feature for better context management and optimization.
+- Initial user experiences with sub-agents were negative due to slowness and poor results.
+- Sub-agents consume excessive tokens and trigger conversation compacting which degrades performance.
+- Context compacting causes agents to lose important information about previous actions taken.
+- Task tool allows main agent to delegate work to specialized sub-agents effectively.
+- Sub-agents have identical tool sets but operate in isolated conversation contexts.
+- Parent agents only see task assignment and completion summaries, not detailed steps.
+- Token consumption gets reduced from massive file reads to concise summary reports.
+- Sub-agents work best for research and information gathering rather than implementation.
+- Implementation-focused sub-agents fail because they lack cross-context awareness and history.
+- Frontend and backend specialized agents cannot share implementation context between sessions.
+- Each sub-agent task creates contained sessions without knowledge of other agents' work.
+- Parent agents have limited visibility into specific files and changes made by sub-agents.
+- Context sharing problems will likely be resolved in future Claude Code versions.
+- Best practice treats sub-agents as researchers who provide summaries to main conversation.
+- Adam Wolf from Claude team confirms sub-agents excel at information retrieval tasks.
+- Service-specific expert agents can be created for platforms like Vercel, Supabase, Tailwind.
+- Expert agents should be equipped with latest documentation and specialized knowledge bases.
+- MCP tools enable agents to retrieve relevant components and design patterns efficiently.
+- File system serves as ultimate context management system for long-running tasks.
+- Tool results should be saved to local files rather than conversation history.
+- Web scraping content gets stored in markdown files for later retrieval.
+- Context files in doc/task folders maintain project state across different agents.
+- Sub-agents read context files before starting work to understand project status.
+- Research reports get saved as markdown files for parent agent consumption.
+- Context file updates document completed work and maintain project continuity.
+- Chassis expert agents use specialized MCP tools for component and design retrieval.
+- System prompts should include detailed documentation for consistent best practices.
+- Migration guides help agents understand differences between software versions clearly.
+- Global agent settings apply across all projects while project-specific agents remain local.
+- Agent creation requires careful prompt engineering and output format specification.
+- Goals should explicitly state research-only focus and prohibit direct implementation work.
+- Output formats guide agents to create proper documentation and file structures.
+- Rules prevent sub-agents from calling themselves and creating infinite loops.
+- Context session files track overall project progress and architectural decisions made.
+- Parent agents must delegate tasks with proper context file references included.
+- Background sessions allow continuous monitoring and execution of long-running development tasks.
+- High-fidelity UI implementations can be achieved through proper component planning.
+- Error fixing becomes easier when parent agents maintain full implementation context.
+- Vercel AI SDK integration requires specialized agents with v5 documentation knowledge.
+- Real-time AI chat functionality can be implemented through proper SDK integration.
+- Production-tested templates provide reliable foundations for new development projects.
+- Weekly sessions help developers learn and share best practices for AI-assisted development.

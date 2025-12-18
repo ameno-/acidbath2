@@ -1,0 +1,57 @@
+graph TD
+    subgraph "Eight Agent Examples: Simple to Complex"
+        subgraph "Foundation"
+            A1[1. Pong Agent<br/>System Prompt Override<br/>Always responds 'pong']
+            A2[2. Echo Agent<br/>Custom Tools with @tool<br/>Text transformations]
+        end
+
+        subgraph "Specialized Tasks"
+            A3[3. Calculator Agent<br/>Deterministic Math<br/>No LLM hallucinations]
+            A4[4. File Processor Agent<br/>Domain-Specific Operations<br/>Custom file formats]
+        end
+
+        subgraph "Conversation Patterns"
+            A5[5. Query vs Client Agent<br/>One-off vs Continuous<br/>Context management]
+        end
+
+        subgraph "Advanced Orchestration"
+            A6[6. Multi-Agent SDLC<br/>Planner→Builder→Reviewer→Shipper<br/>Agent handoffs]
+            A7[7. Out-of-Loop Review<br/>Autonomous Operation<br/>No human intervention]
+        end
+
+        subgraph "Production"
+            A8[8. Real-Time WebSocket<br/>Live UI Communication<br/>Status updates & monitoring]
+        end
+    end
+
+    %% Progression flow
+    A1 -.Progression.-> A2
+    A2 -.Progression.-> A3
+    A3 -.Progression.-> A4
+    A4 -.Progression.-> A5
+    A5 -.Progression.-> A6
+    A6 -.Progression.-> A7
+    A7 -.Progression.-> A8
+
+    %% Key learnings
+    A1 -.Teaches.-> L1[System prompts<br/>redefine behavior]
+    A2 -.Teaches.-> L2[Tools bridge<br/>code & conversation]
+    A3 -.Teaches.-> L3[Tools for prediction<br/>Agents for reasoning]
+    A4 -.Teaches.-> L4[Specialized tools<br/>unlock workflows]
+    A5 -.Teaches.-> L5[Pattern matching<br/>to requirements]
+    A6 -.Teaches.-> L6[Complex workflows<br/>need specialization]
+    A7 -.Teaches.-> L7[Scale requires<br/>autonomy]
+    A8 -.Teaches.-> L8[Production needs<br/>infrastructure]
+
+    %% Styling
+    style A1 fill:#e7f5ff,stroke:#1971c2,stroke-width:2px
+    style A2 fill:#e7f5ff,stroke:#1971c2,stroke-width:2px
+    style A3 fill:#d0ebff,stroke:#1864ab,stroke-width:2px
+    style A4 fill:#d0ebff,stroke:#1864ab,stroke-width:2px
+    style A5 fill:#a5d8ff,stroke:#1864ab,stroke-width:2px
+    style A6 fill:#74c0fc,stroke:#1971c2,stroke-width:3px
+    style A7 fill:#74c0fc,stroke:#1971c2,stroke-width:3px
+    style A8 fill:#4dabf7,stroke:#1971c2,stroke-width:3px,color:#fff
+
+    classDef learning fill:#fff3bf,stroke:#f59f00,stroke-width:1px,color:#000
+    class L1,L2,L3,L4,L5,L6,L7,L8 learning

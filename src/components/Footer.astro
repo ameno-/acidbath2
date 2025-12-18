@@ -1,0 +1,20 @@
+---
+const currentYear = new Date().getFullYear();
+---
+
+<footer>
+  <hr />
+  <p class="text-alt">
+    &copy; {currentYear} ACIDBATH · Built with <a href="https://astro.build">Astro</a>
+  </p>
+</footer>
+
+<style>
+  footer {
+    margin-top: calc(var(--spacing-line) * 3);
+  }
+
+  footer p {
+    font-size: 0.875rem;
+  }
+</style>

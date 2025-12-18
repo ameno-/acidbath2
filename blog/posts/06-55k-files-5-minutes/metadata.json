@@ -1,0 +1,99 @@
+{
+  "slug": "55k-files-5-minutes",
+  "title": "55,000 Files in 5 Minutes: How to Make AI Coding Agents Actually Work on Large Codebases",
+  "subtitle": "3 hours → 5 minutes. 28M tokens → 1M. $14 → $0.60. The difference? The right tools.",
+  "publishDate": "2025-12-15",
+  "author": "acidbath",
+  "keywords": [
+    "ai coding large codebase",
+    "mcp semantic search",
+    "legacy code refactoring ai",
+    "ai coding agents performance",
+    "serena mcp",
+    "refactor mcp",
+    "semantic code search",
+    "ai token optimization",
+    "large codebase ai tools",
+    "autonomous ai refactoring"
+  ],
+  "tags": [
+    "AI Coding",
+    "MCP Servers",
+    "Code Refactoring",
+    "Developer Tools",
+    "Performance Optimization",
+    "Legacy Code"
+  ],
+  "category": "Technical Deep Dive",
+  "readingTime": "12 minutes",
+  "difficulty": "Intermediate",
+  "summary": "AI coding agents fail spectacularly on large codebases—not because AI isn't capable, but because they're using the wrong tools. This post reveals how semantic search MCP servers transform AI performance from 3-hour token-burning disasters into 5-minute autonomous operations. Real benchmarks on a 55,000-file codebase prove 30x speed improvements and 28x cost reductions are achievable today.",
+  "source": {
+    "type": "youtube",
+    "videoId": "UqfxuQKuMo8",
+    "channel": "Jo Van Eyck",
+    "title": "AI coding agents are useless on large codebases. Unless you do THIS.",
+    "url": "https://youtube.com/watch?v=UqfxuQKuMo8",
+    "duration": "16:22",
+    "qualityScore": 78,
+    "contentRating": "A Tier",
+    "analysisDate": "2025-11-23"
+  },
+  "relatedPosts": [
+    "03-subagents-wrong",
+    "05-agent-endgame"
+  ],
+  "toolsReferenced": [
+    {
+      "name": "Serena MCP",
+      "type": "Semantic Search",
+      "url": "https://github.com/serena-ai/serena",
+      "description": "Open-source semantic code retrieval and editing"
+    },
+    {
+      "name": "Refactor MCP",
+      "type": "Code Refactoring",
+      "url": "https://github.com/davehillier/refactor-mcp",
+      "description": "Roslyn-based refactoring tools for .NET"
+    },
+    {
+      "name": "Claude Code",
+      "type": "AI Assistant",
+      "url": "https://github.com/anthropics/claude-code",
+      "description": "Anthropic's official CLI for Claude"
+    }
+  ],
+  "keyMetrics": {
+    "codebaseSize": "55,000 files, 1.2M lines of code",
+    "taskType": "Type rename across entire codebase",
+    "improvements": {
+      "timeReduction": "36x (3 hours → 5 minutes)",
+      "tokenReduction": "28x (28M → 1M tokens)",
+      "costReduction": "23x ($14 → $0.60)"
+    }
+  },
+  "callouts": {
+    "data": "Performance comparison showing 3 hours vs 5 minutes, 28M vs 1M tokens, $14 vs $0.60",
+    "provocative": "Using AI coding tools without proper setup is like eating spaghetti with a spoon",
+    "classic": "That's twice as fast as I would be able to do this. I can go do something else, attend a meeting, coach a colleague"
+  },
+  "targetAudience": [
+    "Developers struggling with AI on large codebases",
+    "Teams maintaining legacy systems",
+    "Engineering leads evaluating AI coding tools",
+    "Developers burning through token budgets"
+  ],
+  "actionableOutcomes": [
+    "Install and configure Serena MCP for semantic search",
+    "Set up language-specific refactoring MCP servers",
+    "Measure baseline AI performance before optimization",
+    "Achieve 20-30x performance improvements on refactoring tasks",
+    "Eliminate compile-fail-retry doom loops in AI workflows"
+  ],
+  "controversialTakes": [
+    "AI doesn't fail on large codebases—your tooling does",
+    "You're eating spaghetti with a spoon (wrong tools, not wrong AI)",
+    "Most developers give up on AI too early with wrong conclusions",
+    "The bottleneck is tooling, not AI capability"
+  ]
+}

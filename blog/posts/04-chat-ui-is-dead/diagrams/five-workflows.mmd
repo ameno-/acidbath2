@@ -1,0 +1,55 @@
+flowchart LR
+    subgraph Workflow1["1. File-Based Agent Automation"]
+        W1Input[Drag & Drop Files] --> W1Process[Automated Processing]
+        W1Process --> W1Output[Processed Results]
+        W1Note[Scale: 1 to 1,000 files<br/>Zero additional effort]
+    end
+
+    subgraph Workflow2["2. Morning Debrief Processing"]
+        W2Input[Audio Recording<br/>voice-notes.mp3] --> W2Process[Transcribe + Analyze]
+        W2Process --> W2Output[Structured Insights<br/>Action Items<br/>Follow-ups]
+        W2Note[Daily automation<br/>Zero manual steps]
+    end
+
+    subgraph Workflow3["3. Bulk Image Generation"]
+        W3Input[Text File<br/>50 Prompts] --> W3Process[Generate via API]
+        W3Process --> W3Output[50 Images<br/>Descriptive Names]
+        W3Note[2 hours → 2 minutes<br/>Walk-away automation]
+    end
+
+    subgraph Workflow4["4. Financial Data Processing"]
+        W4Input[Bank CSV Export] --> W4Process[Categorize + Analyze]
+        W4Process --> W4Output[Charts + Insights<br/>Budget Report]
+        W4Note[Afternoon task → Coffee break<br/>Fully automated]
+    end
+
+    subgraph Workflow5["5. Training Data Expansion"]
+        W5Input[100 Examples<br/>dataset.jsonl] --> W5Process[Pattern Analysis<br/>Generation]
+        W5Process --> W5Output[1,000 Examples<br/>Validated Dataset]
+        W5Note[9x dataset expansion<br/>Fully automated]
+    end
+
+    Start([Agentic Drop Zones]) -.-> Workflow1
+    Start -.-> Workflow2
+    Start -.-> Workflow3
+    Start -.-> Workflow4
+    Start -.-> Workflow5
+
+    Workflow1 -.->|Compound Value| End([Exponential Productivity])
+    Workflow2 -.->|Compound Value| End
+    Workflow3 -.->|Compound Value| End
+    Workflow4 -.->|Compound Value| End
+    Workflow5 -.->|Compound Value| End
+
+    style Start fill:#e1f5ff
+    style End fill:#d4edda
+    style Workflow1 fill:#fff3cd
+    style Workflow2 fill:#d1ecf1
+    style Workflow3 fill:#cfe2ff
+    style Workflow4 fill:#f8d7da
+    style Workflow5 fill:#d4edda
+    style W1Note fill:#ffffff,stroke-dasharray: 5 5
+    style W2Note fill:#ffffff,stroke-dasharray: 5 5
+    style W3Note fill:#ffffff,stroke-dasharray: 5 5
+    style W4Note fill:#ffffff,stroke-dasharray: 5 5
+    style W5Note fill:#ffffff,stroke-dasharray: 5 5

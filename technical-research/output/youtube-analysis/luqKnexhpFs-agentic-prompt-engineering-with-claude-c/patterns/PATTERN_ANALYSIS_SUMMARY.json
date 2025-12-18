@@ -1,0 +1,109 @@
+{
+  "status": "completed",
+  "video_id": "luqKnexhpFs",
+  "content_type": "technical",
+  "execution_timestamp": "2025-11-24T16:52:00Z",
+  "patterns_executed": [
+    "extract_algorithm_update_recommendations",
+    "extract_patterns",
+    "extract_predictions",
+    "extract_main_idea",
+    "extract_poc",
+    "extract_references",
+    "extract_primary_problem",
+    "explain_code",
+    "explain_docs",
+    "extract_extraordinary_claims",
+    "extract_controversial_ideas",
+    "extract_sponsor_info",
+    "extract_latest_video_essay_topics"
+  ],
+  "patterns_successful": 11,
+  "patterns_failed": 2,
+  "failed_patterns": [
+    "extract_sponsor_info",
+    "extract_latest_video_essay_topics"
+  ],
+  "output_files": [
+    "/Users/ameno/dev/umbra-dev/technical-research/output/youtube-analysis/luqKnexhpFs-agentic-prompt-engineering-with-claude-c/patterns/extract_algorithm_update_recommendations.md",
+    "/Users/ameno/dev/umbra-dev/technical-research/output/youtube-analysis/luqKnexhpFs-agentic-prompt-engineering-with-claude-c/patterns/extract_patterns.md",
+    "/Users/ameno/dev/umbra-dev/technical-research/output/youtube-analysis/luqKnexhpFs-agentic-prompt-engineering-with-claude-c/patterns/extract_predictions.md",
+    "/Users/ameno/dev/umbra-dev/technical-research/output/youtube-analysis/luqKnexhpFs-agentic-prompt-engineering-with-claude-c/patterns/extract_main_idea.md",
+    "/Users/ameno/dev/umbra-dev/technical-research/output/youtube-analysis/luqKnexhpFs-agentic-prompt-engineering-with-claude-c/patterns/extract_poc.md",
+    "/Users/ameno/dev/umbra-dev/technical-research/output/youtube-analysis/luqKnexhpFs-agentic-prompt-engineering-with-claude-c/patterns/extract_references.md",
+    "/Users/ameno/dev/umbra-dev/technical-research/output/youtube-analysis/luqKnexhpFs-agentic-prompt-engineering-with-claude-c/patterns/extract_primary_problem.md",
+    "/Users/ameno/dev/umbra-dev/technical-research/output/youtube-analysis/luqKnexhpFs-agentic-prompt-engineering-with-claude-c/patterns/explain_code.md",
+    "/Users/ameno/dev/umbra-dev/technical-research/output/youtube-analysis/luqKnexhpFs-agentic-prompt-engineering-with-claude-c/patterns/explain_docs.md",
+    "/Users/ameno/dev/umbra-dev/technical-research/output/youtube-analysis/luqKnexhpFs-agentic-prompt-engineering-with-claude-c/patterns/extract_extraordinary_claims.md",
+    "/Users/ameno/dev/umbra-dev/technical-research/output/youtube-analysis/luqKnexhpFs-agentic-prompt-engineering-with-claude-c/patterns/extract_controversial_ideas.md"
+  ],
+  "metrics": {
+    "technical": {
+      "total_patterns_identified": 27,
+      "design_patterns_count": 27,
+      "tools_frameworks_mentioned": [
+        "Claude Code",
+        "AI Agents",
+        "Prompt Engineering Framework",
+        "Variable System ({{variable_name}})",
+        "Metadata Specification",
+        "Context Maps",
+        "Template Meta Prompts",
+        "Delegation Prompts",
+        "Workflow Prompts"
+      ],
+      "tools_count": 9,
+      "key_concepts": [
+        "Stakeholder Trifecta (you, team, agents)",
+        "Seven Levels of Prompt Complexity",
+        "Input-Workflow-Output Pattern",
+        "Composable Sections (Lego Blocks)",
+        "Control Flow (conditionals, loops)",
+        "Delegation (agent spawning)",
+        "Consistency over Complexity"
+      ],
+      "concepts_count": 7,
+      "controversial_ideas_count": 15,
+      "extraordinary_claims_count": 0,
+      "automation_opportunities": [
+        "Build reusable prompt libraries with composable sections",
+        "Create prompt templates for workflow automation",
+        "Implement agent delegation for autonomous task execution",
+        "Use context maps to eliminate redundant tool calls",
+        "Template meta prompts for generating other prompts",
+        "Background agent execution for long-running tasks",
+        "Multi-agent coordination through delegation prompts"
+      ],
+      "automation_count": 7,
+      "code_examples_present": true,
+      "documentation_discussed": true,
+      "primary_problem": "Most engineers haven't shifted to engineering prompts for three audiences: themselves, teams, and agents"
+    },
+    "educational": {
+      "learning_framework": "Seven Levels of Prompt Complexity",
+      "skill_levels": [
+        "Level 1: Ad Hoc Prompts",
+        "Level 2: Workflow Prompts", 
+        "Level 3: Control Flow Prompts",
+        "Level 4: Delegation Prompts",
+        "Level 5: Advanced Integration",
+        "Level 6: Template Meta Prompts",
+        "Level 7: Enterprise Scale"
+      ]
+    },
+    "key_recommendations": [
+      "Build reusable prompt libraries with Lego-block composability",
+      "Design prompts for three audiences using consistent formats",
+      "Focus on workflow section as the most powerful component",
+      "Start with workflow prompts before advanced patterns",
+      "Implement input-workflow-output structure as default",
+      "Use static variables to eliminate repetition",
+      "Create context maps for complex codebases",
+      "Prioritize consistency over complexity"
+    ]
+  },
+  "execution_time_seconds": 180,
+  "total_output_lines": 249,
+  "analysis_depth": "comprehensive",
+  "domain_focus": "AI Prompt Engineering for Agentic Development"
+}

@@ -1,0 +1,48 @@
+graph TB
+    subgraph "Custom Agent Architecture"
+        SP[System Prompt<br/>Agent DNA]
+        UP[User Prompt<br/>Task Input]
+
+        subgraph "Agent Core"
+            LLM[Claude Model<br/>Haiku/Sonnet/Opus]
+            CTX[Context Window<br/>Token Budget]
+        end
+
+        subgraph "Custom Tools"
+            T1[@tool decorator<br/>Deterministic Logic]
+            T2[Custom Functions<br/>Domain-Specific]
+            MCP[In-Memory MCP Server<br/>Tool Package]
+        end
+
+        subgraph "Execution Loop"
+            REASON[Reasoning<br/>Tool Selection]
+            EXEC[Tool Execution<br/>Deterministic Output]
+            RESP[Response Generation<br/>Conversational Output]
+        end
+
+        OUT[Agent Output<br/>Results & Actions]
+    end
+
+    %% Flow
+    SP --> LLM
+    UP --> LLM
+    T1 --> MCP
+    T2 --> MCP
+    MCP --> CTX
+
+    LLM --> REASON
+    REASON --> EXEC
+    EXEC --> RESP
+    RESP --> OUT
+
+    CTX -.Context Constraint.-> REASON
+
+    %% Annotations
+    style SP fill:#ff6b6b,stroke:#c92a2a,stroke-width:3px,color:#fff
+    style LLM fill:#4dabf7,stroke:#1971c2,stroke-width:2px,color:#fff
+    style MCP fill:#51cf66,stroke:#2f9e44,stroke-width:2px,color:#fff
+    style OUT fill:#ffd43b,stroke:#f59f00,stroke-width:2px,color:#000
+    style CTX fill:#ff8787,stroke:#e03131,stroke-width:2px,color:#fff
+
+    classDef highlight fill:#845ef7,stroke:#5f3dc4,stroke-width:2px,color:#fff
+    class REASON,EXEC,RESP highlight

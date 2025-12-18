@@ -1,0 +1,39 @@
+IDEAS
+
+- Prompts are the fundamental unit of engineering in the age of agents.
+- Well-crafted prompts can generate hundreds of hours of productive work efficiently.
+- Bad prompts compound failure at the same exponential rate as good ones.
+- Engineers must shift mindset to create prompts for three audiences: you, team, agents.
+- Winners build libraries of reusable battle-tested agentic prompts with composable sections.
+- Composable prompt sections work like Lego blocks that can be swapped interchangeably.
+- Agentic prompt engineering allows prompts to call hundreds of tool calls automatically.
+- Modern prompts can run for minutes to hours with extensive capabilities.
+- Seven powerful agentic prompt formats exist with specific composable sections underneath.
+- Workflow prompts represent sequential workflows and are the most important format.
+- Metadata sections provide tool specifications but offer limited overall prompt value.
+- Report sections control agent response format including JSON, YAML, and structure.
+- Variables make prompts massively more valuable by enabling dynamic information passing.
+- Dynamic variables change based on input while static variables remain constant.
+- Context maps help agents navigate codebases faster without additional tool calls.
+- Input-workflow-output represents a consistent three-step pattern for prompt design thinking.
+- Control flow prompts add conditions, loops, and early returns to workflow.
+- Delegation prompts kick off other agents to accomplish distributed computational work.
+- Nondeterministic agents return different results when multiple instances run simultaneously.
+- Primary agents act as prompt engineers for sub-agents in delegation scenarios.
+- Background prompts enable autonomous agent operation while engineers continue other work.
+- Template meta prompts represent the highest tier of agentic engineering velocity.
+- Ninety percent of engineering needs can be met with seven prompt levels.
+- Workflow sections are the most important component of any agentic prompt.
+- Communication quality to agents directly impacts the results they can deliver.
+- Consistent prompt formats enable CRUD operations on prompts at light speed.
+- Engineering must consider the stakeholder trifecta: you, your team, and agents.
+- Consistency beats complexity when designing reusable agentic prompt systems consistently.
+- Agents represent a new type of consumer requiring specific prompt design.
+- Swappable Lego blocks enable distinct uses and capabilities for repeat success.
+- Asymmetric engineering becomes possible when investing in prompts for the trifecta.
+- Context engineering importance ranks below fundamental prompt engineering skills and knowledge.
+- Domain-specific customizable agents require mastery of specialized prompt engineering techniques.
+- Scaling requires moving beyond simple back-and-forth prompting toward automated pipelines.
+- Pipeline systems should do one thing extraordinarily well rather than many.
+- Starting with ad hoc prompts allows natural progression to more complex formats.
+- Template meta prompts enable prompts that build prompts and agents building.

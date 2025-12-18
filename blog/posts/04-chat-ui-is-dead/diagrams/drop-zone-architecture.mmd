@@ -1,0 +1,51 @@
+flowchart TD
+    Start([User Drops File]) --> DropZone[Drop Zone Directory<br/>~/drops/transcribe/]
+
+    DropZone --> Watcher[File System Watcher<br/>Watchdog Library]
+
+    Watcher --> Detect{File Event<br/>Detected?}
+
+    Detect -->|Created| Pattern[Pattern Matching]
+    Detect -->|Modified| Pattern
+    Detect -->|No Event| Watcher
+
+    Pattern --> Match{Match<br/>Workflow?}
+
+    Match -->|Yes| LoadConfig[Load Configuration<br/>drops.yaml]
+    Match -->|No Match| Error[Log Error:<br/>No Handler]
+
+    LoadConfig --> LoadPrompt[Load Prompt Template<br/>prompts/workflow.md]
+
+    LoadPrompt --> Router[Agent Router]
+
+    Router --> Claude[Claude Agent<br/>claude-3-5-sonnet]
+    Router --> Gemini[Gemini Agent<br/>gemini-2.5-flash]
+    Router --> Replicate[Replicate API<br/>Image Models]
+    Router --> Whisper[Whisper<br/>Audio Transcription]
+
+    Claude --> Execute[Execute Workflow<br/>Variable Substitution]
+    Gemini --> Execute
+    Replicate --> Execute
+    Whisper --> Execute
+
+    Execute --> Stream[Stream Progress<br/>Rich Terminal UI]
+
+    Stream --> Results[Generate Results]
+
+    Results --> Output[Output Directory<br/>./output/]
+    Results --> Archive[Archive Input<br/>./archive/]
+    Results --> Log[Log Completion<br/>workflow.log]
+
+    Output --> Complete([Workflow Complete])
+    Archive --> Complete
+    Log --> Complete
+
+    Complete --> Notify[Notify User<br/>Visual/Audio]
+
+    style Start fill:#e1f5ff
+    style Complete fill:#d4edda
+    style DropZone fill:#fff3cd
+    style Watcher fill:#f8d7da
+    style Router fill:#d1ecf1
+    style Execute fill:#cfe2ff
+    style Error fill:#f8d7da

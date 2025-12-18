@@ -1,0 +1,22 @@
+# RECOMMENDATIONS
+
+- Create prompts for three audiences: you, your team, and your agents
+- Build libraries of reusable, battle-tested agentic prompts with composable sections
+- Use consistent prompt formats with swappable Lego-block sections across all prompts
+- Structure prompts with three core components: input, workflow, and output
+- Write workflows as sequential, step-by-step tasks for agents to execute
+- Include metadata sections to specify tools, models, and execution parameters
+- Add report sections to control agent output format and structure
+- Use variables (both static and dynamic) to make prompts reusable
+- Reference variables consistently throughout prompts using clear syntax patterns
+- Implement control flow with conditions, loops, and early returns when needed
+- Add instruction sections for auxiliary information supporting the workflow
+- Include context maps to help agents navigate codebases more efficiently
+- Use direct, dry language when communicating with agents in prompts
+- Collapse prompts to second level to quickly analyze composable sections
+- Only include sections you actually need; remove unnecessary complexity
+- Test prompts thoroughly to ensure predictable agent behavior
+- Start with simple ad-hoc prompts, then scale to workflow prompts
+- Focus 90% of effort on perfecting the workflow section
+- Push skills to at least B-tier level for most prompt engineering value
+- Progress toward template meta prompts for maximum engineering velocity

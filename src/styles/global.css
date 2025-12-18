@@ -1,0 +1,245 @@
+@import "tailwindcss";
+
+@theme {
+  /* Monospace Typography */
+  --font-family-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+
+  /* Dark Mode Colors */
+  --color-background: #000;
+  --color-background-alt: #111;
+  --color-foreground: #fff;
+  --color-foreground-alt: #888;
+  --color-accent: #0f0;
+
+  /* Spacing based on line-height rhythm */
+  --spacing-line: 1.5rem;
+  --border-width-thick: 2px;
+}
+
+@layer base {
+  html {
+    font-family: var(--font-family-mono);
+    font-optical-sizing: auto;
+    font-variant-numeric: tabular-nums lining-nums;
+    font-size: 16px;
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+  }
+
+  body {
+    max-width: 80ch;
+    margin: 0 auto;
+    padding: var(--spacing-line) 2ch;
+    line-height: var(--spacing-line);
+  }
+
+  @media screen and (max-width: 480px) {
+    html {
+      font-size: 14px;
+    }
+    body {
+      padding: var(--spacing-line) 1ch;
+    }
+  }
+
+  /* Sibling spacing rhythm */
+  * + * {
+    margin-top: var(--spacing-line);
+  }
+
+  /* Reset margin for nested elements */
+  li > *,
+  nav *,
+  header *,
+  footer * {
+    margin-top: 0;
+  }
+
+  /* Headings */
+  h1, h2, h3, h4, h5, h6 {
+    font-weight: 800;
+    text-transform: uppercase;
+    margin: calc(var(--spacing-line) * 2) 0 var(--spacing-line);
+    line-height: var(--spacing-line);
+  }
+
+  h1 {
+    font-size: 2rem;
+    line-height: calc(2 * var(--spacing-line));
+    margin-bottom: calc(var(--spacing-line) * 2);
+  }
+
+  h2 {
+    font-size: 1rem;
+  }
+
+  /* Links */
+  a {
+    color: var(--color-foreground);
+    text-decoration-thickness: var(--border-width-thick);
+    text-underline-offset: 3px;
+  }
+
+  a:hover {
+    color: var(--color-accent);
+  }
+
+  /* Horizontal rules */
+  hr {
+    position: relative;
+    display: block;
+    height: var(--spacing-line);
+    margin: calc(var(--spacing-line) * 1.5) 0;
+    border: none;
+  }
+
+  hr::after {
+    display: block;
+    content: "";
+    position: absolute;
+    top: calc(var(--spacing-line) / 2 - var(--border-width-thick));
+    left: 0;
+    width: 100%;
+    border-top: calc(var(--border-width-thick) * 3) double var(--color-foreground);
+  }
+
+  /* Paragraphs */
+  p {
+    margin-bottom: var(--spacing-line);
+    word-break: break-word;
+    hyphens: auto;
+  }
+
+  /* Strong and emphasis */
+  strong {
+    font-weight: 800;
+  }
+
+  em {
+    font-style: italic;
+  }
+
+  /* Code */
+  code {
+    font-family: var(--font-family-mono);
+    font-weight: 600;
+  }
+
+  pre {
+    white-space: pre;
+    overflow-x: auto;
+    margin: var(--spacing-line) 0;
+    padding: var(--spacing-line) 1ch;
+    background: var(--color-background-alt);
+    border: var(--border-width-thick) solid var(--color-foreground-alt);
+  }
+
+  pre code {
+    font-weight: 500;
+  }
+
+  /* Lists */
+  ul, ol {
+    padding: 0;
+    margin: 0 0 var(--spacing-line);
+  }
+
+  ul {
+    list-style-type: square;
+    padding-left: 2ch;
+  }
+
+  ol {
+    list-style-type: decimal;
+    padding-left: 3ch;
+  }
+
+  li {
+    margin: 0;
+    padding: 0;
+  }
+
+  /* Blockquotes */
+  blockquote {
+    margin: var(--spacing-line) 0;
+    padding-left: 2ch;
+    border-left: var(--border-width-thick) solid var(--color-foreground-alt);
+    color: var(--color-foreground-alt);
+  }
+
+  /* Images */
+  img {
+    display: block;
+    max-width: 100%;
+    height: auto;
+  }
+
+  /* Tables */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: var(--spacing-line) 0;
+  }
+
+  th, td {
+    border: var(--border-width-thick) solid var(--color-foreground);
+    padding: calc(var(--spacing-line) / 2) 1ch;
+    text-align: left;
+    vertical-align: top;
+  }
+
+  th {
+    font-weight: 700;
+  }
+
+  /* Details/Summary */
+  details {
+    border: var(--border-width-thick) solid var(--color-foreground);
+    padding: calc(var(--spacing-line) - var(--border-width-thick)) 1ch;
+    margin-bottom: var(--spacing-line);
+  }
+
+  summary {
+    font-weight: 600;
+    cursor: pointer;
+  }
+
+  details[open] summary {
+    margin-bottom: var(--spacing-line);
+  }
+}
+
+/* Utility classes */
+@layer utilities {
+  .text-alt {
+    color: var(--color-foreground-alt);
+  }
+
+  .text-accent {
+    color: var(--color-accent);
+  }
+
+  .bg-alt {
+    background-color: var(--color-background-alt);
+  }
+
+  .border-alt {
+    border-color: var(--color-foreground-alt);
+  }
+
+  .font-medium {
+    font-weight: 600;
+  }
+
+  .font-bold {
+    font-weight: 800;
+  }
+
+  .uppercase {
+    text-transform: uppercase;
+  }
+
+  .no-margin {
+    margin-top: 0;
+  }
+}

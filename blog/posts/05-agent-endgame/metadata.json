@@ -1,0 +1,100 @@
+{
+  "title": "The Agent Endgame: Stop Renting Default Agents and Start Building Your Own",
+  "slug": "agent-endgame",
+  "date": "2025-12-15",
+  "excerpt": "Default agents are training wheels. Custom agents are where the real power lives. Learn how system prompts, custom tools, and in-memory MCP servers transform generic agents into specialized computational products tuned for your exact needs.",
+  "tags": [
+    "ai-agents",
+    "claude-code",
+    "agent-engineering",
+    "custom-agents",
+    "mcp-servers"
+  ],
+  "keywords": [
+    "custom claude agents",
+    "agent engineering",
+    "claude code sdk agents",
+    "system prompts",
+    "@tool decorator",
+    "in-memory mcp servers",
+    "multi-agent orchestration",
+    "agent automation",
+    "context window optimization",
+    "production agent deployment"
+  ],
+  "author": "Acidbath Blog",
+  "readingTime": "12 min",
+  "difficulty": "advanced",
+  "category": "ai-engineering",
+  "source": {
+    "type": "youtube",
+    "videoId": "6wR6xblSays",
+    "title": "Agentic Coding ENDGAME: Build your Claude Code SDK Custom Agents",
+    "channel": "IndyDevDan",
+    "channelUrl": "https://www.youtube.com/@IndyDevDan",
+    "videoUrl": "https://youtube.com/watch?v=6wR6xblSays",
+    "publishDate": "2025-09-22",
+    "duration": "16:56",
+    "qualityScore": 82,
+    "rating": "A Tier"
+  },
+  "relatedPosts": [
+    "prompts-are-the-new-code",
+    "context-window-bleeding",
+    "subagents-wrong",
+    "chat-ui-is-dead"
+  ],
+  "diagrams": [
+    "diagrams/custom-agent-architecture.mmd",
+    "diagrams/eight-agents.mmd"
+  ],
+  "codeExamples": [
+    {
+      "title": "System Prompt Override (Pong Agent)",
+      "language": "python",
+      "description": "Demonstrates how system prompts completely redefine agent behavior"
+    },
+    {
+      "title": "Custom Tool Definition (Echo Agent)",
+      "language": "python",
+      "description": "Shows @tool decorator usage for deterministic operations"
+    },
+    {
+      "title": "In-Memory MCP Server Creation",
+      "language": "python",
+      "description": "Packaging custom tools without external infrastructure"
+    }
+  ],
+  "keyTakeaways": [
+    "System prompts are the highest leverage point in custom agent engineering",
+    "Default agents carry ~15 unnecessary tools that waste context window space",
+    "Custom tools bridge deterministic code execution with conversational AI",
+    "In-memory MCP servers eliminate infrastructure overhead for tool packaging",
+    "Agent progression: Better agents → More agents → Custom agents",
+    "Context window efficiency becomes critical constraint as systems scale",
+    "Production agents require security controls, model selection, and monitoring"
+  ],
+  "technicalStack": [
+    "Claude Code SDK",
+    "Python 3.8+",
+    "MCP (Model Context Protocol)",
+    "Claude Haiku/Sonnet/Opus",
+    "WebSockets",
+    "Rich (Python library)"
+  ],
+  "audienceLevel": "Advanced engineers building custom AI agents",
+  "prerequisites": [
+    "Understanding of large language models",
+    "Python programming experience",
+    "Familiarity with Claude API",
+    "Basic agent/prompt engineering knowledge"
+  ],
+  "implementationTime": "4-8 weeks for full progression",
+  "estimatedROI": "High - reduces context costs, increases specialization, enables scaling",
+  "metadata": {
+    "version": "1.0",
+    "lastUpdated": "2025-12-15",
+    "contentType": "technical-guide",
+    "analysisDate": "2025-11-24"
+  }
+}

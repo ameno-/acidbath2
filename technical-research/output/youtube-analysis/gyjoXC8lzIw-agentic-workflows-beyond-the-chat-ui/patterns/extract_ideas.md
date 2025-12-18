@@ -1,0 +1,41 @@
+IDEAS
+
+- Generative AI capabilities extend far beyond simple chat interfaces currently dominating usage.
+- Chat represents the first, simplest, and most overused interface for AI interactions.
+- Agentic workflows can be triggered through drag-and-drop file operations into directories.
+- ADZ enables eight specialized agentic workflows through simple file directory operations.
+- File-based engineering work can be automated through programmed directory-specific agent responses.
+- Drop zones configuration uses YAML files to define agent behaviors and workflows.
+- Agent-agnostic systems prevent vendor lock-in while enabling multiple AI provider integration.
+- Nano Banana (Gemini 2.5 Flash) provides powerful image generation and editing capabilities.
+- Image editing workflows maintain original detail while applying specified modifications accurately.
+- Twitter classification datasets can be automatically expanded using existing data patterns.
+- Financial data processing generates categorized reports and visual charts from raw statements.
+- Audio transcription workflows create formatted summaries with key insights and extensions.
+- Single File Scripts (SFS) can pack complex functionality into 700-line Python applications.
+- Astral UV enables dependency loading directly within Python files for streamlined deployment.
+- Prompt engineering requires structured approaches with purpose, variables, workflows, and outputs.
+- File system interfaces provide familiar, proven interaction methods for agent automation.
+- Watchdog libraries enable real-time file system monitoring for automated workflow triggers.
+- Replicate API integration allows access to specialized models through MCP servers.
+- Morning debrief workflows can transcribe, analyze, and enhance daily planning recordings.
+- Programmatic agents offer superior capabilities compared to traditional chat-based AI interactions.
+- Claude Code leads programmatic agent development with comprehensive TypeScript and Python SDKs.
+- Variable replacement in prompts enables dynamic content processing within agent workflows.
+- Rich logging provides enhanced terminal interfaces for monitoring agent workflow progress.
+- Human-in-the-loop patterns should evolve toward fully autonomous agent-driven processes.
+- Repeat workflows represent prime candidates for agent automation rather than manual execution.
+- Agent autonomy should be leveraged to eliminate repetitive human intervention requirements.
+- Phase 2 agentic coding represents the evolution beyond basic prompt-response interactions.
+- Engineers possess unique advantages for building and leveraging advanced AI technologies.
+- Prompt engineering has become the most critical skill for modern software engineers.
+- XML embedding in prompts enables structured templating and variable section definitions.
+- Configuration-driven architectures allow rapid deployment of new agent workflow capabilities.
+- File pattern matching enables selective workflow triggering based on input characteristics.
+- Parallel agent execution maximizes computational efficiency for multiple concurrent workflows.
+- Reactive directories transform passive file storage into active workflow trigger mechanisms.
+- Model and agent capabilities no longer represent the primary bottleneck for implementation.
+- Skill development and architectural thinking now determine AI implementation success rates.
+- Compound advantages emerge from consistently building and deploying automated agent workflows.
+- Engineering work automation requires identifying repetitive patterns suitable for agent processing.
+- Agent architecture design should prioritize reusability, extensibility, and interoperability principles.

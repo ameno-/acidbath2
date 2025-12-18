@@ -1,0 +1,27 @@
+flowchart TD
+    Start[Parent Agent: Claude Code] --> CreateContext[Create context.md]
+    CreateContext --> ContextContent["context.md contains:<br/>• Project state<br/>• Research requirements<br/>• Constraints"]
+
+    ContextContent --> SpawnSubAgent[Spawn Sub-Agent<br/>RESEARCHER ONLY]
+
+    SpawnSubAgent --> SubAgentRead[Sub-Agent reads context.md]
+    SubAgentRead --> Research["Sub-Agent performs research:<br/>• Read documentation<br/>• Search codebase<br/>• Analyze patterns<br/>• Plan implementation"]
+
+    Research --> SaveReport[Save to research-report.md]
+    SaveReport --> ReturnSummary[Return brief summary<br/>NOT full report]
+
+    ReturnSummary --> ParentReads[Parent Agent reads<br/>research-report.md]
+    ParentReads --> FullContext["Parent has complete context:<br/>• Conversation history<br/>• Full research report<br/>• Project knowledge"]
+
+    FullContext --> Implementation[Parent Agent implements<br/>with FULL CONTEXT]
+    Implementation --> UpdateContext[Update context.md<br/>with progress]
+
+    UpdateContext --> Done[Implementation Complete]
+
+    style Start fill:#4CAF50,stroke:#2E7D32,color:#fff
+    style SpawnSubAgent fill:#2196F3,stroke:#1565C0,color:#fff
+    style Research fill:#2196F3,stroke:#1565C0,color:#fff
+    style Implementation fill:#4CAF50,stroke:#2E7D32,color:#fff
+    style Done fill:#4CAF50,stroke:#2E7D32,color:#fff
+    style SaveReport fill:#FF9800,stroke:#E65100,color:#fff
+    style ParentReads fill:#FF9800,stroke:#E65100,color:#fff

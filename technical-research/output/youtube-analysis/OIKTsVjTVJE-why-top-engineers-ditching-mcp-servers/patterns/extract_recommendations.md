@@ -1,0 +1,22 @@
+Based on the content about MCP server alternatives and context management for AI agents, here are the key recommendations:
+
+- Use MCP servers for 80% of external tool integrations - simple and standardized
+- Switch to CLI approach when you need specific control over external tools
+- Implement scripts or skills only when context preservation is critical (5% of cases)
+- Build CLI-first for new tools to enable you, team, and agent usage
+- Use progressive disclosure to avoid loading unnecessary context into agents
+- Wrap MCP servers around existing CLIs when scaling to multiple agents needed
+- Prompt engineer context consumption before adding more complex solutions
+- Focus agents on single purposes to sidestep most context engineering problems
+- Read tool documentation files only when specific functionality is required
+- Use self-contained single-file scripts with dependencies declared at the top
+- Implement incremental context loading rather than front-loading all tool information
+- Consider ecosystem lock-in when choosing between skills and portable CLI approaches
+- Stack multiple approaches: start simple, add complexity only when necessary
+- Test context window consumption with /context command to monitor token usage
+- Build interoperability by having MCP server methods call into CLI functions
+- Use UV for Python dependency management in single-file scripts
+- Prime agents with specific prompts before giving them access to tools
+- Avoid reinventing wheels - use existing MCP servers when they meet needs
+- Monitor when multiple MCP servers consume 20%+ of context window capacity
+- Delete focused agents after task completion to reset context consumption

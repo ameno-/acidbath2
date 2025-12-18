@@ -1,0 +1,89 @@
+{
+  "status": "completed",
+  "video_id": "LCYBVpSB0Wo",
+  "content_type": "technical",
+  "execution_timestamp": "2025-11-26T12:25:00Z",
+  "patterns_executed": [
+    "extract_patterns",
+    "extract_algorithm_update_recommendations",
+    "create_mermaid_visualization",
+    "extract_insights",
+    "extract_predictions",
+    "extract_extraordinary_claims",
+    "extract_recommendations",
+    "extract_wisdom",
+    "analyze_claims",
+    "extract_ideas",
+    "rate_content",
+    "summarize",
+    "extract_references"
+  ],
+  "output_files": [
+    "/Users/ameno/dev/umbra-dev/technical-research/output/youtube-analysis/LCYBVpSB0Wo-i-was-using-subagents-wrong-here-is-my-w/patterns/extract_patterns.md",
+    "/Users/ameno/dev/umbra-dev/technical-research/output/youtube-analysis/LCYBVpSB0Wo-i-was-using-subagents-wrong-here-is-my-w/patterns/create_mermaid_visualization.md",
+    "/Users/ameno/dev/umbra-dev/technical-research/output/youtube-analysis/LCYBVpSB0Wo-i-was-using-subagents-wrong-here-is-my-w/patterns/extract_algorithm_update_recommendations.md",
+    "/Users/ameno/dev/umbra-dev/technical-research/output/youtube-analysis/LCYBVpSB0Wo-i-was-using-subagents-wrong-here-is-my-w/patterns/extract_insights.md",
+    "/Users/ameno/dev/umbra-dev/technical-research/output/youtube-analysis/LCYBVpSB0Wo-i-was-using-subagents-wrong-here-is-my-w/patterns/extract_predictions.md",
+    "/Users/ameno/dev/umbra-dev/technical-research/output/youtube-analysis/LCYBVpSB0Wo-i-was-using-subagents-wrong-here-is-my-w/patterns/extract_extraordinary_claims.md",
+    "/Users/ameno/dev/umbra-dev/technical-research/output/youtube-analysis/LCYBVpSB0Wo-i-was-using-subagents-wrong-here-is-my-w/patterns/extract_recommendations.md",
+    "/Users/ameno/dev/umbra-dev/technical-research/output/youtube-analysis/LCYBVpSB0Wo-i-was-using-subagents-wrong-here-is-my-w/patterns/extract_wisdom.md",
+    "/Users/ameno/dev/umbra-dev/technical-research/output/youtube-analysis/LCYBVpSB0Wo-i-was-using-subagents-wrong-here-is-my-w/patterns/analyze_claims.md",
+    "/Users/ameno/dev/umbra-dev/technical-research/output/youtube-analysis/LCYBVpSB0Wo-i-was-using-subagents-wrong-here-is-my-w/patterns/extract_ideas.md",
+    "/Users/ameno/dev/umbra-dev/technical-research/output/youtube-analysis/LCYBVpSB0Wo-i-was-using-subagents-wrong-here-is-my-w/patterns/rate_content.md",
+    "/Users/ameno/dev/umbra-dev/technical-research/output/youtube-analysis/LCYBVpSB0Wo-i-was-using-subagents-wrong-here-is-my-w/patterns/summarize.md",
+    "/Users/ameno/dev/umbra-dev/technical-research/output/youtube-analysis/LCYBVpSB0Wo-i-was-using-subagents-wrong-here-is-my-w/patterns/extract_references.md",
+    "/Users/ameno/dev/umbra-dev/technical-research/output/youtube-analysis/LCYBVpSB0Wo-i-was-using-subagents-wrong-here-is-my-w/patterns/TECHNICAL_SUMMARY.md"
+  ],
+  "metrics": {
+    "technical": {
+      "core_patterns_identified": 21,
+      "architectural_patterns": 5,
+      "tools_frameworks": 10,
+      "service_integrations": 5,
+      "code_snippets": 1,
+      "best_practices": 15,
+      "recommendations": 10,
+      "architecture_diagrams": 1,
+      "total_documentation_lines": 539
+    },
+    "tools_identified": [
+      "Claude Code",
+      "MCP (Model Context Protocol)",
+      "Context7",
+      "Manus",
+      "Shadcn/UI",
+      "Vercel AI SDK v5",
+      "Stripe",
+      "Tailwind CSS",
+      "Supabase",
+      "Next.js (implied)",
+      "React (implied)"
+    ],
+    "automation_opportunities": [
+      "Specialized service agents (Vercel, Stripe, Shadcn, Supabase, Tailwind)",
+      "Context management automation (auto-generate context.md)",
+      "Research workflow automation (pre-research phase)",
+      "Agent orchestration templates",
+      "Token usage monitoring and optimization",
+      "Background monitoring for long-running tasks",
+      "Documentation retrieval via MCP",
+      "Plan validation before code generation"
+    ],
+    "key_contributors": [
+      "Adam Wolf (Claude Code team)",
+      "Manus Team (context engineering)",
+      "AI Jason (content creator)"
+    ],
+    "testing_duration": "20+ hours",
+    "token_optimization": "~80% reduction per research task"
+  },
+  "key_findings": {
+    "primary_insight": "Sub-agents excel at research and planning but fail at direct implementation due to context isolation",
+    "solution": "Use file-based context management and treat sub-agents as specialized researchers",
+    "architecture_pattern": "Parent agent orchestrates, sub-agents research, file system shares context",
+    "performance_impact": "80% context window saved through summary-based reporting instead of full file reads",
+    "validation": "Confirmed by Claude Code team engineer Adam Wolf and inspired by Manus team patterns"
+  },
+  "execution_time_seconds": 45,
+  "working_directory": "/Users/ameno/dev/umbra-dev/technical-research/output/youtube-analysis/LCYBVpSB0Wo-i-was-using-subagents-wrong-here-is-my-w"
+}

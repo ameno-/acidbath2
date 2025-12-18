@@ -1,0 +1,99 @@
+{
+  "status": "completed",
+  "content_type": "technical",
+  "video_id": "luqKnexhpFs",
+  "video_title": "Agentic Prompt Engineering with Claude Code (For you, your team, and your AGENTS)",
+  "channel": "IndyDevDan",
+  "duration": "34:35",
+  "patterns_executed": [
+    "extract_technical_content"
+  ],
+  "output_files": [
+    "/Users/ameno/dev/umbra-dev/technical-research/output/youtube-analysis/luqKnexhpFs-agentic-prompt-engineering-with-claude-c/patterns/extract_technical_content.md"
+  ],
+  "metrics": {
+    "technical": {
+      "total_lines": 332,
+      "total_sections": 38,
+      "code_snippets": 4,
+      "languages_identified": 6,
+      "tools_frameworks": 3,
+      "services_apis": 2,
+      "bash_commands": 9,
+      "config_files": 2,
+      "automation_opportunities": 5,
+      "architectural_patterns": 3,
+      "design_principles": 3,
+      "best_practices": 3,
+      "common_pitfalls": 3
+    }
+  },
+  "key_findings": {
+    "primary_technologies": [
+      "Claude Code CLI",
+      "MCP Server (Model Context Protocol)",
+      "Replicate API"
+    ],
+    "languages_used": [
+      "Natural Language",
+      "Markdown",
+      "JSON",
+      "YAML",
+      "XML",
+      "Bash"
+    ],
+    "core_concepts": [
+      "Input-Workflow-Output Pattern",
+      "Delegation Pattern",
+      "Template Meta Pattern",
+      "Consistency Over Complexity",
+      "Stakeholder Trifecta",
+      "Composable Sections"
+    ],
+    "workflow_levels": [
+      "Level 1: Ad Hoc Prompts",
+      "Level 2: Workflow Prompts",
+      "Level 3: Control Flow",
+      "Level 4: Delegation"
+    ],
+    "automation_opportunities": [
+      "Prompt Template Generation",
+      "Variable Validation",
+      "Prompt Testing Pipeline",
+      "Documentation Generation",
+      "Performance Monitoring"
+    ],
+    "configuration_files": [
+      "claude.md - Agent knowledge and context",
+      "prompt-template.md - Template structure for new prompts"
+    ],
+    "key_commands": [
+      "/prime - Basic prompt execution",
+      "/build - Workflow prompt with arguments",
+      "/create_image - Image generation with parameters",
+      "/parallel - Parallel agent execution",
+      "/background - Background agent execution"
+    ],
+    "environment_variables": [
+      "CLAUDE_API_KEY",
+      "REPLICATE_API_TOKEN",
+      "OUTPUT_PATH",
+      "MODEL_PREFERENCE"
+    ]
+  },
+  "technical_depth": {
+    "code_examples": "4 detailed code snippets with explanations",
+    "architectural_patterns": "3 major patterns (Input-Workflow-Output, Delegation, Template Meta)",
+    "best_practices": "3 core principles documented",
+    "pitfalls": "3 common mistakes identified",
+    "workflow_steps": "4 major workflow categories documented"
+  },
+  "extraction_quality": {
+    "completeness": "high",
+    "structure": "well_organized",
+    "actionability": "high",
+    "technical_accuracy": "verified"
+  },
+  "execution_time_seconds": 15,
+  "timestamp": "2025-11-24T19:26:00Z"
+}

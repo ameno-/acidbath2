@@ -1,0 +1,125 @@
+{
+  "title": "Prompts Are the New Code: The 7-Level Framework That's Making Traditional Programming Obsolete",
+  "slug": "prompts-are-the-new-code",
+  "description": "One well-crafted prompt generates hundreds of hours of work. One bad prompt compounds failure at the same exponential rate. The paradigm shift to agentic prompt engineering is happening now—and engineers who don't adapt will be obsolete in 2 years.",
+  "keywords": [
+    "prompt engineering framework",
+    "agentic prompts",
+    "claude code",
+    "AI agents",
+    "workflow prompts",
+    "agent orchestration",
+    "engineering productivity",
+    "stakeholder trifecta",
+    "AI-driven development",
+    "prompt engineering levels",
+    "template meta-prompts",
+    "delegation prompts",
+    "engineering paradigm shift",
+    "AI engineering",
+    "prompt architecture"
+  ],
+  "author": "ameno",
+  "date": "2025-12-15",
+  "readTime": "12 minutes",
+  "category": "AI Engineering",
+  "tags": [
+    "Prompt Engineering",
+    "AI Agents",
+    "Engineering Productivity",
+    "Claude Code",
+    "Workflow Automation",
+    "Agent Orchestration",
+    "Software Engineering",
+    "AI Development",
+    "Engineering Best Practices",
+    "Agentic Systems"
+  ],
+  "seo": {
+    "metaTitle": "Prompts Are the New Code: 7-Level Agentic Framework | AI Engineering",
+    "metaDescription": "Master the 7-level framework for agentic prompt engineering. Learn why prompts replaced code as the fundamental unit of engineering and how to capture 90% of value from workflow prompts. The paradigm shift is here.",
+    "openGraphTitle": "The 7-Level Framework Making Traditional Programming Obsolete",
+    "openGraphDescription": "One well-crafted prompt = 100 hours of work. Learn the stakeholder trifecta framework and why engineers who don't adapt will be obsolete in 2 years.",
+    "twitterTitle": "Prompts Are the New Code: The Uncomfortable Truth About Engineering's Future",
+    "twitterDescription": "S-tier framework: 7 levels of agentic prompt engineering. 90% of value from levels 2-4. The paradigm shift that's separating 10x engineers from everyone else.",
+    "canonicalUrl": "/posts/01-prompts-are-the-new-code",
+    "focusKeywords": [
+      "agentic prompt engineering",
+      "workflow prompts",
+      "AI agent orchestration",
+      "prompt engineering framework"
+    ]
+  },
+  "source": {
+    "videoId": "luqKnexhpFs",
+    "videoTitle": "Agentic Prompt Engineering with Claude Code (For you, your team, and your AGENTS)",
+    "channel": "IndyDevDan",
+    "channelUrl": "https://www.youtube.com/@IndyDevDan",
+    "videoUrl": "https://www.youtube.com/watch?v=luqKnexhpFs",
+    "duration": "34:35",
+    "views": 20727,
+    "uploadDate": "2025-09-15",
+    "qualityScore": 92,
+    "contentRating": "S Tier",
+    "watchPriority": "CRITICAL"
+  },
+  "stats": {
+    "wordCount": 3421,
+    "insightsExtracted": 40,
+    "actionableRecommendations": 25,
+    "frameworksDocumented": 7,
+    "wpmScore": 8.2
+  },
+  "relatedContent": {
+    "prerequisites": [
+      "Basic understanding of AI agents",
+      "Software engineering fundamentals",
+      "Interest in productivity multiplication"
+    ],
+    "nextSteps": [
+      "Complete The Agentic Course (TAC)",
+      "Implement first workflow prompt",
+      "Build reusable prompt library",
+      "Master delegation patterns"
+    ],
+    "relatedPosts": [
+      "02-context-window-bleeding",
+      "03-subagents-wrong",
+      "04-chat-ui-is-dead",
+      "05-agent-endgame"
+    ]
+  },
+  "engagement": {
+    "targetAudience": [
+      "Software Engineers",
+      "Engineering Team Leads",
+      "AI Practitioners",
+      "Technical Architects",
+      "Engineering Managers",
+      "Individual Contributors seeking productivity gains"
+    ],
+    "emotionalHooks": [
+      "Fear of obsolescence",
+      "Desire for competitive advantage",
+      "Frustration with plateaued AI productivity",
+      "Ambition to become irreplaceable",
+      "FOMO on paradigm shift"
+    ],
+    "controversialClaims": [
+      "Traditional programming becoming obsolete",
+      "Engineers will be obsolete in 2 years without adaptation",
+      "Prompts replaced code as fundamental unit",
+      "90% of engineers haven't made the agentic shift",
+      "Consistency beats complexity as primary principle"
+    ]
+  },
+  "formatting": {
+    "hasCodeBlocks": true,
+    "hasDiagrams": true,
+    "hasCallouts": true,
+    "hasQuotes": true,
+    "hasActionableSections": true,
+    "tone": "direct, provocative, no-nonsense",
+    "style": "polarizing, emotionally engaging, data-driven"
+  }
+}

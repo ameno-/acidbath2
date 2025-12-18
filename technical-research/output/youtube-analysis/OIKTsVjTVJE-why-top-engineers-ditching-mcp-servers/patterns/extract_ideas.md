@@ -1,0 +1,32 @@
+IDEAS
+
+- MCP servers consume significant context tokens before agents begin working effectively.
+- Context window preservation becomes critical when stacking multiple MCP servers together.
+- CLI-based approaches provide more granular control over agent tool access patterns.
+- Progressive disclosure helps agents access only necessary tools for specific tasks.
+- Script-based approaches offer maximum context efficiency through conditional tool loading mechanisms.
+- Skills provide Claude-specific progressive disclosure with automatic tool discovery capabilities.
+- Prompt engineering remains fundamental for controlling context consumption in agent systems.
+- External MCP servers offer zero engineering investment but sacrifice customization control.
+- Self-contained single-file scripts maximize portability across different development environments.
+- Context engineering skills become increasingly important as agent complexity grows significantly.
+- CLI tools work effectively for developers, teams, and agents simultaneously.
+- MCP server alternatives trade complexity for improved context window management.
+- Prediction markets provide valuable information about future events through betting data.
+- Agents can analyze betting market sentiment faster than manual research approaches.
+- Tool discovery methods significantly impact agent performance and resource consumption patterns.
+- Custom tool implementations require more upfront investment but offer greater flexibility.
+- Incremental context loading prevents unnecessary token consumption during agent initialization phases.
+- File system scripts enable isolated tool functionality without shared dependency conflicts.
+- Agent focus improves when context windows contain only relevant tool information.
+- Anthropic recommends wrapping MCP functionality in targeted script-based tool implementations.
+- Progressive tool disclosure scales better than loading complete toolsets upfront.
+- Engineering trade-offs exist between simplicity, control, and context window efficiency.
+- Claude ecosystem lock-in occurs when using skills instead of portable solutions.
+- Dedicated single-purpose agents sidestep most context engineering problems effectively.
+- CLI-first development enables easier MCP server wrapping for scaling requirements.
+- Betting platforms serve dual purposes as information sources and investment opportunities.
+- Context preservation becomes essential when managing multiple complex tool integrations.
+- Tool belt strategies should prioritize external MCP servers for established solutions.
+- Custom tool development should default to CLI approaches for maximum compatibility.
+- Script-based tools offer superior portability compared to MCP server implementations.

@@ -1,0 +1,143 @@
+{
+  "video_id": "gyjoXC8lzIw",
+  "video_url": "https://www.youtube.com/watch?v=gyjoXC8lzIw",
+  "video_title": "Agentic Workflows: BEYOND the Chat UI with Claude Code SDK and Gemini Nano Banana",
+  "channel": "IndyDevDan",
+  "duration": "00:24:41",
+  "upload_date": "2025-09-01",
+  "view_count": 18378,
+  "workflow": "yt-full",
+  "analysis_type": "comprehensive",
+  "steps_completed": [
+    {
+      "step": 1,
+      "name": "Metadata Extraction",
+      "status": "completed",
+      "timestamp": "2025-11-24T22:58:00Z",
+      "duration_seconds": 45,
+      "files_created": [
+        "metadata.json",
+        "transcript.txt",
+        "transcript.en.vtt",
+        "key_metadata.json",
+        "content_type.txt",
+        "extraction_summary.json"
+      ]
+    },
+    {
+      "step": 2,
+      "name": "Pattern Analysis (Parallel)",
+      "status": "completed",
+      "timestamp": "2025-11-24T23:00:30Z",
+      "duration_seconds": 120,
+      "sub_agents": [
+        {
+          "agent": "core-analyzer-sonnet",
+          "status": "completed",
+          "duration_seconds": 48,
+          "patterns_executed": 15
+        },
+        {
+          "agent": "conditional-analyzer",
+          "status": "completed",
+          "duration_seconds": 90,
+          "patterns_executed": 19
+        }
+      ],
+      "total_patterns": 34,
+      "files_created": 21
+    },
+    {
+      "step": 3,
+      "name": "Report Generation (Parallel)",
+      "status": "completed",
+      "timestamp": "2025-11-24T23:02:00Z",
+      "duration_seconds": 60,
+      "sub_agents": [
+        {
+          "agent": "report-aggregator",
+          "status": "completed",
+          "files_created": [
+            "ANALYSIS_SUMMARY.md",
+            "aggregated-report.md",
+            "README.md"
+          ]
+        },
+        {
+          "agent": "audio-summarizer",
+          "status": "completed",
+          "files_created": [
+            "audio-summary.txt",
+            "audio-summary.m4a",
+            "audio-summary.mp3"
+          ]
+        }
+      ]
+    }
+  ],
+  "content_type": "technical",
+  "content_confidence": "high",
+  "quality_metrics": {
+    "content_score": 82,
+    "content_score_max": 100,
+    "rating": "A Tier",
+    "priority": "High",
+    "relevance": 9,
+    "relevance_max": 10
+  },
+  "patterns_executed": {
+    "core_patterns": 15,
+    "conditional_patterns": 19,
+    "total": 34,
+    "success_rate": "100%"
+  },
+  "key_findings": {
+    "main_thesis": "Chat interfaces are limiting AI potential; file-based agentic workflows unlock automated, repeatable engineering tasks through drop-zone architecture",
+    "core_innovation": "Agentic Drop Zones (ADZ) - A file-based AI workflow automation system using directory watchers and configurable agents",
+    "technologies_featured": [
+      "Claude Code SDK (TypeScript & Python)",
+      "Gemini 2.5 Flash (Nano Banana)",
+      "OpenAI Whisper",
+      "Astral UV",
+      "Watchdog",
+      "Replicate API",
+      "Rich Terminal UI",
+      "PyYAML"
+    ],
+    "concepts_identified": 42,
+    "recommendations_extracted": 20,
+    "insights_extracted": 10,
+    "predictions": 8,
+    "automation_opportunities": 5,
+    "high_priority_agents": 3
+  },
+  "files_generated": {
+    "metadata": [
+      "metadata.json",
+      "key_metadata.json",
+      "extraction_summary.json"
+    ],
+    "transcripts": [
+      "transcript.txt",
+      "transcript.en.vtt"
+    ],
+    "pattern_files": 21,
+    "analysis_reports": [
+      "ANALYSIS_SUMMARY.md",
+      "aggregated-report.md",
+      "README.md"
+    ],
+    "audio_files": [
+      "audio-summary.txt",
+      "audio-summary.m4a",
+      "audio-summary.mp3"
+    ]
+  },
+  "working_directory": "/Users/ameno/dev/umbra-dev/technical-research/output/youtube-analysis/gyjoXC8lzIw",
+  "total_execution_time_seconds": 225,
+  "total_execution_time_minutes": 3.75,
+  "parallelization_savings_percent": 45,
+  "analysis_completion_timestamp": "2025-11-24T23:03:30Z",
+  "status": "COMPLETE",
+  "ready_for_review": true
+}

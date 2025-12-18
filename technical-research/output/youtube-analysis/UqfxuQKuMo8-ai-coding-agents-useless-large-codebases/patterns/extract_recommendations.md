@@ -1,0 +1,20 @@
+- Use semantic search tools like Serena instead of basic text search for AI coding
+- Install MCP servers that provide intelligent code navigation and editing capabilities
+- Choose language-specific refactoring tools rather than generic text-based approaches
+- Run unit tests after every AI-assisted refactoring to verify correctness
+- Use embedding-based searches to reduce token consumption in large codebases
+- Avoid brute force approaches that cause AI agents to doom loop
+- Install Roslyn-based tools for C# refactoring tasks when available
+- Configure AI assistants to use specialized MCP servers in system prompts
+- Look for open-source semantic code retrieval tools for your programming language
+- Prioritize tools that reduce compile-fail-retry cycles in AI workflows
+- Use factory method patterns when refactoring inheritance hierarchies
+- Test drive new implementations after major code restructuring
+- Push down class members to specific subclasses that actually use them
+- Benchmark AI performance before and after adding specialized tools
+- Consider autonomous refactoring for multi-step code transformation tasks
+- Research GitHub for language-specific AI coding enhancement tools
+- Use line counting tools to assess codebase complexity before refactoring
+- Enable hands-off AI workflows for routine but complex refactoring tasks
+- Measure token usage and cost when evaluating AI coding tool effectiveness
+- Explore MCP servers before investing in expensive sub-agent approaches

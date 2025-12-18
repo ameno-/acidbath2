@@ -1,0 +1,33 @@
+graph TB
+    subgraph Manual["Manual IDE Approach"]
+        M1[JetBrains Rider<br/>Built-in Refactoring]
+        M2[Time: 3 minutes<br/>Tokens: N/A<br/>Cost: $0]
+        M3[Result: Perfect<br/>Human Effort: High]
+        M1 --> M2 --> M3
+    end
+
+    subgraph Basic["Basic Claude (No Tools)"]
+        B1[Standard File Operations<br/>Text-Based Search]
+        B2[Time: 3 hours<br/>Tokens: 28M<br/>Cost: $14]
+        B3[Result: Eventually works<br/>4 rebuild cycles<br/>Constant babysitting]
+        B1 --> B2 --> B3
+    end
+
+    subgraph MCP["With MCP Servers"]
+        C1[Serena + Refactor MCP<br/>Semantic Search]
+        C2[Time: 5 minutes<br/>Tokens: 1M<br/>Cost: $0.60]
+        C3[Result: Perfect<br/>One-shot autonomous<br/>Hands-off operation]
+        C1 --> C2 --> C3
+    end
+
+    Task[Rename Type in<br/>55,000 File Codebase] --> Manual
+    Task --> Basic
+    Task --> MCP
+
+    style Manual fill:#90EE90
+    style Basic fill:#FFB6C6
+    style MCP fill:#87CEEB
+    style Task fill:#FFE4B5
+
+    classDef metrics fill:#FFF9E3,stroke:#333,stroke-width:2px
+    class M2,B2,C2 metrics

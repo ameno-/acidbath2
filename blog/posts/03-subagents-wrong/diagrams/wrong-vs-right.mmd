@@ -1,0 +1,34 @@
+flowchart LR
+    subgraph Wrong["❌ WRONG: Sub-Agent as Implementer"]
+        W1[Parent Agent] --> W2[Spawn Frontend<br/>Sub-Agent]
+        W1 --> W3[Spawn Backend<br/>Sub-Agent]
+
+        W2 --> W4["Frontend implements<br/>in isolation"]
+        W3 --> W5["Backend implements<br/>in isolation"]
+
+        W4 --> W6["❌ PROBLEMS:<br/>• No shared context<br/>• Parent can't see changes<br/>• 80% tokens consumed<br/>• Conversation compaction<br/>• Integration failures<br/>• Debugging nightmare"]
+        W5 --> W6
+        W6 --> W7[FAILED PROJECT]
+    end
+
+    subgraph Right["✅ RIGHT: Sub-Agent as Researcher"]
+        R1[Parent Agent] --> R2[Create context.md]
+        R2 --> R3[Spawn Research<br/>Sub-Agent]
+
+        R3 --> R4["Research:<br/>• Read docs<br/>• Analyze code<br/>• Plan solution"]
+
+        R4 --> R5[Save research-report.md<br/>Return summary]
+
+        R5 --> R6[Parent reads report]
+        R6 --> R7["Parent implements<br/>with FULL context"]
+
+        R7 --> R8["✅ BENEFITS:<br/>• Complete visibility<br/>• 80% token reduction<br/>• No compaction<br/>• Better code quality<br/>• Easy debugging<br/>• Scalable workflow"]
+        R8 --> R9[SUCCESS]
+    end
+
+    style Wrong fill:#ffebee,stroke:#c62828,stroke-width:3px
+    style Right fill:#e8f5e9,stroke:#2e7d32,stroke-width:3px
+    style W7 fill:#f44336,stroke:#b71c1c,color:#fff,stroke-width:2px
+    style R9 fill:#4caf50,stroke:#1b5e20,color:#fff,stroke-width:2px
+    style W6 fill:#ef5350,stroke:#c62828,color:#fff
+    style R8 fill:#66bb6a,stroke:#2e7d32,color:#fff

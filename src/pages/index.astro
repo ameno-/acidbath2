@@ -1,0 +1,72 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import BlogPostCard from '../components/BlogPostCard.astro';
+import { getCollection } from 'astro:content';
+
+const allPosts = await getCollection('blog', ({ data }) => !data.draft);
+const recentPosts = allPosts
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+  .slice(0, 3);
+---
+
+<BaseLayout title="Home" description="Acidbath - Technology and AI focused blog">
+  <section class="hero">
+    <h1>ACIDBATH</h1>
+    <p class="tagline">
+      Exploring technology, artificial intelligence, and the systems that shape our digital world.
+    </p>
+  </section>
+
+  <hr />
+
+  <section class="recent-posts">
+    <h2>Recent Posts</h2>
+    {recentPosts.length > 0 ? (
+      <div class="posts-list">
+        {recentPosts.map((post) => (
+          <BlogPostCard
+            title={post.data.title}
+            description={post.data.description}
+            pubDate={post.data.pubDate}
+            slug={post.slug}
+            tags={post.data.tags}
+          />
+        ))}
+      </div>
+    ) : (
+      <p class="text-alt">No posts yet. Check back soon.</p>
+    )}
+    {recentPosts.length > 0 && (
+      <p>
+        <a href="/blog">View all posts →</a>
+      </p>
+    )}
+  </section>
+</BaseLayout>
+
+<style>
+  .hero {
+    text-align: center;
+    padding: calc(var(--spacing-line) * 2) 0;
+  }
+
+  .hero h1 {
+    font-size: 3rem;
+    letter-spacing: 0.2em;
+    margin-bottom: var(--spacing-line);
+  }
+
+  .tagline {
+    color: var(--color-foreground-alt);
+    max-width: 50ch;
+    margin: 0 auto;
+  }
+
+  .recent-posts h2 {
+    margin-bottom: var(--spacing-line);
+  }
+
+  .posts-list {
+    margin-bottom: calc(var(--spacing-line) * 2);
+  }
+</style>

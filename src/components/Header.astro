@@ -1,0 +1,35 @@
+---
+import Navigation from './Navigation.astro';
+---
+
+<header>
+  <div class="header-content">
+    <a href="/" class="logo">ACIDBATH</a>
+    <Navigation />
+  </div>
+</header>
+
+<style>
+  header {
+    margin-bottom: calc(var(--spacing-line) * 2);
+  }
+
+  .header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1ch;
+  }
+
+  .logo {
+    font-size: 1.25rem;
+    font-weight: 800;
+    text-decoration: none;
+    letter-spacing: 0.1em;
+  }
+
+  .logo:hover {
+    color: var(--color-accent);
+  }
+</style>

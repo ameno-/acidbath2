@@ -1,0 +1,25 @@
+AGENTIC CODING ENDGAME: Build Your Claude Code SDK Custom Agents
+From IndyDevDan - 16 minutes 56 seconds
+
+SECTION 1: THE CORE THESIS
+Welcome to a deep dive into custom agents and why they represent the endgame of agentic software development. This video explains why system prompts are the most critical element of any agent system, and how to build specialized agents that outperform generic solutions.
+
+SECTION 2: THE PROGRESSION FRAMEWORK
+The journey to custom agents follows a clear progression. First, you make better agents by improving your prompts and engineering the context. Second, you scale impact by building more agents to handle different tasks. Third, and most importantly, you build custom agents tailored to your specific domain, codebase, and problems that generic solutions can't solve. This is the endgame.
+
+Key technologies powering this progression include the Claude Code SDK, MCP servers for tool integration, and models ranging from Claude Haiku for simple tasks to Claude Sonnet for complex analysis.
+
+SECTION 3: CRITICAL INSIGHTS AND THE SYSTEM PROMPT
+Five critical insights that will transform your approach to agents. First, system prompts multiply effectiveness across every single user interaction—they affect everything an agent does. Second, out-of-the-box agents waste context tokens on irrelevant universal capabilities that don't apply to your problem. Third, custom agents let you completely overwrite default behavior, eliminating wasted capability. Fourth, multi-agent workflows enable true out-of-loop autonomous development where agents work without human intervention. Fifth, agent coding shifts from "what can you do" to "teach me these specialized behaviors."
+
+The system prompt is king. Master it first because it controls every interaction your agent has with users. Include the four core elements in your architecture: user prompts, agent responses, tool calls, and system prompts themselves.
+
+SECTION 4: PRACTICAL IMPLEMENTATION
+The video demonstrates eight concrete custom agent examples and ten specific integration opportunities. Start simple with prompt engineering and context engineering for single agents. Progress to multiple agents when you need to scale compute and increase workflow impact. Graduate to custom agents when out-of-the-box solutions don't fit your specific codebase.
+
+For your domain, build agents focused on hard specific problems that most engineers can't solve. Use Cloud Code SDK to configure your agents and handle responses. Monitor tool access carefully—context window pollution from unused tools degrades agent performance. Choose appropriate models: cheaper Haiku for simple tasks, more capable Sonnet for complex analysis.
+
+Ten integration opportunities await you. From simple to complex: build a pong agent as a hello-world example; create an echo agent with custom tools; develop a search agent that queries your codebase; build a refactoring agent for technical debt; create test generation agents; develop documentation agents; build security audit agents; create a Micro-SDLC system with planner, builder, reviewer, and shipper agents; implement multi-agent orchestration for complex workflows; and deploy agents across scripts, terminals, data streams, and user interfaces.
+
+SECTION 5: NEXT STEPS
+Start where you have constraints and high return on investment. Find workflows that repeat consistently. Focus on problems that most engineers struggle to solve. Watch the full video to see all eight agent examples in action and explore the technical deep dive. Dive into the Claude Code SDK documentation and the MCP protocol. Build your first custom agent today. The future of engineering is agentic, and custom agents are the endgame.

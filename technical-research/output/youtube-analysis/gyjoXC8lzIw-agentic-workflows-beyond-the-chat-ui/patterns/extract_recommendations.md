@@ -1,0 +1,22 @@
+# RECOMMENDATIONS
+
+- Build file-based agentic workflows instead of relying solely on chat interfaces
+- Use drop zones to automate repetitive file processing tasks with agents
+- Create configurable YAML files to define specialized workflow triggers and prompts
+- Implement agent-agnostic systems to avoid vendor lock-in with specific AI providers
+- Structure prompts with purpose, variables, workflow steps, and output format sections
+- Leverage programmatic agent SDKs for automated workflow execution capabilities
+- Design workflows around repeat engineering tasks that operate on file inputs
+- Use directory watchers to trigger agents when files are dropped
+- Build single-file scripts that pack maximum value into minimal code
+- Reference variables throughout prompts to make workflows flexible and reusable
+- Create specialized drop zones for different file types and processing needs
+- Automate image generation, editing, transcription, and data processing workflows
+- Use the file system as a familiar interface for AI interactions
+- Move beyond human-in-the-loop patterns toward autonomous agent operations
+- Focus on developing prompt engineering skills as core engineering competency
+- Build workflows that can scale to process hundreds or thousands of files
+- Use rich terminal logging for clear workflow progress visibility
+- Design modular prompt templates that can be easily modified and extended
+- Implement parallel agent execution for handling multiple workflows simultaneously
+- Think systematically about which repetitive tasks can benefit from agent automation

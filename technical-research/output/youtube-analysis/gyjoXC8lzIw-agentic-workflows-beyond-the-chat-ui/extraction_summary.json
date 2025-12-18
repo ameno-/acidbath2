@@ -1,0 +1,32 @@
+{
+  "video_id": "gyjoXC8lzIw",
+  "working_directory": "/Users/ameno/dev/umbra-dev/technical-research/output/youtube-analysis/gyjoXC8lzIw",
+  "extraction_date": "2025-11-24T14:42:57.650021",
+  "metadata": {
+    "title": "Agentic Workflows: BEYOND the Chat UI with Claude Code SDK and Gemini Nano Banana",
+    "channel": "IndyDevDan",
+    "duration": "00:24:41",
+    "duration_seconds": 1481,
+    "upload_date": "2025-09-01",
+    "view_count": 18378,
+    "description": "The Chat UI is a trap. Trapping you in endless back-and-forth prompting. It's time to break free and unlock a new level of AI powered workflow automation.\n\n\ud83c\udfa5 VIDEO REFERENCES\n\n- Agentic Drop Zones Codebase: https://github.com/disler/agentic-drop-zones\n\n- Master AI Coding: https://agenticengineer.com"
+  },
+  "classification": {
+    "content_type": "technical",
+    "reason": "Contains 18 technical keywords including: agentic, workflow, Claude SDK, Gemini, automation, AI, coding frameworks, and developer-focused terminology"
+  },
+  "file_paths": {
+    "working_directory": "/Users/ameno/dev/umbra-dev/technical-research/output/youtube-analysis/gyjoXC8lzIw",
+    "metadata_file": "/Users/ameno/dev/umbra-dev/technical-research/output/youtube-analysis/gyjoXC8lzIw/metadata.json",
+    "transcript_file": "/Users/ameno/dev/umbra-dev/technical-research/output/youtube-analysis/gyjoXC8lzIw/transcript.txt",
+    "transcript_vtt": "/Users/ameno/dev/umbra-dev/technical-research/output/youtube-analysis/gyjoXC8lzIw/transcript.en.vtt",
+    "key_metadata": "/Users/ameno/dev/umbra-dev/technical-research/output/youtube-analysis/gyjoXC8lzIw/key_metadata.json",
+    "content_classification": "/Users/ameno/dev/umbra-dev/technical-research/output/youtube-analysis/gyjoXC8lzIw/content_type.txt",
+    "patterns_directory": "/Users/ameno/dev/umbra-dev/technical-research/output/youtube-analysis/gyjoXC8lzIw/patterns",
+    "audio_directory": "/Users/ameno/dev/umbra-dev/technical-research/output/youtube-analysis/gyjoXC8lzIw/audio"
+  },
+  "transcript_stats": {
+    "lines": 4241,
+    "file_size_kb": 241
+  }
+}

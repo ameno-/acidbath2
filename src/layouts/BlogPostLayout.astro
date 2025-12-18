@@ -1,0 +1,49 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import type { CollectionEntry } from 'astro:content';
+
+interface Props {
+  post: CollectionEntry<'blog'>;
+}
+
+const { post } = Astro.props;
+const { title, description, pubDate, updatedDate, author, tags } = post.data;
+
+const formattedDate = pubDate.toLocaleDateString('en-US', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+});
+
+const formattedUpdatedDate = updatedDate?.toLocaleDateString('en-US', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+});
+---
+
+<BaseLayout title={title} description={description}>
+  <article>
+    <header>
+      <h1>{title}</h1>
+      <div class="text-alt">
+        <time datetime={pubDate.toISOString()}>{formattedDate}</time>
+        {updatedDate && (
+          <span> · Updated: <time datetime={updatedDate.toISOString()}>{formattedUpdatedDate}</time></span>
+        )}
+        <span> · {author}</span>
+      </div>
+      {tags.length > 0 && (
+        <div class="no-margin">
+          {tags.map((tag) => (
+            <span class="text-alt">[{tag}]</span>
+          ))}
+        </div>
+      )}
+    </header>
+    <hr />
+    <div class="prose">
+      <slot />
+    </div>
+  </article>
+</BaseLayout>

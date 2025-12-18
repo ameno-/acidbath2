@@ -1,0 +1,22 @@
+Based on this video transcript about Claude Code sub-agents, here are the key recommendations:
+
+- Consider each sub-agent as a researcher rather than implementation executor
+- Use sub-agents for planning and research, not direct code implementation
+- Create specialized sub-agents for each service provider (Vercel, Supabase, Tailwind, etc.)
+- Include relevant documentation directly in sub-agent system prompts
+- Equip sub-agents with specific MCP tools for information retrieval
+- Use file system as ultimate context management system
+- Save tool results to local files instead of conversation history
+- Create task folders to contain context for each feature
+- Always create context files that include project information
+- Have sub-agents read context files before starting work
+- Update context files after completing tasks
+- Use identical output formats and rules across all sub-agents
+- Prevent sub-agents from calling themselves or getting confused
+- Pass context file names when delegating tasks to sub-agents
+- Focus on token optimization through context engineering
+- Create detailed implementation plans rather than direct code changes
+- Use parent agents for orchestration and actual implementation
+- Maintain project plans in doc/task/context sessions files
+- Delegate research work to specialized agents with domain expertise
+- Test sub-agents in production environments before widespread use

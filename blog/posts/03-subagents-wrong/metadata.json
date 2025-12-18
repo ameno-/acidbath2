@@ -1,0 +1,136 @@
+{
+  "title": "You're Using Sub-Agents Wrong: 90% of Developers Are Sabotaging Their AI Workflows",
+  "slug": "subagents-wrong",
+  "author": "ameno",
+  "publishDate": "2025-12-15",
+  "description": "After 20+ hours of testing, discover why most developers use Claude Code sub-agents completely backwards—and the simple architectural shift that reduces tokens by 80% while improving code quality.",
+  "tags": [
+    "claude code",
+    "sub agents",
+    "ai coding",
+    "context management",
+    "workflow optimization",
+    "token optimization",
+    "ai architecture"
+  ],
+  "keywords": [
+    "claude code sub agents",
+    "ai agent patterns",
+    "sub agent architecture",
+    "context management ai",
+    "token optimization",
+    "file based context",
+    "ai workflow",
+    "specialized agents",
+    "research agents",
+    "claude code best practices"
+  ],
+  "category": "AI Development",
+  "readingTime": "8 minutes",
+  "difficulty": "intermediate",
+  "source": {
+    "type": "youtube",
+    "videoId": "LCYBVpSB0Wo",
+    "videoTitle": "I was using sub-agents wrong... Here is my way after 20+ hrs test",
+    "channel": "AI Jason",
+    "channelUrl": "https://youtube.com/@AIJasonZ",
+    "videoUrl": "https://youtube.com/watch?v=LCYBVpSB0Wo",
+    "viewCount": 95844,
+    "uploadDate": "2025-08-14",
+    "duration": "16:01",
+    "qualityScore": 78,
+    "contentType": "technical"
+  },
+  "validation": {
+    "testingHours": "20+",
+    "confirmedBy": "Claude Code team (Adam Wolf)",
+    "inspirationSource": "Manus team context engineering",
+    "servicesValidated": [
+      "Vercel AI SDK v5",
+      "Stripe",
+      "Shadcn/UI",
+      "Supabase",
+      "Tailwind"
+    ]
+  },
+  "keyMetrics": {
+    "tokenReduction": "~80%",
+    "performanceImprovement": "Prevents conversation compaction",
+    "codeQualityImpact": "Significant improvement through research-informed implementation"
+  },
+  "relatedPosts": [
+    "prompts-are-the-new-code",
+    "context-window-bleeding",
+    "agent-endgame"
+  ],
+  "callouts": {
+    "insight": "Sub-agents excel as researchers, not implementers. Context isolation kills implementation. Research summaries enable it.",
+    "data": "Token Reduction: ~80%. Before: 80% context consumed before work starts. After: Few hundred tokens per research task. Result: Conversation compaction PREVENTED.",
+    "warning": "Implementation delegation WILL fail. Without proper context management: Sub-agents work in isolation, Parent agent loses visibility, Integration becomes impossible, Debugging is a nightmare. Use sub-agents for RESEARCH ONLY."
+  },
+  "diagrams": [
+    "correct-architecture.mmd",
+    "wrong-vs-right.mmd"
+  ],
+  "implementationChecklist": [
+    "Create context.md template",
+    "Audit current sub-agent usage",
+    "Choose one service for specialized agent",
+    "Test research → implementation pattern",
+    "Build 2-3 specialized service agents",
+    "Implement file-based context workflow",
+    "Measure token savings",
+    "Scale to all frequently-used services",
+    "Create context management automation",
+    "Join AI Builder Club community"
+  ],
+  "coreInsights": [
+    "Sub-agents work best as researchers, not implementers",
+    "Context engineering saves more tokens than actual implementation",
+    "File system is ultimate context management across agents",
+    "Specialized agents need domain-specific documentation embedded",
+    "Parent agents lose implementation context without proper sharing",
+    "Research phases dramatically improve final coding output quality",
+    "Token optimization matters more than execution speed initially",
+    "Documentation retrieval beats conversation history for persistence",
+    "Agent orchestration requires explicit context file maintenance",
+    "Implementation delegation fails without proper information architecture"
+  ],
+  "automationOpportunities": [
+    "Specialized service agents (Vercel, Stripe, Shadcn, Supabase, Tailwind)",
+    "Context management automation",
+    "Research workflow automation",
+    "Agent orchestration templates",
+    "Token usage monitoring system",
+    "Background monitoring & execution",
+    "Documentation retrieval via MCP",
+    "Plan validation before implementation"
+  ],
+  "technologiesMentioned": [
+    "Claude Code",
+    "MCP (Model Context Protocol)",
+    "Context7",
+    "Manus",
+    "Vercel AI SDK v5",
+    "Stripe",
+    "Shadcn/UI",
+    "Supabase",
+    "Tailwind CSS",
+    "Next.js",
+    "React"
+  ],
+  "seo": {
+    "metaTitle": "You're Using Sub-Agents Wrong: 90% of Developers Sabotage AI Workflows",
+    "metaDescription": "Discover why most developers use Claude Code sub-agents backwards. Learn the research-focused pattern that cuts tokens by 80% and improves code quality.",
+    "openGraphImage": "/blog/posts/03-subagents-wrong/og-image.png",
+    "twitterCard": "summary_large_image",
+    "canonicalUrl": "https://acidbath.blog/posts/subagents-wrong"
+  },
+  "contentQuality": {
+    "rating": "A-tier",
+    "practicalValue": "very high",
+    "technicalDepth": "intermediate-advanced",
+    "actionability": "immediate",
+    "validationLevel": "high"
+  }
+}

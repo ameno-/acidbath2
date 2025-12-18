@@ -1,0 +1,151 @@
+{
+  "slug": "context-window-bleeding",
+  "title": "Your Context Window Is Bleeding: Why MCP Servers Are a Bandaid on a Bullet Wound",
+  "subtitle": "20% of your context was gone before you typed a single character",
+  "publishDate": "2025-12-15",
+  "author": "Acidbath Analysis",
+  "tags": [
+    "mcp-servers",
+    "context-optimization",
+    "ai-agents",
+    "claude-code",
+    "developer-tools",
+    "performance"
+  ],
+  "keywords": [
+    "mcp server alternatives",
+    "context window optimization",
+    "claude code context",
+    "ai agent performance",
+    "progressive disclosure",
+    "cli tools vs mcp",
+    "token consumption",
+    "context engineering",
+    "claude skills",
+    "file system scripts"
+  ],
+  "category": "Technical Analysis",
+  "readingTime": "12 minutes",
+  "difficulty": "Intermediate",
+  "source": {
+    "type": "youtube-analysis",
+    "videoId": "OIKTsVjTVJE",
+    "videoTitle": "Why are top engineers DITCHING MCP Servers? (3 PROVEN Solutions)",
+    "channel": "IndyDevDan",
+    "channelUrl": "https://youtube.com/@IndyDevDan",
+    "videoUrl": "https://www.youtube.com/watch?v=OIKTsVjTVJE",
+    "uploadDate": "2025-11-10",
+    "duration": "32:01",
+    "views": 21394,
+    "likes": 668,
+    "qualityScore": 72,
+    "analysisDate": "2025-11-23"
+  },
+  "summary": "MCP servers are convenient but wasteful—consuming 10,000+ tokens before your agent does any work. This analysis reveals three proven alternatives (CLI tools, file scripts, and Claude skills) that reduce context consumption by 50-92%, with a practical decision framework for when to use each approach.",
+  "keyTakeaways": [
+    "MCP servers consume 10,000+ tokens (5% of context window) before work begins",
+    "Stacking 3+ MCP servers bleeds 20%+ of your context before typing a character",
+    "CLI tools offer 50% context savings while maintaining full control",
+    "File system scripts with progressive disclosure achieve 90% context reduction",
+    "Claude skills provide 92%+ savings with automatic progressive disclosure",
+    "The 80/15/5 rule: MCP for external tools (80%), CLI for control (15%), scripts for critical context (5%)",
+    "Less garbage context = better agent performance and decision-making"
+  ],
+  "targetAudience": [
+    "AI/ML Engineers",
+    "Claude Code Users",
+    "Agent Developers",
+    "Software Architects",
+    "DevOps Engineers"
+  ],
+  "relatedPosts": [
+    "01-prompts-are-the-new-code"
+  ],
+  "toc": [
+    {
+      "title": "The Context Window Is a Finite, Precious Resource",
+      "anchor": "the-context-window-is-a-finite-precious-resource"
+    },
+    {
+      "title": "The Token Tax: How MCP Servers Consume Before You Begin",
+      "anchor": "the-token-tax-how-mcp-servers-consume-before-you-begin"
+    },
+    {
+      "title": "3 Proven Alternatives That Stop the Bleeding",
+      "anchor": "3-proven-alternatives-that-stop-the-bleeding"
+    },
+    {
+      "title": "The 80/15/5 Rule: When to Use What",
+      "anchor": "the-801515-rule-when-to-use-what"
+    },
+    {
+      "title": "Data Breakdown: The Real Cost of Convenience",
+      "anchor": "data-breakdown-the-real-cost-of-convenience"
+    },
+    {
+      "title": "Practical Steps: Audit Your Setup TODAY",
+      "anchor": "practical-steps-audit-your-setup-today"
+    },
+    {
+      "title": "The Cost of Convenience",
+      "anchor": "the-cost-of-convenience"
+    }
+  ],
+  "diagrams": [
+    {
+      "file": "diagrams/context-flow.mmd",
+      "type": "mermaid",
+      "title": "Context Window Consumption Flow",
+      "description": "Visualization of how multiple MCP servers progressively consume context before any work begins"
+    },
+    {
+      "file": "diagrams/alternatives-comparison.mmd",
+      "type": "mermaid",
+      "title": "MCP Alternatives Token Savings Comparison",
+      "description": "Side-by-side comparison showing token savings from CLI tools, file scripts, and Claude skills"
+    }
+  ],
+  "callouts": [
+    {
+      "file": "callouts/provocative-quote.txt",
+      "type": "provocative",
+      "text": "Stack up two or three more MCP servers, and I'll be bleeding 20% plus context in no time",
+      "author": "IndyDevDan"
+    },
+    {
+      "file": "callouts/data-breakdown.txt",
+      "type": "data",
+      "title": "THE CONTEXT CONSUMPTION BREAKDOWN"
+    },
+    {
+      "file": "callouts/warning-context.txt",
+      "type": "warning",
+      "text": "When you have less garbage context, your agent can perform better"
+    }
+  ],
+  "codeExamples": [
+    "UV single-file script pattern",
+    "CLI tool with help documentation",
+    "Prime prompt for progressive disclosure",
+    "Context consumption calculation"
+  ],
+  "resources": [
+    {
+      "title": "Beyond MCP Repository",
+      "url": "https://github.com/disler/beyond-mcp",
+      "description": "Working examples of all four approaches (MCP, CLI, Scripts, Skills)"
+    },
+    {
+      "title": "UV Dependency Manager",
+      "url": "https://github.com/astral-sh/uv",
+      "description": "Single-file Python scripts with embedded dependencies"
+    },
+    {
+      "title": "Anthropic MCP Documentation",
+      "url": "https://www.anthropic.com/mcp",
+      "description": "Official Model Context Protocol documentation"
+    }
+  ],
+  "version": "1.0",
+  "status": "published"
+}

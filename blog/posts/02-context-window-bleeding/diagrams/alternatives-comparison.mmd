@@ -1,0 +1,25 @@
+graph LR
+    subgraph Baseline["MCP Servers (Baseline)"]
+        MCP[10,000 tokens<br/>5% of context<br/>0% savings]
+    end
+
+    subgraph CLI["CLI Tools Alternative"]
+        CLI1[5,600 tokens<br/>2.8% of context<br/>50% savings]
+    end
+
+    subgraph Scripts["File System Scripts"]
+        SCR[2,000 tokens<br/>1% of context<br/>90% savings]
+    end
+
+    subgraph Skills["Claude Skills"]
+        SKL[1,500 tokens<br/>0.75% of context<br/>92%+ savings]
+    end
+
+    MCP -->|Reduce by 50%| CLI1
+    CLI1 -->|Reduce by 64%| SCR
+    SCR -->|Reduce by 25%| SKL
+
+    style MCP fill:#f44336,stroke:#c62828,color:#fff
+    style CLI1 fill:#FF9800,stroke:#E65100,color:#fff
+    style SCR fill:#FFC107,stroke:#F57C00,color:#fff
+    style SKL fill:#4CAF50,stroke:#2E7D32,color:#fff

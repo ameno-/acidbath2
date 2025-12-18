@@ -1,0 +1,80 @@
+{
+  "status": "completed",
+  "video_id": "UqfxuQKuMo8",
+  "content_type": "technical",
+  "patterns_executed": [
+    "extract_technical_content"
+  ],
+  "output_files": [
+    "/Users/ameno/dev/umbra-dev/technical-research/output/youtube-analysis/UqfxuQKuMo8/patterns/extract_technical_content.md"
+  ],
+  "metrics": {
+    "technical": {
+      "code_snippets": 3,
+      "code_blocks": 11,
+      "tools_frameworks": 12,
+      "commands": 15,
+      "technical_concepts": 8,
+      "dependencies": 7,
+      "configuration_files": 2,
+      "resources_links": 9,
+      "workflow_steps": 16,
+      "automation_opportunities": 4
+    },
+    "content_analysis": {
+      "transcript_lines": 2864,
+      "output_lines": 272,
+      "compression_ratio": "10.5:1",
+      "primary_languages": ["C#", "TypeScript"],
+      "primary_frameworks": [".NET", "Roslyn"],
+      "primary_tools": ["Claude Code", "Rider", "Visual Studio Code"],
+      "key_technologies": ["MCP (Model Context Protocol)", "Serena MCP", "Refactor MCP"]
+    },
+    "key_findings": {
+      "performance_improvements": {
+        "token_reduction": "20-30x",
+        "speed_improvement": "30x faster",
+        "time_comparison": "12 min manual vs 6 min AI-assisted (2x faster)"
+      },
+      "technical_focus": "AI-assisted code refactoring using specialized MCP servers",
+      "use_cases": [
+        "Large-scale code refactoring",
+        "Semantic code search and editing",
+        "Automated test validation",
+        "AST-based code transformation"
+      ],
+      "main_tools": {
+        "serena_mcp": "Semantic search and edit capabilities for codebases",
+        "refactor_mcp": "Roslyn-based refactoring tools for .NET/C# projects",
+        "claude_code": "Anthropic's official CLI for AI-assisted coding"
+      },
+      "benchmark_details": {
+        "test_codebase": "Umbraco CMS",
+        "codebase_size": {
+          "total_files": "55,000",
+          "typescript_lines": "842,000",
+          "csharp_lines": "360,000"
+        },
+        "refactoring_task": "Rename GlobalSettings type across 147 files"
+      }
+    }
+  },
+  "technical_stack_summary": {
+    "languages": ["C#", "TypeScript"],
+    "frameworks": [".NET", "Roslyn"],
+    "tools": ["Claude Code", "Rider", "Visual Studio Code", "GitHub", "cloc"],
+    "services": ["Anthropic Claude", "MCP (Model Context Protocol)"],
+    "mcp_servers": ["Serena MCP", "Refactor MCP"]
+  },
+  "installation_commands": [
+    "npm install -g serena-mcp",
+    "dotnet tool install -g refactor-mcp"
+  ],
+  "validation_commands": [
+    "dotnet test",
+    "dotnet build",
+    "dotnet publish"
+  ],
+  "execution_time_seconds": 15,
+  "timestamp": "2025-11-23T22:57:00Z"
+}

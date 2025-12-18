@@ -1,0 +1,39 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import BlogPostCard from '../../components/BlogPostCard.astro';
+import { getCollection } from 'astro:content';
+
+const allPosts = await getCollection('blog', ({ data }) => !data.draft);
+const sortedPosts = allPosts.sort(
+  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
+);
+---
+
+<BaseLayout title="Blog" description="All blog posts from Acidbath">
+  <h1>Blog</h1>
+  <p class="text-alt">All posts about technology, AI, and systems.</p>
+
+  <hr />
+
+  {sortedPosts.length > 0 ? (
+    <div class="posts-list">
+      {sortedPosts.map((post) => (
+        <BlogPostCard
+          title={post.data.title}
+          description={post.data.description}
+          pubDate={post.data.pubDate}
+          slug={post.slug}
+          tags={post.data.tags}
+        />
+      ))}
+    </div>
+  ) : (
+    <p class="text-alt">No posts yet. Check back soon.</p>
+  )}
+</BaseLayout>
+
+<style>
+  .posts-list {
+    margin-top: var(--spacing-line);
+  }
+</style>

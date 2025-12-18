@@ -1,0 +1,67 @@
+{
+  "status": "completed",
+  "video_id": "luqKnexhpFs",
+  "video_url": "https://www.youtube.com/watch?v=luqKnexhpFs",
+  "patterns_requested": 8,
+  "patterns_executed": 8,
+  "patterns_failed": 0,
+  "execution_time_seconds": 443,
+  "execution_time_minutes": 7.4,
+  "output_files": [
+    "/Users/ameno/dev/umbra-dev/technical-research/output/youtube-analysis/luqKnexhpFs-agentic-prompt-engineering-with-claude-c/patterns/extract_wisdom.md",
+    "/Users/ameno/dev/umbra-dev/technical-research/output/youtube-analysis/luqKnexhpFs-agentic-prompt-engineering-with-claude-c/patterns/extract_insights.md",
+    "/Users/ameno/dev/umbra-dev/technical-research/output/youtube-analysis/luqKnexhpFs-agentic-prompt-engineering-with-claude-c/patterns/extract_recommendations.md",
+    "/Users/ameno/dev/umbra-dev/technical-research/output/youtube-analysis/luqKnexhpFs-agentic-prompt-engineering-with-claude-c/patterns/extract_ideas.md",
+    "/Users/ameno/dev/umbra-dev/technical-research/output/youtube-analysis/luqKnexhpFs-agentic-prompt-engineering-with-claude-c/patterns/summarize.md",
+    "/Users/ameno/dev/umbra-dev/technical-research/output/youtube-analysis/luqKnexhpFs-agentic-prompt-engineering-with-claude-c/patterns/rate_content.md",
+    "/Users/ameno/dev/umbra-dev/technical-research/output/youtube-analysis/luqKnexhpFs-agentic-prompt-engineering-with-claude-c/patterns/extract_article_wisdom.md",
+    "/Users/ameno/dev/umbra-dev/technical-research/output/youtube-analysis/luqKnexhpFs-agentic-prompt-engineering-with-claude-c/patterns/create_summary_with_takeaways.md"
+  ],
+  "file_sizes": {
+    "extract_wisdom.md": 9664,
+    "extract_insights.md": 792,
+    "extract_recommendations.md": 1647,
+    "extract_ideas.md": 3153,
+    "summarize.md": 1849,
+    "rate_content.md": 1459,
+    "extract_article_wisdom.md": 11007,
+    "create_summary_with_takeaways.md": 162
+  },
+  "total_output_size_bytes": 29733,
+  "metrics": {
+    "quality_score": "92/100",
+    "content_rating": "S Tier: Must Consume Original Content Immediately",
+    "content_priority": "High",
+    "insights_count": 10,
+    "recommendations_count": 20,
+    "ideas_count": 27,
+    "quotes_count": 10,
+    "habits_count": 15,
+    "facts_count": 15,
+    "references_count": 14
+  },
+  "top_3_insights": [
+    "Prompts became engineering's fundamental unit, multiplying human productivity exponentially",
+    "Engineers must design for three audiences: themselves, teams, and agents",
+    "Workflow sections create sequential task execution replacing manual coding"
+  ],
+  "video_topic": "Agentic Prompt Engineering with Claude",
+  "key_themes": [
+    "Engineering",
+    "Prompts",
+    "AI Agents",
+    "Workflow",
+    "Automation",
+    "Templates",
+    "Variables",
+    "Delegation",
+    "Control-flow",
+    "Meta-programming",
+    "Productivity",
+    "Software-development",
+    "Architecture",
+    "Systems",
+    "Scalability"
+  ],
+  "summary": "Engineering expert demonstrates seven agentic prompt formats for creating reusable, composable prompts that scale engineering impact with AI agents effectively."
+}

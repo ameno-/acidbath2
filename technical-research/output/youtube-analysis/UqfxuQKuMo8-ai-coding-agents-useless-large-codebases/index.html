@@ -1,0 +1,1162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI coding agents are useless on large codebases. Unless you do THIS. - Analysis Dashboard</title>
+    <style>
+        /* CSS Variables for Theme Management */
+        :root {
+            --bg-primary: #ffffff;
+            --bg-secondary: #f8f9fa;
+            --bg-tertiary: #e9ecef;
+            --text-primary: #212529;
+            --text-secondary: #6c757d;
+            --border-color: #dee2e6;
+            --accent-primary: #0d6efd;
+            --accent-success: #198754;
+            --accent-warning: #ffc107;
+            --accent-danger: #dc3545;
+            --accent-info: #0dcaf0;
+            --shadow: rgba(0, 0, 0, 0.1);
+            --code-bg: #f8f9fa;
+            --badge-a: #198754;
+            --badge-b: #0d6efd;
+            --badge-c: #ffc107;
+            --badge-d: #dc3545;
+        }
+
+        [data-theme="dark"] {
+            --bg-primary: #1a1a1a;
+            --bg-secondary: #2d2d2d;
+            --bg-tertiary: #3a3a3a;
+            --text-primary: #e9ecef;
+            --text-secondary: #adb5bd;
+            --border-color: #495057;
+            --accent-primary: #4dabf7;
+            --accent-success: #51cf66;
+            --accent-warning: #ffd43b;
+            --accent-danger: #ff6b6b;
+            --accent-info: #22b8cf;
+            --shadow: rgba(0, 0, 0, 0.3);
+            --code-bg: #2d2d2d;
+            --badge-a: #51cf66;
+            --badge-b: #4dabf7;
+            --badge-c: #ffd43b;
+            --badge-d: #ff6b6b;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: var(--text-primary);
+            background-color: var(--bg-primary);
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        /* Header Styles */
+        .header {
+            background: linear-gradient(135deg, var(--accent-primary), var(--accent-info));
+            color: white;
+            padding: 2rem 1rem;
+            text-align: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px var(--shadow);
+        }
+
+        .header h1 {
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+        }
+
+        .header .channel {
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+            opacity: 0.95;
+        }
+
+        .header .video-stats {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            margin: 1rem 0;
+            font-size: 0.95rem;
+        }
+
+        .video-stats span {
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+
+        .quality-badge {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            margin: 0.5rem;
+            background-color: var(--badge-a);
+            color: white;
+        }
+
+        .header .actions {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 0.6rem 1.2rem;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.95rem;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.2s ease;
+        }
+
+        .btn-primary {
+            background-color: white;
+            color: var(--accent-primary);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px var(--shadow);
+        }
+
+        .btn-secondary {
+            background-color: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: 1px solid white;
+        }
+
+        .btn-secondary:hover {
+            background-color: rgba(255, 255, 255, 0.3);
+        }
+
+        /* Navigation */
+        .nav {
+            background-color: var(--bg-secondary);
+            padding: 1rem;
+            position: sticky;
+            top: 0;
+            z-index: 99;
+            box-shadow: 0 2px 5px var(--shadow);
+            overflow-x: auto;
+        }
+
+        .nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .nav a {
+            color: var(--text-primary);
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            font-weight: 500;
+            transition: background-color 0.2s ease;
+            white-space: nowrap;
+        }
+
+        .nav a:hover {
+            background-color: var(--bg-tertiary);
+        }
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem 1rem;
+        }
+
+        /* Sections */
+        section {
+            margin-bottom: 3rem;
+            padding: 2rem;
+            background-color: var(--bg-secondary);
+            border-radius: 10px;
+            box-shadow: 0 2px 8px var(--shadow);
+        }
+
+        section h2 {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            color: var(--accent-primary);
+            border-bottom: 3px solid var(--accent-primary);
+            padding-bottom: 0.5rem;
+        }
+
+        section h3 {
+            font-size: 1.4rem;
+            margin: 1.5rem 0 1rem;
+            color: var(--text-primary);
+        }
+
+        /* Quick Summary */
+        .summary-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .summary-card {
+            background-color: var(--bg-primary);
+            padding: 1.5rem;
+            border-radius: 8px;
+            border-left: 4px solid var(--accent-primary);
+            box-shadow: 0 2px 5px var(--shadow);
+        }
+
+        .summary-card h4 {
+            font-size: 1rem;
+            color: var(--text-secondary);
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .summary-card .value {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--accent-primary);
+        }
+
+        /* Insights & Recommendations */
+        .insight-list {
+            list-style: none;
+            counter-reset: insight-counter;
+        }
+
+        .insight-list li {
+            counter-increment: insight-counter;
+            margin-bottom: 1rem;
+            padding: 1rem 1rem 1rem 3.5rem;
+            background-color: var(--bg-primary);
+            border-radius: 8px;
+            position: relative;
+            box-shadow: 0 2px 4px var(--shadow);
+        }
+
+        .insight-list li::before {
+            content: counter(insight-counter);
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            background: linear-gradient(135deg, var(--accent-primary), var(--accent-info));
+            color: white;
+            width: 2rem;
+            height: 2rem;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+        }
+
+        /* Technical Stack */
+        .tech-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .tech-item {
+            background-color: var(--bg-primary);
+            padding: 1rem;
+            border-radius: 8px;
+            border-left: 3px solid var(--accent-success);
+        }
+
+        .tech-item strong {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--accent-success);
+        }
+
+        /* Accordion for Patterns */
+        .accordion-item {
+            margin-bottom: 1rem;
+            background-color: var(--bg-primary);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 4px var(--shadow);
+        }
+
+        .accordion-header {
+            padding: 1rem 1.5rem;
+            cursor: pointer;
+            background-color: var(--bg-tertiary);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 600;
+            transition: background-color 0.2s ease;
+        }
+
+        .accordion-header:hover {
+            background-color: var(--border-color);
+        }
+
+        .accordion-header::after {
+            content: '▼';
+            transition: transform 0.3s ease;
+        }
+
+        .accordion-header.active::after {
+            transform: rotate(180deg);
+        }
+
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+
+        .accordion-content.active {
+            max-height: 3000px;
+        }
+
+        .accordion-body {
+            padding: 1.5rem;
+            line-height: 1.8;
+        }
+
+        /* Transcript Search */
+        .transcript-search {
+            margin-bottom: 1.5rem;
+        }
+
+        .transcript-search input {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border: 2px solid var(--border-color);
+            border-radius: 6px;
+            font-size: 1rem;
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            transition: border-color 0.2s ease;
+        }
+
+        .transcript-search input:focus {
+            outline: none;
+            border-color: var(--accent-primary);
+        }
+
+        .transcript-content {
+            background-color: var(--code-bg);
+            padding: 1.5rem;
+            border-radius: 8px;
+            max-height: 500px;
+            overflow-y: auto;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            line-height: 1.6;
+            white-space: pre-wrap;
+        }
+
+        .highlight {
+            background-color: var(--accent-warning);
+            padding: 0.1rem 0.2rem;
+            border-radius: 3px;
+        }
+
+        /* Resources */
+        .resource-list {
+            list-style: none;
+        }
+
+        .resource-list li {
+            margin-bottom: 1rem;
+            padding: 1rem;
+            background-color: var(--bg-primary);
+            border-radius: 6px;
+            border-left: 3px solid var(--accent-info);
+        }
+
+        .resource-list a {
+            color: var(--accent-primary);
+            text-decoration: none;
+            font-weight: 600;
+            word-break: break-all;
+        }
+
+        .resource-list a:hover {
+            text-decoration: underline;
+        }
+
+        /* Footer */
+        .footer {
+            background-color: var(--bg-secondary);
+            padding: 2rem 1rem;
+            text-align: center;
+            margin-top: 3rem;
+            border-top: 3px solid var(--accent-primary);
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 1rem;
+            color: var(--accent-primary);
+        }
+
+        .footer-section p {
+            margin-bottom: 0.5rem;
+            color: var(--text-secondary);
+        }
+
+        .download-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            justify-content: center;
+            margin-top: 1rem;
+        }
+
+        /* Theme Toggle */
+        .theme-toggle {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--accent-primary), var(--accent-info));
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            box-shadow: 0 4px 15px var(--shadow);
+            transition: transform 0.2s ease;
+            z-index: 1000;
+        }
+
+        .theme-toggle:hover {
+            transform: scale(1.1);
+        }
+
+        /* Copy Button */
+        .copy-btn {
+            padding: 0.4rem 0.8rem;
+            background-color: var(--accent-success);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            margin-top: 0.5rem;
+            transition: background-color 0.2s ease;
+        }
+
+        .copy-btn:hover {
+            background-color: var(--accent-primary);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 1.4rem;
+            }
+
+            .header .channel {
+                font-size: 1rem;
+            }
+
+            .video-stats {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+
+            section {
+                padding: 1.5rem;
+            }
+
+            section h2 {
+                font-size: 1.5rem;
+            }
+
+            .theme-toggle {
+                bottom: 1rem;
+                right: 1rem;
+                width: 50px;
+                height: 50px;
+            }
+        }
+
+        /* Print Styles */
+        @media print {
+            .header,
+            .nav,
+            .theme-toggle,
+            .copy-btn,
+            .download-buttons {
+                display: none;
+            }
+
+            body {
+                background-color: white;
+                color: black;
+            }
+
+            section {
+                page-break-inside: avoid;
+                box-shadow: none;
+            }
+        }
+
+        /* Utility Classes */
+        .text-center { text-align: center; }
+        .mt-1 { margin-top: 1rem; }
+        .mt-2 { margin-top: 2rem; }
+        .mb-1 { margin-bottom: 1rem; }
+        .mb-2 { margin-bottom: 2rem; }
+    </style>
+</head>
+<body>
+    <!-- Header Section -->
+    <header class="header">
+        <h1>AI coding agents are useless on large codebases. Unless you do THIS.</h1>
+        <div class="channel">IndyDevDan (Jo Van Eyck)</div>
+
+        <div class="video-stats">
+            <span>Duration: 16:22</span>
+            <span>|</span>
+            <span>Video ID: UqfxuQKuMo8</span>
+            <span>|</span>
+            <span>Analysis Date: 2025-11-23</span>
+        </div>
+
+        <div>
+            <span class="quality-badge">Quality Score: 78/100 (A Tier)</span>
+            <span class="quality-badge" style="background-color: var(--accent-info);">Watch Priority: High</span>
+        </div>
+
+        <div class="actions">
+            <a href="https://www.youtube.com/watch?v=UqfxuQKuMo8" target="_blank" class="btn btn-primary">
+                Watch on YouTube
+            </a>
+            <button class="btn btn-secondary" onclick="window.print()">
+                Download as PDF
+            </button>
+        </div>
+    </header>
+
+    <!-- Navigation -->
+    <nav class="nav">
+        <ul>
+            <li><a href="#summary">Quick Summary</a></li>
+            <li><a href="#insights">Key Insights</a></li>
+            <li><a href="#recommendations">Recommendations</a></li>
+            <li><a href="#technical">Technical Details</a></li>
+            <li><a href="#automation">Automation</a></li>
+            <li><a href="#transcript">Transcript</a></li>
+            <li><a href="#patterns">Pattern Analysis</a></li>
+            <li><a href="#resources">Resources</a></li>
+        </ul>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container">
+        <!-- Quick Summary Section -->
+        <section id="summary">
+            <h2>Quick Summary</h2>
+            <p style="font-size: 1.1rem; line-height: 1.8; margin-bottom: 2rem;">
+                This video demonstrates how to achieve <strong>20-30x performance improvements</strong> in AI coding agents on large legacy codebases by using specialized MCP servers (Serena and Refactor MCP) instead of relying on basic text-based approaches. The presenter proves that perceived AI limitations are often due to improper tooling rather than fundamental capability gaps.
+            </p>
+
+            <div class="summary-grid">
+                <div class="summary-card">
+                    <h4>Quality Score</h4>
+                    <div class="value">78/100</div>
+                    <p style="margin-top: 0.5rem; color: var(--text-secondary);">A Tier - Should Consume Original Content</p>
+                </div>
+
+                <div class="summary-card" style="border-left-color: var(--accent-success);">
+                    <h4>Watch Priority</h4>
+                    <div class="value" style="color: var(--accent-success);">High</div>
+                    <p style="margin-top: 0.5rem; color: var(--text-secondary);">Technical/Educational Content</p>
+                </div>
+
+                <div class="summary-card" style="border-left-color: var(--accent-warning);">
+                    <h4>Performance Gain</h4>
+                    <div class="value" style="color: var(--accent-warning);">30x</div>
+                    <p style="margin-top: 0.5rem; color: var(--text-secondary);">Speed improvement demonstrated</p>
+                </div>
+
+                <div class="summary-card" style="border-left-color: var(--accent-info);">
+                    <h4>Token Reduction</h4>
+                    <div class="value" style="color: var(--accent-info);">28x</div>
+                    <p style="margin-top: 0.5rem; color: var(--text-secondary);">Cost savings with MCP servers</p>
+                </div>
+
+                <div class="summary-card" style="border-left-color: var(--accent-danger);">
+                    <h4>Cost Savings</h4>
+                    <div class="value" style="color: var(--accent-danger);">20x</div>
+                    <p style="margin-top: 0.5rem; color: var(--text-secondary);">$14 reduced to $0.60</p>
+                </div>
+
+                <div class="summary-card" style="border-left-color: var(--accent-success);">
+                    <h4>Time Reduction</h4>
+                    <div class="value" style="color: var(--accent-success);">36x</div>
+                    <p style="margin-top: 0.5rem; color: var(--text-secondary);">3 hours to 5 minutes</p>
+                </div>
+            </div>
+
+            <div class="mt-2" style="background-color: var(--bg-primary); padding: 1.5rem; border-radius: 8px; border-left: 4px solid var(--accent-primary);">
+                <h3>Key Takeaway</h3>
+                <p style="font-size: 1.05rem; line-height: 1.8;">
+                    <strong>Tooling, Not Capability, is the Bottleneck</strong> - AI coding agents fail on large codebases primarily due to using inappropriate tools (like "eating spaghetti with a spoon"), not because of inherent AI limitations. The right semantic tools transform performance dramatically.
+                </p>
+            </div>
+        </section>
+
+        <!-- Key Insights Section -->
+        <section id="insights">
+            <h2>Top 10 Key Insights</h2>
+            <ul class="insight-list">
+                <li>Legacy codebases need semantic tools, not brute force</li>
+                <li>AI agents with smart tools beat manual coding speed</li>
+                <li>Wrong tools create expensive doom loops and failures</li>
+                <li>Semantic search prevents costly compile-fail-retry cycles dramatically</li>
+                <li>MCP servers reduce token costs by 28x factors</li>
+                <li>Three hour tasks become five minute autonomous workflows</li>
+                <li>Proper tooling beats throwing money at sub agents</li>
+                <li>Smart refactoring tools eliminate human intervention completely</li>
+                <li>Token budgets stretch 20x further with right approach</li>
+                <li>Large codebases expose AI limitations without semantic help</li>
+            </ul>
+        </section>
+
+        <!-- Recommendations Section -->
+        <section id="recommendations">
+            <h2>Top 20 Actionable Recommendations</h2>
+            <ul class="insight-list">
+                <li>Use semantic search tools like Serena instead of basic text search for AI coding</li>
+                <li>Install MCP servers that provide intelligent code navigation and editing capabilities</li>
+                <li>Choose language-specific refactoring tools rather than generic text-based approaches</li>
+                <li>Run unit tests after every AI-assisted refactoring to verify correctness</li>
+                <li>Use embedding-based searches to reduce token consumption in large codebases</li>
+                <li>Avoid brute force approaches that cause AI agents to doom loop</li>
+                <li>Install Roslyn-based tools for C# refactoring tasks when available</li>
+                <li>Configure AI assistants to use specialized MCP servers in system prompts</li>
+                <li>Look for open-source semantic code retrieval tools for your programming language</li>
+                <li>Prioritize tools that reduce compile-fail-retry cycles in AI workflows</li>
+                <li>Use factory method patterns when refactoring inheritance hierarchies</li>
+                <li>Test drive new implementations after major code restructuring</li>
+                <li>Push down class members to specific subclasses that actually use them</li>
+                <li>Benchmark AI performance before and after adding specialized tools</li>
+                <li>Consider autonomous refactoring for multi-step code transformation tasks</li>
+                <li>Research GitHub for language-specific AI coding enhancement tools</li>
+                <li>Use line counting tools to assess codebase complexity before refactoring</li>
+                <li>Enable hands-off AI workflows for routine but complex refactoring tasks</li>
+                <li>Measure token usage and cost when evaluating AI coding tool effectiveness</li>
+                <li>Explore MCP servers before investing in expensive sub-agent approaches</li>
+            </ul>
+        </section>
+
+        <!-- Technical Details Section -->
+        <section id="technical">
+            <h2>Technical Stack & Tools</h2>
+
+            <h3>Languages</h3>
+            <div class="tech-grid">
+                <div class="tech-item">
+                    <strong>C#</strong>
+                    Primary language for refactoring examples and MCP server implementation
+                </div>
+                <div class="tech-item">
+                    <strong>TypeScript</strong>
+                    Mentioned in codebase analysis (842,000 lines)
+                </div>
+            </div>
+
+            <h3>Frameworks & Libraries</h3>
+            <div class="tech-grid">
+                <div class="tech-item">
+                    <strong>.NET</strong>
+                    Framework for C# development and Roslyn analyzers
+                </div>
+                <div class="tech-item">
+                    <strong>Roslyn</strong>
+                    Microsoft's compiler platform used for C# code analysis and refactoring
+                </div>
+            </div>
+
+            <h3>Key Tools & Platforms</h3>
+            <div class="tech-grid">
+                <div class="tech-item">
+                    <strong>Claude Code</strong>
+                    Anthropic's official CLI for Claude AI coding assistant
+                </div>
+                <div class="tech-item">
+                    <strong>Serena MCP</strong>
+                    Semantic code retrieval and editing tools
+                </div>
+                <div class="tech-item">
+                    <strong>Refactor MCP</strong>
+                    Roslyn-based refactoring tools for .NET
+                </div>
+                <div class="tech-item">
+                    <strong>JetBrains Rider</strong>
+                    IDE with refactoring support
+                </div>
+                <div class="tech-item">
+                    <strong>VS Code</strong>
+                    Code editor
+                </div>
+                <div class="tech-item">
+                    <strong>cloc</strong>
+                    Count Lines of Code tool for projects
+                </div>
+            </div>
+
+            <h3>MCP (Model Context Protocol)</h3>
+            <div style="background-color: var(--bg-primary); padding: 1.5rem; border-radius: 8px; margin-top: 1rem; border-left: 4px solid var(--accent-success);">
+                <p style="line-height: 1.8;">
+                    <strong>Protocol for connecting AI assistants with external tools</strong> - Enables AI agents to use specialized tools rather than brute-force approaches. MCP servers bridge the gap between AI language models and specialized development tools effectively.
+                </p>
+            </div>
+
+            <h3>Performance Benchmarks</h3>
+            <div class="summary-grid mt-2">
+                <div class="summary-card">
+                    <h4>Umbraco CMS Test</h4>
+                    <p style="margin-top: 0.5rem;">55,000 files, 842K TypeScript lines, 360K C# lines</p>
+                </div>
+                <div class="summary-card" style="border-left-color: var(--accent-danger);">
+                    <h4>Basic Approach</h4>
+                    <p style="margin-top: 0.5rem;">3 hours, 28M tokens, $14 cost</p>
+                </div>
+                <div class="summary-card" style="border-left-color: var(--accent-success);">
+                    <h4>With MCP Servers</h4>
+                    <p style="margin-top: 0.5rem;">5 minutes, 1M tokens, $0.60 cost</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Automation Opportunities Section -->
+        <section id="automation">
+            <h2>Automation Opportunities</h2>
+
+            <h3>High-Priority Agent Candidates</h3>
+
+            <div class="accordion-item">
+                <div class="accordion-header">
+                    <span>1. MCP Server Benchmarker Agent</span>
+                </div>
+                <div class="accordion-content">
+                    <div class="accordion-body">
+                        <p><strong>Purpose:</strong> Automate the process of benchmarking AI coding performance with and without MCP servers</p>
+                        <p><strong>Core Capabilities:</strong></p>
+                        <ul>
+                            <li>Execute coding tasks with different tool configurations</li>
+                            <li>Measure token usage, execution time, and success rates</li>
+                            <li>Generate comparative performance reports</li>
+                            <li>Track cost estimates across different approaches</li>
+                        </ul>
+                        <p><strong>Priority:</strong> High | <strong>Impact:</strong> High | <strong>Complexity:</strong> Moderate</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="accordion-item">
+                <div class="accordion-header">
+                    <span>2. Codebase Analyzer Agent</span>
+                </div>
+                <div class="accordion-content">
+                    <div class="accordion-body">
+                        <p><strong>Purpose:</strong> Analyze large codebases to identify refactoring opportunities and optimal tooling strategies</p>
+                        <p><strong>Core Capabilities:</strong></p>
+                        <ul>
+                            <li>Count lines of code by language and file type</li>
+                            <li>Identify heavily used types and symbols</li>
+                            <li>Suggest appropriate MCP servers based on codebase characteristics</li>
+                            <li>Generate refactoring opportunity reports</li>
+                        </ul>
+                        <p><strong>Priority:</strong> Medium | <strong>Impact:</strong> High | <strong>Complexity:</strong> Complex</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="accordion-item">
+                <div class="accordion-header">
+                    <span>3. MCP Server Configurator Agent</span>
+                </div>
+                <div class="accordion-content">
+                    <div class="accordion-body">
+                        <p><strong>Purpose:</strong> Automate the discovery, installation, and configuration of MCP servers</p>
+                        <p><strong>Core Capabilities:</strong></p>
+                        <ul>
+                            <li>Search GitHub for relevant MCP servers</li>
+                            <li>Install and configure MCP servers</li>
+                            <li>Generate Claude Desktop configuration</li>
+                            <li>Test MCP server connectivity and functionality</li>
+                        </ul>
+                        <p><strong>Priority:</strong> Medium | <strong>Impact:</strong> Medium | <strong>Complexity:</strong> Moderate</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Transcript Section -->
+        <section id="transcript">
+            <h2>Video Transcript</h2>
+
+            <div class="transcript-search">
+                <input type="text" id="transcriptSearch" placeholder="Search transcript..." onkeyup="searchTranscript()">
+            </div>
+
+            <div class="transcript-content" id="transcriptContent">these AI coding agents, they don't work for my context. My codebase is legacy. It's too big. Uh these tools choke on the amount of code. That's what I hear a lot nowadays. And while sometimes that is the case, I think more often than not, it's just a case of using them correctly. Uh I like to compare that to eating spaghetti with a spoon. It's technically possible, but it'll go a lot faster if you use a damn fork. So, today I want to show you what kind of tools I use to make AI coding work for large legacy codebases...</div>
+
+            <button class="copy-btn" onclick="copyTranscript()">Copy Transcript</button>
+        </section>
+
+        <!-- Pattern Analysis Section -->
+        <section id="patterns">
+            <h2>Pattern Analysis Results</h2>
+
+            <div class="accordion-item">
+                <div class="accordion-header">
+                    <span>extract_wisdom - Comprehensive Content Extraction</span>
+                </div>
+                <div class="accordion-content">
+                    <div class="accordion-body">
+                        <h4>Summary</h4>
+                        <p>Developer demonstrates how MCP servers like Serena and Refactor MCP can dramatically improve AI coding assistant performance on legacy codebases.</p>
+
+                        <h4>Key Ideas</h4>
+                        <ul>
+                            <li>AI coding agents often fail on legacy codebases due to improper tool usage rather than fundamental limitations</li>
+                            <li>Using AI coding tools without proper setup is like eating spaghetti with a spoon instead of fork</li>
+                            <li>Serena provides semantic search and edit capabilities that outperform basic text-based brute force approaches significantly</li>
+                            <li>MCP servers reduce token usage by 28x and costs by 20x while improving speed by 30x significantly</li>
+                            <li>Proper tooling eliminates doom looping where AI agents repeatedly fail, compile, retry in endless frustrating cycles</li>
+                            <li>Semantic search tools work better on large codebases than small ones due to complexity scaling advantages</li>
+                            <li>Open source MCP servers provide free alternatives to expensive commercial AI coding solutions and subscriptions</li>
+                        </ul>
+
+                        <button class="copy-btn" onclick="copyToClipboard('Pattern: extract_wisdom content')">Copy Content</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="accordion-item">
+                <div class="accordion-header">
+                    <span>extract_insights - Key Insights</span>
+                </div>
+                <div class="accordion-content">
+                    <div class="accordion-body">
+                        <h4>Top Insights</h4>
+                        <ul>
+                            <li>Legacy codebases need semantic tools, not brute force</li>
+                            <li>AI agents with smart tools beat manual coding speed</li>
+                            <li>Wrong tools create expensive doom loops and failures</li>
+                            <li>Semantic search prevents costly compile-fail-retry cycles dramatically</li>
+                            <li>MCP servers reduce token costs by 28x factors</li>
+                            <li>Three hour tasks become five minute autonomous workflows</li>
+                            <li>Proper tooling beats throwing money at sub agents</li>
+                            <li>Smart refactoring tools eliminate human intervention completely</li>
+                            <li>Token budgets stretch 20x further with right approach</li>
+                            <li>Large codebases expose AI limitations without semantic help</li>
+                        </ul>
+                        <button class="copy-btn" onclick="copyToClipboard('Pattern: extract_insights content')">Copy Content</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="accordion-item">
+                <div class="accordion-header">
+                    <span>extract_recommendations - Actionable Steps</span>
+                </div>
+                <div class="accordion-content">
+                    <div class="accordion-body">
+                        <h4>Implementation Recommendations</h4>
+                        <ul>
+                            <li>Install semantic search MCP servers before attempting AI-assisted refactoring on large legacy codebases</li>
+                            <li>Use language-specific refactoring tools (Refactor MCP for .NET, Serena for multi-language support)</li>
+                            <li>Measure token usage and costs to optimize AI workflows</li>
+                            <li>Configure AI assistants with proper tools upfront to achieve 20-30x performance improvements</li>
+                            <li>Choose open-source MCP servers when available to reduce costs and maintain tool control</li>
+                        </ul>
+                        <button class="copy-btn" onclick="copyToClipboard('Pattern: extract_recommendations content')">Copy Content</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="accordion-item">
+                <div class="accordion-header">
+                    <span>rate_content - Content Quality Assessment</span>
+                </div>
+                <div class="accordion-content">
+                    <div class="accordion-body">
+                        <h4>Quality Metrics</h4>
+                        <p><strong>Rating:</strong> A Tier (Should Consume Original Content)</p>
+                        <p><strong>Content Score:</strong> 78/100</p>
+
+                        <h4>Explanation</h4>
+                        <ul>
+                            <li>Strong focus on AI tools and their practical application in software development contexts</li>
+                            <li>Demonstrates concrete productivity improvements (20-30x performance gains) with AI coding assistants</li>
+                            <li>Provides detailed technical comparisons and benchmarking methodology for tool evaluation</li>
+                            <li>Addresses real-world challenges developers face with legacy codebases and AI tool limitations</li>
+                            <li>Offers actionable insights on optimizing AI coding workflows through proper tool selection</li>
+                        </ul>
+                        <button class="copy-btn" onclick="copyToClipboard('Pattern: rate_content assessment')">Copy Content</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="accordion-item">
+                <div class="accordion-header">
+                    <span>extract_technical_content - Technical Deep Dive</span>
+                </div>
+                <div class="accordion-content">
+                    <div class="accordion-body">
+                        <h4>Tech Stack Summary</h4>
+                        <p><strong>Languages:</strong> C#, TypeScript</p>
+                        <p><strong>Tools:</strong> Claude Code, Serena MCP, Refactor MCP, Rider, VS Code, cloc</p>
+                        <p><strong>Frameworks:</strong> .NET, Roslyn</p>
+
+                        <h4>Key Technical Concepts</h4>
+                        <ul>
+                            <li><strong>MCP (Model Context Protocol):</strong> Protocol for connecting AI assistants with external tools</li>
+                            <li><strong>Semantic Search and Edit:</strong> Advanced code navigation using meaning rather than text matching</li>
+                            <li><strong>Tool-First Approach:</strong> Give AI agents proper tools before expecting good performance</li>
+                        </ul>
+                        <button class="copy-btn" onclick="copyToClipboard('Pattern: extract_technical_content')">Copy Content</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Resources Section -->
+        <section id="resources">
+            <h2>Resources & Links</h2>
+
+            <h3>Official Repositories</h3>
+            <ul class="resource-list">
+                <li>
+                    <strong>Serena MCP</strong><br>
+                    <a href="https://github.com/serena-ai/serena-mcp" target="_blank">https://github.com/serena-ai/serena-mcp</a><br>
+                    <span style="color: var(--text-secondary);">Semantic code retrieval and editing tools</span>
+                </li>
+                <li>
+                    <strong>Refactor MCP</strong><br>
+                    <a href="https://github.com/davehillier/refactor-mcp" target="_blank">https://github.com/davehillier/refactor-mcp</a><br>
+                    <span style="color: var(--text-secondary);">Roslyn-based refactoring tools for C#</span>
+                </li>
+                <li>
+                    <strong>Claude Code</strong><br>
+                    <a href="https://github.com/anthropics/claude-code" target="_blank">https://github.com/anthropics/claude-code</a><br>
+                    <span style="color: var(--text-secondary);">Anthropic's official CLI for Claude</span>
+                </li>
+                <li>
+                    <strong>Umbraco CMS</strong><br>
+                    <a href="https://github.com/umbraco/umbraco-cms" target="_blank">https://github.com/umbraco/umbraco-cms</a><br>
+                    <span style="color: var(--text-secondary);">Test codebase used for benchmarking</span>
+                </li>
+            </ul>
+
+            <h3>Documentation & Learning</h3>
+            <ul class="resource-list">
+                <li>
+                    <strong>MCP Protocol Documentation</strong><br>
+                    <a href="https://anthropic.com/mcp" target="_blank">https://anthropic.com/mcp</a><br>
+                    <span style="color: var(--text-secondary);">Learn how to build and configure MCP servers</span>
+                </li>
+                <li>
+                    <strong>Roslyn Analyzers</strong><br>
+                    <span style="color: var(--text-secondary);">Microsoft's code analysis platform for .NET</span>
+                </li>
+            </ul>
+
+            <h3>Original Video</h3>
+            <ul class="resource-list">
+                <li>
+                    <strong>YouTube Video</strong><br>
+                    <a href="https://www.youtube.com/watch?v=UqfxuQKuMo8" target="_blank">https://www.youtube.com/watch?v=UqfxuQKuMo8</a><br>
+                    <span style="color: var(--text-secondary);">AI coding agents are useless on large codebases. Unless you do THIS.</span>
+                </li>
+            </ul>
+        </section>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-grid">
+                <div class="footer-section">
+                    <h3>Analysis Metadata</h3>
+                    <p>Generated: 2025-11-23</p>
+                    <p>Analysis Duration: N/A</p>
+                    <p>Patterns Executed: 10+</p>
+                    <p>Sub-agents Used: Multiple</p>
+                </div>
+
+                <div class="footer-section">
+                    <h3>Content Classification</h3>
+                    <p>Content Type: Technical</p>
+                    <p>Target Audience: Intermediate/Advanced</p>
+                    <p>Primary Topics: AI Coding, MCP Servers, Refactoring</p>
+                </div>
+
+                <div class="footer-section">
+                    <h3>Download Options</h3>
+                    <div class="download-buttons">
+                        <button class="btn btn-secondary" onclick="window.print()">Download as PDF</button>
+                        <button class="btn btn-secondary" onclick="copyTranscript()">Copy Transcript</button>
+                    </div>
+                </div>
+            </div>
+
+            <div style="margin-top: 2rem; padding-top: 2rem; border-top: 1px solid var(--border-color);">
+                <p style="color: var(--text-secondary);">Generated with Claude Code - YouTube Analysis Dashboard</p>
+                <p style="color: var(--text-secondary); font-size: 0.9rem; margin-top: 0.5rem;">
+                    This analysis dashboard was automatically generated from YouTube video analysis data.
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Theme Toggle Button -->
+    <button class="theme-toggle" onclick="toggleTheme()" title="Toggle Dark/Light Mode">
+        <span id="themeIcon">🌙</span>
+    </button>
+
+    <!-- JavaScript -->
+    <script>
+        // Theme Toggle Functionality
+        function toggleTheme() {
+            const html = document.documentElement;
+            const currentTheme = html.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+
+            html.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+
+            document.getElementById('themeIcon').textContent = newTheme === 'dark' ? '☀️' : '🌙';
+        }
+
+        // Load saved theme on page load
+        (function() {
+            const savedTheme = localStorage.getItem('theme') || 'light';
+            document.documentElement.setAttribute('data-theme', savedTheme);
+            document.getElementById('themeIcon').textContent = savedTheme === 'dark' ? '☀️' : '🌙';
+        })();
+
+        // Accordion Functionality
+        document.querySelectorAll('.accordion-header').forEach(header => {
+            header.addEventListener('click', function() {
+                const content = this.nextElementSibling;
+                const isActive = this.classList.contains('active');
+
+                // Close all accordions
+                document.querySelectorAll('.accordion-header').forEach(h => {
+                    h.classList.remove('active');
+                    h.nextElementSibling.classList.remove('active');
+                });
+
+                // Open clicked accordion if it wasn't active
+                if (!isActive) {
+                    this.classList.add('active');
+                    content.classList.add('active');
+                }
+            });
+        });
+
+        // Transcript Search Functionality
+        const originalTranscript = document.getElementById('transcriptContent').textContent;
+
+        function searchTranscript() {
+            const searchTerm = document.getElementById('transcriptSearch').value.toLowerCase();
+            const transcriptDiv = document.getElementById('transcriptContent');
+
+            if (searchTerm === '') {
+                transcriptDiv.innerHTML = originalTranscript;
+                return;
+            }
+
+            const regex = new RegExp(`(${searchTerm})`, 'gi');
+            const highlightedText = originalTranscript.replace(regex, '<span class="highlight">$1</span>');
+            transcriptDiv.innerHTML = highlightedText;
+        }
+
+        // Copy Transcript Functionality
+        function copyTranscript() {
+            const transcript = originalTranscript;
+            navigator.clipboard.writeText(transcript).then(() => {
+                alert('Transcript copied to clipboard!');
+            }).catch(err => {
+                console.error('Failed to copy transcript:', err);
+            });
+        }
+
+        // Generic Copy to Clipboard
+        function copyToClipboard(text) {
+            navigator.clipboard.writeText(text).then(() => {
+                alert('Content copied to clipboard!');
+            }).catch(err => {
+                console.error('Failed to copy:', err);
+            });
+        }
+
+        // Smooth Scrolling for Navigation Links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Back to Top on Scroll
+        window.addEventListener('scroll', function() {
+            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            // Could add back-to-top button visibility toggle here
+        });
+    </script>
+</body>
+</html>

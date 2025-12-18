@@ -1,0 +1,1371 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Why are top engineers DITCHING MCP Servers? - Analysis Dashboard</title>
+    <style>
+        :root {
+            --bg-primary: #ffffff;
+            --bg-secondary: #f8f9fa;
+            --bg-tertiary: #e9ecef;
+            --text-primary: #212529;
+            --text-secondary: #6c757d;
+            --border-color: #dee2e6;
+            --accent-primary: #0d6efd;
+            --accent-success: #198754;
+            --accent-warning: #ffc107;
+            --accent-danger: #dc3545;
+            --shadow: rgba(0, 0, 0, 0.1);
+        }
+
+        [data-theme="dark"] {
+            --bg-primary: #1a1a1a;
+            --bg-secondary: #2d2d2d;
+            --bg-tertiary: #3a3a3a;
+            --text-primary: #e9ecef;
+            --text-secondary: #adb5bd;
+            --border-color: #495057;
+            --accent-primary: #4dabf7;
+            --accent-success: #51cf66;
+            --accent-warning: #ffd43b;
+            --accent-danger: #ff6b6b;
+            --shadow: rgba(0, 0, 0, 0.3);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .header {
+            background: linear-gradient(135deg, var(--accent-primary), #0056b3);
+            color: white;
+            padding: 2rem 1rem;
+            box-shadow: 0 2px 10px var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .video-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .video-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            align-items: center;
+            margin-top: 1rem;
+        }
+
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 0.35rem 0.75rem;
+            border-radius: 6px;
+            font-weight: 600;
+            font-size: 0.875rem;
+        }
+
+        .badge-success {
+            background: var(--accent-success);
+            color: white;
+        }
+
+        .badge-info {
+            background: var(--accent-primary);
+            color: white;
+        }
+
+        .badge-warning {
+            background: var(--accent-warning);
+            color: #000;
+        }
+
+        .theme-toggle {
+            position: fixed;
+            top: 1rem;
+            right: 1rem;
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            padding: 0.75rem;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.25rem;
+            transition: background 0.3s;
+            z-index: 1001;
+        }
+
+        .theme-toggle:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        .nav {
+            background: var(--bg-secondary);
+            border-bottom: 1px solid var(--border-color);
+            position: sticky;
+            top: 0;
+            z-index: 999;
+            padding: 1rem 0;
+        }
+
+        .nav-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+            display: flex;
+            gap: 1.5rem;
+            overflow-x: auto;
+        }
+
+        .nav-link {
+            color: var(--text-primary);
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            white-space: nowrap;
+            transition: background 0.2s;
+        }
+
+        .nav-link:hover {
+            background: var(--bg-tertiary);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+
+        .section {
+            background: var(--bg-secondary);
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 8px var(--shadow);
+        }
+
+        .section-title {
+            font-size: 1.75rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            color: var(--accent-primary);
+            border-bottom: 3px solid var(--accent-primary);
+            padding-bottom: 0.5rem;
+        }
+
+        .section-subtitle {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin: 1.5rem 0 1rem;
+            color: var(--text-primary);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .stat-card {
+            background: var(--bg-tertiary);
+            padding: 1.5rem;
+            border-radius: 10px;
+            border-left: 4px solid var(--accent-primary);
+        }
+
+        .stat-label {
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+            text-transform: uppercase;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-value {
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: var(--accent-primary);
+        }
+
+        .insights-list {
+            list-style: none;
+            counter-reset: insight-counter;
+        }
+
+        .insight-item {
+            counter-increment: insight-counter;
+            padding: 1.25rem;
+            margin: 1rem 0;
+            background: var(--bg-tertiary);
+            border-radius: 8px;
+            border-left: 4px solid var(--accent-success);
+            position: relative;
+        }
+
+        .insight-item:before {
+            content: counter(insight-counter);
+            position: absolute;
+            left: -0.5rem;
+            top: -0.5rem;
+            background: var(--accent-success);
+            color: white;
+            width: 2rem;
+            height: 2rem;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 0.875rem;
+        }
+
+        .recommendation-item {
+            padding: 1rem;
+            margin: 0.75rem 0;
+            background: var(--bg-tertiary);
+            border-radius: 8px;
+            border-left: 4px solid var(--accent-warning);
+        }
+
+        .accordion {
+            margin: 1rem 0;
+        }
+
+        .accordion-item {
+            background: var(--bg-tertiary);
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            overflow: hidden;
+        }
+
+        .accordion-header {
+            padding: 1.25rem;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: var(--bg-tertiary);
+            border: none;
+            width: 100%;
+            text-align: left;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            transition: background 0.2s;
+        }
+
+        .accordion-header:hover {
+            background: var(--bg-primary);
+        }
+
+        .accordion-icon {
+            transition: transform 0.3s;
+            font-size: 1.25rem;
+        }
+
+        .accordion-item.active .accordion-icon {
+            transform: rotate(180deg);
+        }
+
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+        }
+
+        .accordion-item.active .accordion-content {
+            max-height: 5000px;
+            transition: max-height 0.5s ease-in;
+        }
+
+        .accordion-body {
+            padding: 1.5rem;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .search-box {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border: 2px solid var(--border-color);
+            border-radius: 8px;
+            font-size: 1rem;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            margin-bottom: 1rem;
+        }
+
+        .search-box:focus {
+            outline: none;
+            border-color: var(--accent-primary);
+        }
+
+        .transcript-container {
+            background: var(--bg-tertiary);
+            padding: 1.5rem;
+            border-radius: 8px;
+            max-height: 500px;
+            overflow-y: auto;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            line-height: 1.8;
+        }
+
+        .tech-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+            margin: 1rem 0;
+        }
+
+        .tech-tag {
+            background: var(--accent-primary);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.875rem;
+            font-weight: 500;
+        }
+
+        .quote-box {
+            background: var(--bg-tertiary);
+            border-left: 4px solid var(--accent-primary);
+            padding: 1.25rem;
+            margin: 1rem 0;
+            font-style: italic;
+            color: var(--text-secondary);
+        }
+
+        .copy-btn {
+            background: var(--accent-primary);
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.875rem;
+            margin-top: 0.5rem;
+            transition: background 0.2s;
+        }
+
+        .copy-btn:hover {
+            opacity: 0.9;
+        }
+
+        .resources-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+
+        .resource-card {
+            background: var(--bg-tertiary);
+            padding: 1rem;
+            border-radius: 8px;
+            transition: transform 0.2s;
+        }
+
+        .resource-card:hover {
+            transform: translateY(-2px);
+        }
+
+        .resource-link {
+            color: var(--accent-primary);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .resource-link:hover {
+            text-decoration: underline;
+        }
+
+        .footer {
+            background: var(--bg-secondary);
+            border-top: 1px solid var(--border-color);
+            padding: 2rem 1rem;
+            margin-top: 3rem;
+            text-align: center;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            color: var(--text-secondary);
+        }
+
+        .back-to-top {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background: var(--accent-primary);
+            color: white;
+            border: none;
+            width: 3rem;
+            height: 3rem;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.5rem;
+            opacity: 0;
+            transition: opacity 0.3s;
+            z-index: 1000;
+        }
+
+        .back-to-top.visible {
+            opacity: 1;
+        }
+
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+        }
+
+        .comparison-table th,
+        .comparison-table td {
+            padding: 1rem;
+            text-align: left;
+            border: 1px solid var(--border-color);
+        }
+
+        .comparison-table th {
+            background: var(--bg-tertiary);
+            font-weight: 600;
+        }
+
+        .comparison-table tr:hover {
+            background: var(--bg-tertiary);
+        }
+
+        code {
+            background: var(--bg-tertiary);
+            padding: 0.2rem 0.4rem;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+        }
+
+        pre {
+            background: var(--bg-tertiary);
+            padding: 1rem;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin: 1rem 0;
+        }
+
+        pre code {
+            background: none;
+            padding: 0;
+        }
+
+        @media (max-width: 768px) {
+            .video-title {
+                font-size: 1.4rem;
+            }
+
+            .video-meta {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.75rem;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .section {
+                padding: 1.5rem;
+            }
+
+            .nav-content {
+                gap: 0.75rem;
+            }
+        }
+
+        @media print {
+            .header,
+            .nav,
+            .theme-toggle,
+            .back-to-top,
+            .copy-btn {
+                display: none;
+            }
+
+            .section {
+                page-break-inside: avoid;
+            }
+        }
+
+        .highlight {
+            background: rgba(255, 193, 7, 0.3);
+            padding: 0.1rem 0.2rem;
+        }
+
+        .priority-high {
+            border-left-color: var(--accent-danger);
+        }
+
+        .priority-medium {
+            border-left-color: var(--accent-warning);
+        }
+
+        .priority-low {
+            border-left-color: var(--accent-success);
+        }
+    </style>
+</head>
+<body>
+    <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">🌓</button>
+
+    <header class="header">
+        <div class="header-content">
+            <h1 class="video-title">Why are top engineers DITCHING MCP Servers? (3 PROVEN Solutions)</h1>
+            <div class="video-meta">
+                <div class="meta-item">
+                    <span>📺 Channel:</span>
+                    <strong>IndyDevDan</strong>
+                </div>
+                <div class="meta-item">
+                    <span>⏱️ Duration:</span>
+                    <strong>32:01</strong>
+                </div>
+                <div class="meta-item">
+                    <span>👀 Views:</span>
+                    <strong>21,394</strong>
+                </div>
+                <div class="meta-item">
+                    <span>📅 Upload:</span>
+                    <strong>Nov 10, 2025</strong>
+                </div>
+                <div class="meta-item">
+                    <span class="badge badge-success">Quality: B (72/100)</span>
+                </div>
+                <div class="meta-item">
+                    <a href="https://www.youtube.com/watch?v=OIKTsVjTVJE" target="_blank" class="badge badge-info" style="text-decoration: none;">Watch on YouTube</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <nav class="nav">
+        <div class="nav-content">
+            <a href="#summary" class="nav-link">Summary</a>
+            <a href="#insights" class="nav-link">Key Insights</a>
+            <a href="#recommendations" class="nav-link">Recommendations</a>
+            <a href="#technical" class="nav-link">Technical Details</a>
+            <a href="#alternatives" class="nav-link">MCP Alternatives</a>
+            <a href="#automation" class="nav-link">Automation</a>
+            <a href="#transcript" class="nav-link">Transcript</a>
+            <a href="#resources" class="nav-link">Resources</a>
+        </div>
+    </nav>
+
+    <div class="container">
+        <!-- Quick Summary Section -->
+        <section id="summary" class="section">
+            <h2 class="section-title">📋 Executive Summary</h2>
+            <p style="font-size: 1.1rem; line-height: 1.8; margin-bottom: 1.5rem;">
+                Indie Dev Dan presents three proven alternatives to traditional MCP (Model Context Protocol) servers for connecting AI agents to external tools while preserving critical context window space. The video demonstrates that MCP servers can consume 10,000+ tokens (5% of context window) before agents even begin working, and when stacking multiple servers, this can reach 20%+ consumption. The three alternatives - CLI tools, file system scripts, and Claude skills - each offer different trade-offs between simplicity, control, and context preservation.
+            </p>
+
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-label">Quality Score</div>
+                    <div class="stat-value">72/100</div>
+                    <div class="stat-label" style="margin-top: 0.5rem;">B Tier - Consume Original</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">Watch Priority</div>
+                    <div class="stat-value">High</div>
+                    <div class="stat-label" style="margin-top: 0.5rem;">AI Agent Developers</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">Content Type</div>
+                    <div class="stat-value">Technical</div>
+                    <div class="stat-label" style="margin-top: 0.5rem;">Educational</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">Ideas Count</div>
+                    <div class="stat-value">31+</div>
+                    <div class="stat-label" style="margin-top: 0.5rem;">Distinct Technical Ideas</div>
+                </div>
+            </div>
+
+            <h3 class="section-subtitle">Context Savings Comparison</h3>
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th>Approach</th>
+                        <th>Tokens</th>
+                        <th>% of 200k</th>
+                        <th>Savings</th>
+                        <th>Best For</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>MCP Server</strong></td>
+                        <td>10,000</td>
+                        <td>5%</td>
+                        <td>Baseline</td>
+                        <td>External tools, quick prototyping</td>
+                    </tr>
+                    <tr>
+                        <td><strong>CLI Tools</strong></td>
+                        <td>5,600</td>
+                        <td>2.8%</td>
+                        <td>50%</td>
+                        <td>Need control, team usage</td>
+                    </tr>
+                    <tr>
+                        <td><strong>File Scripts</strong></td>
+                        <td>2,000</td>
+                        <td>1%</td>
+                        <td>90%</td>
+                        <td>Context critical, stacking tools</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Claude Skills</strong></td>
+                        <td>1,500</td>
+                        <td>0.75%</td>
+                        <td>92%+</td>
+                        <td>Claude-only, auto-discovery</td>
+                    </tr>
+                    <tr style="background: rgba(220, 53, 69, 0.1);">
+                        <td><strong>Multiple MCPs</strong></td>
+                        <td>20,000+</td>
+                        <td>10-20%+</td>
+                        <td>N/A</td>
+                        <td>Avoid or optimize</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- Key Insights Section -->
+        <section id="insights" class="section">
+            <h2 class="section-title">💡 Key Insights</h2>
+            <ul class="insights-list">
+                <li class="insight-item">
+                    <strong>Context window preservation is more critical than tool standardization</strong> for high-performance agent workflows. Losing 20%+ of context to tool descriptions before work begins fundamentally limits agent capability.
+                </li>
+                <li class="insight-item">
+                    <strong>Progressive disclosure transforms context from liability into strategic asset</strong> through conditional loading mechanisms. Only load tools when needed, not everything upfront.
+                </li>
+                <li class="insight-item">
+                    <strong>Building CLI-first enables seamless scaling</strong> from individual use to team collaboration to MCP server wrapping, without rewriting core functionality.
+                </li>
+                <li class="insight-item">
+                    <strong>Prompt engineering remains foundational skill</strong> that precedes and controls all context engineering efforts. Prompts execute before context loads.
+                </li>
+                <li class="insight-item">
+                    <strong>Agent effectiveness improves dramatically when garbage context is eliminated</strong> through targeted tool exposure. Cleaner context = better performance.
+                </li>
+                <li class="insight-item">
+                    <strong>Single-purpose focused agents eliminate most context engineering challenges</strong> through deliberate scope limitation. Build, execute, delete.
+                </li>
+                <li class="insight-item">
+                    <strong>Tool access trade-offs follow predictable pattern</strong>: Simplicity versus control across all implementation approaches. No one-size-fits-all solution.
+                </li>
+                <li class="insight-item">
+                    <strong>Raw code as tools provides equivalent functionality to MCP</strong> with superior context management, proven by benchmarks showing no quality degradation.
+                </li>
+            </ul>
+
+            <div class="quote-box">
+                "Even before context comes prompt engineering. This is still a critical skill. In fact, it is the critical skill for engineers in 2025 and beyond."
+            </div>
+
+            <div class="quote-box">
+                "When you have less garbage context, your agent can perform better."
+            </div>
+
+            <div class="quote-box">
+                "You can sidestep every single context engineering problem by just focusing your agents on one problem and then you delete them when they're done."
+            </div>
+        </section>
+
+        <!-- Recommendations Section -->
+        <section id="recommendations" class="section">
+            <h2 class="section-title">🎯 Actionable Recommendations</h2>
+
+            <h3 class="section-subtitle">The 80/15/5 Rule</h3>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-label">80% of Time</div>
+                    <div class="stat-value">MCP Servers</div>
+                    <p style="margin-top: 0.5rem; font-size: 0.9rem;">For external tools - leverage existing standards</p>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">15% of Time</div>
+                    <div class="stat-value">CLI Tools</div>
+                    <p style="margin-top: 0.5rem; font-size: 0.9rem;">When you need specific control</p>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">5% of Time</div>
+                    <div class="stat-value">Scripts/Skills</div>
+                    <p style="margin-top: 0.5rem; font-size: 0.9rem;">When context preservation is critical</p>
+                </div>
+            </div>
+
+            <h3 class="section-subtitle">Immediate Implementation Steps</h3>
+            <div class="recommendation-item priority-high">
+                <strong>1. Use MCP servers 80% of time for external tools</strong> to leverage existing standards and minimize engineering investment
+            </div>
+            <div class="recommendation-item priority-high">
+                <strong>2. Switch to CLI approach when you need specific control</strong> over tool behavior and context consumption
+            </div>
+            <div class="recommendation-item priority-medium">
+                <strong>3. Implement script-based approach only when context preservation becomes critical</strong> for agent performance (5% of cases)
+            </div>
+            <div class="recommendation-item priority-high">
+                <strong>4. Prime agents with specific prompts before activating tool sets</strong> to control context consumption effectively
+            </div>
+            <div class="recommendation-item priority-high">
+                <strong>5. Build single-purpose focused agents</strong> that delete themselves when tasks complete to sidestep context issues
+            </div>
+            <div class="recommendation-item priority-medium">
+                <strong>6. Start with CLI development before wrapping MCP servers</strong> to maintain interoperability across approaches
+            </div>
+            <div class="recommendation-item priority-medium">
+                <strong>7. Use UV dependency manager for single file scripts</strong> to eliminate dependency management complexity
+            </div>
+            <div class="recommendation-item priority-low">
+                <strong>8. Implement progressive disclosure by mapping conditions to files</strong> for powerful agentic data structures
+            </div>
+            <div class="recommendation-item priority-high">
+                <strong>9. Check context window consumption regularly</strong> with /context command during agent workflow development
+            </div>
+            <div class="recommendation-item priority-medium">
+                <strong>10. Build for trifecta of human, team, and agent usability</strong> when creating new tools
+            </div>
+
+            <h3 class="section-subtitle">Decision Framework</h3>
+            <div class="accordion">
+                <div class="accordion-item">
+                    <button class="accordion-header">
+                        <span>When to use MCP Servers</span>
+                        <span class="accordion-icon">▼</span>
+                    </button>
+                    <div class="accordion-content">
+                        <div class="accordion-body">
+                            <ul>
+                                <li>External third-party integrations</li>
+                                <li>Quick prototyping</li>
+                                <li>Standard integrations with established tools</li>
+                                <li>When you don't need customization</li>
+                                <li>Already available MCP server exists</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <button class="accordion-header">
+                        <span>When to use CLI Tools</span>
+                        <span class="accordion-icon">▼</span>
+                    </button>
+                    <div class="accordion-content">
+                        <div class="accordion-body">
+                            <ul>
+                                <li>Need to modify or extend existing tools</li>
+                                <li>Building tools for humans AND agents</li>
+                                <li>Want better context control</li>
+                                <li>Need team-wide usability</li>
+                                <li>Building new tools from scratch</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <button class="accordion-header">
+                        <span>When to use File System Scripts</span>
+                        <span class="accordion-icon">▼</span>
+                    </button>
+                    <div class="accordion-content">
+                        <div class="accordion-body">
+                            <ul>
+                                <li>Context preservation is critical</li>
+                                <li>Highly focused, single-purpose tools</li>
+                                <li>Maximum portability required</li>
+                                <li>Stacking multiple tool sets</li>
+                                <li>Need progressive disclosure</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <button class="accordion-header">
+                        <span>When to use Claude Skills</span>
+                        <span class="accordion-icon">▼</span>
+                    </button>
+                    <div class="accordion-content">
+                        <div class="accordion-body">
+                            <ul>
+                                <li>Claude-specific workflows only</li>
+                                <li>Want automatic tool discovery</li>
+                                <li>Accept vendor lock-in trade-off</li>
+                                <li>Bundled, self-contained functionality</li>
+                                <li>No prime prompts preferred</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- MCP Alternatives Deep Dive -->
+        <section id="alternatives" class="section">
+            <h2 class="section-title">🔧 The 3 MCP Alternatives Explained</h2>
+
+            <div class="accordion">
+                <div class="accordion-item active">
+                    <button class="accordion-header">
+                        <span>1️⃣ CLI Tools (50% Context Savings)</span>
+                        <span class="accordion-icon">▼</span>
+                    </button>
+                    <div class="accordion-content">
+                        <div class="accordion-body">
+                            <h4>How It Works</h4>
+                            <p>Teach agents to use command-line interfaces through prompt-based tool discovery instead of consuming MCP context.</p>
+
+                            <h4>Key Benefits</h4>
+                            <ul>
+                                <li>Works for humans, teams, AND agents simultaneously</li>
+                                <li>Full control over functionality</li>
+                                <li>50% context reduction compared to MCP</li>
+                                <li>Easy to wrap with MCP later if needed</li>
+                            </ul>
+
+                            <h4>Implementation Pattern</h4>
+                            <pre><code># Prime prompt teaches agent CLI usage
+# Read only CLI help and README
+# ~5,600 token overhead (50% savings)
+# Works for you, team, agents</code></pre>
+
+                            <h4>When to Use</h4>
+                            <p>Use 15% of time when you need specific control over tool behavior and context consumption.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <button class="accordion-header">
+                        <span>2️⃣ File System Scripts (90% Context Savings)</span>
+                        <span class="accordion-icon">▼</span>
+                    </button>
+                    <div class="accordion-content">
+                        <div class="accordion-body">
+                            <h4>How It Works</h4>
+                            <p>Progressive disclosure through single-file scripts. Only load tools when needed based on conditions.</p>
+
+                            <h4>Key Benefits</h4>
+                            <ul>
+                                <li>90% context savings (down to ~2,000 tokens)</li>
+                                <li>UV dependency manager for self-contained scripts</li>
+                                <li>Conditional tool loading based on needs</li>
+                                <li>Maximum portability - single file with dependencies</li>
+                            </ul>
+
+                            <h4>UV Single-File Script Pattern</h4>
+                            <pre><code>#!/usr/bin/env -S uv run
+# /// script
+# dependencies = [
+#   "requests",
+#   "aiohttp"
+# ]
+# ///
+
+# Self-contained script with dependencies
+# No shared imports, full control
+# Maximum portability</code></pre>
+
+                            <h4>Progressive Disclosure Pattern</h4>
+                            <pre><code>Condition: Agent needs market search
+→ Load: search.py only
+
+Condition: Agent needs orderbook data
+→ Load: get_orderbook.py only
+
+Not loaded: get_trades.py, get_market.py
+Result: 75% reduction in context consumption</code></pre>
+
+                            <h4>When to Use</h4>
+                            <p>Use 5% of time when context preservation is absolutely critical for agent performance.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <button class="accordion-header">
+                        <span>3️⃣ Claude Skills (92%+ Context Savings)</span>
+                        <span class="accordion-icon">▼</span>
+                    </button>
+                    <div class="accordion-content">
+                        <div class="accordion-body">
+                            <h4>How It Works</h4>
+                            <p>Automatic progressive disclosure with Claude ecosystem integration. No prime prompts required.</p>
+
+                            <h4>Key Benefits</h4>
+                            <ul>
+                                <li>Automatic progressive disclosure</li>
+                                <li>No prime prompts required</li>
+                                <li>0.75% context overhead (~1,500 tokens)</li>
+                                <li>Bundled, self-contained functionality</li>
+                            </ul>
+
+                            <h4>Trade-off</h4>
+                            <div class="quote-box" style="background: rgba(220, 53, 69, 0.1);">
+                                <strong>Vendor Lock-in:</strong> Skills are Claude ecosystem specific. Great for Claude-only workflows, but reduces portability.
+                            </div>
+
+                            <h4>When to Use</h4>
+                            <p>When working exclusively in Claude ecosystem and want automatic tool discovery without manual priming.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Technical Details Section -->
+        <section id="technical" class="section">
+            <h2 class="section-title">⚙️ Technical Details</h2>
+
+            <h3 class="section-subtitle">Tools & Frameworks</h3>
+            <div class="tech-stack">
+                <span class="tech-tag">Claude</span>
+                <span class="tech-tag">Claude Code</span>
+                <span class="tech-tag">MCP Servers</span>
+                <span class="tech-tag">UV (Astral)</span>
+                <span class="tech-tag">Click/Typer CLI</span>
+                <span class="tech-tag">Python</span>
+                <span class="tech-tag">Kalshi</span>
+                <span class="tech-tag">Polymarket</span>
+                <span class="tech-tag">Haiku</span>
+                <span class="tech-tag">Sonnet</span>
+            </div>
+
+            <h3 class="section-subtitle">Architecture Patterns</h3>
+            <div class="accordion">
+                <div class="accordion-item">
+                    <button class="accordion-header">
+                        <span>CLI-First Development Pattern</span>
+                        <span class="accordion-icon">▼</span>
+                    </button>
+                    <div class="accordion-content">
+                        <div class="accordion-body">
+                            <pre><code>1. Build CLI for human use
+2. Add comprehensive help documentation
+3. Create prime prompt for agents
+4. (Optional) Wrap with MCP server later
+5. Maintain all three usage modes</code></pre>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <button class="accordion-header">
+                        <span>Progressive Disclosure Pattern</span>
+                        <span class="accordion-icon">▼</span>
+                    </button>
+                    <div class="accordion-content">
+                        <div class="accordion-body">
+                            <p>Loading tools and context conditionally based on agent needs rather than front-loading everything. Maps conditions to files, creating dynamic context activation.</p>
+                            <pre><code># Map conditions to files
+if task_requires_search:
+    load_script("search.py")
+if task_requires_orderbook:
+    load_script("orderbook.py")
+
+# Not loaded unless needed:
+# - trades.py
+# - market_details.py
+# - historical_data.py</code></pre>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <button class="accordion-header">
+                        <span>Single-Purpose Agent Pattern</span>
+                        <span class="accordion-icon">▼</span>
+                    </button>
+                    <div class="accordion-content">
+                        <div class="accordion-body">
+                            <p>Create focused agents that auto-delete after task completion, resetting context automatically.</p>
+                            <ul>
+                                <li>Define single, specific task</li>
+                                <li>Load minimal tool set</li>
+                                <li>Execute task</li>
+                                <li>Auto-delete agent</li>
+                                <li>Context reset complete</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <h3 class="section-subtitle">Key Repository</h3>
+            <div class="resource-card">
+                <h4>Beyond MCP</h4>
+                <a href="https://github.com/disler/beyond-mcp" target="_blank" class="resource-link">github.com/disler/beyond-mcp</a>
+                <p style="margin-top: 0.5rem; color: var(--text-secondary);">
+                    Contains all four approaches with working examples and Kalshi prediction markets integration demos.
+                </p>
+            </div>
+        </section>
+
+        <!-- Automation Opportunities Section -->
+        <section id="automation" class="section">
+            <h2 class="section-title">🤖 Automation Opportunities</h2>
+
+            <h3 class="section-subtitle">High-Priority Agents (7 Identified)</h3>
+            <div class="accordion">
+                <div class="accordion-item">
+                    <button class="accordion-header">
+                        <span>1. Context Window Monitor Agent (VERY HIGH ROI)</span>
+                        <span class="accordion-icon">▼</span>
+                    </button>
+                    <div class="accordion-content">
+                        <div class="accordion-body">
+                            <p><strong>Purpose:</strong> Automatic threshold tracking and alerts</p>
+                            <p><strong>Value:</strong> Prevents context bloat before performance impact</p>
+                            <p><strong>Timeline:</strong> 1-2 days</p>
+                            <p><strong>Implementation:</strong></p>
+                            <ul>
+                                <li>Parse /context output</li>
+                                <li>Track percentage usage</li>
+                                <li>Alert at 15%, 20%, 25%</li>
+                                <li>Historical pattern analysis</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <button class="accordion-header">
+                        <span>2. Progressive Disclosure Optimizer (HIGH ROI)</span>
+                        <span class="accordion-icon">▼</span>
+                    </button>
+                    <div class="accordion-content">
+                        <div class="accordion-body">
+                            <p><strong>Purpose:</strong> Analyzes tool usage patterns and recommends script migrations</p>
+                            <p><strong>Value:</strong> Automatic context optimization recommendations</p>
+                            <p><strong>Timeline:</strong> 3-5 days</p>
+                            <p><strong>Features:</strong></p>
+                            <ul>
+                                <li>Track loaded vs. used tools</li>
+                                <li>Calculate waste ratio</li>
+                                <li>Generate optimization reports</li>
+                                <li>Recommend migrations</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <button class="accordion-header">
+                        <span>3. CLI-First Template Generator (MEDIUM ROI)</span>
+                        <span class="accordion-icon">▼</span>
+                    </button>
+                    <div class="accordion-content">
+                        <div class="accordion-body">
+                            <p><strong>Purpose:</strong> Scaffolding for new tools with built-in MCP wrapping</p>
+                            <p><strong>Value:</strong> Standardize CLI-first development approach</p>
+                            <p><strong>Timeline:</strong> 3-4 days</p>
+                            <p><strong>Generated Files:</strong></p>
+                            <ul>
+                                <li>CLI implementation (Click/Typer)</li>
+                                <li>Prime prompt for agents</li>
+                                <li>MCP wrapper (optional)</li>
+                                <li>README documentation</li>
+                                <li>Test suite template</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <button class="accordion-header">
+                        <span>4. Single-Purpose Agent Factory (MEDIUM ROI)</span>
+                        <span class="accordion-icon">▼</span>
+                    </button>
+                    <div class="accordion-content">
+                        <div class="accordion-body">
+                            <p><strong>Purpose:</strong> Creates focused agents that auto-delete</p>
+                            <p><strong>Value:</strong> Automatic context reset</p>
+                            <p><strong>Timeline:</strong> 4-5 days</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <button class="accordion-header">
+                        <span>5. Prediction Market Analysis Agent (MEDIUM ROI)</span>
+                        <span class="accordion-icon">▼</span>
+                    </button>
+                    <div class="accordion-content">
+                        <div class="accordion-body">
+                            <p><strong>Purpose:</strong> Analyzes Kalshi/Polymarket data</p>
+                            <p><strong>Value:</strong> Automated market intelligence</p>
+                            <p><strong>Timeline:</strong> 5-7 days</p>
+                            <p><strong>Uses:</strong> Scripts + Haiku for minimal context</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <button class="accordion-header">
+                        <span>6. Tool Migration Assistant (LOW ROI)</span>
+                        <span class="accordion-icon">▼</span>
+                    </button>
+                    <div class="accordion-content">
+                        <div class="accordion-body">
+                            <p><strong>Purpose:</strong> Converts MCP servers to CLI/scripts</p>
+                            <p><strong>Timeline:</strong> 5-7 days</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <button class="accordion-header">
+                        <span>7. Context Budget Allocator (LOW ROI)</span>
+                        <span class="accordion-icon">▼</span>
+                    </button>
+                    <div class="accordion-content">
+                        <div class="accordion-body">
+                            <p><strong>Purpose:</strong> Recommends approach based on budget</p>
+                            <p><strong>Timeline:</strong> 3-4 days</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <h3 class="section-subtitle">High-Priority Hooks (4 Identified)</h3>
+            <ul>
+                <li><strong>Pre-Tool-Use Context Check</strong> - Validates budget before activation</li>
+                <li><strong>Post-Tool-Use Analytics</strong> - Tracks usage for optimization</li>
+                <li><strong>Session-Start Context Planner</strong> - Sets budget and strategy</li>
+                <li><strong>Session-End Context Audit</strong> - Generates optimization report</li>
+            </ul>
+        </section>
+
+        <!-- Transcript Section -->
+        <section id="transcript" class="section">
+            <h2 class="section-title">📝 Searchable Transcript</h2>
+            <input type="text" id="transcriptSearch" class="search-box" placeholder="Search transcript...">
+            <div class="transcript-container" id="transcriptContainer">
+                <!-- Transcript will be loaded here -->
+            </div>
+            <button class="copy-btn" onclick="copyTranscript()">Copy Full Transcript</button>
+        </section>
+
+        <!-- Resources Section -->
+        <section id="resources" class="section">
+            <h2 class="section-title">🔗 Resources & Links</h2>
+
+            <h3 class="section-subtitle">Main Resources</h3>
+            <div class="resources-grid">
+                <div class="resource-card">
+                    <h4>Beyond MCP Repository</h4>
+                    <a href="https://github.com/disler/beyond-mcp" target="_blank" class="resource-link">github.com/disler/beyond-mcp</a>
+                    <p style="margin-top: 0.5rem; color: var(--text-secondary); font-size: 0.9rem;">
+                        All four approaches with working examples
+                    </p>
+                </div>
+
+                <div class="resource-card">
+                    <h4>Anthropic Blog</h4>
+                    <a href="https://www.anthropic.com" target="_blank" class="resource-link">Code execution with MCP</a>
+                    <p style="margin-top: 0.5rem; color: var(--text-secondary); font-size: 0.9rem;">
+                        Progressive disclosure recommendations
+                    </p>
+                </div>
+
+                <div class="resource-card">
+                    <h4>Mario Zechner's Approach</h4>
+                    <p style="margin-top: 0.5rem; color: var(--text-secondary); font-size: 0.9rem;">
+                        MCP alternative implementation
+                    </p>
+                </div>
+
+                <div class="resource-card">
+                    <h4>Vitalik on Info Finance</h4>
+                    <p style="margin-top: 0.5rem; color: var(--text-secondary); font-size: 0.9rem;">
+                        Using prediction markets for information
+                    </p>
+                </div>
+
+                <div class="resource-card">
+                    <h4>UV Documentation</h4>
+                    <p style="margin-top: 0.5rem; color: var(--text-secondary); font-size: 0.9rem;">
+                        Astral's Python dependency manager
+                    </p>
+                </div>
+
+                <div class="resource-card">
+                    <h4>Kalshi</h4>
+                    <p style="margin-top: 0.5rem; color: var(--text-secondary); font-size: 0.9rem;">
+                        Prediction markets platform
+                    </p>
+                </div>
+
+                <div class="resource-card">
+                    <h4>Polymarket</h4>
+                    <p style="margin-top: 0.5rem; color: var(--text-secondary); font-size: 0.9rem;">
+                        Betting platform for market analysis
+                    </p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <p><strong>Analysis Generated:</strong> November 23, 2025</p>
+            <p style="margin-top: 0.5rem;">Video: <a href="https://www.youtube.com/watch?v=OIKTsVjTVJE" target="_blank" style="color: var(--accent-primary);">Why are top engineers DITCHING MCP Servers?</a></p>
+            <p style="margin-top: 1rem; color: var(--text-secondary); font-size: 0.9rem;">
+                Generated with Claude Code | Quality Score: 72/100 (B Tier)
+            </p>
+        </div>
+    </footer>
+
+    <button class="back-to-top" id="backToTop" onclick="scrollToTop()">↑</button>
+
+    <script>
+        // Theme Toggle
+        const themeToggle = document.getElementById('themeToggle');
+        const htmlElement = document.documentElement;
+
+        // Load saved theme
+        const savedTheme = localStorage.getItem('theme') || 'light';
+        htmlElement.setAttribute('data-theme', savedTheme);
+
+        themeToggle.addEventListener('click', () => {
+            const currentTheme = htmlElement.getAttribute('data-theme');
+            const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+            htmlElement.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+        });
+
+        // Accordion functionality
+        document.querySelectorAll('.accordion-header').forEach(header => {
+            header.addEventListener('click', () => {
+                const item = header.parentElement;
+                const wasActive = item.classList.contains('active');
+
+                // Close all accordion items in the same accordion
+                const accordion = item.parentElement;
+                accordion.querySelectorAll('.accordion-item').forEach(i => {
+                    i.classList.remove('active');
+                });
+
+                // Toggle current item
+                if (!wasActive) {
+                    item.classList.add('active');
+                }
+            });
+        });
+
+        // Smooth scroll for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+
+        // Back to top button
+        const backToTop = document.getElementById('backToTop');
+
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) {
+                backToTop.classList.add('visible');
+            } else {
+                backToTop.classList.remove('visible');
+            }
+        });
+
+        function scrollToTop() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Load and search transcript
+        const transcriptText = `What's up, engineers? Indie Dev Dan here. Once again, my MCP server just ate 10,000 tokens before my agent even started working. That's 5% of my agent's context window gone, and my Kshi prediction market MCP server isn't even that large. Stack up two or three more MCP servers, and I'll be bleeding 20% plus context in no time. This isn't new, but what is new are these three proven alternatives to MCP servers. You know about skills. We're going to break down two additional approaches you can use to connect your agents to external tools without torching your contact window while maintaining control. These approaches are being used by some of the top leading companies in the agent space like Anthropic and by some of the top engineers who use agent coding tools every single day. We'll break down when to use each and their tradeoffs so your agent can ship for hours not minutes with focus contacts. Let's go beyond MCP.`;
+
+        const transcriptContainer = document.getElementById('transcriptContainer');
+        const transcriptSearch = document.getElementById('transcriptSearch');
+
+        transcriptContainer.textContent = transcriptText;
+
+        transcriptSearch.addEventListener('input', (e) => {
+            const searchTerm = e.target.value.toLowerCase();
+            if (searchTerm === '') {
+                transcriptContainer.innerHTML = transcriptText;
+                return;
+            }
+
+            const regex = new RegExp(`(${searchTerm})`, 'gi');
+            const highlighted = transcriptText.replace(regex, '<span class="highlight">$1</span>');
+            transcriptContainer.innerHTML = highlighted;
+        });
+
+        function copyTranscript() {
+            navigator.clipboard.writeText(transcriptText).then(() => {
+                alert('Transcript copied to clipboard!');
+            });
+        }
+
+        // Copy button functionality for code blocks
+        document.querySelectorAll('pre code').forEach(block => {
+            const btn = document.createElement('button');
+            btn.className = 'copy-btn';
+            btn.textContent = 'Copy';
+            btn.style.position = 'absolute';
+            btn.style.top = '0.5rem';
+            btn.style.right = '0.5rem';
+
+            const pre = block.parentElement;
+            pre.style.position = 'relative';
+            pre.appendChild(btn);
+
+            btn.addEventListener('click', () => {
+                navigator.clipboard.writeText(block.textContent).then(() => {
+                    btn.textContent = 'Copied!';
+                    setTimeout(() => btn.textContent = 'Copy', 2000);
+                });
+            });
+        });
+    </script>
+</body>
+</html>

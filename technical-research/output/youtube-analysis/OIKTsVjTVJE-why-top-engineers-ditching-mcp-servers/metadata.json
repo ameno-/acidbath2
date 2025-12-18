@@ -1,0 +1,11 @@
+{
+  "id": "OIKTsVjTVJE",
+  "title": "Why are top engineers DITCHING MCP Servers? (3 PROVEN Solutions)",
+  "channel": "IndyDevDan",
+  "uploader": "IndyDevDan",
+  "duration": 1921,
+  "upload_date": "20251110",
+  "view_count": 21394,
+  "like_count": 668,
+  "description": "Are your MCP server is BLEEDING context tokens before your AI agent even starts working? \n\nThere's a better way - three proven alternatives that companies like Anthropic and leading agentic coding engineers use every day to maintain control and preserve context.\n\n\ud83c\udfa5 VIDEO REFERENCES\n\n- Beyond MCP Codebase: https://github.com/disler/beyond-mcp\n\n- Anthropic - Code execution with MCP: https://www.anthropic.com/engineering/code-execution-with-mcp\n\n- Mario Zechner - What if you don't need MCP Server?:"
+}

@@ -1,0 +1,23 @@
+{
+  "video_id": "luqKnexhpFs",
+  "video_url": "https://www.youtube.com/watch?v=luqKnexhpFs",
+  "working_directory": "/Users/ameno/dev/umbra-dev/technical-research/output/youtube-analysis/luqKnexhpFs-agentic-prompt-engineering-with-claude-c",
+  "transcript_path": "/Users/ameno/dev/umbra-dev/technical-research/output/youtube-analysis/luqKnexhpFs-agentic-prompt-engineering-with-claude-c/transcript.txt",
+  "content_type": "technical",
+  "metadata": {
+    "title": "Agentic Prompt Engineering with Claude Code (For you, your team, and your AGENTS)",
+    "channel": "IndyDevDan",
+    "duration": "00:34:35",
+    "views": 20727,
+    "upload_date": "2025-09-15",
+    "description": "The PROMPTS you write today CAN control THOUSANDS of valuable agents tomorrow. This is your blueprint to master Agentic Prompt Engineering."
+  },
+  "files": {
+    "transcript.txt": "Plain text transcript of video content",
+    "transcript.vtt": "WebVTT subtitle file with timestamps",
+    "metadata.json": "Full yt-dlp metadata export",
+    "metadata-summary.json": "Extracted metadata summary",
+    "content-type.txt": "Classification of content",
+    "EXTRACTION_SUMMARY.json": "This file"
+  }
+}

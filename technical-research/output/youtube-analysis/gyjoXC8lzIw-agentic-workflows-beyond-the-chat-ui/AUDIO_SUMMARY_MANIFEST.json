@@ -1,0 +1,48 @@
+{
+  "status": "completed",
+  "video_id": "gyjoXC8lzIw",
+  "video_title": "Agentic Workflows: BEYOND the Chat UI with Claude Code SDK and Gemini Nano Banana",
+  "channel": "IndyDevDan",
+  "video_duration": "24:41",
+  "files_created": [
+    {
+      "file_path": "/Users/ameno/dev/umbra-dev/technical-research/output/youtube-analysis/gyjoXC8lzIw/audio-summary.txt",
+      "type": "text",
+      "size_bytes": 3740,
+      "description": "Ultra-concise 524-word audio summary text"
+    },
+    {
+      "file_path": "/Users/ameno/dev/umbra-dev/technical-research/output/youtube-analysis/gyjoXC8lzIw/audio-summary.m4a",
+      "type": "audio",
+      "format": "M4A (AAC-LC)",
+      "size_bytes": 10066944,
+      "size_mb": 9.6,
+      "description": "High-quality audio summary (native format)"
+    },
+    {
+      "file_path": "/Users/ameno/dev/umbra-dev/technical-research/output/youtube-analysis/gyjoXC8lzIw/audio-summary.mp3",
+      "type": "audio",
+      "format": "MP3 (AAC container)",
+      "size_bytes": 10066944,
+      "size_mb": 9.6,
+      "description": "Audio summary in MP3-compatible format"
+    }
+  ],
+  "summary_content": {
+    "word_count": 524,
+    "estimated_duration_minutes": 3.5,
+    "sections": [
+      "Video introduction and core thesis",
+      "Main innovation (Agentic Drop Zones)",
+      "Key insights and technologies",
+      "Five concrete automation opportunities",
+      "Three game-changing agents",
+      "Practical recommendations",
+      "Content rating and next steps"
+    ]
+  },
+  "tts_service_used": "macOS Say (native system TTS)",
+  "generation_method": "say -f text_file -o audio_file",
+  "quality_notes": "Professional voice synthesis using native macOS TTS engine with natural speech patterns",
+  "execution_timestamp": "2025-11-24T15:02:00Z"
+}

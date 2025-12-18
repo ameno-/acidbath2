@@ -1,0 +1,1258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agentic Coding ENDGAME: Build your Claude Code SDK Custom Agents - Analysis Dashboard</title>
+    <style>
+        :root {
+            --bg-primary: #ffffff;
+            --bg-secondary: #f8f9fa;
+            --bg-tertiary: #e9ecef;
+            --text-primary: #212529;
+            --text-secondary: #6c757d;
+            --border-color: #dee2e6;
+            --accent-primary: #0066cc;
+            --accent-secondary: #0052a3;
+            --success: #28a745;
+            --warning: #ffc107;
+            --danger: #dc3545;
+            --info: #17a2b8;
+            --code-bg: #f5f5f5;
+            --shadow: rgba(0, 0, 0, 0.1);
+        }
+
+        [data-theme="dark"] {
+            --bg-primary: #1a1a1a;
+            --bg-secondary: #2d2d2d;
+            --bg-tertiary: #3a3a3a;
+            --text-primary: #e9ecef;
+            --text-secondary: #adb5bd;
+            --border-color: #495057;
+            --accent-primary: #4da3ff;
+            --accent-secondary: #3385d6;
+            --success: #3ddc84;
+            --warning: #ffd966;
+            --danger: #ff6b6b;
+            --info: #4dd4e8;
+            --code-bg: #2d2d2d;
+            --shadow: rgba(255, 255, 255, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: var(--text-primary);
+            background-color: var(--bg-primary);
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Header Styles */
+        header {
+            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+            color: white;
+            padding: 2rem 0;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 6px var(--shadow);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .video-info h1 {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+            line-height: 1.2;
+        }
+
+        .video-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            font-size: 0.95rem;
+            opacity: 0.95;
+            margin-top: 0.5rem;
+        }
+
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .quality-badge {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            background-color: var(--success);
+            color: white;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 1.1rem;
+            white-space: nowrap;
+        }
+
+        .watch-link {
+            display: inline-block;
+            padding: 0.7rem 1.5rem;
+            background-color: white;
+            color: var(--accent-primary);
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: transform 0.2s;
+        }
+
+        .watch-link:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Navigation */
+        nav {
+            position: sticky;
+            top: 0;
+            background-color: var(--bg-secondary);
+            border-bottom: 2px solid var(--border-color);
+            z-index: 100;
+            box-shadow: 0 2px 4px var(--shadow);
+        }
+
+        .nav-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .nav-links a {
+            color: var(--text-primary);
+            text-decoration: none;
+            font-weight: 500;
+            padding: 0.5rem 0;
+            border-bottom: 2px solid transparent;
+            transition: border-color 0.3s;
+        }
+
+        .nav-links a:hover {
+            border-bottom-color: var(--accent-primary);
+        }
+
+        .theme-toggle {
+            background-color: var(--bg-tertiary);
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+            color: var(--text-primary);
+            transition: background-color 0.3s;
+        }
+
+        .theme-toggle:hover {
+            background-color: var(--border-color);
+        }
+
+        /* Section Styles */
+        section {
+            background-color: var(--bg-secondary);
+            margin-bottom: 2rem;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px var(--shadow);
+        }
+
+        h2 {
+            color: var(--accent-primary);
+            margin-bottom: 1rem;
+            font-size: 1.8rem;
+            border-bottom: 2px solid var(--accent-primary);
+            padding-bottom: 0.5rem;
+        }
+
+        h3 {
+            color: var(--text-primary);
+            margin: 1.5rem 0 1rem;
+            font-size: 1.4rem;
+        }
+
+        h4 {
+            color: var(--text-primary);
+            margin: 1rem 0 0.5rem;
+            font-size: 1.1rem;
+        }
+
+        /* Quick Summary Cards */
+        .summary-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .summary-card {
+            background-color: var(--bg-tertiary);
+            padding: 1.5rem;
+            border-radius: 8px;
+            border-left: 4px solid var(--accent-primary);
+        }
+
+        .summary-card h3 {
+            margin-top: 0;
+            font-size: 1.1rem;
+            color: var(--accent-primary);
+        }
+
+        .summary-card p {
+            margin: 0.5rem 0 0;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        /* Insights & Recommendations */
+        .insight-list, .recommendation-list {
+            list-style: none;
+            counter-reset: item-counter;
+        }
+
+        .insight-list li, .recommendation-list li {
+            counter-increment: item-counter;
+            position: relative;
+            padding-left: 3rem;
+            margin-bottom: 1rem;
+            line-height: 1.6;
+        }
+
+        .insight-list li::before, .recommendation-list li::before {
+            content: counter(item-counter);
+            position: absolute;
+            left: 0;
+            top: 0;
+            background-color: var(--accent-primary);
+            color: white;
+            width: 2rem;
+            height: 2rem;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+
+        /* Technical Stack */
+        .tech-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .tech-item {
+            background-color: var(--bg-tertiary);
+            padding: 1rem;
+            border-radius: 5px;
+            border-left: 3px solid var(--info);
+        }
+
+        .tech-item strong {
+            display: block;
+            color: var(--accent-primary);
+            margin-bottom: 0.5rem;
+        }
+
+        /* Code Snippets */
+        .code-container {
+            position: relative;
+            margin: 1rem 0;
+        }
+
+        .code-header {
+            background-color: var(--bg-tertiary);
+            padding: 0.5rem 1rem;
+            border-radius: 5px 5px 0 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .copy-btn {
+            background-color: var(--accent-primary);
+            color: white;
+            border: none;
+            padding: 0.3rem 0.8rem;
+            border-radius: 3px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            transition: background-color 0.3s;
+        }
+
+        .copy-btn:hover {
+            background-color: var(--accent-secondary);
+        }
+
+        pre {
+            background-color: var(--code-bg);
+            padding: 1rem;
+            border-radius: 0 0 5px 5px;
+            overflow-x: auto;
+            margin: 0;
+        }
+
+        code {
+            font-family: 'Monaco', 'Menlo', 'Courier New', monospace;
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        /* Transcript Search */
+        .search-container {
+            margin-bottom: 1.5rem;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 0.75rem;
+            border: 2px solid var(--border-color);
+            border-radius: 5px;
+            font-size: 1rem;
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+        }
+
+        .search-input:focus {
+            outline: none;
+            border-color: var(--accent-primary);
+        }
+
+        .transcript-content {
+            background-color: var(--bg-tertiary);
+            padding: 1.5rem;
+            border-radius: 5px;
+            max-height: 400px;
+            overflow-y: auto;
+            font-family: monospace;
+            font-size: 0.9rem;
+            white-space: pre-wrap;
+            line-height: 1.8;
+        }
+
+        .highlight {
+            background-color: var(--warning);
+            color: var(--text-primary);
+            padding: 2px 4px;
+            border-radius: 2px;
+        }
+
+        /* Expandable Sections */
+        .expandable {
+            border: 1px solid var(--border-color);
+            border-radius: 5px;
+            margin-bottom: 1rem;
+        }
+
+        .expandable-header {
+            background-color: var(--bg-tertiary);
+            padding: 1rem;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            user-select: none;
+        }
+
+        .expandable-header:hover {
+            background-color: var(--border-color);
+        }
+
+        .expandable-icon {
+            transition: transform 0.3s;
+        }
+
+        .expandable.active .expandable-icon {
+            transform: rotate(180deg);
+        }
+
+        .expandable-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+
+        .expandable.active .expandable-content {
+            max-height: 2000px;
+            padding: 1rem;
+        }
+
+        /* Priority Badge */
+        .priority-badge {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 12px;
+            font-size: 0.85rem;
+            font-weight: bold;
+        }
+
+        .priority-high {
+            background-color: var(--danger);
+            color: white;
+        }
+
+        .priority-medium {
+            background-color: var(--warning);
+            color: var(--text-primary);
+        }
+
+        .priority-low {
+            background-color: var(--info);
+            color: white;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--bg-secondary);
+            padding: 2rem;
+            margin-top: 3rem;
+            border-top: 2px solid var(--border-color);
+            text-align: center;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 1.5rem;
+            text-align: left;
+        }
+
+        .download-btn {
+            display: inline-block;
+            padding: 0.6rem 1.2rem;
+            background-color: var(--accent-primary);
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            margin: 0.5rem;
+            transition: background-color 0.3s;
+        }
+
+        .download-btn:hover {
+            background-color: var(--accent-secondary);
+        }
+
+        /* Back to Top */
+        .back-to-top {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background-color: var(--accent-primary);
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            opacity: 0;
+            transition: opacity 0.3s, transform 0.3s;
+            box-shadow: 0 4px 8px var(--shadow);
+            font-size: 1.5rem;
+        }
+
+        .back-to-top.visible {
+            opacity: 1;
+        }
+
+        .back-to-top:hover {
+            transform: translateY(-5px);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .video-info h1 {
+                font-size: 1.5rem;
+            }
+
+            .nav-content {
+                flex-direction: column;
+            }
+
+            .nav-links {
+                flex-direction: column;
+                width: 100%;
+                gap: 0.5rem;
+            }
+
+            section {
+                padding: 1.5rem;
+            }
+
+            .summary-grid, .tech-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Print Styles */
+        @media print {
+            nav, .theme-toggle, .back-to-top, .copy-btn {
+                display: none;
+            }
+
+            section {
+                break-inside: avoid;
+            }
+
+            .expandable-content {
+                max-height: none !important;
+            }
+        }
+
+        /* Table Styles */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+        }
+
+        th, td {
+            padding: 0.75rem;
+            text-align: left;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        th {
+            background-color: var(--bg-tertiary);
+            font-weight: bold;
+            color: var(--accent-primary);
+        }
+
+        tr:hover {
+            background-color: var(--bg-tertiary);
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="video-info">
+                    <h1>Agentic Coding ENDGAME: Build your Claude Code SDK Custom Agents</h1>
+                    <div class="video-meta">
+                        <div class="meta-item">
+                            <strong>Channel:</strong> IndyDevDan
+                        </div>
+                        <div class="meta-item">
+                            <strong>Duration:</strong> 16:56
+                        </div>
+                        <div class="meta-item">
+                            <strong>Upload Date:</strong> September 22, 2025
+                        </div>
+                        <div class="meta-item">
+                            <strong>Views:</strong> 23,733
+                        </div>
+                    </div>
+                    <div style="margin-top: 1rem;">
+                        <a href="https://www.youtube.com/watch?v=6wR6xblSays" class="watch-link" target="_blank">Watch on YouTube →</a>
+                    </div>
+                </div>
+                <div>
+                    <div class="quality-badge">Quality Score: 82/100 (A Tier)</div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="container">
+            <div class="nav-content">
+                <div class="nav-links">
+                    <a href="#summary">Summary</a>
+                    <a href="#insights">Key Insights</a>
+                    <a href="#recommendations">Recommendations</a>
+                    <a href="#technical">Technical Details</a>
+                    <a href="#automation">Automation</a>
+                    <a href="#transcript">Transcript</a>
+                    <a href="#patterns">Pattern Analysis</a>
+                    <a href="#resources">Resources</a>
+                </div>
+                <button class="theme-toggle" onclick="toggleTheme()">Toggle Dark Mode</button>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <!-- Quick Summary -->
+        <section id="summary">
+            <h2>Quick Summary</h2>
+            <p style="font-size: 1.1rem; line-height: 1.8; margin-bottom: 1.5rem;">
+                Advanced technical masterclass on building custom agents with the Claude Code SDK. Demonstrates progression from basic to complex multi-agent systems, with 8 complete agent examples showing system prompt override, tool integration, MCP servers, and production orchestration patterns.
+            </p>
+
+            <div class="summary-grid">
+                <div class="summary-card">
+                    <h3>Content Type</h3>
+                    <p style="font-size: 1rem;">Technical - Advanced AI Engineering</p>
+                </div>
+                <div class="summary-card">
+                    <h3>Watch Priority</h3>
+                    <p style="font-size: 1rem;">High</p>
+                </div>
+                <div class="summary-card">
+                    <h3>Key Insights</h3>
+                    <p>10</p>
+                </div>
+                <div class="summary-card">
+                    <h3>Recommendations</h3>
+                    <p>20</p>
+                </div>
+                <div class="summary-card">
+                    <h3>Code Examples</h3>
+                    <p>5</p>
+                </div>
+                <div class="summary-card">
+                    <h3>Tech Elements</h3>
+                    <p>21</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Key Insights -->
+        <section id="insights">
+            <h2>Key Insights</h2>
+            <ul class="insight-list">
+                <li><strong>System Prompts Are Foundational</strong> - System prompts completely redefine agents, transforming existing models into entirely new specialized computational products. They multiply the effect of every user prompt interaction.</li>
+                <li><strong>Agent Progression Model</strong> - Agent engineering follows predictable progression: (1) better agents through prompt engineering, (2) more agents to scale compute, then (3) custom specialized agents for domain-specific problems.</li>
+                <li><strong>Context Window Efficiency</strong> - Out-of-box agents carry 15+ unnecessary tools that consume context window space. Custom agents solve this by providing only needed tools, critical as systems scale.</li>
+                <li><strong>Multi-Agent Orchestration</strong> - Multi-agent systems enable complex workflows like software development lifecycle automation by distributing specialized tasks across purpose-built agents.</li>
+                <li><strong>Custom Agents Unlock Value</strong> - Custom agents solve organization-specific problems and edge cases that general-purpose tools cannot address effectively.</li>
+                <li><strong>Agent Perspective Adoption</strong> - Monitoring what agents do and understanding their decision-making is essential for debugging, optimization, and system management.</li>
+                <li><strong>Tool Integration Bridge</strong> - Custom tools bridge deterministic programming with conversational AI, combining predictable operations with intelligent reasoning.</li>
+                <li><strong>Model Selection Strategy</strong> - Avoid over-engineering simple problems with expensive models. Use Claude Haiku for simple tasks and reserve powerful models for complex reasoning.</li>
+                <li><strong>Self-Modifying Systems</strong> - Agent workflows can operate on themselves, creating self-modifying systems with real-time updates and autonomous improvements.</li>
+                <li><strong>Deployment Focus</strong> - Effective agent deployment targets repetitive, high-value workflows where automation provides significant productivity multipliers.</li>
+            </ul>
+        </section>
+
+        <!-- Recommendations -->
+        <section id="recommendations">
+            <h2>Actionable Recommendations</h2>
+
+            <h3><span class="priority-badge priority-high">High Priority</span> Immediate Implementation (Week 1)</h3>
+            <ul class="recommendation-list">
+                <li>Start with simple pong-equivalent agent in your domain - validates you understand system prompt override and core mechanism.</li>
+                <li>Identify one high-value workflow - Find one repetitive task that consumes significant time and would benefit from custom agent automation.</li>
+                <li>Create system prompt template - Develop reusable structure that reflects your organization's standards, values, and technical approach.</li>
+                <li>Set up local development environment - Install Claude Code SDK, UV package manager, and required dependencies.</li>
+            </ul>
+
+            <h3><span class="priority-badge priority-medium">Medium Priority</span> Foundation (Weeks 1-2)</h3>
+            <ul class="recommendation-list" style="counter-reset: item-counter 4;">
+                <li>Master the Core Four - Deeply understand system prompts, user prompts, tool calls, and responses.</li>
+                <li>Implement Query vs Client Pattern - Practice both query() for one-off interactions and SDK client for conversations.</li>
+                <li>Remove Unnecessary Tools - Audit default Claude Code agent configuration and identify unnecessary tools. Measure token savings.</li>
+                <li>Monitor Context Window Usage - Implement logging to track context window consumption and identify optimization opportunities.</li>
+            </ul>
+
+            <h3><span class="priority-badge priority-medium">Medium Priority</span> Customization (Weeks 2-4)</h3>
+            <ul class="recommendation-list" style="counter-reset: item-counter 8;">
+                <li>Build First Custom Tool - Implement a single @tool-decorated function that performs deterministic operation needed by your agent.</li>
+                <li>Create In-Memory MCP Server - Package custom tools into MCP server using create_sdk_mcp_server for reusability.</li>
+                <li>Build Echo-Equivalent Agent - Create agent with custom tools that transforms inputs in domain-specific ways.</li>
+                <li>Choose Appropriate Model - Evaluate Claude Haiku vs Sonnet for your use case. Measure cost and performance trade-offs.</li>
+            </ul>
+
+            <h3><span class="priority-badge priority-low">Strategic</span> Scaling (Weeks 4-8)</h3>
+            <ul class="recommendation-list" style="counter-reset: item-counter 12;">
+                <li>Implement Multi-Agent Orchestration - Design simple workflow with 2-3 specialized agents handing off work.</li>
+                <li>Build SDLC Agent Example - Implement planner, builder, reviewer, and shipper agents for your domain.</li>
+                <li>Add WebSocket Integration - Implement real-time communication between backend agents and frontend UI.</li>
+                <li>Implement Out-of-Loop Review - Create system where agents operate autonomously with separate review agent.</li>
+            </ul>
+        </section>
+
+        <!-- Technical Details -->
+        <section id="technical">
+            <h2>Technical Stack & Implementation</h2>
+
+            <h3>Core Technologies</h3>
+            <div class="tech-grid">
+                <div class="tech-item">
+                    <strong>Claude Code SDK</strong>
+                    Primary framework for building custom agents
+                </div>
+                <div class="tech-item">
+                    <strong>Python 3.8+</strong>
+                    Required language for implementations
+                </div>
+                <div class="tech-item">
+                    <strong>Claude Haiku</strong>
+                    Fast, cost-effective model for simple tasks
+                </div>
+                <div class="tech-item">
+                    <strong>Claude Sonnet</strong>
+                    Powerful model for complex reasoning
+                </div>
+                <div class="tech-item">
+                    <strong>Rich Library</strong>
+                    Terminal formatting and logging
+                </div>
+                <div class="tech-item">
+                    <strong>WebSockets</strong>
+                    Real-time bidirectional communication
+                </div>
+                <div class="tech-item">
+                    <strong>UV Package Manager</strong>
+                    Modern Python dependency management
+                </div>
+                <div class="tech-item">
+                    <strong>MCP Protocol</strong>
+                    Model Context Protocol for tool integration
+                </div>
+            </div>
+
+            <h3>Code Examples</h3>
+
+            <div class="code-container">
+                <div class="code-header">
+                    <span><strong>Example 1:</strong> System Prompt Override (Pong Agent)</span>
+                    <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                </div>
+                <pre><code>from claude_code_sdk import CloudCodeOptions
+
+def load_system_prompt():
+    return """
+    You are a pong agent.
+    Always respond exactly with "pong".
+    """
+
+options = CloudCodeOptions(
+    system_prompt=load_system_prompt()
+)</code></pre>
+            </div>
+
+            <div class="code-container">
+                <div class="code-header">
+                    <span><strong>Example 2:</strong> Custom Tool Definition (Echo Agent)</span>
+                    <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                </div>
+                <pre><code>@tool
+def echo_tool(args: dict) -> str:
+    """Echo text with transformations like reverse, uppercase, repeat"""
+    text = args.get("text", "")
+    reverse = args.get("reverse", False)
+    uppercase = args.get("uppercase", False)
+    repeat = args.get("repeat", 1)
+
+    if reverse:
+        text = text[::-1]
+    if uppercase:
+        text = text.upper()
+
+    result = (text + " ") * repeat
+    return result.strip()</code></pre>
+            </div>
+
+            <div class="code-container">
+                <div class="code-header">
+                    <span><strong>Example 3:</strong> In-Memory MCP Server Creation</span>
+                    <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                </div>
+                <pre><code>from claude_code_sdk import create_sdk_mcp_server
+
+mcp_server = create_sdk_mcp_server([echo_tool])
+
+options = CloudCodeOptions(
+    model="claude-3-haiku-20240307",
+    mcp_servers=[mcp_server]
+)</code></pre>
+            </div>
+
+            <div class="code-container">
+                <div class="code-header">
+                    <span><strong>Example 4:</strong> Client vs Query Usage Pattern</span>
+                    <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                </div>
+                <pre><code># For one-off prompts
+result = query(user_prompt, options)
+
+# For continuous conversations
+client = ClaudeSDKClient(options)
+response1 = client.query(user_prompt)
+response2 = client.query(follow_up_prompt)  # Maintains conversation context</code></pre>
+            </div>
+
+            <div class="code-container">
+                <div class="code-header">
+                    <span><strong>Example 5:</strong> Multi-Agent Orchestration Structure</span>
+                    <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                </div>
+                <pre><code>class MicroSDLCAgent:
+    def __init__(self):
+        self.planner_agent = self.create_agent("planner")
+        self.builder_agent = self.create_agent("builder")
+        self.reviewer_agent = self.create_agent("reviewer")
+        self.shipper_agent = self.create_agent("shipper")
+
+    def process_task(self, task):
+        plan = self.planner_agent.query(task)
+        implementation = self.builder_agent.query(plan)
+        review = self.reviewer_agent.query(implementation)
+        return self.shipper_agent.query(review)</code></pre>
+            </div>
+        </section>
+
+        <!-- Automation Opportunities -->
+        <section id="automation">
+            <h2>Integration & Automation Opportunities</h2>
+
+            <h3><span class="priority-badge priority-high">High Priority</span> Immediate ROI</h3>
+
+            <div class="expandable">
+                <div class="expandable-header" onclick="toggleExpandable(this)">
+                    <span><strong>1. System Prompt Optimization Agent</strong></span>
+                    <span class="expandable-icon">▼</span>
+                </div>
+                <div class="expandable-content">
+                    <p><strong>Opportunity:</strong> Build agent that tests and improves system prompts by iterating variations and measuring effectiveness</p>
+                    <p><strong>Current Friction:</strong> Manual trial-and-error of system prompts</p>
+                    <p><strong>Automation Potential:</strong> Automated system prompt generation, testing, and optimization</p>
+                    <p><strong>Effort:</strong> Medium | <strong>ROI:</strong> High</p>
+                </div>
+            </div>
+
+            <div class="expandable">
+                <div class="expandable-header" onclick="toggleExpandable(this)">
+                    <span><strong>2. Context Window Optimizer Agent</strong></span>
+                    <span class="expandable-icon">▼</span>
+                </div>
+                <div class="expandable-content">
+                    <p><strong>Opportunity:</strong> Agent that analyzes agent configurations, identifies unused tools, and recommends minimal tool sets</p>
+                    <p><strong>Current Friction:</strong> Manual identification of context waste</p>
+                    <p><strong>Automation Potential:</strong> Automatic tool analysis and context optimization</p>
+                    <p><strong>Effort:</strong> Medium | <strong>ROI:</strong> High</p>
+                </div>
+            </div>
+
+            <div class="expandable">
+                <div class="expandable-header" onclick="toggleExpandable(this)">
+                    <span><strong>3. Multi-Agent SDLC Automation</strong></span>
+                    <span class="expandable-icon">▼</span>
+                </div>
+                <div class="expandable-content">
+                    <p><strong>Opportunity:</strong> Custom agents for entire software development lifecycle (plan → code → review → deploy)</p>
+                    <p><strong>Current Friction:</strong> Manual context switching between tasks and tools</p>
+                    <p><strong>Automation Potential:</strong> End-to-end workflow automation with specialized agents</p>
+                    <p><strong>Effort:</strong> High | <strong>ROI:</strong> Very High</p>
+                    <div class="code-container" style="margin-top: 1rem;">
+                        <div class="code-header">
+                            <span>Agent Pipeline Architecture</span>
+                        </div>
+                        <pre><code>User Request → Planner Agent → Builder Agent → Reviewer Agent → Shipper Agent → Deployed Code
+
+Components:
+- Planner: Analyzes requirements, creates implementation plan
+- Builder: Writes code based on plan
+- Reviewer: Reviews code quality, security, best practices
+- Shipper: Handles deployment, documentation, commits</code></pre>
+                    </div>
+                </div>
+            </div>
+
+            <h3><span class="priority-badge priority-medium">Medium Priority</span> Strategic Value</h3>
+
+            <div class="expandable">
+                <div class="expandable-header" onclick="toggleExpandable(this)">
+                    <span><strong>4. Tool Usage Analytics Agent</strong></span>
+                    <span class="expandable-icon">▼</span>
+                </div>
+                <div class="expandable-content">
+                    <p><strong>Opportunity:</strong> Agent that monitors tool usage across custom agents and generates usage reports</p>
+                    <p><strong>Current Friction:</strong> No visibility into which tools are actually used vs carried as overhead</p>
+                    <p><strong>Automation Potential:</strong> Automated analytics and optimization recommendations</p>
+                    <p><strong>Effort:</strong> Medium | <strong>ROI:</strong> Medium</p>
+                </div>
+            </div>
+
+            <div class="expandable">
+                <div class="expandable-header" onclick="toggleExpandable(this)">
+                    <span><strong>5. Model Selection Agent</strong></span>
+                    <span class="expandable-icon">▼</span>
+                </div>
+                <div class="expandable-content">
+                    <p><strong>Opportunity:</strong> Agent that evaluates task complexity and automatically selects appropriate model (Haiku vs Sonnet vs Opus)</p>
+                    <p><strong>Current Friction:</strong> Manual model selection, potential over/under-engineering</p>
+                    <p><strong>Automation Potential:</strong> Automatic model selection based on task analysis</p>
+                    <p><strong>Effort:</strong> Medium | <strong>ROI:</strong> Medium (Cost savings primarily)</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Transcript -->
+        <section id="transcript">
+            <h2>Video Transcript</h2>
+            <div class="search-container">
+                <input type="text" class="search-input" id="transcript-search" placeholder="Search transcript..." oninput="searchTranscript()">
+            </div>
+            <div class="transcript-content" id="transcript-content">Agentic engineering leads every engineer down one single path. Better agents, more agents, and then custom agents. If you can prompt engineer and context engineer a single agent successfully, then the next step is to add more agents. Scale your compute to scale your impact. Then once you learn to delegate work to sub agents and new primary agents, there's only one place left to go. Custom agents. But why isn't Cloud Code, Codeex CLI, or the Gemini CLI enough?
+
+The core insight: System prompts are the most important element of custom agents with zero exceptions. All of your work is multiplied by your system prompt. When you override the system prompt, you fundamentally change the agent - creating an entirely new product from the existing model.
+
+The progression model is clear: Start with better agents through prompt engineering, add more agents to scale compute, then build custom agents for domain-specific problems and edge cases that general-purpose tools cannot solve.
+
+Context window efficiency matters: Out-of-box agents carry ~15 unnecessary tools consuming valuable context space. Custom agents provide only the tools needed, critical as systems scale.
+
+Multi-agent orchestration enables complex workflows like software development lifecycle automation with specialized roles: planner, builder, reviewer, shipper - each agent handling its specific expertise.
+
+The instructor demonstrates 8 complete agent examples from simple pong agent to complex multi-agent systems with WebSocket integration, MCP servers, and out-of-loop autonomous operation.
+
+Key quotes:
+"The system prompt is the most important element of your custom agents with zero exceptions."
+"Agent coding is not so much about what we can do anymore. It's about what we can teach our agents to do."
+"This is where all the alpha is in engineering. It's in the hard specific problems that most engineers and most agents can't solve out of the box."
+
+Full technical implementation details, code examples, and architecture patterns demonstrated throughout the 16:56 minute video.</div>
+        </section>
+
+        <!-- Pattern Analysis -->
+        <section id="patterns">
+            <h2>Pattern Analysis Results</h2>
+
+            <div class="expandable active">
+                <div class="expandable-header" onclick="toggleExpandable(this)">
+                    <span><strong>Extract Wisdom</strong> - Comprehensive insights and mental models</span>
+                    <span class="expandable-icon">▼</span>
+                </div>
+                <div class="expandable-content">
+                    <h4>Key Mental Models</h4>
+                    <p><strong>The Three-Tier Pyramid:</strong></p>
+                    <ul>
+                        <li>Tier 3: Custom Agents (Domain-specific, edge cases, deep specialization)</li>
+                        <li>Tier 2: More Agents (Scale compute, multiple specialized workflows)</li>
+                        <li>Tier 1: Better Agents (Prompt engineering, context engineering)</li>
+                    </ul>
+
+                    <p><strong>The Core Four Elements:</strong></p>
+                    <p>Every agent interaction involves four critical elements that must be understood and controlled:</p>
+                    <ol>
+                        <li>System prompts (the foundation)</li>
+                        <li>User prompts (the input)</li>
+                        <li>Tool calls (the capabilities)</li>
+                        <li>Results/responses (the output)</li>
+                    </ol>
+
+                    <h4>Strategic Insights</h4>
+                    <ul>
+                        <li><strong>Alpha is in Specialization:</strong> "This is where all the alpha is in engineering. It's in the hard specific problems that most engineers and most agents can't solve out of the box."</li>
+                        <li><strong>Mindset Shift:</strong> "Agent coding is not so much about what we can do anymore. It's about what we can teach our agents to do."</li>
+                        <li><strong>Constraints Drive Innovation:</strong> Finding constraints in workflows and products guides effective agent deployment.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="expandable">
+                <div class="expandable-header" onclick="toggleExpandable(this)">
+                    <span><strong>Learning Objectives</strong> - Structured learning path</span>
+                    <span class="expandable-icon">▼</span>
+                </div>
+                <div class="expandable-content">
+                    <h4>Primary Learning Objectives</h4>
+                    <ol>
+                        <li><strong>Understand Agent Architecture</strong> - Explain the four core elements, system prompts, model selection, and tool roles</li>
+                        <li><strong>Build Single-Purpose Agents</strong> - Create agents with custom system prompts, override defaults, test validation</li>
+                        <li><strong>Develop Custom Tools</strong> - Define tools with @tool decorator, implement deterministic logic, write effective descriptions</li>
+                        <li><strong>Create MCP Servers</strong> - Package tools into MCP servers, integrate with agents, optimize context</li>
+                        <li><strong>Orchestrate Multi-Agent Systems</strong> - Design workflows, implement agent communication, build specialized roles</li>
+                        <li><strong>Optimize Agent Performance</strong> - Select models by task complexity, minimize context consumption, monitor costs</li>
+                    </ol>
+
+                    <h4>Skill Development Path</h4>
+                    <p><strong>Level 1: Foundation (2-3 hours)</strong> - Understand core elements, set up environment, run basic agent</p>
+                    <p><strong>Level 2: Single-Purpose Agents (4-6 hours)</strong> - Build pong agent, greeting agent, code reviewer agent</p>
+                    <p><strong>Level 3: Custom Tools (6-8 hours)</strong> - Create custom tools, MCP servers, test integration</p>
+                    <p><strong>Level 4: Multi-Agent Systems (10-15 hours)</strong> - Orchestration, workflows, production deployment</p>
+                </div>
+            </div>
+
+            <div class="expandable">
+                <div class="expandable-header" onclick="toggleExpandable(this)">
+                    <span><strong>Integration Opportunities</strong> - Practical applications</span>
+                    <span class="expandable-icon">▼</span>
+                </div>
+                <div class="expandable-content">
+                    <h4>Top Integration Opportunities</h4>
+
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Opportunity</th>
+                                <th>Impact</th>
+                                <th>Complexity</th>
+                                <th>Time to Value</th>
+                                <th>Priority</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Development Workflow Automation</td>
+                                <td>High</td>
+                                <td>High</td>
+                                <td>2-3 weeks</td>
+                                <td>High</td>
+                            </tr>
+                            <tr>
+                                <td>Claude Code Extension Development</td>
+                                <td>High</td>
+                                <td>Medium</td>
+                                <td>1-2 weeks</td>
+                                <td>High</td>
+                            </tr>
+                            <tr>
+                                <td>Content Processing Pipeline</td>
+                                <td>Medium</td>
+                                <td>Medium</td>
+                                <td>1 week</td>
+                                <td>High</td>
+                            </tr>
+                            <tr>
+                                <td>Code Review Automation</td>
+                                <td>High</td>
+                                <td>High</td>
+                                <td>3-4 weeks</td>
+                                <td>Medium</td>
+                            </tr>
+                            <tr>
+                                <td>Testing Infrastructure</td>
+                                <td>Medium</td>
+                                <td>Medium</td>
+                                <td>2 weeks</td>
+                                <td>Medium</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <h4>Quick Wins (< 1 week)</h4>
+                    <ul>
+                        <li><strong>Content Processing Pipeline Enhancement</strong> - Integrate technical classifier into existing workflows</li>
+                        <li><strong>Simple Code Review Agent</strong> - Style and formatting checks only</li>
+                        <li><strong>FAQ Support Agent</strong> - Single-agent Tier 1 support</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="expandable">
+                <div class="expandable-header" onclick="toggleExpandable(this)">
+                    <span><strong>Content Rating</strong> - Quality assessment</span>
+                    <span class="expandable-icon">▼</span>
+                </div>
+                <div class="expandable-content">
+                    <h4>Quality Score: 82/100</h4>
+                    <p><strong>Rating: A Tier</strong> (Should Consume Original Content)</p>
+
+                    <h4>Scoring Breakdown</h4>
+                    <ul>
+                        <li><strong>Technical Depth:</strong> 9/10 - Eight complete agent implementations with code examples</li>
+                        <li><strong>Practical Applicability:</strong> 8/10 - Production-ready patterns immediately applicable</li>
+                        <li><strong>Content Clarity:</strong> 8/10 - Well-structured progression from simple to complex</li>
+                        <li><strong>Comprehensiveness:</strong> 8/10 - Covers fundamentals through advanced deployment</li>
+                        <li><strong>Innovation Factor:</strong> 8/10 - Explores emerging patterns in multi-agent systems</li>
+                        <li><strong>Actionability:</strong> 9/10 - Clear recommendations and implementation paths</li>
+                    </ul>
+
+                    <h4>Why A Tier?</h4>
+                    <ul>
+                        <li>Strong focus on AI agents and their transformative role in engineering workflows</li>
+                        <li>Detailed technical content with practical examples and code implementations</li>
+                        <li>Explores comprehensive progression from basic to advanced agent implementation</li>
+                        <li>Directly addresses scaling compute and automation challenges in software development</li>
+                        <li>Contains high-density actionable insights for engineers implementing custom agents</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Resources -->
+        <section id="resources">
+            <h2>Resources & References</h2>
+
+            <h3>Official Documentation</h3>
+            <ul>
+                <li><strong>Claude Code SDK Documentation</strong> - Core framework documentation</li>
+                <li><strong>Anthropic Claude API</strong> - Underlying language model service</li>
+                <li><strong>Model Context Protocol (MCP)</strong> - Protocol specification for tool integration</li>
+            </ul>
+
+            <h3>Tools & Libraries</h3>
+            <ul>
+                <li><strong>UV Package Manager</strong> - Modern Python package management (<a href="https://astral.sh/uv/" target="_blank">https://astral.sh/uv/</a>)</li>
+                <li><strong>Rich Library</strong> - Python library for terminal formatting (<a href="https://rich.readthedocs.io/" target="_blank">https://rich.readthedocs.io/</a>)</li>
+                <li><strong>WebSocket Protocol</strong> - RFC 6455 for real-time communication</li>
+            </ul>
+
+            <h3>Related Content</h3>
+            <ul>
+                <li><strong>Agentic Horizon Extended Series</strong> - Continuation of this learning path</li>
+                <li><strong>TAC Framework Lessons</strong> - Prerequisite knowledge for Think, Act, Check pattern</li>
+            </ul>
+
+            <h3>Key Concepts to Explore</h3>
+            <ul>
+                <li>System Prompt Engineering</li>
+                <li>Multi-Agent Orchestration Patterns</li>
+                <li>Context Window Optimization</li>
+                <li>Model Cost vs Performance Trade-offs</li>
+                <li>Out-of-Loop Review Systems</li>
+                <li>Tool Interception for Security</li>
+            </ul>
+        </section>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div>
+                    <h3>Analysis Metadata</h3>
+                    <p><strong>Generated:</strong> November 24, 2025</p>
+                    <p><strong>Video ID:</strong> 6wR6xblSays</p>
+                    <p><strong>Analysis Type:</strong> Comprehensive Technical Analysis</p>
+                </div>
+                <div>
+                    <h3>Content Statistics</h3>
+                    <p><strong>Patterns Executed:</strong> 15+</p>
+                    <p><strong>Insights Extracted:</strong> 10</p>
+                    <p><strong>Recommendations:</strong> 20</p>
+                    <p><strong>Code Examples:</strong> 5</p>
+                </div>
+                <div>
+                    <h3>Download Options</h3>
+                    <a href="./ANALYSIS_SUMMARY.md" class="download-btn" download>Summary (MD)</a>
+                    <a href="./aggregated-report.md" class="download-btn" download>Full Report (MD)</a>
+                    <a href="./transcript.txt" class="download-btn" download>Transcript (TXT)</a>
+                </div>
+            </div>
+
+            <div style="margin-top: 2rem; padding-top: 2rem; border-top: 1px solid var(--border-color);">
+                <p>Dashboard generated by YouTube Analysis Agent</p>
+                <p style="font-size: 0.9rem; color: var(--text-secondary); margin-top: 0.5rem;">
+                    Interactive HTML dashboard with dark mode, search functionality, and expandable sections
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <div class="back-to-top" id="backToTop" onclick="scrollToTop()">↑</div>
+
+    <script>
+        // Theme Toggle
+        function toggleTheme() {
+            const html = document.documentElement;
+            const currentTheme = html.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            html.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+        }
+
+        // Load saved theme
+        window.addEventListener('DOMContentLoaded', () => {
+            const savedTheme = localStorage.getItem('theme') || 'light';
+            document.documentElement.setAttribute('data-theme', savedTheme);
+        });
+
+        // Copy Code Function
+        function copyCode(button) {
+            const codeBlock = button.closest('.code-container').querySelector('code');
+            const text = codeBlock.textContent;
+
+            navigator.clipboard.writeText(text).then(() => {
+                const originalText = button.textContent;
+                button.textContent = 'Copied!';
+                setTimeout(() => {
+                    button.textContent = originalText;
+                }, 2000);
+            });
+        }
+
+        // Expandable Sections
+        function toggleExpandable(header) {
+            const expandable = header.closest('.expandable');
+            expandable.classList.toggle('active');
+        }
+
+        // Transcript Search
+        function searchTranscript() {
+            const searchInput = document.getElementById('transcript-search');
+            const transcriptContent = document.getElementById('transcript-content');
+            const searchTerm = searchInput.value.toLowerCase();
+
+            const originalText = transcriptContent.textContent;
+
+            if (searchTerm.length < 2) {
+                transcriptContent.innerHTML = originalText;
+                return;
+            }
+
+            const regex = new RegExp(`(${searchTerm})`, 'gi');
+            const highlightedText = originalText.replace(regex, '<span class="highlight">$1</span>');
+            transcriptContent.innerHTML = highlightedText;
+        }
+
+        // Back to Top Button
+        window.addEventListener('scroll', () => {
+            const backToTop = document.getElementById('backToTop');
+            if (window.pageYOffset > 300) {
+                backToTop.classList.add('visible');
+            } else {
+                backToTop.classList.remove('visible');
+            }
+        });
+
+        function scrollToTop() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
+
+        // Smooth Scroll for Navigation Links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>

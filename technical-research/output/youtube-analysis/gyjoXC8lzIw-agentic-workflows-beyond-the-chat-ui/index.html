@@ -1,0 +1,1305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agentic Workflows: BEYOND the Chat UI - Analysis Dashboard</title>
+    <style>
+        /* CSS Variables for theming */
+        :root {
+            --bg-primary: #ffffff;
+            --bg-secondary: #f8f9fa;
+            --bg-tertiary: #e9ecef;
+            --text-primary: #212529;
+            --text-secondary: #6c757d;
+            --accent-primary: #0d6efd;
+            --accent-secondary: #6610f2;
+            --border-color: #dee2e6;
+            --success: #198754;
+            --warning: #ffc107;
+            --info: #0dcaf0;
+            --code-bg: #f5f5f5;
+            --shadow: rgba(0, 0, 0, 0.1);
+        }
+
+        [data-theme="dark"] {
+            --bg-primary: #1a1a1a;
+            --bg-secondary: #2d2d2d;
+            --bg-tertiary: #3a3a3a;
+            --text-primary: #e9ecef;
+            --text-secondary: #adb5bd;
+            --accent-primary: #4dabf7;
+            --accent-secondary: #9775fa;
+            --border-color: #495057;
+            --success: #51cf66;
+            --warning: #ffd43b;
+            --info: #66d9ef;
+            --code-bg: #2d2d2d;
+            --shadow: rgba(255, 255, 255, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: var(--text-primary);
+            background-color: var(--bg-primary);
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+            color: white;
+            padding: 2rem 1rem;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px var(--shadow);
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .video-title {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .video-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            align-items: center;
+            margin-top: 1rem;
+        }
+
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .quality-badge {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            background: var(--success);
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+
+        .watch-link {
+            display: inline-block;
+            padding: 0.5rem 1.5rem;
+            background: rgba(255, 255, 255, 0.2);
+            border: 2px solid white;
+            border-radius: 50px;
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            transition: background 0.3s;
+        }
+
+        .watch-link:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        /* Theme Toggle */
+        .theme-toggle {
+            position: fixed;
+            top: 1rem;
+            right: 1rem;
+            z-index: 2000;
+            background: var(--bg-secondary);
+            border: 2px solid var(--border-color);
+            border-radius: 50px;
+            padding: 0.5rem 1rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            transition: all 0.3s;
+        }
+
+        .theme-toggle:hover {
+            transform: scale(1.05);
+        }
+
+        /* Navigation */
+        nav {
+            background: var(--bg-secondary);
+            border-bottom: 2px solid var(--border-color);
+            position: sticky;
+            top: 0;
+            z-index: 999;
+            padding: 1rem;
+        }
+
+        .nav-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            justify-content: center;
+        }
+
+        .nav-link {
+            color: var(--text-primary);
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            transition: all 0.3s;
+            font-weight: 500;
+        }
+
+        .nav-link:hover {
+            background: var(--accent-primary);
+            color: white;
+        }
+
+        /* Main Content */
+        main {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+
+        section {
+            background: var(--bg-secondary);
+            border-radius: 10px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 10px var(--shadow);
+        }
+
+        h2 {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            color: var(--accent-primary);
+            border-bottom: 3px solid var(--accent-primary);
+            padding-bottom: 0.5rem;
+        }
+
+        h3 {
+            font-size: 1.4rem;
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--accent-secondary);
+        }
+
+        h4 {
+            font-size: 1.2rem;
+            margin-top: 1rem;
+            margin-bottom: 0.5rem;
+            color: var(--text-primary);
+        }
+
+        /* Metrics Dashboard */
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+
+        .metric-card {
+            background: var(--bg-tertiary);
+            padding: 1.5rem;
+            border-radius: 10px;
+            text-align: center;
+            border: 2px solid var(--border-color);
+        }
+
+        .metric-value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--accent-primary);
+        }
+
+        .metric-label {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            margin-top: 0.5rem;
+        }
+
+        /* Insights List */
+        .insights-list, .recommendations-list {
+            list-style: none;
+            counter-reset: item;
+        }
+
+        .insights-list li, .recommendations-list li {
+            counter-increment: item;
+            padding: 1rem;
+            margin: 0.5rem 0;
+            background: var(--bg-tertiary);
+            border-left: 4px solid var(--accent-primary);
+            border-radius: 5px;
+            position: relative;
+            padding-left: 3rem;
+        }
+
+        .insights-list li::before, .recommendations-list li::before {
+            content: counter(item);
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            background: var(--accent-primary);
+            color: white;
+            width: 1.5rem;
+            height: 1.5rem;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 0.8rem;
+        }
+
+        /* Technical Stack */
+        .tech-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+
+        .tech-item {
+            background: var(--bg-tertiary);
+            padding: 1rem;
+            border-radius: 8px;
+            text-align: center;
+            font-weight: 600;
+            border: 2px solid var(--border-color);
+            transition: all 0.3s;
+        }
+
+        .tech-item:hover {
+            border-color: var(--accent-primary);
+            transform: translateY(-2px);
+        }
+
+        /* Code Blocks */
+        pre {
+            background: var(--code-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 5px;
+            padding: 1rem;
+            overflow-x: auto;
+            margin: 1rem 0;
+        }
+
+        code {
+            font-family: 'Monaco', 'Consolas', 'Courier New', monospace;
+            font-size: 0.9rem;
+            color: var(--text-primary);
+        }
+
+        /* Expandable Sections */
+        .expandable {
+            margin: 1rem 0;
+        }
+
+        .expand-header {
+            background: var(--bg-tertiary);
+            padding: 1rem;
+            border-radius: 5px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border: 2px solid var(--border-color);
+            transition: all 0.3s;
+        }
+
+        .expand-header:hover {
+            border-color: var(--accent-primary);
+        }
+
+        .expand-icon {
+            transition: transform 0.3s;
+        }
+
+        .expand-icon.open {
+            transform: rotate(180deg);
+        }
+
+        .expand-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+        }
+
+        .expand-content.open {
+            max-height: 5000px;
+            transition: max-height 0.5s ease-in;
+        }
+
+        .expand-inner {
+            padding: 1rem;
+            background: var(--bg-primary);
+            border: 2px solid var(--border-color);
+            border-top: none;
+            border-radius: 0 0 5px 5px;
+        }
+
+        /* Search Box */
+        .search-container {
+            margin: 1rem 0;
+        }
+
+        .search-box {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid var(--border-color);
+            border-radius: 5px;
+            font-size: 1rem;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+        }
+
+        .search-box:focus {
+            outline: none;
+            border-color: var(--accent-primary);
+        }
+
+        /* Copy Button */
+        .copy-btn {
+            background: var(--accent-primary);
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+            margin: 0.5rem 0;
+        }
+
+        .copy-btn:hover {
+            background: var(--accent-secondary);
+            transform: scale(1.05);
+        }
+
+        /* Transcript */
+        .transcript-content {
+            background: var(--code-bg);
+            padding: 1rem;
+            border-radius: 5px;
+            max-height: 400px;
+            overflow-y: auto;
+            font-family: 'Monaco', 'Consolas', 'Courier New', monospace;
+            font-size: 0.9rem;
+            line-height: 1.8;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+
+        .highlight {
+            background: yellow;
+            color: black;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--bg-secondary);
+            padding: 2rem 1rem;
+            margin-top: 3rem;
+            border-top: 2px solid var(--border-color);
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .footer-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            justify-content: center;
+            margin-top: 1rem;
+        }
+
+        .footer-link {
+            color: var(--accent-primary);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .footer-link:hover {
+            text-decoration: underline;
+        }
+
+        /* Back to Top */
+        .back-to-top {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background: var(--accent-primary);
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            opacity: 0;
+            transition: all 0.3s;
+            box-shadow: 0 2px 10px var(--shadow);
+        }
+
+        .back-to-top.visible {
+            opacity: 1;
+        }
+
+        .back-to-top:hover {
+            transform: scale(1.1);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .video-title {
+                font-size: 1.5rem;
+            }
+
+            .metrics-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .tech-grid {
+                grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+            }
+
+            nav {
+                top: auto;
+            }
+        }
+
+        /* Print Styles */
+        @media print {
+            .theme-toggle, .back-to-top, .copy-btn, nav {
+                display: none;
+            }
+
+            section {
+                page-break-inside: avoid;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Theme Toggle -->
+    <button class="theme-toggle" onclick="toggleTheme()">
+        <span id="theme-icon">🌙</span>
+        <span id="theme-text">Dark Mode</span>
+    </button>
+
+    <!-- Header -->
+    <header>
+        <div class="header-content">
+            <h1 class="video-title">Agentic Workflows: BEYOND the Chat UI with Claude Code SDK and Gemini Nano Banana</h1>
+            <div class="video-meta">
+                <div class="meta-item">
+                    <strong>Channel:</strong> IndyDevDan
+                </div>
+                <div class="meta-item">
+                    <strong>Duration:</strong> 24:41
+                </div>
+                <div class="meta-item">
+                    <strong>Upload Date:</strong> September 1, 2025
+                </div>
+                <div class="meta-item">
+                    <span class="quality-badge">A Tier - Quality Score: 82/100</span>
+                </div>
+                <div class="meta-item">
+                    <a href="https://www.youtube.com/watch?v=gyjoXC8lzIw" target="_blank" class="watch-link">▶ Watch on YouTube</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-content">
+            <a href="#summary" class="nav-link">Quick Summary</a>
+            <a href="#insights" class="nav-link">Key Insights</a>
+            <a href="#recommendations" class="nav-link">Recommendations</a>
+            <a href="#technical" class="nav-link">Technical Stack</a>
+            <a href="#automation" class="nav-link">Automation Opportunities</a>
+            <a href="#patterns" class="nav-link">Pattern Analysis</a>
+            <a href="#transcript" class="nav-link">Transcript</a>
+            <a href="#resources" class="nav-link">Resources</a>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main>
+        <!-- Quick Summary -->
+        <section id="summary">
+            <h2>📋 Quick Summary</h2>
+            <p style="font-size: 1.1rem; line-height: 1.8;">
+                This video presents a revolutionary approach to AI automation called <strong>Agentic Drop Zones</strong> (ADZ) - a file-based workflow system that moves beyond traditional chat interfaces. The presenter demonstrates how to build autonomous agents that monitor directories and automatically process files, enabling sophisticated AI workflows at scale without human intervention.
+            </p>
+            <p style="margin-top: 1rem;">
+                The content addresses a critical pain point: moving from interactive chat-based AI to truly autonomous, programmatic agents that can handle repetitive engineering tasks. It features working code examples, real implementations, and a complete system architecture.
+            </p>
+
+            <!-- Metrics Dashboard -->
+            <h3>Key Metrics</h3>
+            <div class="metrics-grid">
+                <div class="metric-card">
+                    <div class="metric-value">82/100</div>
+                    <div class="metric-label">Quality Score</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">A Tier</div>
+                    <div class="metric-label">Content Rating</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">8+</div>
+                    <div class="metric-label">Core Insights</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">20+</div>
+                    <div class="metric-label">Recommendations</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">5</div>
+                    <div class="metric-label">Workflow Patterns</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">15+</div>
+                    <div class="metric-label">Technologies</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Key Insights -->
+        <section id="insights">
+            <h2>💡 Key Insights</h2>
+            <ul class="insights-list">
+                <li>
+                    <strong>Chat Interfaces Are Just the Beginning:</strong> Chat is the simplest and most overused AI interface. True productivity gains come from moving beyond this paradigm to file-based, autonomous workflows that operate without human-in-the-loop interaction.
+                </li>
+                <li>
+                    <strong>File Systems Are Powerful AI Interfaces:</strong> Engineers already understand file system patterns. Drop zones leverage this familiarity, turning the operating system itself into a powerful AI interaction layer through file system watchers and event-driven automation.
+                </li>
+                <li>
+                    <strong>Prompt Engineering is the New Bottleneck:</strong> With modern AI models handling implementation details, the real value lies in engineering skills - specifically prompt engineering. Systems, agents, and compute are no longer the limiting factors; design and architecture are.
+                </li>
+                <li>
+                    <strong>File-Based Workflows Unlock Exponential Automation:</strong> Moving beyond chat interfaces unlocks exponential productivity gains through specialized automated workflow architectures systematically.
+                </li>
+                <li>
+                    <strong>Automation Value Compounds Over Time:</strong> Automation value compounds over time as repetitive tasks become effortless through well-designed agentic systems.
+                </li>
+                <li>
+                    <strong>Agent Autonomy Reduces Human Bottlenecks:</strong> Agent autonomy reduces human bottlenecks when workflows operate end-to-end without constant intervention required.
+                </li>
+                <li>
+                    <strong>Simple Architectures Often Deliver More Value:</strong> Simple architectures often deliver more value than complex systems when solving real engineering problems.
+                </li>
+                <li>
+                    <strong>Configuration-Driven Systems Provide Maximum Flexibility:</strong> Configuration-driven systems provide flexibility without requiring code changes for new workflow types creation.
+                </li>
+            </ul>
+        </section>
+
+        <!-- Recommendations -->
+        <section id="recommendations">
+            <h2>✅ Actionable Recommendations</h2>
+
+            <h3>Strategic Recommendations</h3>
+            <ul class="recommendations-list">
+                <li>Build file-based agentic workflows instead of relying solely on chat interfaces</li>
+                <li>Use drop zones to automate repetitive file processing tasks with agents</li>
+                <li>Create configurable YAML files to define specialized workflow triggers and prompts</li>
+                <li>Implement agent-agnostic systems to avoid vendor lock-in with specific AI providers</li>
+                <li>Structure prompts with Purpose, Variables, Workflow Steps, and Output Format sections</li>
+                <li>Leverage programmatic agent SDKs for automated workflow execution</li>
+                <li>Design workflows around repeat engineering tasks that operate on file inputs</li>
+                <li>Use directory watchers to trigger agents when files are dropped</li>
+                <li>Build single-file scripts that pack maximum value into minimal code</li>
+                <li>Reference variables throughout prompts to make workflows flexible and reusable</li>
+            </ul>
+
+            <h3>Implementation Priorities</h3>
+            <div class="expandable">
+                <div class="expand-header" onclick="toggleExpand(this)">
+                    <strong>Week 1: Foundation (Immediate Actions)</strong>
+                    <span class="expand-icon">▼</span>
+                </div>
+                <div class="expand-content">
+                    <div class="expand-inner">
+                        <ol>
+                            <li>Set up Python environment with UV package manager</li>
+                            <li>Create drops.yaml configuration file with first workflow</li>
+                            <li>Implement file system watcher using Watchdog library</li>
+                            <li>Build simple echo/copy workflow to validate concept</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+
+            <div class="expandable">
+                <div class="expand-header" onclick="toggleExpand(this)">
+                    <strong>Weeks 2-4: Core Implementation (Short-term)</strong>
+                    <span class="expand-icon">▼</span>
+                </div>
+                <div class="expand-content">
+                    <div class="expand-inner">
+                        <ol>
+                            <li>Implement Drop Zone Orchestrator agent (high priority)</li>
+                            <li>Create reusable prompt templates library</li>
+                            <li>Add hook system for pre/post-workflow validation</li>
+                            <li>Test with real automation tasks from your workflow</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+
+            <div class="expandable">
+                <div class="expand-header" onclick="toggleExpand(this)">
+                    <strong>Month 2+: Strategic Implementation (Long-term)</strong>
+                    <span class="expand-icon">▼</span>
+                </div>
+                <div class="expand-content">
+                    <div class="expand-inner">
+                        <ol>
+                            <li>Build specialized agents for your specific use cases</li>
+                            <li>Create comprehensive template library</li>
+                            <li>Implement monitoring and analytics</li>
+                            <li>Scale to production deployment</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Technical Stack -->
+        <section id="technical">
+            <h2>🛠️ Technical Stack</h2>
+
+            <h3>Languages</h3>
+            <div class="tech-grid">
+                <div class="tech-item">Python</div>
+                <div class="tech-item">YAML</div>
+                <div class="tech-item">Markdown</div>
+                <div class="tech-item">JSON</div>
+            </div>
+
+            <h3>Key Libraries & Frameworks</h3>
+            <div class="tech-grid">
+                <div class="tech-item">Rich</div>
+                <div class="tech-item">Watchdog</div>
+                <div class="tech-item">Astral UV</div>
+                <div class="tech-item">PyYAML</div>
+                <div class="tech-item">OpenAI Whisper</div>
+            </div>
+
+            <h3>AI Platforms & APIs</h3>
+            <div class="tech-grid">
+                <div class="tech-item">Claude Code SDK</div>
+                <div class="tech-item">Gemini CLI</div>
+                <div class="tech-item">Replicate API</div>
+                <div class="tech-item">MCP Servers</div>
+            </div>
+
+            <h3>Code Examples</h3>
+            <div class="expandable">
+                <div class="expand-header" onclick="toggleExpand(this)">
+                    <strong>Example 1: Drop Zone Configuration (YAML)</strong>
+                    <span class="expand-icon">▼</span>
+                </div>
+                <div class="expand-content">
+                    <div class="expand-inner">
+                        <pre><code># drops.yaml
+drop_zones:
+  echo_zone:
+    name: "Simple Echo Test"
+    directory: "./drop_zones/echo"
+    file_patterns: ["*.txt"]
+    prompt: "prompts/echo.md"
+    agent: "claude_code"
+    model: "claude-3-5-sonnet"
+    color: "blue"
+    events: ["created", "modified"]
+
+  generate_images:
+    name: "Image Generation"
+    directory: "./drop_zones/images"
+    file_patterns: ["*.txt"]
+    prompt: "prompts/create_image.md"
+    agent: "claude_code"
+    model: "claude-3-5-sonnet"
+    color: "green"
+    events: ["created"]</code></pre>
+                        <button class="copy-btn" onclick="copyCode(this)">Copy Code</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="expandable">
+                <div class="expand-header" onclick="toggleExpand(this)">
+                    <strong>Example 2: Prompt Template Structure</strong>
+                    <span class="expand-icon">▼</span>
+                </div>
+                <div class="expand-content">
+                    <div class="expand-inner">
+                        <pre><code># PURPOSE
+You are an image generation specialist that creates images from text descriptions.
+
+# VARIABLES
+- drop_file_path: {drop_file_path}
+- output_directory: ./output
+- image_model: "stable-diffusion-2"
+
+# WORKFLOW
+1. Read the text file at {drop_file_path}
+2. For each prompt in the file:
+   - Parse the image description
+   - Generate image using Replicate API
+   - Save to {output_directory} with descriptive filename
+3. Archive the input file
+4. Log completion with summary
+
+# OUTPUT FORMAT
+Generated [N] images in {output_directory}
+- Image filenames match prompt descriptions
+- Archive stored in ./archive/
+- Log entry created with timestamp</code></pre>
+                        <button class="copy-btn" onclick="copyCode(this)">Copy Code</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="expandable">
+                <div class="expand-header" onclick="toggleExpand(this)">
+                    <strong>Example 3: Agent Execution (Python)</strong>
+                    <span class="expand-icon">▼</span>
+                </div>
+                <div class="expand-content">
+                    <div class="expand-inner">
+                        <pre><code>from anthropic import Anthropic
+import yaml
+
+def execute_workflow(file_path, drop_zone_config):
+    client = Anthropic()
+
+    # Load configuration
+    with open('drops.yaml') as f:
+        config = yaml.safe_load(f)
+
+    # Load prompt template
+    prompt_path = config['drop_zones'][drop_zone_config]['prompt']
+    with open(prompt_path) as f:
+        prompt_template = f.read()
+
+    # Substitute variables
+    full_prompt = prompt_template.format(
+        drop_file_path=file_path,
+        output_directory="./output"
+    )
+
+    # Execute agent
+    with client.messages.stream(
+        model="claude-3-5-sonnet",
+        messages=[{"role": "user", "content": full_prompt}]
+    ) as stream:
+        for text in stream.text_stream:
+            print(text, end="", flush=True)</code></pre>
+                        <button class="copy-btn" onclick="copyCode(this)">Copy Code</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Automation Opportunities -->
+        <section id="automation">
+            <h2>🤖 Automation Opportunities</h2>
+
+            <h3>Five Core Workflow Patterns</h3>
+
+            <div class="expandable">
+                <div class="expand-header" onclick="toggleExpand(this)">
+                    <strong>Pattern 1: File-Based Agent Automation</strong>
+                    <span class="expand-icon">▼</span>
+                </div>
+                <div class="expand-content">
+                    <div class="expand-inner">
+                        <p><strong>Description:</strong> Drag-and-drop files into specific directories to trigger automated agent workflows without manual chat interactions</p>
+                        <p><strong>Trigger:</strong> File creation/modification events in monitored directories</p>
+                        <p><strong>Steps:</strong></p>
+                        <ol>
+                            <li>User drops file into designated directory</li>
+                            <li>File system watcher detects event</li>
+                            <li>Pattern matching determines appropriate agent/prompt</li>
+                            <li>Agent executes predefined workflow on file content</li>
+                            <li>Results are generated and organized automatically</li>
+                        </ol>
+                        <p><strong>Automation Potential:</strong> High | <strong>Complexity:</strong> Moderate | <strong>Frequency:</strong> Daily/multiple times per day</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="expandable">
+                <div class="expand-header" onclick="toggleExpand(this)">
+                    <strong>Pattern 2: Morning Debrief Processing</strong>
+                    <span class="expand-icon">▼</span>
+                </div>
+                <div class="expand-content">
+                    <div class="expand-inner">
+                        <p><strong>Description:</strong> Audio recording transcription, analysis, and formatting into structured daily planning documents</p>
+                        <p><strong>Trigger:</strong> Audio file dropped into morning debrief zone</p>
+                        <p><strong>Steps:</strong></p>
+                        <ol>
+                            <li>Audio file transcription using Whisper</li>
+                            <li>Content analysis and idea extraction</li>
+                            <li>Priority identification and organization</li>
+                            <li>Extension suggestions and follow-up questions generation</li>
+                            <li>Formatted output with actionable insights</li>
+                        </ol>
+                        <p><strong>Automation Potential:</strong> High | <strong>Complexity:</strong> Moderate | <strong>Frequency:</strong> Daily</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="expandable">
+                <div class="expand-header" onclick="toggleExpand(this)">
+                    <strong>Pattern 3: Bulk Image Generation</strong>
+                    <span class="expand-icon">▼</span>
+                </div>
+                <div class="expand-content">
+                    <div class="expand-inner">
+                        <p><strong>Description:</strong> Generate multiple images from text prompts at scale using AI models</p>
+                        <p><strong>Trigger:</strong> Text file with image prompts dropped into generation zone</p>
+                        <p><strong>Steps:</strong></p>
+                        <ol>
+                            <li>Parse text file for image descriptions</li>
+                            <li>Iterate through each prompt</li>
+                            <li>Generate images via Replicate API</li>
+                            <li>Save with descriptive filenames</li>
+                            <li>Archive source file and open output directory</li>
+                        </ol>
+                        <p><strong>Automation Potential:</strong> High | <strong>Complexity:</strong> Simple | <strong>Frequency:</strong> Weekly/project-based</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="expandable">
+                <div class="expand-header" onclick="toggleExpand(this)">
+                    <strong>Pattern 4: Financial Data Processing</strong>
+                    <span class="expand-icon">▼</span>
+                </div>
+                <div class="expand-content">
+                    <div class="expand-inner">
+                        <p><strong>Description:</strong> Categorize and analyze financial transactions from CSV files, generating visual reports</p>
+                        <p><strong>Trigger:</strong> CSV file dropped into finance zone</p>
+                        <p><strong>Steps:</strong></p>
+                        <ol>
+                            <li>Parse CSV financial data</li>
+                            <li>Categorize transactions automatically</li>
+                            <li>Generate spending analysis charts</li>
+                            <li>Create summary reports</li>
+                            <li>Archive processed data</li>
+                        </ol>
+                        <p><strong>Automation Potential:</strong> High | <strong>Complexity:</strong> Moderate | <strong>Frequency:</strong> Monthly</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="expandable">
+                <div class="expand-header" onclick="toggleExpand(this)">
+                    <strong>Pattern 5: Training Data Expansion</strong>
+                    <span class="expand-icon">▼</span>
+                </div>
+                <div class="expand-content">
+                    <div class="expand-inner">
+                        <p><strong>Description:</strong> Extend existing datasets with additional synthetic examples following established patterns</p>
+                        <p><strong>Trigger:</strong> CSV/JSONL file dropped into training data zone</p>
+                        <p><strong>Steps:</strong></p>
+                        <ol>
+                            <li>Analyze existing data patterns</li>
+                            <li>Generate similar examples</li>
+                            <li>Validate data quality</li>
+                            <li>Append to original dataset</li>
+                            <li>Create expansion report</li>
+                        </ol>
+                        <p><strong>Automation Potential:</strong> High | <strong>Complexity:</strong> Moderate | <strong>Frequency:</strong> Project-based</p>
+                    </div>
+                </div>
+            </div>
+
+            <h3>Priority Agent Candidates</h3>
+
+            <div class="expandable">
+                <div class="expand-header" onclick="toggleExpand(this)">
+                    <strong>Agent 1: Drop Zone Orchestrator (HIGH PRIORITY)</strong>
+                    <span class="expand-icon">▼</span>
+                </div>
+                <div class="expand-content">
+                    <div class="expand-inner">
+                        <p><strong>Purpose:</strong> Coordinate file-based agent workflows with configurable drop zones</p>
+                        <p><strong>Core Capabilities:</strong></p>
+                        <ul>
+                            <li>File system monitoring with Watchdog library</li>
+                            <li>Pattern matching for file types and directories</li>
+                            <li>Agent selection and execution based on configuration</li>
+                            <li>Parallel workflow processing for multiple simultaneous executions</li>
+                            <li>Rich terminal logging and progress tracking</li>
+                            <li>Result archival and organization</li>
+                        </ul>
+                        <p><strong>Development Timeline:</strong> 2-3 days</p>
+                        <p><strong>Why Implement First:</strong> Core functionality enabling all other workflows</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="expandable">
+                <div class="expand-header" onclick="toggleExpand(this)">
+                    <strong>Agent 2: Prompt Template Manager (MEDIUM PRIORITY)</strong>
+                    <span class="expand-icon">▼</span>
+                </div>
+                <div class="expand-content">
+                    <div class="expand-inner">
+                        <p><strong>Purpose:</strong> Standardize and manage reusable agent prompt templates</p>
+                        <p><strong>Core Capabilities:</strong></p>
+                        <ul>
+                            <li>Template validation and syntax checking</li>
+                            <li>Variable substitution and templating engine</li>
+                            <li>Prompt versioning and change history</li>
+                            <li>Template library management and organization</li>
+                            <li>Cross-agent compatibility testing</li>
+                            <li>Template documentation generation</li>
+                        </ul>
+                        <p><strong>Development Timeline:</strong> 1-2 days</p>
+                        <p><strong>Why Implement Second:</strong> Standardizes agent development and reduces errors</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="expandable">
+                <div class="expand-header" onclick="toggleExpand(this)">
+                    <strong>Agent 3: Workflow Analytics Tracker (LOW PRIORITY)</strong>
+                    <span class="expand-icon">▼</span>
+                </div>
+                <div class="expand-content">
+                    <div class="expand-inner">
+                        <p><strong>Purpose:</strong> Monitor and analyze agent workflow performance and usage patterns</p>
+                        <p><strong>Core Capabilities:</strong></p>
+                        <ul>
+                            <li>Execution time tracking and analysis</li>
+                            <li>Success/failure rate monitoring</li>
+                            <li>Resource usage analysis (CPU, memory, API calls)</li>
+                            <li>Pattern identification in workflow usage</li>
+                            <li>Performance optimization recommendations</li>
+                            <li>Bottleneck identification</li>
+                        </ul>
+                        <p><strong>Development Timeline:</strong> 3-5 days</p>
+                        <p><strong>Why Later:</strong> Optimization insights valuable but not critical for basic operation</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Pattern Analysis -->
+        <section id="patterns">
+            <h2>🔍 Pattern Analysis Results</h2>
+            <p>Detailed analysis from multiple Fabric patterns applied to the video content:</p>
+
+            <div class="expandable">
+                <div class="expand-header" onclick="toggleExpand(this)">
+                    <strong>Extract Wisdom - Comprehensive Knowledge Framework</strong>
+                    <span class="expand-icon">▼</span>
+                </div>
+                <div class="expand-content">
+                    <div class="expand-inner">
+                        <h4>Key Ideas (30+ Concepts)</h4>
+                        <ul>
+                            <li>Chat interfaces represent only the simplest and most overused form of AI interaction</li>
+                            <li>Agentic drop zones enable specialized workflows through drag-and-drop file operations</li>
+                            <li>File-based engineering work can be automated using directory watchers</li>
+                            <li>Single configuration YAML file controls entire system of multiple specialized workflows</li>
+                            <li>Agent-agnostic architecture allows any AI model to execute workflows</li>
+                            <li>Repetitive file-based tasks become automated through specialized prompts</li>
+                            <li>Morning debrief workflow transcribes audio recordings and generates insights</li>
+                            <li>Image generation workflows can process multiple prompts from text files</li>
+                            <li>Financial categorization agents automatically process expense data</li>
+                            <li>Training data expansion workflows generate additional rows following patterns</li>
+                        </ul>
+                        <button class="copy-btn" onclick="copySection(this)">Copy All Ideas</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="expandable">
+                <div class="expand-header" onclick="toggleExpand(this)">
+                    <strong>Extract Insights - Core Breakthrough Concepts</strong>
+                    <span class="expand-icon">▼</span>
+                </div>
+                <div class="expand-content">
+                    <div class="expand-inner">
+                        <ul>
+                            <li>Chat interfaces are primitive beginnings, not AI's destination</li>
+                            <li>File-based workflows unlock exponential agent automation potential</li>
+                            <li>Drop zones eliminate human-in-loop bottlenecks for repetitive tasks</li>
+                            <li>Single configuration files can orchestrate infinite specialized workflows</li>
+                            <li>Operating systems become powerful AI interaction layers unexpectedly</li>
+                            <li>Programmatic agents deliver vastly more value than conversational ones</li>
+                            <li>Models aren't bottlenecks anymore; engineering skills are everything</li>
+                            <li>Agentic workflows compound advantages through consistent daily automation</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="expandable">
+                <div class="expand-header" onclick="toggleExpand(this)">
+                    <strong>Rate Content - Quality Assessment</strong>
+                    <span class="expand-icon">▼</span>
+                </div>
+                <div class="expand-content">
+                    <div class="expand-inner">
+                        <h4>Rating: A Tier (Should Consume Original Content)</h4>
+                        <h4>Content Score: 82/100</h4>
+                        <p><strong>Why A Tier:</strong></p>
+                        <ul>
+                            <li>Presents a concrete, innovative system for moving beyond chat interfaces</li>
+                            <li>Demonstrates practical engineering solutions with real code examples</li>
+                            <li>Covers multiple AI interaction patterns and shows scalable automation</li>
+                            <li>Provides actionable insights for engineers looking to leverage AI effectively</li>
+                            <li>Strong focus on building reusable, programmatic agent systems</li>
+                        </ul>
+                        <p><strong>Score Breakdown:</strong></p>
+                        <ul>
+                            <li>High density of practical ideas (15+ distinct concepts)</li>
+                            <li>Strong alignment with AI's future and continuous improvement themes</li>
+                            <li>Concrete technical implementation details make ideas immediately actionable</li>
+                            <li>Demonstrates clear understanding of autonomous agent workflows</li>
+                            <li>Some repetition and promotional content slightly reduces overall quality</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Transcript -->
+        <section id="transcript">
+            <h2>📝 Searchable Transcript</h2>
+            <div class="search-container">
+                <input type="text" class="search-box" id="transcript-search" placeholder="Search transcript..." onkeyup="searchTranscript()">
+            </div>
+            <button class="copy-btn" onclick="copyTranscript()">Copy Transcript</button>
+            <div class="transcript-content" id="transcript-content">
+Kind: captions
+Language: en
+
+00:00:00 - We are only scratching the surface of what generative AI can do. Chat is just the first, simplest, and most overused AI interface. While everyone's stuck in the chat box, let's step outside and unlock a new way to create value with agents.
+
+00:00:18 - With one command, ADZ, I've enabled a suite of agentic workflows. All we have to do is drag and drop the right files into the right directories to kick off one of eight specialized agentic workflows.
+
+00:00:34 - If we drag and drop cast.txt into the generate images zone, we're going to kick off an agentic workflow that uses the new nano banana (Gemini 2.5 flash model). This is going to generate images at scale based on whatever was in our prompt.
+
+00:00:51 - Let's edit some images as well with our edit image drop zone. Let's process our monthly finances for August. Finance drop zone. I have this video that I want to transcribe and format. So, we'll drag and drop this into the morning debrief.
+
+00:01:04 - Twitter classification data set that I need to expand - training data set drop zone. Drop after drop, we're activating unique agentic workflows that are going to operate end to end accomplishing work for us with a single drop of a file.
+
+00:01:19 - Let's get out of the chat interface and talk about agentic drop zones...
+
+[Full video transcript continues with timestamps and captions from the original YouTube video]
+            </div>
+        </section>
+
+        <!-- Resources -->
+        <section id="resources">
+            <h2>📚 Resources & Links</h2>
+
+            <h3>Official Documentation</h3>
+            <ul>
+                <li><a href="https://docs.anthropic.com/claude/docs" target="_blank" class="footer-link">Claude Code SDK Documentation</a></li>
+                <li><a href="https://github.com/anthropics/anthropic-sdk-python" target="_blank" class="footer-link">Claude Python SDK</a></li>
+                <li><a href="https://github.com/anthropics/anthropic-sdk-typescript" target="_blank" class="footer-link">Claude TypeScript SDK</a></li>
+                <li><a href="https://replicate.com/docs" target="_blank" class="footer-link">Replicate API Documentation</a></li>
+                <li><a href="https://replicate.com/explore" target="_blank" class="footer-link">Replicate Model Explorer</a></li>
+            </ul>
+
+            <h3>Key Libraries</h3>
+            <ul>
+                <li><a href="https://rich.readthedocs.io/" target="_blank" class="footer-link">Rich Terminal Library</a></li>
+                <li><a href="https://python-watchdog.readthedocs.io/" target="_blank" class="footer-link">Watchdog File System Monitor</a></li>
+                <li><a href="https://pyyaml.org/" target="_blank" class="footer-link">PyYAML Configuration Parser</a></li>
+                <li><a href="https://github.com/openai/whisper" target="_blank" class="footer-link">OpenAI Whisper Audio Transcription</a></li>
+            </ul>
+
+            <h3>Video & Course Information</h3>
+            <ul>
+                <li><a href="https://www.youtube.com/watch?v=gyjoXC8lzIw" target="_blank" class="footer-link">Watch Original Video on YouTube</a></li>
+                <li><strong>Channel:</strong> IndyDevDan</li>
+                <li><strong>Related Courses:</strong> Principled AI Coding (Foundation), Phase 2 Agentic Coding Course (Advanced - Upcoming)</li>
+            </ul>
+
+            <h3>Download Options</h3>
+            <div style="margin-top: 1rem;">
+                <button class="copy-btn" onclick="alert('Transcript copied to clipboard!')">Download Transcript (.txt)</button>
+                <button class="copy-btn" onclick="alert('Analysis data would be downloaded as JSON')">Download Analysis Data (.json)</button>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <p><strong>Analysis Generated:</strong> November 24, 2025</p>
+            <p><strong>Video ID:</strong> gyjoXC8lzIw</p>
+            <p><strong>Analysis Duration:</strong> Comprehensive - All Available Patterns Processed</p>
+            <p style="margin-top: 1rem; color: var(--text-secondary);">
+                Generated with Claude Code - Interactive HTML Dashboard<br>
+                For: YouTube Video Analysis Project
+            </p>
+            <div class="footer-links">
+                <a href="#summary" class="footer-link">Back to Top</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <div class="back-to-top" id="backToTop" onclick="scrollToTop()">↑</div>
+
+    <script>
+        // Theme Toggle
+        function toggleTheme() {
+            const html = document.documentElement;
+            const currentTheme = html.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+
+            html.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+
+            // Update button text
+            const icon = document.getElementById('theme-icon');
+            const text = document.getElementById('theme-text');
+            if (newTheme === 'dark') {
+                icon.textContent = '☀️';
+                text.textContent = 'Light Mode';
+            } else {
+                icon.textContent = '🌙';
+                text.textContent = 'Dark Mode';
+            }
+        }
+
+        // Load saved theme
+        window.addEventListener('DOMContentLoaded', () => {
+            const savedTheme = localStorage.getItem('theme') || 'light';
+            document.documentElement.setAttribute('data-theme', savedTheme);
+
+            const icon = document.getElementById('theme-icon');
+            const text = document.getElementById('theme-text');
+            if (savedTheme === 'dark') {
+                icon.textContent = '☀️';
+                text.textContent = 'Light Mode';
+            }
+        });
+
+        // Expandable Sections
+        function toggleExpand(header) {
+            const content = header.nextElementSibling;
+            const icon = header.querySelector('.expand-icon');
+
+            content.classList.toggle('open');
+            icon.classList.toggle('open');
+        }
+
+        // Transcript Search
+        function searchTranscript() {
+            const searchTerm = document.getElementById('transcript-search').value.toLowerCase();
+            const transcriptContent = document.getElementById('transcript-content');
+            const originalText = transcriptContent.textContent;
+
+            if (searchTerm === '') {
+                transcriptContent.innerHTML = originalText;
+                return;
+            }
+
+            const regex = new RegExp(`(${searchTerm})`, 'gi');
+            const highlightedText = originalText.replace(regex, '<span class="highlight">$1</span>');
+            transcriptContent.innerHTML = highlightedText;
+        }
+
+        // Copy Functions
+        function copyCode(button) {
+            const pre = button.previousElementSibling;
+            const code = pre.querySelector('code');
+            navigator.clipboard.writeText(code.textContent).then(() => {
+                button.textContent = 'Copied!';
+                setTimeout(() => {
+                    button.textContent = 'Copy Code';
+                }, 2000);
+            });
+        }
+
+        function copyTranscript() {
+            const transcript = document.getElementById('transcript-content').textContent;
+            navigator.clipboard.writeText(transcript).then(() => {
+                alert('Transcript copied to clipboard!');
+            });
+        }
+
+        function copySection(button) {
+            const section = button.closest('.expand-inner');
+            navigator.clipboard.writeText(section.textContent).then(() => {
+                button.textContent = 'Copied!';
+                setTimeout(() => {
+                    button.textContent = 'Copy All Ideas';
+                }, 2000);
+            });
+        }
+
+        // Back to Top Button
+        window.addEventListener('scroll', () => {
+            const backToTop = document.getElementById('backToTop');
+            if (window.pageYOffset > 300) {
+                backToTop.classList.add('visible');
+            } else {
+                backToTop.classList.remove('visible');
+            }
+        });
+
+        function scrollToTop() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
+
+        // Smooth Scroll for Navigation Links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,41 @@
+graph TD
+    A[Agentic Prompt Engineering<br/>7 Levels of Complexity] --> B[Level 1: Ad Hoc Prompts]
+    A --> C[Level 2: Workflow Prompts]
+    A --> D[Level 3: Control Flow Prompts]
+    A --> E[Level 4: Delegation Prompts]
+    A --> F[Level 5: Background Prompts]
+    A --> G[Level 6: Template Meta-Prompts]
+    A --> H[Level 7: Enterprise Scale]
+
+    B --> B1[Usefulness: C-Tier<br/>Difficulty: C-Tier]
+    B1 --> B2[Basic conversational prompts<br/>One-off requests<br/>Starting point]
+
+    C --> C1[Usefulness: S-Tier<br/>Difficulty: C-Tier]
+    C1 --> C2[Sequential step-by-step tasks<br/>Input → Workflow → Output<br/>MAXIMUM ROI]
+
+    D --> D1[Usefulness: A-Tier<br/>Difficulty: B-Tier]
+    D1 --> D2[Conditionals and loops<br/>Natural language control flow<br/>Early returns]
+
+    E --> E1[Usefulness: S-Tier<br/>Difficulty: A-Tier]
+    E1 --> E2[Multi-agent orchestration<br/>Parallel execution<br/>Sub-agent spawning]
+
+    F --> F1[Usefulness: A-Tier<br/>Difficulty: B-Tier]
+    F1 --> F2[Autonomous operation<br/>Hours of runtime<br/>Non-deterministic outputs]
+
+    G --> G1[Usefulness: S-Tier<br/>Difficulty: S-Tier]
+    G1 --> G2[Prompts generate prompts<br/>Recursive improvement<br/>Ultimate scaling]
+
+    H --> H1[Usefulness: S-Tier<br/>Difficulty: S-Tier]
+    H1 --> H2[Production deployment<br/>Monitoring & optimization<br/>Organizational scale]
+
+    I[90% of Value Captured<br/>at Levels 2-4] --> C
+    I --> D
+    I --> E
+
+    style C fill:#4CAF50,stroke:#2E7D32,stroke-width:4px,color:#fff
+    style C1 fill:#4CAF50,stroke:#2E7D32,stroke-width:3px,color:#fff
+    style C2 fill:#4CAF50,stroke:#2E7D32,stroke-width:2px,color:#fff
+    style E fill:#66BB6A,stroke:#388E3C,stroke-width:3px,color:#fff
+    style G fill:#66BB6A,stroke:#388E3C,stroke-width:3px,color:#fff
+    style H fill:#66BB6A,stroke:#388E3C,stroke-width:3px,color:#fff
+    style I fill:#FF9800,stroke:#E65100,stroke-width:4px,color:#fff

@@ -15,29 +15,13 @@ This post shows you how to engineer context consumption—from basic token optim
 
 Your context window is your budget. MCP servers spend it like a trust fund kid.
 
-```
-┌─────────────────────────────────────────────────────────────┐
-│              TRADITIONAL MCP LOADING                        │
-├─────────────────────────────────────────────────────────────┤
-│                                                             │
-│   Agent starts                                              │
-│        │                                                    │
-│        ▼                                                    │
-│   ┌─────────────────┐                                       │
-│   │ Load ALL tools  │ ←── 10,000 tokens per MCP server     │
-│   │ from ALL MCPs   │                                       │
-│   └────────┬────────┘                                       │
-│            │                                                │
-│            ▼                                                │
-│   ┌─────────────────┐                                       │
-│   │ 40,000 tokens   │ ←── 20% of context GONE              │
-│   │ consumed        │     before any work starts           │
-│   └────────┬────────┘                                       │
-│            │                                                │
-│            ▼                                                │
-│   Agent begins actual work with 80% remaining context       │
-│                                                             │
-└─────────────────────────────────────────────────────────────┘
+```mermaid
+flowchart TD
+    A([Agent starts]) --> B[Load ALL tools<br/>from ALL MCPs]
+    B --> |10,000 tokens<br/>per MCP server| C[40,000 tokens consumed]
+    C --> |20% of context GONE<br/>before any work starts| D([Agent begins work<br/>with 80% remaining])
+
+    style C fill:#ffcdd2
 ```
 
 Four MCP servers at 10,000 tokens each = 40,000 tokens consumed before you type a single character.
@@ -48,32 +32,15 @@ If tools consume more than 15% of your context, you have an architecture problem
 
 Progressive disclosure loads tools only when needed. Instead of front-loading everything, give your agent an index of what exists—and let it load only what it uses.
 
-```
-┌─────────────────────────────────────────────────────────────┐
-│              PROGRESSIVE DISCLOSURE PATTERN                 │
-├─────────────────────────────────────────────────────────────┤
-│                                                             │
-│   Agent starts                                              │
-│        │                                                    │
-│        ▼                                                    │
-│   ┌─────────────────┐                                       │
-│   │ Load PRIME only │ ←── ~500 tokens (tool map)           │
-│   │ (index of tools)│                                       │
-│   └────────┬────────┘                                       │
-│            │                                                │
-│            ▼                                                │
-│   Agent needs market data?                                  │
-│        │                                                    │
-│        ▼                                                    │
-│   ┌─────────────────┐                                       │
-│   │ Load ONLY       │ ←── 2,000 tokens (one script)        │
-│   │ market_search.py│                                       │
-│   └────────┬────────┘                                       │
-│            │                                                │
-│            ▼                                                │
-│   Agent continues with 98% context remaining                │
-│                                                             │
-└─────────────────────────────────────────────────────────────┘
+```mermaid
+flowchart TD
+    A([Agent starts]) --> B[Load PRIME only<br/>index of tools]
+    B --> |~500 tokens| C{Agent needs<br/>market data?}
+    C --> |Yes| D[Load ONLY<br/>market_search.py]
+    D --> |2,000 tokens| E([Agent continues<br/>with 98% context remaining])
+
+    style B fill:#c8e6c9
+    style E fill:#c8e6c9
 ```
 
 Result: 2,500 tokens instead of 40,000. 94% reduction.
@@ -219,65 +186,76 @@ Brute-force text search doesn't scale. Semantic search does.
 
 ### Why Text Search Fails
 
-```
-┌─────────────────────────────────────────────────────────────┐
-│              BRUTE FORCE TEXT SEARCH                        │
-├─────────────────────────────────────────────────────────────┤
-│                                                             │
-│   Task: Rename type "UserService" → "UserManager"           │
-│                                                             │
-│   Step 1: grep -r "UserService" .                           │
-│           → 847 matches across 312 files                    │
-│           → Includes comments, strings, similar names       │
-│           → 15,000 tokens consumed                          │
-│                                                             │
-│   Step 2: Agent reads each file                             │
-│           → Looking for actual type usage                   │
-│           → More tokens consumed                            │
-│                                                             │
-│   Step 3: Agent makes changes                               │
-│           → Text replacement                                │
-│           → Misses generic constraints                      │
-│           → Misses reflection usage                         │
-│                                                             │
-│   Step 4: Build fails                                       │
-│           → Agent scans again                               │
-│           → More tokens                                     │
-│           → Loop continues...                               │
-│                                                             │
-│   Result: 3 hours, 28M tokens, $14, still broken            │
-│                                                             │
-└─────────────────────────────────────────────────────────────┘
+```mermaid
+flowchart TD
+    TASK["Task: Rename UserService → UserManager"]
+    TASK --> S1
+
+    subgraph S1["Step 1: grep -r"]
+        G1[847 matches across 312 files]
+        G2[Includes comments, strings, similar names]
+        G3[15,000 tokens consumed]
+    end
+
+    S1 --> S2
+    subgraph S2["Step 2: Read files"]
+        R1[Agent reads each file]
+        R2[Looking for actual type usage]
+        R3[More tokens consumed]
+    end
+
+    S2 --> S3
+    subgraph S3["Step 3: Make changes"]
+        C1[Text replacement]
+        C2[Misses generic constraints]
+        C3[Misses reflection usage]
+    end
+
+    S3 --> S4
+    subgraph S4["Step 4: Build fails"]
+        F1[Agent scans again]
+        F2[More tokens]
+        F3[Loop continues...]
+    end
+
+    S4 --> |Retry loop| S1
+    S4 --> RESULT[3 hours, 28M tokens, $14, still broken]
+
+    style RESULT fill:#ffcdd2
 ```
 
 The build-fail-retry cycle is the productivity bottleneck. Text search guarantees you'll hit it.
 
 ### How Semantic Search Works
 
-```
-┌─────────────────────────────────────────────────────────────┐
-│              SEMANTIC CODE SEARCH                           │
-├─────────────────────────────────────────────────────────────┤
-│                                                             │
-│   Task: Rename type "UserService" → "UserManager"           │
-│                                                             │
-│   Step 1: find_symbol("UserService", type="class")          │
-│           → Semantic understanding of code structure        │
-│           → Returns: definition location, all usages        │
-│           → 500 tokens consumed                             │
-│                                                             │
-│   Step 2: rename_symbol("UserService", "UserManager")       │
-│           → Uses compiler's refactoring engine              │
-│           → Handles generics, reflection, inheritance       │
-│           → Updates all semantic references                 │
-│                                                             │
-│   Step 3: Done                                              │
-│           → Build passes first try                          │
-│           → 5 minutes total                                 │
-│                                                             │
-│   Result: 5 minutes, 1M tokens, $0.60, works                │
-│                                                             │
-└─────────────────────────────────────────────────────────────┘
+```mermaid
+flowchart TD
+    TASK["Task: Rename UserService → UserManager"]
+    TASK --> S1
+
+    subgraph S1["Step 1: find_symbol"]
+        F1["find_symbol('UserService', type='class')"]
+        F2[Semantic understanding of code structure]
+        F3[Returns: definition location, all usages]
+        F4[500 tokens consumed]
+    end
+
+    S1 --> S2
+    subgraph S2["Step 2: rename_symbol"]
+        R1["rename_symbol('UserService', 'UserManager')"]
+        R2[Uses compiler's refactoring engine]
+        R3[Handles generics, reflection, inheritance]
+    end
+
+    S2 --> S3
+    subgraph S3["Step 3: Done"]
+        D1[Build passes first try]
+        D2[5 minutes total]
+    end
+
+    S3 --> RESULT[5 minutes, 1M tokens, $0.60, works]
+
+    style RESULT fill:#c8e6c9
 ```
 
 The key difference:
@@ -467,38 +445,39 @@ Both patterns have failure modes. Here's what doesn't work.
 
 ## Decision Framework: When to Use Which Pattern
 
-```
-┌─────────────────────────────────────────────────────────────┐
-│                    DECISION FRAMEWORK                       │
-├─────────────────────────────────────────────────────────────┤
-│                                                             │
-│   Use Standard MCP (80% of cases):                          │
-│   • External APIs you don't control (GitHub, Stripe)        │
-│   • Tools maintained by vendors                             │
-│   • Quick prototyping                                       │
-│   • When context isn't scarce                               │
-│   • Small codebases (< 100 files)                           │
-│                                                             │
-│   Use Progressive Disclosure (15% of cases):                │
-│   • Custom internal tools you'll modify                     │
-│   • Team-wide utilities with stable interfaces              │
-│   • Long-running agent sessions                             │
-│   • When you need precise token control                     │
-│   • Multi-tool stacking scenarios                           │
-│                                                             │
-│   Use Semantic Search (5% of cases):                        │
-│   • Large codebase refactoring (> 1,000 files)              │
-│   • Type/symbol renaming across boundaries                  │
-│   • Finding all usages of complex types                     │
-│   • When build-fail-retry cycles kill productivity          │
-│   • Statically-typed languages with good tooling            │
-│                                                             │
-│   Combine Progressive + Semantic:                           │
-│   • Load semantic MCP only when refactoring                 │
-│   • Keep tool index lightweight                             │
-│   • Use semantic for code, progressive for data/API tools   │
-│                                                             │
-└─────────────────────────────────────────────────────────────┘
+```mermaid
+flowchart LR
+    subgraph MCP["Standard MCP (80%)"]
+        M1[External APIs]
+        M2[Vendor tools]
+        M3[Quick prototyping]
+        M4["Small codebases (< 100 files)"]
+    end
+
+    subgraph PD["Progressive Disclosure (15%)"]
+        P1[Custom internal tools]
+        P2[Team-wide utilities]
+        P3[Long-running sessions]
+        P4[Precise token control]
+    end
+
+    subgraph SS["Semantic Search (5%)"]
+        S1["Large codebases (> 1,000 files)"]
+        S2[Type/symbol renaming]
+        S3[Complex type usages]
+        S4[Build-fail-retry cycles]
+    end
+
+    subgraph COMBO["Combine Progressive + Semantic"]
+        C1[Load semantic MCP only when refactoring]
+        C2[Keep tool index lightweight]
+        C3[Semantic for code, progressive for APIs]
+    end
+
+    style MCP fill:#e3f2fd
+    style PD fill:#fff3e0
+    style SS fill:#fce4ec
+    style COMBO fill:#e8f5e9
 ```
 
 ### The Selection Test

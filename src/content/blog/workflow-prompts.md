@@ -17,23 +17,31 @@ This post shows you how to build workflow prompts that actually work, with templ
 
 Every effective agentic prompt follows this three-step structure:
 
-```
-┌─────────────────────────────────────────────────────────────┐
-│                    AGENTIC PROMPT FLOW                      │
-├─────────────────────────────────────────────────────────────┤
-│                                                             │
-│   ┌─────────┐      ┌─────────────┐      ┌──────────┐       │
-│   │  INPUT  │ ───▶ │  WORKFLOW   │ ───▶ │  OUTPUT  │       │
-│   └─────────┘      └─────────────┘      └──────────┘       │
-│        │                  │                   │             │
-│        ▼                  ▼                   ▼             │
-│   Variables          Sequential           Report           │
-│   Parameters         Step-by-Step         Format           │
-│   Context            Instructions         Structure        │
-│                                                             │
-│   "What goes in"     "What happens"      "What comes out"  │
-│                                                             │
-└─────────────────────────────────────────────────────────────┘
+```mermaid
+flowchart LR
+    subgraph INPUT["INPUT"]
+        I1[Variables]
+        I2[Parameters]
+        I3[Context]
+    end
+
+    subgraph WORKFLOW["WORKFLOW"]
+        W1[Sequential]
+        W2[Step-by-Step]
+        W3[Instructions]
+    end
+
+    subgraph OUTPUT["OUTPUT"]
+        O1[Report]
+        O2[Format]
+        O3[Structure]
+    end
+
+    INPUT --> WORKFLOW --> OUTPUT
+
+    style INPUT fill:#e3f2fd
+    style WORKFLOW fill:#fff3e0
+    style OUTPUT fill:#c8e6c9
 ```
 
 The workflow section is where your agent's actual work happens. It's rated S-tier usefulness with C-tier difficulty—the most valuable component is also the easiest to execute well.
@@ -252,49 +260,54 @@ If the task is high-stakes or high-variance, the value of predictability can exc
 
 Here's where you can multiply your impact:
 
-```
-┌─────────────────────────────────────────────────────────────┐
-│                 PROMPT LIBRARY STRUCTURE                    │
-├─────────────────────────────────────────────────────────────┤
-│                                                             │
-│   .claude/commands/                                         │
-│   ├── analyze.md        # File analysis (above)            │
-│   ├── refactor.md       # Guided refactoring               │
-│   ├── test.md           # Generate tests for file          │
-│   ├── document.md       # Add documentation                │
-│   ├── review.md         # Code review checklist            │
-│   └── debug.md          # Systematic debugging             │
-│                                                             │
-│   Each prompt follows: Input → Workflow → Output           │
-│   Each prompt is reusable across projects                  │
-│   Each prompt serves you, your team, AND your agents       │
-│                                                             │
-└─────────────────────────────────────────────────────────────┘
+```mermaid
+flowchart TD
+    subgraph LIB[".claude/commands/"]
+        A["analyze.md - File analysis"]
+        B["refactor.md - Guided refactoring"]
+        C["test.md - Generate tests"]
+        D["document.md - Add documentation"]
+        E["review.md - Code review checklist"]
+        F["debug.md - Systematic debugging"]
+    end
+
+    LIB --> G["Each prompt follows: Input → Workflow → Output"]
+    G --> H["Reusable across projects"]
+    H --> I["Serves you, your team, AND your agents"]
+
+    style LIB fill:#e8f5e9
 ```
 
 ## Why Workflows Beat Ad-Hoc Prompting
 
-```
-┌─────────────────────────────────────────────────────────────┐
-│              AD-HOC vs WORKFLOW COMPARISON                  │
-├─────────────────────────────────────────────────────────────┤
-│                                                             │
-│   AD-HOC PROMPTING              WORKFLOW PROMPTING          │
-│   ─────────────────             ──────────────────          │
-│   "Help me refactor this"       Step 1: Backup              │
-│                                 Step 2: Analyze             │
-│   → Unpredictable scope         Step 3: Plan                │
-│   → Inconsistent output         Step 4: Execute             │
-│   → No error handling           Step 5: Verify              │
-│   → Can't reuse                 Step 6: Document            │
-│   → Team can't use it                                       │
-│                                 → Predictable execution     │
-│                                 → Consistent format         │
-│                                 → Early returns on error    │
-│                                 → Reusable forever          │
-│                                 → Team multiplier           │
-│                                                             │
-└─────────────────────────────────────────────────────────────┘
+```mermaid
+flowchart LR
+    subgraph ADHOC["AD-HOC PROMPTING"]
+        A1["'Help me refactor this'"]
+        A2[Unpredictable scope]
+        A3[Inconsistent output]
+        A4[No error handling]
+        A5[Can't reuse]
+        A6[Team can't use it]
+    end
+
+    subgraph WORKFLOW["WORKFLOW PROMPTING"]
+        W1["Step 1: Backup"]
+        W2["Step 2: Analyze"]
+        W3["Step 3: Plan"]
+        W4["Step 4: Execute"]
+        W5["Step 5: Verify"]
+        W6["Step 6: Document"]
+    end
+
+    WORKFLOW --> R1[Predictable execution]
+    WORKFLOW --> R2[Consistent format]
+    WORKFLOW --> R3[Early returns on error]
+    WORKFLOW --> R4[Reusable forever]
+    WORKFLOW --> R5[Team multiplier]
+
+    style ADHOC fill:#ffcdd2
+    style WORKFLOW fill:#c8e6c9
 ```
 
 The workflow prompt transforms a vague request into an executable engineering plan. One workflow prompt executing for an hour can generate work that would take you 20 hours.

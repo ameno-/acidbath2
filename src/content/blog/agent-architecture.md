@@ -15,27 +15,22 @@ This post shows you how to build custom agents and delegate research reliably, w
 
 ## Why Custom Agents Matter
 
-```
-┌─────────────────────────────────────────────────────────────┐
-│              SYSTEM PROMPT = AGENT IDENTITY                 │
-├─────────────────────────────────────────────────────────────┤
-│                                                             │
-│   Default Claude Code:                                      │
-│   "You are a helpful AI assistant that can read files,      │
-│    write code, execute commands..."                         │
-│   → General purpose coding assistant                        │
-│                                                             │
-│   Custom System Prompt:                                     │
-│   "You are a Stripe research agent. Research payment        │
-│    integration patterns. Never implement, only plan."       │
-│   → Specialized researcher                                  │
-│                                                             │
-│   Same model. Same API. Completely different behavior.      │
-│                                                             │
-│   The system prompt affects EVERY user prompt that follows. │
-│   All of your work is multiplied by your system prompt.     │
-│                                                             │
-└─────────────────────────────────────────────────────────────┘
+```mermaid
+flowchart LR
+    subgraph DEFAULT["Default Claude Code"]
+        A["You are a helpful AI assistant..."]
+        B["→ General purpose coding assistant"]
+    end
+
+    subgraph CUSTOM["Custom System Prompt"]
+        C["You are a Stripe research agent..."]
+        D["→ Specialized researcher"]
+    end
+
+    DEFAULT ~~~ CUSTOM
+    RESULT["Same model. Same API. Completely different behavior."]
+    DEFAULT --> RESULT
+    CUSTOM --> RESULT
 ```
 
 Default agents are built for everyone's codebase. Custom agents are built for yours.
@@ -256,71 +251,47 @@ The agent uses deterministic tool execution while maintaining conversational flo
 
 Custom agents enable specialization. Specialization enables delegation. But delegation has a critical problem:
 
-```
-┌─────────────────────────────────────────────────────────────┐
-│            SUB-AGENT IMPLEMENTATION (WRONG)                 │
-├─────────────────────────────────────────────────────────────┤
-│                                                             │
-│   Parent Agent                                              │
-│        │                                                    │
-│        │ "Implement Stripe checkout"                        │
-│        ▼                                                    │
-│   ┌─────────────────┐                                       │
-│   │   Sub-Agent     │                                       │
-│   │                 │ ← Reads 50 files                     │
-│   │  (isolated)     │ ← Makes decisions                    │
-│   │                 │ ← Writes code                        │
-│   └────────┬────────┘                                       │
-│            │                                                │
-│            │ "Task completed"                               │
-│            ▼                                                │
-│   Parent Agent sees ONLY:                                   │
-│   • Task was assigned                                       │
-│   • Task is "complete"                                      │
-│                                                             │
-│   Parent Agent does NOT see:                                │
-│   • Which files were read                                   │
-│   • What decisions were made                                │
-│   • Why certain approaches were chosen                      │
-│   • What edge cases were considered                         │
-│                                                             │
-│   Result: When something breaks, nobody knows why           │
-│                                                             │
-└─────────────────────────────────────────────────────────────┘
+```mermaid
+sequenceDiagram
+    participant P as Parent Agent
+    participant S as Sub-Agent (isolated)
+
+    P->>S: "Implement Stripe checkout"
+    Note over S: Reads 50 files
+    Note over S: Makes decisions
+    Note over S: Writes code
+    S-->>P: "Task completed"
+
+    Note over P: Parent sees ONLY:<br/>• Task was assigned<br/>• Task is "complete"
+    Note over P: Parent does NOT see:<br/>• Which files were read<br/>• What decisions were made<br/>• Why approaches were chosen
+
+    Note over P,S: Result: When something breaks, nobody knows why
 ```
 
 The parent agent has limited information about what the sub-agent actually did. When something isn't 100% correct and you want to fix it—that's where everything breaks down.
 
 ## File-Based Context: The Solution
 
-```
-┌─────────────────────────────────────────────────────────────┐
-│            SUB-AGENT RESEARCH (CORRECT)                     │
-├─────────────────────────────────────────────────────────────┤
-│                                                             │
-│   Parent Agent                                              │
-│        │                                                    │
-│        │ Writes context.md                                  │
-│        ▼                                                    │
-│   ┌─────────────────┐                                       │
-│   │   Sub-Agent     │                                       │
-│   │                 │ ← Reads context.md                   │
-│   │  (researcher)   │ ← Researches documentation           │
-│   │                 │ ← Creates plan                       │
-│   │                 │ ← Writes research-report.md          │
-│   └────────┬────────┘                                       │
-│            │                                                │
-│            │ "Research complete: see research-report.md"    │
-│            ▼                                                │
-│   Parent Agent:                                             │
-│   • Reads research-report.md (FULL context)                │
-│   • Has conversation history                                │
-│   • Implements with complete understanding                  │
-│   • Can debug because it knows the plan                     │
-│                                                             │
-│   Result: Implementation succeeds, debugging is possible    │
-│                                                             │
-└─────────────────────────────────────────────────────────────┘
+```mermaid
+sequenceDiagram
+    participant P as Parent Agent
+    participant F as File System
+    participant S as Sub-Agent (researcher)
+
+    P->>F: Write context.md
+    P->>S: Research task
+    S->>F: Read context.md
+    Note over S: Researches documentation
+    Note over S: Creates plan
+    S->>F: Write research-report.md
+    S-->>P: "Research complete: see research-report.md"
+
+    Note over P: Only ~50 tokens returned
+
+    P->>F: Read research-report.md
+    Note over P: Full context now available<br/>• Implements with complete understanding<br/>• Can debug because it knows the plan
+
+    Note over P,S: Result: Implementation succeeds, debugging is possible
 ```
 
 Conversation history gets compacted. Files don't.
@@ -685,33 +656,22 @@ The specific version gets useful research. The vague version gets generic docume
 
 ## Model Selection Strategy
 
-```
-┌─────────────────────────────────────────────────────────────┐
-│                    MODEL SELECTION                          │
-├─────────────────────────────────────────────────────────────┤
-│                                                             │
-│   Task Type              Model           Cost/Speed         │
-│   ─────────              ─────           ──────────         │
-│   Simple routing         Haiku           $0.25/M  ⚡⚡⚡      │
-│   Text extraction        Haiku           $0.25/M  ⚡⚡⚡      │
-│   Classification         Haiku           $0.25/M  ⚡⚡⚡      │
-│   Research (simple)      Haiku           $0.25/M  ⚡⚡⚡      │
-│                                                             │
-│   Code review            Sonnet          $3/M     ⚡⚡       │
-│   Implementation         Sonnet          $3/M     ⚡⚡       │
-│   Analysis               Sonnet          $3/M     ⚡⚡       │
-│   Research (complex)     Sonnet          $3/M     ⚡⚡       │
-│                                                             │
-│   Complex reasoning      Opus            $15/M    ⚡        │
-│   Architecture decisions Opus            $15/M    ⚡        │
-│   Edge case handling     Opus            $15/M    ⚡        │
-│   Research (critical)    Opus            $15/M    ⚡        │
-│                                                             │
-│   Rule: Use the cheapest model that solves the problem.     │
-│   Most tasks are Haiku tasks. Don't over-engineer.          │
-│                                                             │
-└─────────────────────────────────────────────────────────────┘
-```
+| Task Type | Model | Cost/M | Speed |
+|-----------|-------|--------|-------|
+| Simple routing | Haiku | $0.25 | ⚡⚡⚡ |
+| Text extraction | Haiku | $0.25 | ⚡⚡⚡ |
+| Classification | Haiku | $0.25 | ⚡⚡⚡ |
+| Research (simple) | Haiku | $0.25 | ⚡⚡⚡ |
+| Code review | Sonnet | $3 | ⚡⚡ |
+| Implementation | Sonnet | $3 | ⚡⚡ |
+| Analysis | Sonnet | $3 | ⚡⚡ |
+| Research (complex) | Sonnet | $3 | ⚡⚡ |
+| Complex reasoning | Opus | $15 | ⚡ |
+| Architecture decisions | Opus | $15 | ⚡ |
+| Edge case handling | Opus | $15 | ⚡ |
+| Research (critical) | Opus | $15 | ⚡ |
+
+> **Rule:** Use the cheapest model that solves the problem. Most tasks are Haiku tasks. Don't over-engineer.
 
 For researchers:
 - **Haiku:** Documentation lookup, simple API pattern research, file structure analysis
@@ -773,47 +733,31 @@ System prompts define what the agent does. Tools define how it does it. Model se
 
 ## The Data Flow
 
-```
-┌─────────────────────────────────────────────────────────────┐
-│                FILE-BASED CONTEXT FLOW                      │
-├─────────────────────────────────────────────────────────────┤
-│                                                             │
-│   ┌──────────────────────────────────────────────────────┐  │
-│   │                   PARENT AGENT                        │  │
-│   │                                                       │  │
-│   │   Conversation    ──────────┐                        │  │
-│   │   History                   │                        │  │
-│   │   (compacts)                │                        │  │
-│   │                             ▼                        │  │
-│   │                    ┌─────────────┐                   │  │
-│   │                    │ context.md  │                   │  │
-│   │                    │ (persists)  │                   │  │
-│   │                    └──────┬──────┘                   │  │
-│   │                           │                          │  │
-│   └───────────────────────────┼──────────────────────────┘  │
-│                               │                             │
-│                               ▼                             │
-│   ┌──────────────────────────────────────────────────────┐  │
-│   │                   SUB-AGENT                           │  │
-│   │                                                       │  │
-│   │   Reads context.md ─────────────┐                    │  │
-│   │                                 │                    │  │
-│   │   Does research                 │                    │  │
-│   │                                 ▼                    │  │
-│   │                    ┌────────────────────┐            │  │
-│   │                    │ research-report.md │            │  │
-│   │                    │    (persists)      │            │  │
-│   │                    └────────────────────┘            │  │
-│   │                                                       │  │
-│   └───────────────────────────────────────────────────────┘  │
-│                               │                             │
-│                               ▼                             │
-│   Parent reads research-report.md                           │
-│   → Full context available                                  │
-│   → Can implement correctly                                 │
-│   → Can debug if issues arise                               │
-│                                                             │
-└─────────────────────────────────────────────────────────────┘
+```mermaid
+flowchart TB
+    subgraph Parent["PARENT AGENT"]
+        CH[Conversation History<br/>compacts over time]
+        CH --> CTX[context.md<br/>persists]
+    end
+
+    subgraph Sub["SUB-AGENT"]
+        READ[Reads context.md]
+        RESEARCH[Does research]
+        REPORT[research-report.md<br/>persists]
+        READ --> RESEARCH --> REPORT
+    end
+
+    CTX --> READ
+    REPORT --> RESULT
+
+    subgraph RESULT[Parent reads research-report.md]
+        R1[Full context available]
+        R2[Can implement correctly]
+        R3[Can debug if issues arise]
+    end
+
+    style CTX fill:#c8e6c9
+    style REPORT fill:#c8e6c9
 ```
 
 Conversation history compacts. Files don't. This is the key insight.

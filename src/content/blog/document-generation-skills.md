@@ -15,84 +15,38 @@ This is Part 1 of a series on AI document skills. We'll cover the core pattern, 
 
 ## The Core Problem: Manual Documents Don't Scale
 
-```
-┌─────────────────────────────────────────────────────────────┐
-│              TRADITIONAL DOCUMENT WORKFLOW                   │
-├─────────────────────────────────────────────────────────────┤
-│                                                             │
-│   Data arrives                                              │
-│        │                                                    │
-│        ▼                                                    │
-│   ┌─────────────────┐                                       │
-│   │ Analyst opens   │ ←── 10 minutes                       │
-│   │ Excel template  │                                       │
-│   └────────┬────────┘                                       │
-│            │                                                │
-│            ▼                                                │
-│   ┌─────────────────┐                                       │
-│   │ Copy-paste data │ ←── 30 minutes                       │
-│   │ Update formulas │                                       │
-│   │ Fix formatting  │                                       │
-│   └────────┬────────┘                                       │
-│            │                                                │
-│            ▼                                                │
-│   ┌─────────────────┐                                       │
-│   │ Create PowerPoint│ ←── 45 minutes                      │
-│   │ Summarize insights│                                     │
-│   │ Make it pretty   │                                      │
-│   └────────┬────────┘                                       │
-│            │                                                │
-│            ▼                                                │
-│   ┌─────────────────┐                                       │
-│   │ Generate PDF    │ ←── 15 minutes                       │
-│   │ Final review    │                                       │
-│   └────────┬────────┘                                       │
-│            │                                                │
-│   Total: 100 minutes, done quarterly = 6+ hours/year        │
-│   With 10 analysts = 60+ hours/year                         │
-│                                                             │
-└─────────────────────────────────────────────────────────────┘
+```mermaid
+flowchart TD
+    A([Data arrives]) --> B[Analyst opens<br/>Excel template]
+    B --> |10 minutes| C[Copy-paste data<br/>Update formulas<br/>Fix formatting]
+    C --> |30 minutes| D[Create PowerPoint<br/>Summarize insights<br/>Make it pretty]
+    D --> |45 minutes| E[Generate PDF<br/>Final review]
+    E --> |15 minutes| F[Total: 100 minutes]
+
+    F --> G["Quarterly = 6+ hours/year"]
+    G --> H["With 10 analysts = 60+ hours/year"]
+
+    style F fill:#ffcdd2
+    style H fill:#ffcdd2
 ```
 
 This is busy work. Highly paid knowledge workers doing copy-paste operations.
 
 ## The Pattern: Skills API Document Pipeline
 
-```
-┌─────────────────────────────────────────────────────────────┐
-│              SKILLS-BASED DOCUMENT PIPELINE                  │
-├─────────────────────────────────────────────────────────────┤
-│                                                             │
-│   Data arrives                                              │
-│        │                                                    │
-│        ▼                                                    │
-│   ┌─────────────────┐                                       │
-│   │ Skills API Call │ ←── 1-2 minutes per document         │
-│   │                 │                                       │
-│   │ "Generate Excel │                                       │
-│   │  with this data"│                                       │
-│   └────────┬────────┘                                       │
-│            │                                                │
-│            ▼                                                │
-│   ┌─────────────────┐                                       │
-│   │ Claude generates│                                       │
-│   │ • Excel with    │                                       │
-│   │   formulas,     │                                       │
-│   │   charts,       │                                       │
-│   │   formatting    │                                       │
-│   └────────┬────────┘                                       │
-│            │                                                │
-│            ▼                                                │
-│   ┌─────────────────┐                                       │
-│   │ Chain to PPTX   │ ←── 1-2 minutes                      │
-│   │ Chain to PDF    │ ←── 1-2 minutes                      │
-│   └────────┬────────┘                                       │
-│            │                                                │
-│   Total: 5-6 minutes, fully automated                       │
-│   Human review: 5 minutes                                   │
-│   95% reduction in manual effort                            │
-│                                                             │
-└─────────────────────────────────────────────────────────────┘
+```mermaid
+flowchart TD
+    A([Data arrives]) --> B["Skills API Call<br/>'Generate Excel with this data'"]
+    B --> |1-2 min| C[Claude generates<br/>Excel with formulas,<br/>charts, formatting]
+    C --> D[Chain to PPTX]
+    D --> |1-2 min| E[Chain to PDF]
+    E --> |1-2 min| F["Total: 5-6 minutes<br/>fully automated"]
+
+    F --> G["Human review: 5 minutes"]
+    G --> H["95% reduction in manual effort"]
+
+    style F fill:#c8e6c9
+    style H fill:#c8e6c9
 ```
 
 The Skills API generates professional documents with formulas, charts, and formatting. You describe what you want; Claude builds it.
@@ -438,33 +392,39 @@ Compare to manual:
 
 ## When This Works: Ideal Use Cases
 
-```
-┌─────────────────────────────────────────────────────────────┐
-│              IDEAL USE CASES FOR SKILLS                      │
-├─────────────────────────────────────────────────────────────┤
-│                                                             │
-│   ✓ Recurring reports (weekly, monthly, quarterly)          │
-│     Same structure, different data                          │
-│     High ROI from automation                                │
-│                                                             │
-│   ✓ Data-to-document conversion                             │
-│     JSON → Excel with formulas                              │
-│     CSV → PowerPoint summary                                │
-│     Metrics → PDF report                                    │
-│                                                             │
-│   ✓ Multi-format output from single source                  │
-│     One dataset → Excel + PPTX + PDF                        │
-│     Consistent data across all formats                      │
-│                                                             │
-│   ✓ Template-based generation                               │
-│     Defined structure, variable content                     │
-│     Professional formatting requirements                    │
-│                                                             │
-│   ✓ Batch processing                                        │
-│     Generate 50 client reports                              │
-│     Same prompt, different data files                       │
-│                                                             │
-└─────────────────────────────────────────────────────────────┘
+```mermaid
+flowchart LR
+    subgraph R["Recurring Reports"]
+        R1["Weekly, monthly, quarterly"]
+        R2["Same structure, different data"]
+    end
+
+    subgraph D["Data-to-Document"]
+        D1["JSON → Excel with formulas"]
+        D2["CSV → PowerPoint summary"]
+        D3["Metrics → PDF report"]
+    end
+
+    subgraph M["Multi-Format Output"]
+        M1["One dataset → Excel + PPTX + PDF"]
+        M2["Consistent data across formats"]
+    end
+
+    subgraph T["Template-Based"]
+        T1["Defined structure, variable content"]
+        T2["Professional formatting"]
+    end
+
+    subgraph B["Batch Processing"]
+        B1["Generate 50 client reports"]
+        B2["Same prompt, different data"]
+    end
+
+    style R fill:#c8e6c9
+    style D fill:#c8e6c9
+    style M fill:#c8e6c9
+    style T fill:#c8e6c9
+    style B fill:#c8e6c9
 ```
 
 ## When This Fails: Honest Limitations

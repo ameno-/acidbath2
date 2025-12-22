@@ -1,7 +1,0 @@
-{
-  "session_id": "2cba1873-f6e5-43f7-97cd-5d0ec29942ea",
-  "prompts": [
-    "/prime ",
-    "We are in the process of implementing a plan located at this directory that verifies the failing workflows .claude/plans/cached-fluttering-crane.md. During the process we uncovered that the directory structure created a key issue with the workflows failing We modified this application's directory structure to move the core agentic layer, Jerry the primary agent, into the root directory and all the other legacy applications moved into a legacy directory where they can be stored As a process of making that change, the Claude session crashed and so I lost some state and context Continue the work of verifying those workflows, making sure the new directory structure is appropriate, and then eventually continuing with the implementation of verifying the workflows "
-  ]
-}

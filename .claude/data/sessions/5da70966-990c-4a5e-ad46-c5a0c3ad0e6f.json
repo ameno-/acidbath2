@@ -1,8 +1,0 @@
-{
-  "session_id": "5da70966-990c-4a5e-ad46-c5a0c3ad0e6f",
-  "prompts": [
-    "/prime ",
-    "We will work on the last step of validation. The goal now is for me to manually run the validation or aspects of the validation and automate other aspects. I have a new test repo with a test application. Walk me through exporting Jerry, importing Jerry, starting Jerry, and configuring the environment variables. We will identify gaps or issues.\n\nKeep in mind once I do complete the migration over to the new repo, I will begin in a brand new cloud instance. So we must make sure that we write a comprehensive plan for this particular validation so that we can continue the conversation in various directories ",
-    "use /commit to push changes to main branch."
-  ]
-}

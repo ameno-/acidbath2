@@ -1,6 +1,0 @@
-{
-  "session_id": "6d50a3dc-3322-448a-b29b-17b02ef85ef2",
-  "prompts": [
-    "/generate_branch_name chore validate-b117e24b {\"number\": \"prompt-5f8534a7\", \"title\": \"Jerry validation test - add health check\", \"body\": \"Jerry validation test - add health check\"}"
-  ]
-}

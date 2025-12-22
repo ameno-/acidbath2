@@ -1,6 +1,0 @@
-{
-  "session_id": "c644e436-a21c-4e87-bda5-b568c90a1754",
-  "prompts": [
-    "/commit sdlc_implementor feature {\"number\": \"29\", \"title\": \"Refresh PRs\", \"body\": \"/feature\\n/adw_plan_build_iso\\n\\nAfter writing lots of code, merging PRs and ensure they're kept up to date is a chore. \\nWe must enhance the /review workflow with the capability to start multiple review processes in parallel.\\nWe must enhance the /review workflow with the capability to review all open branches in PRs and MRs and attach a review.\\nWe must enhance the /review workflow with the capability to upload a simple screenshot for non-ui types of changes. screenshot the diff, or draw an abstract interpretive picture of the changes and upload that to a bucket. We must have some evidence of a successful run\\nWe also must improve the review workflow to always pull and merge latest changes from main.\"}"
-  ]
-}

@@ -1,6 +1,0 @@
-{
-  "session_id": "b5d8abc9-e163-4a8f-a962-a1bfa0919307",
-  "prompts": [
-    "I recently worked on an export flow that migrated Jerry over to the /dev/jerry-next directory. It seems like key workflows for Jerry are working, but there appear to be an internal problem when comitting code and opening new MRs in gitlab.  Here is the original issue: https://gitlab.com/ameno13/jerry-next/-/issues/2 adw_id: 0661e1c4\n\nKeep in mind that this workflow was run in the jerry-next dir and repo.\n\nWe need to debug what the issue with this workflow was, fix that bug in Jerry source code, re-export jerry to jerry-next, verify adw flows can complete e2e in gitlab"
-  ]
-}

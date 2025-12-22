@@ -1,8 +1,0 @@
-{
-  "session_id": "192529a0-07f7-4243-9da5-575897df8ae5",
-  "prompts": [
-    "Tagging on this site appears to be broken. We correctly add tags, but theres no way to navigate to articles with similar tabs fix and implement",
-    "Tag pages are working. but the links on the page haven't been created yet. Let's use playwright to add automated tests we can run on each blog post page. Each test should enforce standards defined in content strategy. for now, let's make sure content, links, structure, mermaid, images are loading correctly and the page speed is high. We care most about search ranking so include metrics related to SEO in our regression tests",
-    "Good. commit all changes to feature branch. open PR. merge and deploy"
-  ]
-}

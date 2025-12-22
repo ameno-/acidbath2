@@ -1,6 +1,0 @@
-{
-  "session_id": "3d87481a-1414-4628-8415-eb941de71f5d",
-  "prompts": [
-    "/generate_branch_name feature test {\"number\": \"prompt-68d7d580\", \"title\": \"--dry-run\", \"body\": \"--dry-run\"}"
-  ]
-}

@@ -1,7 +1,0 @@
-{
-  "session_id": "7d8c6dea-51d5-4871-87e8-4cb420a3de38",
-  "prompts": [
-    "/init_worktree ",
-    "What are the implications of picking a directory? For my current issue, I want to create a separate worktree to trigger a new adw flow to fix a chore."
-  ]
-}

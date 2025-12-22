@@ -1,6 +1,0 @@
-{
-  "session_id": "ed22b2f8-9364-4ad5-acb6-d5fe5da65e62",
-  "prompts": [
-    "/import_workflow /Users/ameno/dev/tac/tac-8/tac8_app5__nlq_to_sql_aea/adws/adw_triggers/trigger_webhook.py adapt /Users/ameno/dev/tac/tac-8/jerry/adws/adw_triggers/trigger_github.py"
-  ]
-}

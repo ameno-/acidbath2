@@ -1,8 +1,0 @@
-{
-  "session_id": "e5084cf5-06dd-4021-a884-55ead31f6ff1",
-  "prompts": [
-    "/prime ",
-    "There is a bug in the rebase adw we just implemented. I'm trying to use the \"patch\" workflow to fix like so: uv run adws/adw_patch_iso.py 5 c2b8a2d0 but the \"create patch plan\" always fails. This issue was not caught by the adw verification flows. I want to fix this issue in the patch workflow, but we must also ensure validation is checking for base cases like this",
-    "Let's commit these changes and open a new PR"
-  ]
-}

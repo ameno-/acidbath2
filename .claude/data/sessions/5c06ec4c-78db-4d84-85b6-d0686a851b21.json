@@ -1,7 +1,0 @@
-{
-  "session_id": "5c06ec4c-78db-4d84-85b6-d0686a851b21",
-  "prompts": [
-    "/Users/ameno/dev/tac/tac-8/tac-4/adws/adw_plan_build.py",
-    "Will /import_workflow reject/exclude workflows that are already in use? /commit for example. How are dedupes handled?"
-  ]
-}

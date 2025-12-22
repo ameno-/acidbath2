@@ -1,6 +1,0 @@
-{
-  "session_id": "33afad5d-d6a3-4757-87e2-7f536fdd7327",
-  "prompts": [
-    "/commit sdlc_planner bug {\"number\": \"19\", \"title\": \"Isolate worktree env better\", \"body\": \"There is a bug during worktree dev where certain files use hardcoded worktree paths. This can subseqyently cause issues during dev when bootstrapping workflows. Investigate this issue and develop a workaround to ensure isolated envs without polluting main context. A viable solution is to reset or delete these files before starting new workflows\\n\\n[.mcp.json](https://github.com/ameno-/jerry/pull/17/files#diff-d5d3368a61f8d02e085f7a4cb666ee471cf5383690a04b64c839c6ae2080ceb9)\\n[.ports.env](https://github.com/ameno-/jerry/pull/17/files#diff-e2fe5c6b2c4c6428e95e3c4fe07f257c09ab6bda517ab831e4f0e5999591ae8b)\\n[playwright-mcp-config.json](https://github.com/ameno-/jerry/pull/17/files#diff-8d7a667c2aa5248d34bd00033488936850b18d73f8f1c367ebf07ae330de2297)\"}"
-  ]
-}

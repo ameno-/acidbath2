@@ -1,6 +1,0 @@
-{
-  "session_id": "92dbce3d-1f66-4c88-b2fc-7a99469c7ca5",
-  "prompts": [
-    "/feature 10 5934eeda {\"number\": \"10\", \"title\": \"Import review workflow\", \"body\": \"\\nadw_plan_build_iso\\nadw_import_workflow\\n\\nImport this workflow from. a legacy app. Make sure it passes validation and documentation is updated after implementation\\n\\npath: \\\"legacy/tac8_app5__nlq_to_sql_aea/adws/adw_review_iso.py\\\"\\nmode: merge\\n\"}"
-  ]
-}

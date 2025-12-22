@@ -1,8 +1,0 @@
-{
-  "session_id": "d8c8379d-4395-4e57-973b-3a6afbb92a41",
-  "prompts": [
-    "/prime ",
-    "We need to test the new workflows implemented in this branch. Let's start with export. How can we best verify it's working? can we generate a one-time simple client/app to verify this use-case? if so, a ts tech stack to start is best",
-    "Where can I find the artifacts and test the jerry implementation?"
-  ]
-}

@@ -1,8 +1,0 @@
-{
-  "session_id": "116ddb5b-338a-4fc9-a245-cdfec54a75d4",
-  "prompts": [
-    "/prime ",
-    "I need to export and install jerry in a new directory: /Users/ameno/dev/ask-anna-ai/package.json. This app also has a Gitlab repo setup and configured. I want to perform a Lvl 5 validation. Give me the exact comand(s) to run in order to export, import, bootstrap jerry into this new application. I will run commands myself and come back to this session for debugging or issues",
-    "On second thought, I want you to do the migration for me. do everything including running the validations. I've also created a test issue so we can validate the gl cli and full plan/build/review/pr workflows"
-  ]
-}

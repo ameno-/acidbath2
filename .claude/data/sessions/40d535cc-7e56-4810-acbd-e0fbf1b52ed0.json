@@ -1,8 +1,0 @@
-{
-  "session_id": "40d535cc-7e56-4810-acbd-e0fbf1b52ed0",
-  "prompts": [
-    "/prime ",
-    "Review the plan in @ai_docs/genesis/plan.md and review @ai_docs/genesis/phase0_foundation_report.md for the last step completed. Lets continue with the next phase",
-    "A key step missing in the import workflow is validating the actual adw. What methodology can be used to actually confirm that an ADW is working? Each imported ADW must define how it can be tested This is improving internal documentation for every imported ADW We must also make sure we update Jerry's README after each imported ADW And import the shared README in the ADW directory for Jerry We must improve validation so that after a workflow is imported, it is available to Jerry, Can be quickly tested And is confirmed ready to use. Some workflows may have major effects so we must be careful about how we test. We cannot introduce huge effects but there must be a way to verify. We can send a command and short circuit the logic. For example: Test a subset of the functionality. Also keep in mind this workflow must be as autonomous as possible. Intervention from the user should only be used when absolutely needed "
-  ]
-}

@@ -1,6 +1,0 @@
-{
-  "session_id": "7f462105-6449-4c84-95b9-1f694d4b2f90",
-  "prompts": [
-    "/classify_issue {\"number\": \"prompt-4375b91c\", \"title\": \"--dry-run\", \"body\": \"--dry-run\"}"
-  ]
-}

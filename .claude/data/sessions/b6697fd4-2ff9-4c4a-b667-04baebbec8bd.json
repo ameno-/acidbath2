@@ -1,6 +1,0 @@
-{
-  "session_id": "b6697fd4-2ff9-4c4a-b667-04baebbec8bd",
-  "prompts": [
-    "/feature 50 1cc4d84c {\"number\": \"50\", \"title\": \"Unit tests\", \"body\": \"Add meaningful test coverage to every ADW, script, or executable in Jerry. Focus on testing key functionality and consider refactors and decomposition to improve consistency of key adw workflows and modules.\"}"
-  ]
-}

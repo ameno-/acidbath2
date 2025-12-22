@@ -1,6 +1,0 @@
-{
-  "session_id": "bba0bcc7-016f-4c4f-8afe-5c68ec516f55",
-  "prompts": [
-    "/import_workflow /Users/ameno/dev/tac/tac-8/tac8_app5__nlq_to_sql_aea/adws/adw_ship_iso.py adapt /Users/ameno/dev/tac/tac-8/jerry/adws/adw_ship_iso.py"
-  ]
-}

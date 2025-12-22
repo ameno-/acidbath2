@@ -1,6 +1,0 @@
-{
-  "session_id": "2e73580a-7152-44d8-9ef4-ed3197a3c9e5",
-  "prompts": [
-    "/pull_request feature-issue-18-adw-53fe41e6-export-import-bootstrap-jerry {\"number\": \"18\", \"title\": \"Export, import, bootstrap jerry\", \"body\": \"adw_plan_build_iso\\nfeature\\nmodel: Heavy\\n\\nJerry needs the ability to export itself, be imported, and bootstrapped. The goal for Jerry is that it can be deployed to any code repository. The current directories include an apps directory which is irrelevant and unused. Must first get rid of those two directories. We must then define clearly workflows or implementations for us to export Jerry in an easy way. Potentially as a Bash script or some way that we can execute in a directory that would set up all the files that are needed. Inside of that directory, install all the necessary packages and dependencies that Jerry needs to run and bootstraps Jerry and verifies that it's ready to run workflows. \"} specs/feature-53fe41e6-export-import-bootstrap-jerry.md 53fe41e6"
-  ]
-}

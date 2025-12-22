@@ -1,6 +1,0 @@
-{
-  "session_id": "0e3073dc-5d1d-42ef-886d-b5afe3067858",
-  "prompts": [
-    "/generate_branch_name feature prompt:Test patch feature {\"number\": \"prompt-4375b91c\", \"title\": \"--dry-run\", \"body\": \"--dry-run\"}"
-  ]
-}

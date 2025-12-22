@@ -1,7 +1,0 @@
-{
-  "session_id": "824c98ad-c099-479b-9642-6f19008f1353",
-  "prompts": [
-    "There is a new blog content in the /brainstorm directory. Review that document, review the @README.md and gain a updated understanding of this codebase and blog. Next, write a new blog post for finance-skills but make it a series where we abstract the overall implementation to be more generic. This first post will focus ",
-    "Making an actual POC of the implementation spoken about in the source documentation. Also use all of the references. Make sure you visit every single Markdown file, every single pattern and extract values for the blog post that you write "
-  ]
-}

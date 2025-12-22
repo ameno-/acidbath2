@@ -1,8 +1,0 @@
-{
-  "session_id": "e6f531b9-fa0f-447d-9657-97e3dd96cf3a",
-  "prompts": [
-    "/prime ",
-    "I ran into an issue running this workflow: uv run adws/adw_plan_build_iso.py 1. debug the output and fix the issue in this adw",
-    "continue"
-  ]
-}

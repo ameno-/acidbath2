@@ -1,6 +1,0 @@
-{
-  "session_id": "4fb4ccb4-4cfb-40a3-b849-582bb44e7757",
-  "prompts": [
-    "/import_workflow /Users/ameno/dev/tac/tac-8/tac8_app2__multi_agent_todone/.claude/commands/init_worktree.md adapt /Users/ameno/dev/tac/tac-8/jerry/.claude/commands/init_worktree.md"
-  ]
-}

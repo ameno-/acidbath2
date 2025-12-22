@@ -1,6 +1,0 @@
-{
-  "session_id": "c8c14cb2-f4f8-4ba1-bc06-903389b44eff",
-  "prompts": [
-    "/classify_issue {\"number\": \"prompt-e83afeba\", \"title\": \"Jerry validation - add test comment\", \"body\": \"Jerry validation - add test comment\"}"
-  ]
-}

@@ -10,16 +10,16 @@ interface Props {
   title?: string;
 }
 
-const { headings, title = 'Contents' } = Astro.props;
+const { headings, title = 'On This Page' } = Astro.props;
 
 // Filter to only show h2 and h3 headings
 const tocHeadings = headings.filter(h => h.depth >= 2 && h.depth <= 3);
 ---
 
 {tocHeadings.length > 0 && (
-  <nav class="toc" aria-label="Table of contents">
-    <details open>
-      <summary class="toc-title">{title}</summary>
+  <aside class="toc-sidebar" aria-label="Table of contents">
+    <nav class="toc-nav">
+      <div class="toc-header">{title}</div>
       <ul class="toc-list">
         {tocHeadings.map((heading) => (
           <li class={`toc-item toc-depth-${heading.depth}`}>
@@ -29,69 +29,9 @@ const tocHeadings = headings.filter(h => h.depth >= 2 && h.depth <= 3);
           </li>
         ))}
       </ul>
-    </details>
-  </nav>
+    </nav>
+  </aside>
 )}
-
-<style>
-  .toc {
-    margin: var(--spacing-line) 0;
-    padding: var(--spacing-line) 1ch;
-    border: var(--border-width-thick) solid var(--color-foreground-alt);
-    background: var(--color-background-alt);
-  }
-
-  .toc-title {
-    font-weight: 800;
-    text-transform: uppercase;
-    cursor: pointer;
-    user-select: none;
-  }
-
-  .toc-list {
-    list-style: none;
-    padding: 0;
-    margin: var(--spacing-line) 0 0;
-  }
-
-  .toc-item {
-    margin: 0;
-    padding: 0;
-    line-height: 1.4;
-  }
-
-  .toc-item + .toc-item {
-    margin-top: 0.5rem;
-  }
-
-  .toc-depth-3 {
-    padding-left: 2ch;
-  }
-
-  .toc-depth-3::before {
-    content: "└─ ";
-    color: var(--color-foreground-alt);
-  }
-
-  .toc-link {
-    color: var(--color-foreground-alt);
-    text-decoration: none;
-    transition: color 0.15s ease;
-  }
-
-  .toc-link:hover {
-    color: var(--color-accent);
-    text-decoration: underline;
-  }
-
-  /* Sticky TOC for desktop */
-  @media (min-width: 1200px) {
-    .toc {
-      position: sticky;
-      top: var(--spacing-line);
-    }
-  }
-</style>
 
 <script>
   // Highlight current section in TOC
@@ -104,33 +44,52 @@ const tocHeadings = headings.filter(h => h.depth >= 2 && h.depth <= 3);
 
     if (headings.length === 0) return;
 
+    // Track current active heading
+    let currentActive: string | null = null;
+
     const observer = new IntersectionObserver(
       (entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            const id = entry.target.id;
+        // Find the first heading that's in view
+        const visibleEntries = entries.filter(e => e.isIntersecting);
+
+        if (visibleEntries.length > 0) {
+          // Get the topmost visible heading
+          const topEntry = visibleEntries.reduce((prev, curr) => {
+            return prev.boundingClientRect.top < curr.boundingClientRect.top ? prev : curr;
+          });
+
+          const id = topEntry.target.id;
+          if (id !== currentActive) {
+            currentActive = id;
             tocLinks.forEach(link => {
-              link.classList.toggle('active', link.getAttribute('href') === `#${id}`);
+              const isActive = link.getAttribute('href') === `#${id}`;
+              link.classList.toggle('active', isActive);
+
+              // Also add visual indicator to parent li
+              link.parentElement?.classList.toggle('is-active', isActive);
             });
           }
-        });
+        }
       },
       {
-        rootMargin: '-20% 0px -60% 0px',
-        threshold: 0
+        rootMargin: '-10% 0px -70% 0px',
+        threshold: [0, 0.5, 1]
       }
     );
 
     headings.forEach(heading => observer.observe(heading));
+
+    // Cleanup on page transitions
+    return () => {
+      headings.forEach(heading => observer.unobserve(heading));
+    };
   }
 
-  document.addEventListener('DOMContentLoaded', initTocHighlight);
+  // Initialize
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initTocHighlight);
+  } else {
+    initTocHighlight();
+  }
   document.addEventListener('astro:after-swap', initTocHighlight);
 </script>
-
-<style is:global>
-  .toc-link.active {
-    color: var(--color-accent);
-    font-weight: 600;
-  }
-</style>

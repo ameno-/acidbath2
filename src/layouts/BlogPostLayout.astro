@@ -80,69 +80,72 @@ const structuredData = {
   {difficulty && <meta name="ai-difficulty" content={difficulty} slot="head" />}
   {category && <meta name="ai-category" content={category} slot="head" />}
 
-  <article>
-    <header>
-      <!-- Post metadata badges -->
-      <div class="post-badges">
-        {category && <span class="badge badge-category">{category}</span>}
-        {difficulty && <span class="badge badge-difficulty">{difficulty}</span>}
-        <span class="badge badge-time">{readingTimeText}</span>
-      </div>
-
-      <h1>{title}</h1>
-
-      <div class="meta">
-        <time datetime={pubDate.toISOString()}>{formattedDate}</time>
-        {updatedDate && (
-          <span> · Updated: <time datetime={updatedDate.toISOString()}>{formattedUpdatedDate}</time></span>
-        )}
-        <span> · {author}</span>
-      </div>
-
-      {tags.length > 0 && (
-        <div class="tags">
-          {tags.map((tag) => (
-            <span class="tag">[{tag}]</span>
-          ))}
-        </div>
-      )}
-    </header>
-
-    <hr />
-
-    {banner && (
-      <div class="post-banner">
-        <img src={banner} alt={title} class="post-banner-img" />
-      </div>
-    )}
-
-    <!-- TL;DR section for AI and quick readers -->
-    {tldr && (
-      <div class="tldr-section">
-        <h2>TL;DR</h2>
-        <p>{tldr}</p>
-      </div>
-    )}
-
-    <!-- Table of Contents -->
+  <div class="post-layout">
+    <!-- Left Sidebar: Table of Contents -->
     <TableOfContents headings={headings} />
 
-    <div class="prose">
-      <slot />
-    </div>
+    <!-- Main Content -->
+    <article class="post-content">
+      <header>
+        <!-- Post metadata badges -->
+        <div class="post-badges">
+          {category && <span class="badge badge-category">{category}</span>}
+          {difficulty && <span class="badge badge-difficulty">{difficulty}</span>}
+          <span class="badge badge-time">{readingTimeText}</span>
+        </div>
 
-    <!-- Key Takeaways section -->
-    {keyTakeaways && keyTakeaways.length > 0 && (
-      <div class="takeaways-section">
-        <h2>Key Takeaways</h2>
-        <ol class="takeaways-list">
-          {keyTakeaways.map((takeaway) => (
-            <li>{takeaway}</li>
-          ))}
-        </ol>
+        <h1>{title}</h1>
+
+        <div class="meta">
+          <time datetime={pubDate.toISOString()}>{formattedDate}</time>
+          {updatedDate && (
+            <span> · Updated: <time datetime={updatedDate.toISOString()}>{formattedUpdatedDate}</time></span>
+          )}
+          <span> · {author}</span>
+        </div>
+
+        {tags.length > 0 && (
+          <div class="tags">
+            {tags.map((tag) => (
+              <span class="tag">[{tag}]</span>
+            ))}
+          </div>
+        )}
+      </header>
+
+      <hr />
+
+      {banner && (
+        <div class="post-banner">
+          <img src={banner} alt={title} class="post-banner-img" />
+        </div>
+      )}
+
+      <!-- TL;DR section for AI and quick readers -->
+      {tldr && (
+        <div class="tldr-section">
+          <h2>TL;DR</h2>
+          <p>{tldr}</p>
+        </div>
+      )}
+
+      <div class="prose">
+        <slot />
       </div>
-    )}
-  </article>
+
+      <!-- Key Takeaways section -->
+      {keyTakeaways && keyTakeaways.length > 0 && (
+        <div class="takeaways-section">
+          <h2>Key Takeaways</h2>
+          <ol class="takeaways-list">
+            {keyTakeaways.map((takeaway) => (
+              <li>{takeaway}</li>
+            ))}
+          </ol>
+        </div>
+      )}
+    </article>
+  </div>
 
   <!-- Code block enhancements (copy button) -->
   <CodeEnhancer />
@@ -287,6 +290,30 @@ const structuredData = {
 </BaseLayout>
 
 <style>
+  /* Two-column layout for desktop */
+  .post-layout {
+    display: block;
+    max-width: 80ch;
+    margin: 0 auto;
+  }
+
+  /* Desktop: Side-by-side layout */
+  @media (min-width: 1100px) {
+    .post-layout {
+      display: grid;
+      grid-template-columns: 220px 1fr;
+      gap: 3rem;
+      max-width: 100%;
+      width: calc(80ch + 220px + 3rem);
+      align-items: start;
+    }
+  }
+
+  .post-content {
+    max-width: 80ch;
+    min-width: 0; /* Prevent grid blowout */
+  }
+
   /* Post badges (category, difficulty, reading time) */
   .post-badges {
     display: flex;
@@ -392,5 +419,103 @@ const structuredData = {
     color: var(--color-text-muted, #888);
     font-size: 0.85rem;
     margin-right: 0.5ch;
+  }
+</style>
+
+<style is:global>
+  /* TOC Sidebar Styles */
+  .toc-sidebar {
+    display: none; /* Hidden on mobile by default */
+  }
+
+  @media (min-width: 1100px) {
+    .toc-sidebar {
+      display: block;
+      position: sticky;
+      top: var(--spacing-line);
+      max-height: calc(100vh - 2 * var(--spacing-line));
+      overflow-y: auto;
+      padding-right: 1ch;
+    }
+
+    .toc-nav {
+      padding: 0;
+    }
+
+    .toc-header {
+      font-size: 0.75rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--color-foreground-alt);
+      margin-bottom: 1rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 1px solid var(--color-foreground-alt);
+    }
+
+    .toc-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .toc-item {
+      margin: 0;
+      padding: 0;
+      line-height: 1.3;
+    }
+
+    .toc-item + .toc-item {
+      margin-top: 0.5rem;
+    }
+
+    .toc-depth-3 {
+      padding-left: 1rem;
+      font-size: 0.85em;
+    }
+
+    .toc-link {
+      display: block;
+      color: var(--color-foreground-alt);
+      text-decoration: none;
+      font-size: 0.85rem;
+      padding: 0.25rem 0;
+      padding-left: 0.75rem;
+      border-left: 2px solid transparent;
+      transition: all 0.15s ease;
+    }
+
+    .toc-link:hover {
+      color: var(--color-foreground);
+    }
+
+    .toc-link.active {
+      color: var(--color-accent);
+      border-left-color: var(--color-accent);
+      font-weight: 600;
+    }
+
+    .toc-item.is-active > .toc-link {
+      color: var(--color-accent);
+      border-left-color: var(--color-accent);
+    }
+
+    /* Scrollbar styling for TOC */
+    .toc-sidebar::-webkit-scrollbar {
+      width: 4px;
+    }
+
+    .toc-sidebar::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    .toc-sidebar::-webkit-scrollbar-thumb {
+      background: var(--color-foreground-alt);
+      border-radius: 2px;
+    }
+
+    .toc-sidebar::-webkit-scrollbar-thumb:hover {
+      background: var(--color-foreground);
+    }
   }
 </style>

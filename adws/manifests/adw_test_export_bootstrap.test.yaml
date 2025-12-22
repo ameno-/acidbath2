@@ -1,0 +1,57 @@
+name: adw_test_export_bootstrap
+description: E2E test harness for Jerry export/bootstrap/validate workflows
+category: testing
+version: "1.0.0"
+type: executable
+
+effects:
+  creates_files: true
+  modifies_worktree: false
+  runs_tests: true
+
+module_dependencies: []
+
+env_vars:
+  required: []
+  optional:
+    - ANTHROPIC_API_KEY  # For validation level 3 dry-run
+
+validation:
+  import_test:
+    enabled: true
+    timeout: 30
+  cli_test:
+    enabled: true
+    command: "--help"
+  dry_run:
+    enabled: true
+    command: "--dry-run"
+    timeout: 120
+
+usage:
+  command: "uv run adws/adw_test_export_bootstrap.py [OPTIONS]"
+  examples:
+    - description: "Run full E2E test"
+      command: "./adws/adw_test_export_bootstrap.py"
+    - description: "Keep artifacts for debugging"
+      command: "./adws/adw_test_export_bootstrap.py --keep-artifacts"
+    - description: "Dry run to preview actions"
+      command: "./adws/adw_test_export_bootstrap.py --dry-run"
+    - description: "Skip smoke tests"
+      command: "./adws/adw_test_export_bootstrap.py --skip-smoke"
+
+test_phases:
+  1: "Setup - Copy fixture to temp directory"
+  2: "Export - Run jerry_export.py to create package"
+  3: "Bootstrap - Run jerry_bootstrap.sh to install Jerry"
+  4: "Validate - Run jerry_validate.py to verify installation"
+  5: "Smoke Test - Verify app structure and ADW scripts"
+  6: "Cleanup - Remove temp artifacts"
+
+dependencies:
+  scripts:
+    - "adws/jerry_export.py"
+    - "jerry_bootstrap.sh"
+    - "adws/jerry_validate.py"
+  fixtures:
+    - "tests/fixtures/vite-bun-app"

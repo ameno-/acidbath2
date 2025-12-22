@@ -1,0 +1,11 @@
+{
+  "name": "extract_educational_value",
+  "category": "educational",
+  "description": "Extract Educational Value pattern",
+  "fabric_source": "/Users/ameno/.config/fabric/patterns/extract_educational_value",
+  "synced_at": "2025-12-16T04:31:34.222948+00:00",
+  "files": [
+    "system.md"
+  ],
+  "checksum": "sha256:9463339ea1afab2130edc741a97147d3ed0b80f9a65367a56ff2cb303b7cd55c"
+}

@@ -1,0 +1,12 @@
+{
+  "name": "rate_content",
+  "category": "core",
+  "description": "Rate Content pattern",
+  "fabric_source": "/Users/ameno/.config/fabric/patterns/rate_content",
+  "synced_at": "2025-12-16T04:31:34.186316+00:00",
+  "files": [
+    "system.md",
+    "user.md"
+  ],
+  "checksum": "sha256:4ad2ff01c242c85e9d4b35786fb6f77fd74983893b9e9b39938ed0a92453cd9f"
+}

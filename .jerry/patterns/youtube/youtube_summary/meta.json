@@ -1,0 +1,11 @@
+{
+  "name": "youtube_summary",
+  "category": "youtube",
+  "description": "Youtube Summary pattern",
+  "fabric_source": "/Users/ameno/.config/fabric/patterns/youtube_summary",
+  "synced_at": "2025-12-16T04:31:34.197417+00:00",
+  "files": [
+    "system.md"
+  ],
+  "checksum": "sha256:761a6e8d8e1ffdafd1121f8ce8350c9cb6535be79dd5e4658692cf92a5de749e"
+}

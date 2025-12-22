@@ -1,0 +1,20 @@
+{
+  "session_id": "1728037f-e57d-4fde-8966-7f52751356c3",
+  "prompts": [
+    "1",
+    "No, let's create a new orchestrator agent that can manage sub the main youtube analyzer and handles triage. Migrate logic out of sonnet/haiku agents related to orchestration and use the new agent for that work",
+    "Option 3, then let's refactor and invoke orchestrator directly and allow the orchestrator to kick off other agents",
+    "restarted, try again",
+    "restarted, let's retry orchestration",
+    "b",
+    "restart",
+    "Option 3 sounds the most appealing. Plan that architecture a little bit more for me ",
+    "I want the option to execute one slash command to perform complete analysis or just one step",
+    "/yt_full https://youtube.com/watch?v=7B2HJr0Y68",
+    "/yt_full https://www.youtube.com/watch?v=UqfxuQKuMo8",
+    "continue",
+    "continue",
+    "What permissions did I explitely give you for this session? List them out",
+    "What permissions did I explitely give you for this session? List them out"
+  ]
+}

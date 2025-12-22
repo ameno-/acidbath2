@@ -1,0 +1,11 @@
+{
+  "name": "extract_agent_opportunities",
+  "category": "youtube",
+  "description": "Extract Agent Opportunities pattern",
+  "fabric_source": "/Users/ameno/.config/fabric/patterns/extract_agent_opportunities",
+  "synced_at": "2025-12-16T04:31:34.205670+00:00",
+  "files": [
+    "system.md"
+  ],
+  "checksum": "sha256:44dfd241624aad8bd81f8c8d1e82f01be4c8b9c21faac61a938b2d9792f77b75"
+}

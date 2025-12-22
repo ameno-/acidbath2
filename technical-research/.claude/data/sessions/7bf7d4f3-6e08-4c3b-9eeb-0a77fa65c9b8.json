@@ -1,0 +1,6 @@
+{
+  "session_id": "7bf7d4f3-6e08-4c3b-9eeb-0a77fa65c9b8",
+  "prompts": [
+    "This technical research directory is a branch of the yt_full analysis suite of commands and agents. I want to start customizing and optimzing the experience. I want you to migrate all the agents, hooks, code, etc, related to youtube analysis. ALL THE REQUIRED AND UESED  TOOLS. to this directory. After, test the migration with this youtube video: \"https://www.youtube.com/watch?v=9UdZhTnMrTA\". After the migration task has been completed, we'll work on refactoring the existing system inside of the global cloud configuration for YouTube. It must be generalized and be able to output to any directory provided as a parameter "
+  ]
+}

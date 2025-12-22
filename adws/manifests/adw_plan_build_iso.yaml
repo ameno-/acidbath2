@@ -1,0 +1,57 @@
+name: adw_plan_build_iso
+description: Compositional workflow that chains isolated planning and building phases
+category: composite
+effects:
+  creates_worktree: true  # Through sub-workflows
+  creates_branch: true    # Through sub-workflows
+  posts_github: false
+  modifies_files: true    # Through sub-workflows
+module_dependencies:
+  - adw_modules.workflow_ops
+sub_workflows:
+  - adw_plan_iso
+  - adw_build_iso
+env_vars:
+  required:
+    - ANTHROPIC_API_KEY  # Required by sub-workflows
+    - GITHUB_TOKEN       # Required by sub-workflows
+validation:
+  import_test:
+    enabled: true
+    timeout: 30
+  cli_test:
+    enabled: false
+    reason: "Composite workflow - CLI help exits with code 1"
+  dry_run:
+    enabled: true
+    command: "999 --dry-run"
+    expected_output: ["DRY RUN"]
+arguments:
+  required:
+    - name: issue_number
+      type: string
+      description: GitHub issue number to process
+  optional:
+    - name: adw_id
+      type: string
+      description: ADW identifier (auto-generated if not provided)
+    - name: --dry-run
+      type: flag
+      description: Validate without executing (passes to sub-workflows)
+workflow_steps:
+  - step: 1
+    name: Initialize ADW state
+    description: Ensure ADW ID and state file exist
+  - step: 2
+    name: Isolated Plan Phase
+    description: Execute adw_plan_iso.py for planning
+    sub_workflow: adw_plan_iso
+  - step: 3
+    name: Isolated Build Phase
+    description: Execute adw_build_iso.py for implementation
+    sub_workflow: adw_build_iso
+notes:
+  - This is a compositional workflow that orchestrates sub-workflows
+  - Sub-workflows communicate via adw_state.json in adws/.adw_state/
+  - Dry-run mode cascades to all sub-workflows
+  - Each sub-workflow has its own major effects (worktree, branch creation)

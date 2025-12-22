@@ -1,0 +1,11 @@
+{
+  "name": "get_wow_per_minute",
+  "category": "youtube",
+  "description": "Get Wow Per Minute pattern",
+  "fabric_source": "/Users/ameno/.config/fabric/patterns/get_wow_per_minute",
+  "synced_at": "2025-12-16T04:31:34.202958+00:00",
+  "files": [
+    "system.md"
+  ],
+  "checksum": "sha256:710487cbdab99b4d62cb97be02c4d0ba6bcdac1806169cf5395437d7f48becec"
+}

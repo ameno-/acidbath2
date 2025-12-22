@@ -1,0 +1,331 @@
+{
+  "version": "1.0.0",
+  "last_synced": "2025-12-16T04:31:34.242604+00:00",
+  "fabric_version": "1.4.0",
+  "source_patterns_count": 231,
+  "bundled_patterns_count": 24,
+  "categories": {
+    "core": {
+      "count": 7,
+      "patterns": [
+        "extract_wisdom",
+        "extract_insights",
+        "extract_recommendations",
+        "rate_content",
+        "create_summary",
+        "create_5_sentence_summary",
+        "extract_references"
+      ]
+    },
+    "youtube": {
+      "count": 4,
+      "patterns": [
+        "youtube_summary",
+        "extract_youtube_metadata",
+        "get_wow_per_minute",
+        "extract_agent_opportunities"
+      ]
+    },
+    "technical": {
+      "count": 5,
+      "patterns": [
+        "extract_technical_content",
+        "review_code",
+        "extract_poc",
+        "analyze_terraform_plan",
+        "analyze_logs"
+      ]
+    },
+    "educational": {
+      "count": 3,
+      "patterns": [
+        "extract_educational_value",
+        "create_knowledge_artifacts",
+        "create_flash_cards"
+      ]
+    },
+    "research": {
+      "count": 5,
+      "patterns": [
+        "analyze_paper",
+        "analyze_claims",
+        "analyze_threat_report",
+        "analyze_patent",
+        "extract_article_wisdom"
+      ]
+    },
+    "custom": {
+      "count": 0,
+      "patterns": []
+    }
+  },
+  "patterns": {
+    "extract_wisdom": {
+      "name": "extract_wisdom",
+      "category": "core",
+      "description": "Extract Wisdom pattern",
+      "fabric_source": "/Users/ameno/.config/fabric/patterns/extract_wisdom",
+      "synced_at": "2025-12-16T04:31:34.174646+00:00",
+      "files": [
+        "system.md"
+      ],
+      "checksum": "sha256:1dfc5719961081cde886470003c544c8397f659978474121b51f4ba87cdc1a09"
+    },
+    "extract_insights": {
+      "name": "extract_insights",
+      "category": "core",
+      "description": "Extract Insights pattern",
+      "fabric_source": "/Users/ameno/.config/fabric/patterns/extract_insights",
+      "synced_at": "2025-12-16T04:31:34.179938+00:00",
+      "files": [
+        "system.md"
+      ],
+      "checksum": "sha256:1aea95178d8a074959a1b0b937e30f5f271c6778425c97d53a0a6876242ff39e"
+    },
+    "extract_recommendations": {
+      "name": "extract_recommendations",
+      "category": "core",
+      "description": "Extract Recommendations pattern",
+      "fabric_source": "/Users/ameno/.config/fabric/patterns/extract_recommendations",
+      "synced_at": "2025-12-16T04:31:34.183022+00:00",
+      "files": [
+        "system.md"
+      ],
+      "checksum": "sha256:d3abdf0f9a86c7becbca4f9a051ca132f58cceb9b9d1a82828a0ee08c856e989"
+    },
+    "rate_content": {
+      "name": "rate_content",
+      "category": "core",
+      "description": "Rate Content pattern",
+      "fabric_source": "/Users/ameno/.config/fabric/patterns/rate_content",
+      "synced_at": "2025-12-16T04:31:34.186316+00:00",
+      "files": [
+        "system.md",
+        "user.md"
+      ],
+      "checksum": "sha256:4ad2ff01c242c85e9d4b35786fb6f77fd74983893b9e9b39938ed0a92453cd9f"
+    },
+    "create_summary": {
+      "name": "create_summary",
+      "category": "core",
+      "description": "Create Summary pattern",
+      "fabric_source": "/Users/ameno/.config/fabric/patterns/create_summary",
+      "synced_at": "2025-12-16T04:31:34.189278+00:00",
+      "files": [
+        "system.md"
+      ],
+      "checksum": "sha256:29d393bf16f9a89464ef1f734cfd523e5949c01e5e580039540fd65823bc4a06"
+    },
+    "create_5_sentence_summary": {
+      "name": "create_5_sentence_summary",
+      "category": "core",
+      "description": "Create 5 Sentence Summary pattern",
+      "fabric_source": "/Users/ameno/.config/fabric/patterns/create_5_sentence_summary",
+      "synced_at": "2025-12-16T04:31:34.192132+00:00",
+      "files": [
+        "system.md"
+      ],
+      "checksum": "sha256:b44fee8d7758c53a633efbe7fceff5591bd81e666bfa9fae74d3bb5c363dd3d3"
+    },
+    "extract_references": {
+      "name": "extract_references",
+      "category": "core",
+      "description": "Extract References pattern",
+      "fabric_source": "/Users/ameno/.config/fabric/patterns/extract_references",
+      "synced_at": "2025-12-16T04:31:34.194709+00:00",
+      "files": [
+        "system.md"
+      ],
+      "checksum": "sha256:dada08eff4dda660002e232668bbb5d7db09bd37232f0a173acccbf5263703b6"
+    },
+    "youtube_summary": {
+      "name": "youtube_summary",
+      "category": "youtube",
+      "description": "Youtube Summary pattern",
+      "fabric_source": "/Users/ameno/.config/fabric/patterns/youtube_summary",
+      "synced_at": "2025-12-16T04:31:34.197417+00:00",
+      "files": [
+        "system.md"
+      ],
+      "checksum": "sha256:761a6e8d8e1ffdafd1121f8ce8350c9cb6535be79dd5e4658692cf92a5de749e"
+    },
+    "extract_youtube_metadata": {
+      "name": "extract_youtube_metadata",
+      "category": "youtube",
+      "description": "Extract Youtube Metadata pattern",
+      "fabric_source": "/Users/ameno/.config/fabric/patterns/extract_youtube_metadata",
+      "synced_at": "2025-12-16T04:31:34.200275+00:00",
+      "files": [
+        "system.md"
+      ],
+      "checksum": "sha256:60e72748f42fd0f7f073d731f3a9a3280e5ba58d790db4866aea2a014eea075f"
+    },
+    "get_wow_per_minute": {
+      "name": "get_wow_per_minute",
+      "category": "youtube",
+      "description": "Get Wow Per Minute pattern",
+      "fabric_source": "/Users/ameno/.config/fabric/patterns/get_wow_per_minute",
+      "synced_at": "2025-12-16T04:31:34.202958+00:00",
+      "files": [
+        "system.md"
+      ],
+      "checksum": "sha256:710487cbdab99b4d62cb97be02c4d0ba6bcdac1806169cf5395437d7f48becec"
+    },
+    "extract_agent_opportunities": {
+      "name": "extract_agent_opportunities",
+      "category": "youtube",
+      "description": "Extract Agent Opportunities pattern",
+      "fabric_source": "/Users/ameno/.config/fabric/patterns/extract_agent_opportunities",
+      "synced_at": "2025-12-16T04:31:34.205670+00:00",
+      "files": [
+        "system.md"
+      ],
+      "checksum": "sha256:44dfd241624aad8bd81f8c8d1e82f01be4c8b9c21faac61a938b2d9792f77b75"
+    },
+    "extract_technical_content": {
+      "name": "extract_technical_content",
+      "category": "technical",
+      "description": "Extract Technical Content pattern",
+      "fabric_source": "/Users/ameno/.config/fabric/patterns/extract_technical_content",
+      "synced_at": "2025-12-16T04:31:34.208424+00:00",
+      "files": [
+        "system.md"
+      ],
+      "checksum": "sha256:6f2d893bc8da330cfaf5e63cbd235bc50d73f500d4c658ae5cee359fef9a0fb5"
+    },
+    "review_code": {
+      "name": "review_code",
+      "category": "technical",
+      "description": "Review Code pattern",
+      "fabric_source": "/Users/ameno/.config/fabric/patterns/review_code",
+      "synced_at": "2025-12-16T04:31:34.211186+00:00",
+      "files": [
+        "system.md"
+      ],
+      "checksum": "sha256:3bd9a9928f7898c7e694b50b61933e1bca2689c8d4fad45f2db94b75c71f9852"
+    },
+    "extract_poc": {
+      "name": "extract_poc",
+      "category": "technical",
+      "description": "Extract Poc pattern",
+      "fabric_source": "/Users/ameno/.config/fabric/patterns/extract_poc",
+      "synced_at": "2025-12-16T04:31:34.214119+00:00",
+      "files": [
+        "system.md"
+      ],
+      "checksum": "sha256:177018dbf0829286018a191eb6b1f2c00fc5b607e30e5e83468ab319b5efaf41"
+    },
+    "analyze_terraform_plan": {
+      "name": "analyze_terraform_plan",
+      "category": "technical",
+      "description": "Analyze Terraform Plan pattern",
+      "fabric_source": "/Users/ameno/.config/fabric/patterns/analyze_terraform_plan",
+      "synced_at": "2025-12-16T04:31:34.217051+00:00",
+      "files": [
+        "system.md"
+      ],
+      "checksum": "sha256:ce54e6c31242ae6b1111cd155831f9c397ae1cf88199bf760860a650ba7bb99a"
+    },
+    "analyze_logs": {
+      "name": "analyze_logs",
+      "category": "technical",
+      "description": "Analyze Logs pattern",
+      "fabric_source": "/Users/ameno/.config/fabric/patterns/analyze_logs",
+      "synced_at": "2025-12-16T04:31:34.220126+00:00",
+      "files": [
+        "system.md"
+      ],
+      "checksum": "sha256:886723b15c3f68b9867f5439bffcd0f8bcfd82699a8b728034e7aef9db64bbeb"
+    },
+    "extract_educational_value": {
+      "name": "extract_educational_value",
+      "category": "educational",
+      "description": "Extract Educational Value pattern",
+      "fabric_source": "/Users/ameno/.config/fabric/patterns/extract_educational_value",
+      "synced_at": "2025-12-16T04:31:34.222948+00:00",
+      "files": [
+        "system.md"
+      ],
+      "checksum": "sha256:9463339ea1afab2130edc741a97147d3ed0b80f9a65367a56ff2cb303b7cd55c"
+    },
+    "create_knowledge_artifacts": {
+      "name": "create_knowledge_artifacts",
+      "category": "educational",
+      "description": "Create Knowledge Artifacts pattern",
+      "fabric_source": "/Users/ameno/.config/fabric/patterns/create_knowledge_artifacts",
+      "synced_at": "2025-12-16T04:31:34.225735+00:00",
+      "files": [
+        "system.md"
+      ],
+      "checksum": "sha256:5b3057c9dbc892a98b9680633d5f68bd3f1b20a64e971bc8071dd62c5714d117"
+    },
+    "create_flash_cards": {
+      "name": "create_flash_cards",
+      "category": "educational",
+      "description": "Create Flash Cards pattern",
+      "fabric_source": "/Users/ameno/.config/fabric/patterns/create_flash_cards",
+      "synced_at": "2025-12-16T04:31:34.228456+00:00",
+      "files": [
+        "system.md"
+      ],
+      "checksum": "sha256:1649562432f696ba239e290f1de4e10b37c73e7625e359b0eba64cf174b8377e"
+    },
+    "analyze_paper": {
+      "name": "analyze_paper",
+      "category": "research",
+      "description": "Analyze Paper pattern",
+      "fabric_source": "/Users/ameno/.config/fabric/patterns/analyze_paper",
+      "synced_at": "2025-12-16T04:31:34.231239+00:00",
+      "files": [
+        "system.md"
+      ],
+      "checksum": "sha256:95bb5d707959e40641eb0626f7d4e9ff21cfdc2a918f0196de32215730241ed2"
+    },
+    "analyze_claims": {
+      "name": "analyze_claims",
+      "category": "research",
+      "description": "Analyze Claims pattern",
+      "fabric_source": "/Users/ameno/.config/fabric/patterns/analyze_claims",
+      "synced_at": "2025-12-16T04:31:34.233947+00:00",
+      "files": [
+        "system.md"
+      ],
+      "checksum": "sha256:5650bdfcad97f1404cac5515a268a98d801199655225aaf6994b0b5d2f1d093c"
+    },
+    "analyze_threat_report": {
+      "name": "analyze_threat_report",
+      "category": "research",
+      "description": "Analyze Threat Report pattern",
+      "fabric_source": "/Users/ameno/.config/fabric/patterns/analyze_threat_report",
+      "synced_at": "2025-12-16T04:31:34.236692+00:00",
+      "files": [
+        "system.md",
+        "user.md"
+      ],
+      "checksum": "sha256:99ff69677be13bb65564a14de65689bd3269b16e3b8e107f57f68a9b4d6ac205"
+    },
+    "analyze_patent": {
+      "name": "analyze_patent",
+      "category": "research",
+      "description": "Analyze Patent pattern",
+      "fabric_source": "/Users/ameno/.config/fabric/patterns/analyze_patent",
+      "synced_at": "2025-12-16T04:31:34.239502+00:00",
+      "files": [
+        "system.md"
+      ],
+      "checksum": "sha256:0428f30f27c91615571458e236ffde8157c5510ca7d98df2879e3f4f4def8de9"
+    },
+    "extract_article_wisdom": {
+      "name": "extract_article_wisdom",
+      "category": "research",
+      "description": "Extract Article Wisdom pattern",
+      "fabric_source": "/Users/ameno/.config/fabric/patterns/extract_article_wisdom",
+      "synced_at": "2025-12-16T04:31:34.242460+00:00",
+      "files": [
+        "system.md",
+        "user.md"
+      ],
+      "checksum": "sha256:c84062f2a8de09e03d52c40889ee612f73fc2f81e84a6a33f9eb1cf77eb410e1"
+    }
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "name": "extract_recommendations",
+  "category": "core",
+  "description": "Extract Recommendations pattern",
+  "fabric_source": "/Users/ameno/.config/fabric/patterns/extract_recommendations",
+  "synced_at": "2025-12-16T04:31:34.183022+00:00",
+  "files": [
+    "system.md"
+  ],
+  "checksum": "sha256:d3abdf0f9a86c7becbca4f9a051ca132f58cceb9b9d1a82828a0ee08c856e989"
+}

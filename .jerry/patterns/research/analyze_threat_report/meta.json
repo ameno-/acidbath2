@@ -1,0 +1,12 @@
+{
+  "name": "analyze_threat_report",
+  "category": "research",
+  "description": "Analyze Threat Report pattern",
+  "fabric_source": "/Users/ameno/.config/fabric/patterns/analyze_threat_report",
+  "synced_at": "2025-12-16T04:31:34.236692+00:00",
+  "files": [
+    "system.md",
+    "user.md"
+  ],
+  "checksum": "sha256:99ff69677be13bb65564a14de65689bd3269b16e3b8e107f57f68a9b4d6ac205"
+}

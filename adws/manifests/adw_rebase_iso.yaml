@@ -1,0 +1,46 @@
+name: adw_rebase_iso
+description: Rebase workflow - PR-first merge conflict resolution via rebase onto origin/main
+category: composite
+effects:
+  creates_worktree: false
+  posts_github: true
+  modifies_git: true
+  pushes_remote: true
+module_dependencies:
+  - adw_modules.state
+  - adw_modules.git_ops
+  - adw_modules.github
+  - adw_modules.workflow_ops
+  - adw_modules.utils
+  - adw_modules.worktree_ops
+  - adw_modules.data_types
+env_vars:
+  required: []
+  optional:
+    - ANTHROPIC_API_KEY  # gh CLI handles GitHub authentication
+validation:
+  import_test:
+    enabled: true
+    timeout: 30
+  cli_test:
+    enabled: true
+    command: "--help"
+  dry_run:
+    enabled: true
+    command: "2 --dry-run"
+arguments:
+  - name: pr_number
+    type: string
+    required: true
+    description: GitHub PR number to rebase
+  - name: adw_id
+    type: string
+    required: false
+    description: Optional ADW identifier (auto-discovered from PR branch if not provided)
+  - name: --dry-run
+    type: flag
+    required: false
+    description: Validate without executing rebase operations
+workflow_dependencies:
+  requires: []
+  description: Can run independently when PR conflicts are detected. Discovers ADW state from PR branch name.

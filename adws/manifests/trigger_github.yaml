@@ -1,0 +1,45 @@
+name: trigger_github
+description: GitHub webhook trigger for ADW workflows
+category: utility
+effects:
+  creates_worktree: false
+  posts_github: true
+  long_running_service: true
+module_dependencies:
+  - adw_modules.utils
+  - adw_modules.github
+  - adw_modules.workflow_ops
+  - adw_modules.state
+external_dependencies:
+  - fastapi
+  - uvicorn
+  - python-dotenv
+env_vars:
+  required:
+    - ANTHROPIC_API_KEY
+    - GITHUB_PAT
+  optional:
+    - PORT
+    - DEPENDENT_WORKFLOWS
+validation:
+  import_test:
+    enabled: false
+    reason: "Trigger in subdirectory with inline uv dependencies - validation runner doesn't support this pattern"
+  cli_test:
+    enabled: false
+    reason: "Long-running server cannot be CLI tested"
+  dry_run:
+    enabled: false
+    reason: "Server-based trigger has no dry-run mode"
+extensibility:
+  workflow_metadata_hook: true
+  configurable_constraints: true
+  environment_based_config: true
+notes: |
+  - FastAPI webhook server that listens for GitHub issue events
+  - Responds within 10 seconds to avoid GitHub timeout
+  - Launches workflows in background using subprocess.Popen
+  - Supports dependent workflows that require existing ADW IDs
+  - Configuration via DEPENDENT_WORKFLOWS environment variable
+  - Health check endpoint at GET /health
+  - Webhook endpoint at POST /gh-webhook

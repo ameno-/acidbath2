@@ -1,0 +1,70 @@
+name: workflow_ops
+description: Shared AI Developer Workflow operations - deployment-agnostic utilities for ADW orchestration
+category: utility
+type: module  # Not an executable ADW, but a shared utility module
+effects:
+  creates_worktree: false
+  posts_github: false
+  modifies_state: true
+  executes_agents: true
+module_dependencies:
+  - adw_modules.data_types
+  - adw_modules.agent
+  - adw_modules.state
+  - adw_modules.utils
+  - adw_modules.git_ops
+slash_command_dependencies:
+  - patch
+  - implement
+  - commit
+  - classify_issue
+  - generate_branch_name
+  - plan
+  - pull_request
+env_vars:
+  required: []
+  optional: []
+validation:
+  import_test:
+    enabled: true
+    timeout: 30
+    command: "python3 -c \"import sys; sys.path.insert(0, '.'); from adws.adw_modules.workflow_ops import format_issue_message, extract_adw_info, classify_issue; print('✓ Import successful')\""
+  cli_test:
+    enabled: false  # Not a CLI tool
+    command: null
+  dry_run:
+    enabled: false  # Not applicable for utility modules
+features:
+  - format_issue_message: Format messages with ADW tracking and bot identifiers
+  - extract_adw_info: Parse ADW workflow commands from text using AI classification
+  - classify_issue: Classify issues as /chore, /bug, or /feature
+  - build_plan: Create implementation plans for issues
+  - implement_plan: Execute implementation plans via agents
+  - generate_branch_name: Generate standardized git branch names
+  - create_commit: Create properly formatted commit messages
+  - create_pull_request: Generate and submit pull requests
+  - ensure_plan_exists: Validate plan file existence
+  - ensure_adw_id: Manage ADW ID lifecycle
+  - find_existing_branch_for_issue: Locate branches by issue number
+  - find_plan_for_issue: Locate plan files by issue number
+  - create_or_find_branch: Unified branch management
+  - find_spec_file: Locate spec files from state or git diff
+  - create_and_implement_patch: Create and execute patch plans
+adaptations:
+  - Removed GitHubIssue model dependency (replaced with Dict[str, Any])
+  - Removed github module dependencies (get_repo_url, extract_repo_path)
+  - Made ADW_BOT_IDENTIFIER configurable at module level
+  - Changed all issue parameters from GitHubIssue to Dict[str, Any]
+  - Added relative imports (. prefix) for internal modules
+  - Removed IssueClassSlashCommand type alias (using str)
+  - Preserved all workflow orchestration logic
+  - Maintained state management integration
+  - Kept agent execution patterns intact
+notes:
+  - This module is deployment-agnostic and can be used across different ADW implementations
+  - All issue data is passed as dictionaries for maximum flexibility
+  - Imports from utils module (parse_json, make_adw_id) expected to be present
+  - Imports from git_ops module (get_current_branch, create_branch) expected to be present
+  - AVAILABLE_ADW_WORKFLOWS list can be extended by specific deployments
+  - Agent name constants can be overridden by importing code
+  - ADW_BOT_IDENTIFIER can be changed at module level before calling functions

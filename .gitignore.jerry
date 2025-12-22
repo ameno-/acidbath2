@@ -1,0 +1,135 @@
+# Jerry Framework - Recommended .gitignore additions
+#
+# Add these patterns to your project's .gitignore file
+# to ensure Jerry's working directories and sensitive files
+# are not committed to version control
+
+# ============================================
+# Jerry Agent Outputs
+# ============================================
+# Agent execution results and logs
+agents/
+agents_backup_*/
+
+# ============================================
+# Jerry Worktrees
+# ============================================
+# Isolated worktree directories
+trees/
+trees_*/
+
+# ============================================
+# Jerry Export Artifacts
+# ============================================
+# Export packages and reports
+jerry-export-*.tar.gz
+jerry-export-*.zip
+.jerry/exports/
+export-report-*.txt
+
+# ============================================
+# Environment & Secrets
+# ============================================
+# Environment configuration files
+.env
+.env.local
+.env.*.local
+*.env
+
+# API keys and credentials
+credentials.json
+secrets.json
+*.key
+*.pem
+
+# ============================================
+# Python
+# ============================================
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+
+# Distribution / packaging
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+pip-wheel-metadata/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Virtual environments
+.venv/
+venv/
+ENV/
+env/
+
+# PyCharm
+.idea/
+
+# VS Code
+.vscode/
+
+# uv
+.uv/
+
+# ============================================
+# Testing & Coverage
+# ============================================
+.pytest_cache/
+.coverage
+.coverage.*
+htmlcov/
+*.cover
+.hypothesis/
+.tox/
+
+# ============================================
+# Logs
+# ============================================
+*.log
+logs/
+*.log.*
+
+# ============================================
+# OS Files
+# ============================================
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# ============================================
+# Backup Files
+# ============================================
+*~
+*.bak
+*.backup
+*.swp
+*.swo
+*_backup_to_delete/
+
+# ============================================
+# Temporary Files
+# ============================================
+tmp/
+temp/
+*.tmp
+.cache/

@@ -1,0 +1,51 @@
+name: adw_plan_iso
+description: AI Developer Workflow for agentic planning in isolated worktrees
+category: planning
+effects:
+  creates_worktree: true
+  creates_branch: true
+  posts_github: true  # Only for GitHub issues
+  commits_code: true
+  pushes_code: true  # Only for GitHub issues
+module_dependencies:
+  - adw_modules.state
+  - adw_modules.git_ops
+  - adw_modules.workflow_ops
+  - adw_modules.agent
+  - adw_modules.worktree_ops
+  - adw_modules.utils
+  - adw_modules.data_types
+  - adw_modules.issue_providers
+slash_command_dependencies:
+  - classify_issue
+  - generate_branch_name
+  - plan
+env_vars:
+  required:
+    - ANTHROPIC_API_KEY
+  optional:
+    - GH_TOKEN  # Only required for GitHub issues
+validation:
+  import_test:
+    enabled: true
+    timeout: 30
+  cli_test:
+    enabled: false
+    reason: "Requires issue reference argument"
+  dry_run:
+    enabled: true
+    command: "local:fix-workflow_ops test-adw --dry-run"
+workflow_steps:
+  - Fetch GitHub issue details
+  - Check/create worktree for isolated execution
+  - Allocate unique ports for services
+  - Setup worktree environment
+  - Classify issue type (/chore, /bug, /feature)
+  - Create feature branch in worktree
+  - Generate implementation plan in worktree
+  - Commit plan in worktree
+  - Push and create/update PR
+notes: |
+  This workflow creates an isolated git worktree under trees/<adw_id>/ for
+  parallel execution without interference. Ports are allocated deterministically
+  to avoid conflicts between parallel instances.

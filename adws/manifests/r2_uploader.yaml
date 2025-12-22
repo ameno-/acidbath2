@@ -1,0 +1,36 @@
+name: r2_uploader
+description: Cloudflare R2 uploader utility for ADW screenshot uploads
+category: utility
+type: module
+
+effects:
+  uploads_artifacts: true
+  creates_files: false
+  posts_github: false
+
+module_dependencies: []
+
+env_vars:
+  required:
+    - CLOUDFLARE_ACCOUNT_ID
+    - CLOUDFLARE_R2_ACCESS_KEY_ID
+    - CLOUDFLARE_R2_SECRET_ACCESS_KEY
+    - CLOUDFLARE_R2_BUCKET_NAME
+  optional:
+    - CLOUDFLARE_R2_PUBLIC_DOMAIN
+
+validation:
+  import_test:
+    enabled: true
+    timeout: 30
+  cli_test:
+    enabled: false
+  dry_run:
+    enabled: false
+
+notes: |
+  Utility module for R2 uploads. Used by adw_review_iso.py.
+  Graceful degradation when R2 not configured - returns None for URLs.
+
+  Upload path pattern: adw/{adw_id}/review/{filename}
+  Public URL format: https://{public_domain}/{object_key}

@@ -1,0 +1,11 @@
+{
+  "name": "extract_insights",
+  "category": "core",
+  "description": "Extract Insights pattern",
+  "fabric_source": "/Users/ameno/.config/fabric/patterns/extract_insights",
+  "synced_at": "2025-12-16T04:31:34.179938+00:00",
+  "files": [
+    "system.md"
+  ],
+  "checksum": "sha256:1aea95178d8a074959a1b0b937e30f5f271c6778425c97d53a0a6876242ff39e"
+}

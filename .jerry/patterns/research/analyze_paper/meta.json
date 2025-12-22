@@ -1,0 +1,11 @@
+{
+  "name": "analyze_paper",
+  "category": "research",
+  "description": "Analyze Paper pattern",
+  "fabric_source": "/Users/ameno/.config/fabric/patterns/analyze_paper",
+  "synced_at": "2025-12-16T04:31:34.231239+00:00",
+  "files": [
+    "system.md"
+  ],
+  "checksum": "sha256:95bb5d707959e40641eb0626f7d4e9ff21cfdc2a918f0196de32215730241ed2"
+}

@@ -1,0 +1,50 @@
+name: adw_ship_iso
+description: Ship workflow - merge feature branch to main and push to remote
+category: composite
+effects:
+  creates_worktree: false
+  posts_github: true
+  modifies_git: true
+  pushes_remote: true
+module_dependencies:
+  - adw_modules.state
+  - adw_modules.github
+  - adw_modules.workflow_ops
+  - adw_modules.utils
+  - adw_modules.worktree_ops
+  - adw_modules.data_types
+slash_command_dependencies:
+  - pull_request
+env_vars:
+  required:
+    - ANTHROPIC_API_KEY
+    - GITHUB_TOKEN
+  optional: []
+validation:
+  import_test:
+    enabled: true
+    timeout: 30
+  cli_test:
+    enabled: true
+    command: "--help"
+  dry_run:
+    enabled: true
+    command: "123 test-adw-id --dry-run"
+arguments:
+  - name: issue_number
+    type: string
+    required: true
+    description: GitHub issue number
+  - name: adw_id
+    type: string
+    required: true
+    description: ADW identifier
+  - name: --dry-run
+    type: flag
+    required: false
+    description: Validate without executing merge operations
+workflow_dependencies:
+  requires:
+    - adw_plan_iso
+    - adw_build_iso
+  description: Must be run after all prior workflows complete with valid state

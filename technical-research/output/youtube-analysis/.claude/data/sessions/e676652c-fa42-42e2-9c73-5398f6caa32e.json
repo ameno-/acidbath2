@@ -1,0 +1,8 @@
+{
+  "session_id": "e676652c-fa42-42e2-9c73-5398f6caa32e",
+  "prompts": [
+    "I need to review the implementation of the youtube analyzer. Given all the possible paths for parallel excecution I want to ensure efficiency. Let's make a refactor, I want to ensure that we limit calls the youtube API. We should perform a single extract of all neccessary youtube content, and provide that data to all other sub-agents and fabric patterns performing that task",
+    "When complete, test a full yt analysis with this video: https://www.youtube.com/watch?v=luqKnexhpFs",
+    "continue work. don't play audio"
+  ]
+}

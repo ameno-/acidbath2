@@ -1,208 +1,430 @@
-# ACIDBATH Charter
+# ACIDBATH
 
-The critical, code-first voice that senior technical leaders trust.
+**Technical AI Engineering Blog + Agentic Workflow Framework**
 
----
-
-## Core Philosophy
-
-**The Acid Test**: Every piece of content must pass the test of skeptical rigor. We're the counter-weight to AI hype while remaining technically credible.
-
-### What We Believe
-
-1. **Production reality over marketing promise** - 80-90% of AI agent projects fail to leave pilot phase. We document what actually works, including what doesn't.
-
-2. **Code-first, always** - No hand-waving. Complete, working code that readers can copy and run today.
-
-3. **Respect the reader's intelligence** - Our audience is senior engineers who build production systems. We skip 101-level explanations and trust them to Google unfamiliar terms.
-
-4. **Honest about costs and failures** - Token consumption, API costs, failure modes, and production gotchas are features of our content, not things we hide.
-
-5. **Substance over style** - Technical terminology IS our keywords. Production experience IS our competitive advantage.
-
-### What We Don't Do
-
-- "Game-changer," "revolutionary," "unlock your potential"
-- Generic prompt engineering tips
-- RAG 101 explainers
-- Intro-to-anything tutorials
-- Content for beginners in disguise
+ACIDBATH is a practitioner-focused technical blog for senior engineers building with AI agents, Claude Code, and LLMs. Built on Astro with the Jerry agentic workflow framework powering content production and automation.
 
 ---
 
-## Key Components
+## Table of Contents
 
-### Content Pillars
-
-| Pillar | Description | Target Keywords |
-|--------|-------------|-----------------|
-| **Agentic AI Patterns** | Sub-agent architecture, orchestration, workflow prompts | "agentic AI patterns," "multi-agent architecture," "ReAct prompting" |
-| **Claude-Specific Deep Dives** | Claude Code, SDK patterns, model optimization | "Claude Code best practices," "Claude vs GPT for code generation" |
-| **Production AI Economics** | Cost optimization, context management, real numbers | "LLM cost optimization," "context window optimization" |
-| **Reliability & Failure** | What breaks, how to prevent it, honest post-mortems | "AI agent observability," "AI agent failure patterns" |
-
-### Content Mix
-
-- **60%** Educational deep-dives (sub-agent patterns, context optimization, cost analysis)
-- **20%** Opinion/POV pieces with earned contrarian takes
-- **15%** News analysis and rapid commentary on releases
-- **5%** Personal/process stories (building in public)
-
-### Format Requirements
-
-- **Length**: 2,000-2,500 words for comprehensive technical content
-- **Structure**: TL;DR → Context → Technical depth → Practical code → Key takeaways
-- **Code**: Complete, runnable examples with realistic variable names
-- **Diagrams**: Architecture diagrams for system design content (Mermaid, ASCII art)
-- **Numbers**: Include benchmarks, token counts, costs when relevant
+- [What is ACIDBATH?](#what-is-acidbath)
+- [Editorial Philosophy](#editorial-philosophy)
+- [Content Strategy](#content-strategy)
+- [Project Structure](#project-structure)
+- [Jerry Framework](#jerry-framework)
+- [Available Workflows](#available-workflows)
+- [Skills & Commands](#skills--commands)
+- [Getting Started](#getting-started)
+- [Development](#development)
+- [Deployment](#deployment)
 
 ---
 
-## Blog Post Tenets
+## What is ACIDBATH?
 
-Every ACIDBATH post must embody these principles:
+ACIDBATH targets a gap in AI content: **practitioner-level technical content** for engineers who actually build with AI, not just read about it.
 
-### 1. The POC Rule
-Every post includes a proof-of-concept the reader can implement today. Not "consider doing X" but "here's the exact code to do X."
+**What we cover:**
+- Claude Code workflows and sub-agent patterns
+- Context engineering and token optimization
+- Agentic prompt design and workflow prompts
+- Production AI agent architecture
+- MCP servers and tool integration
+- Real cost analysis and failure modes
 
-### 2. The Numbers Test
-Quantify claims. "Reduces context consumption" becomes "95% reduction in token usage." "Faster" becomes "36x improvement."
-
-### 3. The Production Lens
-Ask: "Would this work in a real codebase?" If the answer requires asterisks, address them explicitly.
-
-### 4. The Senior Engineer Filter
-Before publishing, ask: "Would a senior engineer at a serious company find this valuable?" If it's something they already know or could easily Google, cut it.
-
-### 5. The Honest Failure Requirement
-Include what doesn't work, edge cases that break, and scenarios where the approach is wrong. This builds trust.
-
-### 6. The "Try It Now" Call
-End with a specific, actionable next step. Not "think about your workflows" but "create this file and run this command."
-
-### Writing Voice
-
-- Direct, technical, confident
-- First person when sharing experience ("I found that...")
-- Specific version numbers and tool names
-- Honest limitations stated plainly
-- No hedging or over-qualification
+**What we don't do:**
+- Hype-speak ("revolutionary", "game-changer", "the future")
+- Unsubstantiated claims ("90% of developers...")
+- Fear-mongering ("your job is obsolete")
+- Tutorial content without working code
 
 ---
 
-## Content Strategy Execution
+## Editorial Philosophy
 
-### Distribution Priority
+### The ACIDBATH Tenets
 
-1. **Hacker News** - Primary reach multiplier (post 8-10 AM EST Wednesdays)
-2. **LinkedIn** - CTOs and technical leadership (personal account, not brand)
-3. **Reddit** - r/LocalLLaMA, r/MachineLearning, r/programming
-4. **Twitter/X** - Real-time thought leadership, rapid reactions to AI news
-5. **Newsletter** - Owned audience for direct distribution
+Every post must pass these six checks:
 
-### SEO Approach
+| Tenet | Requirement |
+|-------|-------------|
+| **POC Rule** | Include working, copy-paste code that readers can run today |
+| **Numbers Test** | Specific, verifiable metrics (not "significantly faster") |
+| **Production Lens** | Document setup complexity, maintenance burden, edge cases |
+| **Senior Engineer Filter** | Would a 10+ year engineer find this valuable? |
+| **Honest Failure Requirement** | Explicit "What Doesn't Work" section |
+| **Try It Now** | Clear action item at the end |
 
-- Title formula: Problem-Solution or Architecture-Focus ("Reducing LLM Costs: How We Cut API Spend 60%")
-- Meta descriptions with specific numbers
-- TechArticle schema with `proficiencyLevel: Expert`
-- Technical terminology as natural keywords
-- First-mover advantage on new patterns/terms
+### Voice Guidelines
 
-### Competitive Positioning
+**Do:**
+- Be direct and opinionated
+- Use specific version numbers and dollar amounts
+- Reference source code
+- Say "Here's what we learned" and "This doesn't work when..."
 
-We fill the gap others don't cover:
-- AI cost engineering and economics
-- Failure post-mortems (not just success stories)
-- Small/mid-sized company AI implementation
-- AI agent observability
-- Long-term AI product maintenance
+**Don't:**
+- Hedge with "might", "could potentially"
+- Use superlatives without evidence
+- Include emotional hooks or FOMO language
+- Make claims without working examples
 
----
+### Post Structure
 
-## Published Content Registry
+Target: **2,000-2,500 words** per post
 
-Track all published posts here. Update as new content goes live.
-
-### Foundation Posts (December 2025)
-
-| # | Title | Key Topic | Primary Pattern | Word Count |
-|---|-------|-----------|-----------------|------------|
-| 01 | **Workflow Prompts: The Pattern That Makes AI Engineering Predictable** | Workflow sections, failure modes, ROI calculation | Input → Workflow → Output | ~2,150 |
-| 02 | **Context Engineering: From Token Optimization to Large Codebase Mastery** | Progressive disclosure + semantic search | UV scripts + Serena MCP | ~3,400 |
-| 03 | **Agent Architecture: From Custom Agents to Effective Delegation** | Custom agents + sub-agent delegation | System prompts + file-based context | ~3,400 |
-| 04 | **Directory Watchers: File-Based AI Automation That Scales** | Drop zones, production deployment | Python watchdog + error handling | ~3,450 |
-| 05 | **AI Document Skills: Automated File Generation That Actually Ships** | Skills API, document pipelines, Excel/PowerPoint/PDF | Data → Skills → Multi-format output | ~3,200 |
-
-### Content Consolidation Notes
-
-Posts consolidated December 2025 to improve depth and eliminate word count padding:
-- Post 01: Expanded with failure modes and ROI calculation sections
-- Post 02+06: Combined context optimization with large codebase tooling
-- Post 03+05: Combined sub-agent delegation with custom agent patterns
-- Post 04: Expanded with production deployment and failure mode sections
-
-### Content Themes Established
-
-From foundation posts, we've established expertise in:
-- [x] Agentic prompt architecture (workflow patterns, failure modes)
-- [x] Context engineering (progressive disclosure, semantic search)
-- [x] Agent architecture (custom agents, sub-agent delegation)
-- [x] File system automation (directory watchers, drop zones)
-- [x] Production considerations (error handling, monitoring, scaling)
-- [x] Document generation (Skills API, multi-format pipelines, Excel/PowerPoint/PDF)
-
-### Upcoming Content Priorities
-
-High-opportunity topics (from content strategy) not yet covered:
-- [ ] Multi-agent coordination and error propagation
-- [ ] Real economics of production LLM systems (comprehensive cost analysis)
-- [ ] AI agent reliability and failure patterns (detailed post-mortems)
-- [ ] Model routing economics (when to use Haiku vs Sonnet vs Opus)
+```
+├── Hook/Problem Statement (100 words)
+├── Key Insight/Thesis (200 words)
+├── Technical Deep-Dive with Code (1,200-1,500 words)
+├── Practical Example/Case Study (400 words)
+└── Takeaways + What's Next (200 words)
+```
 
 ---
 
-## Quality Checklist
+## Content Strategy
 
-Before publishing any post, verify:
+### Target Keywords
 
-**Content Quality**
-- [ ] Includes complete, runnable POC code
-- [ ] Numbers are specific and verifiable
-- [ ] Production considerations addressed
-- [ ] Failure modes documented
-- [ ] "Try It Now" section with specific action
+| Tier | Keywords | Competition |
+|------|----------|-------------|
+| **High Opportunity** | context engineering, context window optimization, CLAUDE.md best practices | Very Low |
+| **Problem-Solution** | AI agent failure patterns, token efficiency strategies, LLM cost optimization | Low-Medium |
+| **Claude Code Specific** | Claude Code workflow, Claude Code MCP setup, Claude Code sub-agents | Very Low |
 
-**Technical Accuracy**
-- [ ] Code tested and working
-- [ ] Version numbers current
-- [ ] Links verified
-- [ ] Diagrams accurate to described architecture
+### Content Pipeline
 
-**Voice & Style**
-- [ ] No banned phrases ("game-changer," "revolutionary," etc.)
-- [ ] Specific over vague throughout
-- [ ] Senior engineer would find valuable
-- [ ] Honest about limitations
+```
+Blog Post (2,000-2,500 words)
+         │
+         ├── Twitter Thread (5-8 tweets)
+         ├── LinkedIn Post (800-1,200 words)
+         └── Newsletter Edition (1,000-1,500 words)
+```
 
-**SEO & Distribution**
-- [ ] Title follows Problem-Solution or Architecture-Focus format
-- [ ] Meta description includes specific numbers
-- [ ] Tags appropriate for content
-- [ ] Distribution plan for HN, LinkedIn, Reddit
+Use `/extract-content` skill to generate derivatives from any published post.
 
 ---
 
-## Updating This Charter
+## Project Structure
 
-This document evolves with the blog. Update when:
-
-1. **New post published** - Add to Content Registry with key topic and pattern
-2. **New content pillar identified** - Add to Key Components section
-3. **Distribution strategy changes** - Update priority/approach
-4. **Quality standards evolve** - Update checklist
-
-The charter reflects what ACIDBATH is, not what we wish it to be. Keep it grounded in published work and proven strategy.
+```
+acidbath2/
+├── src/                          # Astro blog source
+│   ├── content/blog/             # Published posts (markdown)
+│   ├── components/               # Astro components
+│   ├── layouts/                  # Page layouts
+│   ├── pages/                    # Routes
+│   └── styles/                   # Global CSS (Tailwind v4)
+│
+├── blog/                         # Content pipeline
+│   ├── posts/                    # Source posts with metadata.json
+│   │   └── {post-name}/
+│   │       ├── post.md
+│   │       ├── metadata.json
+│   │       └── diagrams/         # Mermaid diagrams
+│   ├── _meta/                    # Keywords, series config
+│   └── archive/                  # Draft/archived content
+│
+├── adws/                         # AI Developer Workflows (Jerry)
+│   ├── adw_modules/              # Core modules
+│   │   ├── agent.py              # Claude Code execution
+│   │   ├── workflow_ops.py       # Workflow orchestration
+│   │   └── worktree_ops.py       # Git worktree management
+│   └── adw_*.py                  # Individual workflows
+│
+├── .claude/
+│   ├── commands/                 # Slash command templates
+│   └── skills/                   # Skill definitions
+│
+├── ai_docs/                      # Context documents
+│   ├── astro.md                  # Astro framework reference
+│   ├── tailwind-v4-astro.md      # Tailwind v4 patterns
+│   ├── content_strategy.md       # SEO and distribution
+│   └── blog_audit.md             # Post quality audit
+│
+├── specs/                        # Implementation specifications
+├── technical-research/           # YouTube analysis system
+│   └── output/youtube-analysis/  # Analyzed video outputs
+│
+└── public/
+    ├── assets/                   # Images, banners
+    ├── llms.txt                  # LLM-readable site summary
+    └── llms-full.txt             # Full content for LLMs
+```
 
 ---
 
-*"The biggest opportunity is practical depth at the senior engineer level. Most AI content is either too basic or too theoretical. ACIDBATH bridges this gap."*
+## Jerry Framework
+
+Jerry is the agentic workflow layer powering ACIDBATH's automation. It transforms high-level intentions into executed changes through AI agent orchestration.
+
+### Core Concepts
+
+- **ADWs (AI Developer Workflows)**: Python scripts combining deterministic code with Claude Code agents
+- **Slash Commands**: Templated prompts in `.claude/commands/*.md`
+- **Worktree Isolation**: Each agent operates in a dedicated Git worktree
+- **Observability**: Every execution produces structured outputs in `agents/`
+
+### Architecture
+
+```
+┌─────────────────────────────────────┐
+│     Agentic Layer (Jerry)           │
+│  ┌─────────────────────────────┐    │
+│  │  ADWs (Workflows)           │    │  ← Orchestration
+│  └──────────┬──────────────────┘    │
+│             │                        │
+│  ┌──────────▼──────────────────┐    │
+│  │  Slash Commands (Templates) │    │  ← Instructions
+│  └──────────┬──────────────────┘    │
+│             │                        │
+│  ┌──────────▼──────────────────┐    │
+│  │  Agents (Execution)         │    │  ← Execution
+│  └──────────┬──────────────────┘    │
+└─────────────┼───────────────────────┘
+              │
+┌─────────────▼───────────────────────┐
+│     Application Layer               │
+│  ┌─────────────────────────────┐    │
+│  │  ACIDBATH Blog (Astro)      │    │
+│  └─────────────────────────────┘    │
+└─────────────────────────────────────┘
+```
+
+---
+
+## Available Workflows
+
+### Utility Workflows
+
+| ADW | Description |
+|-----|-------------|
+| `adw_prompt` | Execute adhoc Claude Code prompts |
+| `adw_sdk_prompt` | SDK-based prompts with type safety |
+| `adw_slash_command` | Execute slash command templates |
+
+### Planning & Building
+
+| ADW | Description |
+|-----|-------------|
+| `adw_plan_iso` | Generate implementation specs in isolated worktrees |
+| `adw_build_iso` | Implement plans and commit changes |
+| `adw_plan_build_iso` | Chained planning + building |
+| `adw_ship_iso` | Merge feature branch to main |
+
+### Content Analysis
+
+| ADW | Description |
+|-----|-------------|
+| `adw_analyze_iso` | Pattern-based analysis (YouTube, GitHub, PDFs) |
+| `adw_brainstorm` | Versioned content analysis with diffs |
+
+### Usage Examples
+
+```bash
+# Direct prompt
+./adws/adw_prompt.py "Add dark mode toggle to header"
+
+# Plan + Build from issue
+./adws/adw_plan_build_iso.py "Add RSS feed to blog"
+
+# Analyze YouTube video for blog content
+./adws/adw_analyze_iso.py "https://youtube.com/watch?v=..." --preset acidbath --brainstorm
+```
+
+---
+
+## Skills & Commands
+
+### Project Skills
+
+| Skill | Description |
+|-------|-------------|
+| `/prime` | Load codebase context for new sessions |
+| `/plan` | Generate implementation plan |
+| `/implement` | Execute implementation spec |
+| `/commit` | Generate git commit |
+| `/pull_request` | Create PR with summary |
+| `/review` | Review code changes |
+| `/new-post` | Create AI-optimized blog post |
+| `/ai-audit` | Audit post against ACIDBATH tenets |
+| `/extract-content` | Generate Twitter/LinkedIn/Newsletter from post |
+| `/analyze` | Run fabric patterns on content |
+
+### Content Commands
+
+```bash
+# Create new blog post
+/new-post "Context Engineering Deep Dive"
+
+# Audit existing post
+/ai-audit src/content/blog/workflow-prompts.md
+
+# Extract derivatives
+/extract-content src/content/blog/workflow-prompts.md
+```
+
+### Development Commands
+
+```bash
+# Generate implementation plan
+/plan "Add search functionality to blog"
+
+# Implement from spec
+/implement specs/feature-search.md
+
+# Commit with conventional format
+/commit
+
+# Open PR
+/pull_request
+```
+
+---
+
+## Getting Started
+
+### Prerequisites
+
+- Node.js 18+
+- [uv](https://github.com/astral-sh/uv) (Python package manager)
+- [Claude Code CLI](https://docs.anthropic.com/claude/docs/claude-code)
+- Git
+
+### Installation
+
+```bash
+# Clone repository
+git clone https://github.com/ameno-/acidbath2.git
+cd acidbath2
+
+# Install dependencies
+npm install
+
+# Start development server
+npm run dev
+```
+
+### Writing a New Post
+
+1. Create post structure:
+```bash
+mkdir -p blog/posts/07-your-post-title/{diagrams,callouts}
+```
+
+2. Create `post.md` with frontmatter and content
+
+3. Create `metadata.json` with SEO data
+
+4. Build and preview:
+```bash
+npm run build
+npm run preview
+```
+
+5. Or use the skill:
+```bash
+/new-post "Your Post Title"
+```
+
+---
+
+## Development
+
+### Local Development
+
+```bash
+# Start dev server with hot reload
+npm run dev
+
+# Build for production
+npm run build
+
+# Preview production build
+npm run preview
+
+# Run Playwright tests
+npm run test
+```
+
+### Content Pipeline
+
+```bash
+# Generate llms.txt from content
+node scripts/generate-llms-txt.js
+
+# Analyze YouTube video for research
+./adws/adw_analyze_iso.py "https://youtube.com/watch?v=..." --preset acidbath
+```
+
+### Jerry Workflows
+
+```bash
+# Plan a feature
+./adws/adw_plan_iso.py "Add tag filtering to blog"
+
+# Build from spec
+./adws/adw_build_iso.py specs/feature-tag-filtering.md
+
+# Ship to main
+./adws/adw_ship_iso.py feat/tag-filtering
+```
+
+---
+
+## Deployment
+
+ACIDBATH deploys to **Cloudflare Pages**.
+
+### Manual Deploy
+
+```bash
+npm run build
+npx wrangler pages deploy dist
+```
+
+### Automatic Deploy
+
+Push to `main` triggers Cloudflare Pages build.
+
+### Environment Variables
+
+Set in Cloudflare Pages dashboard:
+- `SITE_URL` - Production URL
+- `ANTHROPIC_API_KEY` - For content generation (if using)
+
+---
+
+## Roadmap
+
+### Near-term
+
+- [ ] Search functionality (Pagefind or custom)
+- [ ] RSS feed with full content
+- [ ] Newsletter signup integration
+- [ ] Reading time estimates
+
+### Content Pipeline
+
+- [ ] Automated Twitter thread scheduling
+- [ ] LinkedIn post templates
+- [ ] HN submission tracking
+
+### Jerry Enhancements
+
+- [ ] `adw_review_all_iso` for batch PR review
+- [ ] Content freshness checking
+- [ ] Automated link validation
+
+---
+
+## License
+
+MIT
+
+---
+
+**ACIDBATH**: Technical content for engineers who build, not just read.

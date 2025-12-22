@@ -1,0 +1,11 @@
+{
+  "name": "extract_wisdom",
+  "category": "core",
+  "description": "Extract Wisdom pattern",
+  "fabric_source": "/Users/ameno/.config/fabric/patterns/extract_wisdom",
+  "synced_at": "2025-12-16T04:31:34.174646+00:00",
+  "files": [
+    "system.md"
+  ],
+  "checksum": "sha256:1dfc5719961081cde886470003c544c8397f659978474121b51f4ba87cdc1a09"
+}

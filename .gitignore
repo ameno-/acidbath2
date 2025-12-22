@@ -88,3 +88,7 @@ export-report-*.txt
 # Backup directories
 *_backup_to_delete/
 apps_backup_to_delete/
+
+# Claude session data
+.claude/data/sessions/
+.claude.backup/

@@ -15,9 +15,9 @@ ACIDBATH provides deep technical content on building production AI systems:
 
 ## Recent Posts
 
-- [AI Document Skills: Automated File Generation That Actually Ships](/blog/document-generation-skills): Skills generate Excel, PowerPoint, and PDF files in minutes, not hours. Complete POC code, real token numbers, and honest failure modes for production document pipelines.
-- [Agent Architecture: From Custom Agents to Effective Delegation](/blog/agent-architecture): System prompts define agent identity. File systems enable delegation. Learn how to build specialized agents and delegate research work reliably with working code you can use today.
-- [Context Engineering: From Token Optimization to Large Codebase Mastery](/blog/context-engineering): Progressive disclosure and semantic search are the difference between burning tokens and shipping features. Learn when to use each pattern with working code and hard numbers.
+- [AI Document Skills: Automated File Generation That Actually Ships](/blog/document-generation-skills): Skills generate Excel, PowerPoint, and PDF files in minutes. Complete POC code, real token numbers, and honest failure modes for production.
+- [Agent Architecture: From Custom Agents to Effective Delegation](/blog/agent-architecture): System prompts define agent identity. File systems enable delegation. Build specialized agents and delegate research reliably with working code.
+- [Context Engineering: From Token Optimization to Large Codebase Mastery](/blog/context-engineering): Progressive disclosure and semantic search: the difference between burning tokens and shipping features. Working code and hard numbers inside.
 - [Directory Watchers: File-Based AI Automation That Scales](/blog/directory-watchers): Turn your file system into an AI interface. Build drop zones that process files automatically with working Python code and production considerations.
 - [Workflow Prompts: The Pattern That Makes AI Engineering Predictable](/blog/workflow-prompts): The workflow section drives 90% of the value in agentic prompts. Learn to build workflow prompts that work, when they fail, and how to measure ROI.
 
@@ -25,16 +25,16 @@ ACIDBATH provides deep technical content on building production AI systems:
 
 ### Production Patterns
 
-- [AI Document Skills: Automated File Generation That Actually Ships](/blog/document-generation-skills): Skills generate Excel, PowerPoint, and PDF files in minutes, not hours. Complete POC code, real token numbers, and honest failure modes for production document pipelines.
+- [AI Document Skills: Automated File Generation That Actually Ships](/blog/document-generation-skills): Skills generate Excel, PowerPoint, and PDF files in minutes. Complete POC code, real token numbers, and honest failure modes for production.
 - [Directory Watchers: File-Based AI Automation That Scales](/blog/directory-watchers): Turn your file system into an AI interface. Build drop zones that process files automatically with working Python code and production considerations.
 
 ### Agent Architecture
 
-- [Agent Architecture: From Custom Agents to Effective Delegation](/blog/agent-architecture): System prompts define agent identity. File systems enable delegation. Learn how to build specialized agents and delegate research work reliably with working code you can use today.
+- [Agent Architecture: From Custom Agents to Effective Delegation](/blog/agent-architecture): System prompts define agent identity. File systems enable delegation. Build specialized agents and delegate research reliably with working code.
 
 ### Context Engineering
 
-- [Context Engineering: From Token Optimization to Large Codebase Mastery](/blog/context-engineering): Progressive disclosure and semantic search are the difference between burning tokens and shipping features. Learn when to use each pattern with working code and hard numbers.
+- [Context Engineering: From Token Optimization to Large Codebase Mastery](/blog/context-engineering): Progressive disclosure and semantic search: the difference between burning tokens and shipping features. Working code and hard numbers inside.
 
 ### Agentic Patterns
 

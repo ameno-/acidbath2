@@ -9,6 +9,9 @@ interface Props {
 }
 
 const { title, description = 'Production AI patterns, agent architecture, and honest engineering for senior technical leaders.' } = Astro.props;
+
+// Generate canonical URL
+const canonicalURL = new URL(Astro.url.pathname, Astro.site || 'https://blog.amenoacids.com');
 ---
 
 <!doctype html>
@@ -18,6 +21,8 @@ const { title, description = 'Production AI patterns, agent architecture, and ho
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content={description} />
     <meta name="generator" content={Astro.generator} />
+    <link rel="canonical" href={canonicalURL.href} />
+    <meta property="og:url" content={canonicalURL.href} />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />

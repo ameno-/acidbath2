@@ -1,6 +1,6 @@
 ---
 title: "Agent Architecture: From Custom Agents to Effective Delegation"
-description: "System prompts define agent identity. File systems enable delegation. Learn how to build specialized agents and delegate research work reliably with working code you can use today."
+description: "System prompts define agent identity. File systems enable delegation. Build specialized agents and delegate research reliably with working code."
 pubDate: 2025-12-15
 author: "Acidbath"
 tags: ["ai", "agents", "claude-code", "sub-agents", "sdk", "architecture"]

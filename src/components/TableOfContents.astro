@@ -34,7 +34,27 @@ const tocHeadings = headings.filter(h => h.depth >= 2 && h.depth <= 3);
 )}
 
 <script>
-  // Highlight current section in TOC
+  /**
+   * Table of Contents Active State Management
+   *
+   * This script ensures the TOC sidebar stays synchronized with the currently visible content.
+   * It uses three complementary mechanisms to maintain accurate highlighting:
+   *
+   * 1. IntersectionObserver: Primary mechanism for detecting visible headings
+   *    - Configured with wider rootMargin (-20% 0px -20% 0px) for reliable detection
+   *    - Multiple threshold values for granular visibility tracking
+   *
+   * 2. URL Hash Synchronization: Handles browser navigation and direct links
+   *    - Sets initial active state on page load from URL hash
+   *    - Responds to hashchange events (back/forward buttons)
+   *
+   * 3. Scroll Event Fallback: Ensures updates even when IntersectionObserver misses changes
+   *    - Debounced to 100ms to prevent performance issues
+   *    - Finds the heading closest to viewport top (20% from top)
+   *
+   * Bug Fix: Issue #5 - Side-nav sub-heading highlighting
+   * Previous issues: narrow IntersectionObserver zone, missing URL hash sync, no fallback
+   */
   function initTocHighlight() {
     const tocLinks = document.querySelectorAll('.toc-link');
     const headings = Array.from(tocLinks).map(link => {
@@ -47,41 +67,137 @@ const tocHeadings = headings.filter(h => h.depth >= 2 && h.depth <= 3);
     // Track current active heading
     let currentActive: string | null = null;
 
+    // Helper function to update active state for a given heading ID
+    function setActiveHeading(id: string) {
+      if (id !== currentActive) {
+        currentActive = id;
+        tocLinks.forEach(link => {
+          const isActive = link.getAttribute('href') === `#${id}`;
+          link.classList.toggle('active', isActive);
+
+          // Also add visual indicator to parent li
+          link.parentElement?.classList.toggle('is-active', isActive);
+        });
+      }
+    }
+
+    // Initialize active state based on URL hash on page load
+    function initFromUrlHash() {
+      const hash = window.location.hash.slice(1);
+      if (hash) {
+        const heading = document.getElementById(hash);
+        if (heading && headings.includes(heading)) {
+          setActiveHeading(hash);
+        }
+      }
+    }
+
+    // Handle URL hash changes (browser back/forward, direct navigation)
+    function handleHashChange() {
+      const hash = window.location.hash.slice(1);
+      if (hash) {
+        const heading = document.getElementById(hash);
+        if (heading && headings.includes(heading)) {
+          setActiveHeading(hash);
+        }
+      }
+    }
+
     const observer = new IntersectionObserver(
       (entries) => {
-        // Find the first heading that's in view
+        // Find all headings currently intersecting with the viewport
         const visibleEntries = entries.filter(e => e.isIntersecting);
 
         if (visibleEntries.length > 0) {
-          // Get the topmost visible heading
+          // Get the topmost visible heading (closest to top of viewport)
+          // This ensures we highlight the heading the user is most likely reading
           const topEntry = visibleEntries.reduce((prev, curr) => {
             return prev.boundingClientRect.top < curr.boundingClientRect.top ? prev : curr;
           });
 
           const id = topEntry.target.id;
-          if (id !== currentActive) {
-            currentActive = id;
-            tocLinks.forEach(link => {
-              const isActive = link.getAttribute('href') === `#${id}`;
-              link.classList.toggle('active', isActive);
+          setActiveHeading(id);
+        } else if (entries.length > 0) {
+          // Fallback: If no headings are in the intersection zone,
+          // find the closest heading above the viewport
+          // This handles cases where user scrolls past all headings in the detection zone
+          const allHeadings = headings.map(h => ({
+            id: h.id,
+            top: h.getBoundingClientRect().top
+          }));
 
-              // Also add visual indicator to parent li
-              link.parentElement?.classList.toggle('is-active', isActive);
+          // Find the last heading that's above the viewport center
+          const viewportCenter = window.innerHeight / 2;
+          const headingsAboveCenter = allHeadings.filter(h => h.top < viewportCenter);
+
+          if (headingsAboveCenter.length > 0) {
+            // Get the closest one to the center (the one we most recently scrolled past)
+            const closest = headingsAboveCenter.reduce((prev, curr) => {
+              return Math.abs(curr.top - viewportCenter) < Math.abs(prev.top - viewportCenter) ? curr : prev;
             });
+            setActiveHeading(closest.id);
           }
         }
       },
       {
-        rootMargin: '-10% 0px -70% 0px',
-        threshold: [0, 0.5, 1]
+        // More reliable detection zone: centered viewport band
+        // This creates a trigger zone from 20% below top to 20% above bottom
+        // Catches headings in a wider range for better scroll tracking
+        rootMargin: '-20% 0px -20% 0px',
+        // Lower threshold to trigger on any visibility, not just 50%+
+        // This ensures small headings and quick scrolling are detected
+        threshold: [0, 0.1, 0.25, 0.5, 0.75, 1]
       }
     );
 
     headings.forEach(heading => observer.observe(heading));
 
+    // Scroll event fallback with debouncing
+    // This ensures TOC updates even if IntersectionObserver misses an update
+    let scrollTimeout: ReturnType<typeof setTimeout>;
+    function handleScroll() {
+      // Clear previous timeout
+      clearTimeout(scrollTimeout);
+
+      // Debounce scroll events to avoid performance issues
+      scrollTimeout = setTimeout(() => {
+        // Find the heading closest to the top of the viewport
+        const viewportTop = window.scrollY + window.innerHeight * 0.2; // 20% from top
+
+        let closestHeadingId: string | null = null;
+        let closestDistance = Infinity;
+
+        headings.forEach((heading: HTMLElement) => {
+          const headingTop = heading.offsetTop;
+          const distance = Math.abs(headingTop - viewportTop);
+
+          if (headingTop <= viewportTop + 100 && distance < closestDistance) {
+            closestDistance = distance;
+            closestHeadingId = heading.id;
+          }
+        });
+
+        if (closestHeadingId) {
+          setActiveHeading(closestHeadingId);
+        }
+      }, 100); // 100ms debounce delay
+    }
+
+    // Add scroll listener as fallback
+    window.addEventListener('scroll', handleScroll, { passive: true });
+
+    // Set initial state based on URL hash
+    initFromUrlHash();
+
+    // Listen for hash changes
+    window.addEventListener('hashchange', handleHashChange);
+
     // Cleanup on page transitions
     return () => {
       headings.forEach(heading => observer.unobserve(heading));
+      window.removeEventListener('hashchange', handleHashChange);
+      window.removeEventListener('scroll', handleScroll);
+      clearTimeout(scrollTimeout);
     };
   }
 

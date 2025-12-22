@@ -33,6 +33,14 @@
     line-height: var(--spacing-line);
   }
 
+  /* Allow wider content for two-column layouts on large screens */
+  @media screen and (min-width: 1100px) {
+    body {
+      max-width: calc(80ch + 220px + 5rem);
+      padding: var(--spacing-line) 3ch;
+    }
+  }
+
   @media screen and (max-width: 480px) {
     html {
       font-size: 14px;

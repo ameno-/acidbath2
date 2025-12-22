@@ -1,0 +1,95 @@
+---
+interface Heading {
+  depth: number;
+  slug: string;
+  text: string;
+}
+
+interface Props {
+  headings: Heading[];
+  title?: string;
+}
+
+const { headings, title = 'On This Page' } = Astro.props;
+
+// Filter to only show h2 and h3 headings
+const tocHeadings = headings.filter(h => h.depth >= 2 && h.depth <= 3);
+---
+
+{tocHeadings.length > 0 && (
+  <aside class="toc-sidebar" aria-label="Table of contents">
+    <nav class="toc-nav">
+      <div class="toc-header">{title}</div>
+      <ul class="toc-list">
+        {tocHeadings.map((heading) => (
+          <li class={`toc-item toc-depth-${heading.depth}`}>
+            <a href={`#${heading.slug}`} class="toc-link">
+              {heading.text}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+  </aside>
+)}
+
+<script>
+  // Highlight current section in TOC
+  function initTocHighlight() {
+    const tocLinks = document.querySelectorAll('.toc-link');
+    const headings = Array.from(tocLinks).map(link => {
+      const id = link.getAttribute('href')?.slice(1);
+      return id ? document.getElementById(id) : null;
+    }).filter(Boolean) as HTMLElement[];
+
+    if (headings.length === 0) return;
+
+    // Track current active heading
+    let currentActive: string | null = null;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        // Find the first heading that's in view
+        const visibleEntries = entries.filter(e => e.isIntersecting);
+
+        if (visibleEntries.length > 0) {
+          // Get the topmost visible heading
+          const topEntry = visibleEntries.reduce((prev, curr) => {
+            return prev.boundingClientRect.top < curr.boundingClientRect.top ? prev : curr;
+          });
+
+          const id = topEntry.target.id;
+          if (id !== currentActive) {
+            currentActive = id;
+            tocLinks.forEach(link => {
+              const isActive = link.getAttribute('href') === `#${id}`;
+              link.classList.toggle('active', isActive);
+
+              // Also add visual indicator to parent li
+              link.parentElement?.classList.toggle('is-active', isActive);
+            });
+          }
+        }
+      },
+      {
+        rootMargin: '-10% 0px -70% 0px',
+        threshold: [0, 0.5, 1]
+      }
+    );
+
+    headings.forEach(heading => observer.observe(heading));
+
+    // Cleanup on page transitions
+    return () => {
+      headings.forEach(heading => observer.unobserve(heading));
+    };
+  }
+
+  // Initialize
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initTocHighlight);
+  } else {
+    initTocHighlight();
+  }
+  document.addEventListener('astro:after-swap', initTocHighlight);
+</script>

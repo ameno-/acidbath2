@@ -5,6 +5,15 @@ pubDate: 2025-12-15
 author: "Acidbath"
 tags: ["ai", "prompts", "claude-code", "workflow", "automation"]
 banner: "/assets/posts/workflow-prompts-banner.png"
+category: "Agentic Patterns"
+difficulty: "Intermediate"
+tldr: "Workflow prompts follow an Input → Workflow → Output structure that makes AI agent behavior predictable. The workflow section—numbered, sequential steps—drives 90% of the value. Use break-even math (time to write / time saved per use) to decide if a workflow is worth building."
+keyTakeaways:
+  - "Workflow sections are S-tier value with C-tier difficulty—the most valuable component is also the easiest to execute"
+  - "Workflow prompts fail on complex judgment calls, ambiguous requirements, and real-time adaptation tasks"
+  - "Break-even calculation: (Time to write) / (Time saved per use) = minimum uses needed"
+  - "A 30-minute workflow prompt pays off after 3 uses of a 15-minute task"
+  - "Build a library of reusable workflow prompts for maximum team ROI"
 ---
 
 The workflow section is the most important thing you'll write in any agentic prompt.

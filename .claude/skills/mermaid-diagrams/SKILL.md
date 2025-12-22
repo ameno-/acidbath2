@@ -1,7 +1,7 @@
 ---
 name: mermaid-diagrams
 description: Create Mermaid diagrams from prompts, descriptions, or existing content (ASCII art, text). Use when creating flowcharts, sequence diagrams, architecture diagrams, or converting ASCII art to proper diagrams.
-allowed-tools: Read, Write, Edit, Glob, Grep
+allowed-tools: Read, Write, Edit, Glob, Grep, Bash
 ---
 
 # Mermaid Diagram Generation
@@ -10,6 +10,39 @@ Create professional diagrams using Mermaid syntax. This skill handles:
 - Creating diagrams from text descriptions or requirements
 - Converting ASCII art to Mermaid
 - All Mermaid diagram types
+- **Verification that diagrams render correctly**
+
+## CRITICAL: Verification Step
+
+**ALWAYS verify diagrams render before completing the task.**
+
+After creating or modifying any Mermaid diagram, run this verification:
+
+```bash
+# Create temp file with the diagram
+cat << 'MERMAID_EOF' > /tmp/mermaid-test.mmd
+<paste diagram content here>
+MERMAID_EOF
+
+# Verify it parses correctly (will output errors if invalid)
+npx -y @mermaid-js/mermaid-cli mmdc -i /tmp/mermaid-test.mmd -o /tmp/mermaid-test.svg 2>&1
+```
+
+**If verification fails:**
+1. Read the error message carefully
+2. Fix the syntax issue (common problems listed below)
+3. Re-verify until it passes
+4. Only then consider the diagram complete
+
+### Common Verification Errors and Fixes
+
+| Error | Cause | Fix |
+|-------|-------|-----|
+| `Parse error` | Invalid syntax | Check brackets, arrows, quotes |
+| `Unexpected token` | Special chars in labels | Wrap label in quotes: `["Label"]` |
+| `Unknown diagram type` | Typo in diagram type | Use exact: `flowchart`, `sequenceDiagram`, etc. |
+| `Unterminated string` | Missing closing quote | Ensure all `"` are paired |
+| `Invalid direction` | Wrong flowchart direction | Use: `TD`, `TB`, `BT`, `LR`, `RL` |
 
 ## Diagram Types Reference
 
@@ -224,3 +257,37 @@ flowchart TD
     Action1 --> End([End])
     Action2 --> End
 ```
+
+## Complete Workflow
+
+**Follow this workflow for every diagram task:**
+
+1. **Understand the requirement**
+   - Read any source content (ASCII art, description, existing diagram)
+   - Identify the appropriate diagram type
+
+2. **Create the diagram**
+   - Write the Mermaid syntax
+   - Follow best practices (simple, labeled, consistent direction)
+
+3. **Verify the diagram renders** (REQUIRED)
+   ```bash
+   cat << 'MERMAID_EOF' > /tmp/mermaid-test.mmd
+   flowchart TD
+       A[Your] --> B[Diagram]
+   MERMAID_EOF
+   npx -y @mermaid-js/mermaid-cli mmdc -i /tmp/mermaid-test.mmd -o /tmp/mermaid-test.svg 2>&1
+   ```
+
+4. **Fix any errors**
+   - If verification fails, fix the syntax
+   - Re-run verification until it passes
+
+5. **Write the diagram to file**
+   - Only after verification passes
+   - Use `.mmd` extension for standalone files
+   - Or embed in markdown with ` ```mermaid ` fence
+
+6. **Confirm completion**
+   - Report the verification result to the user
+   - Include the file path where the diagram was saved

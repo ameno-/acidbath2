@@ -22,7 +22,11 @@ const { title, description = 'Production AI patterns, agent architecture, and ho
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <!-- AI crawler guidance -->
+    <link rel="ai-content" href="/llms.txt" type="text/markdown" />
     <title>{title} | ACIDBATH</title>
+    <!-- Slot for additional head content (JSON-LD, AI meta tags) -->
+    <slot name="head" />
   </head>
   <body>
     <Header />

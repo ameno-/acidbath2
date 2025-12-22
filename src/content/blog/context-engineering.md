@@ -5,6 +5,15 @@ pubDate: 2025-12-15
 author: "Acidbath"
 tags: ["ai", "context-window", "mcp", "semantic-search", "optimization"]
 banner: "/assets/posts/context-engineering-banner.png"
+category: "Context Engineering"
+difficulty: "Advanced"
+tldr: "Context is your budget—every token loaded is a tax on productivity. Progressive disclosure reduces context consumption by 94% by loading tools only when needed. For large codebases (55K+ files), semantic search with tools like Serena MCP provides 36x performance improvements over naive approaches."
+keyTakeaways:
+  - "MCP servers can consume 20% of your context before work begins—if tools consume >15%, you have an architecture problem"
+  - "Progressive disclosure with UV scripts reduces context from 40,000 to 2,500 tokens (94% reduction)"
+  - "Semantic search outperforms ripgrep at scale: 36x faster search, 28x faster symbol navigation, 23x faster references"
+  - "Real cost savings: $2.40 per 100 queries with semantic search vs $86.40 with full context loading"
+  - "The 15% rule: if upfront context consumption exceeds 15%, refactor to progressive disclosure"
 ---
 
 Context is finite. Every token your agent loads before it starts working is a tax on productivity.

@@ -5,6 +5,15 @@ pubDate: 2025-12-15
 author: "Acidbath"
 tags: ["ai", "automation", "file-system", "python", "production"]
 banner: "/assets/posts/directory-watchers-banner.png"
+category: "Production Patterns"
+difficulty: "Intermediate"
+tldr: "Directory watchers turn your file system into an AI interface—drop a file, get processed results. Build with Python's watchdog library, configure zones via YAML, and handle production concerns like race conditions, error recovery, and monitoring."
+keyTakeaways:
+  - "Drop zones eliminate the chat interface—drag a file, get results automatically"
+  - "Use watchdog events with pattern matching for flexible zone configuration"
+  - "Production concerns: file locks, race conditions, atomic moves, error recovery"
+  - "Archive originals before processing for debugging and audit trails"
+  - "Add monitoring with simple JSON logs and file-based alerts for reliability"
 ---
 
 Directory watchers turn your file system into an AI interface.

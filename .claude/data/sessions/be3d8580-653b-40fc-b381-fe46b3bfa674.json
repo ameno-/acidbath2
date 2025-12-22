@@ -1,0 +1,6 @@
+{
+  "session_id": "be3d8580-653b-40fc-b381-fe46b3bfa674",
+  "prompts": [
+    "/classify_issue {\"number\": \"1\", \"title\": \"Enhance README to showcase Jerry's power and flexibility\", \"body\": \"/adw_plan_build_iso\\n\\n\\n ## Description\\n Update the main README.md to better reflect the robust nature, power, and flexibility of Jerry - the most advanced agentic layer for\\n modern apps.\\n ## Goals\\n - Highlight Jerry as a production-ready agentic layer framework\\n - Cover core features: ADWs, slash commands, worktree isolation, multi-source issues\\n - Emphasize scalability, observability, and composability\\n - Make the value proposition clear and compelling\\n\\n ## Acceptance Criteria\\n - [ ] README showcases Jerry's unique capabilities\\n - [ ] Core features are documented with examples\\n - [ ] Value proposition is clear in the first few paragraphs\\n - [ ] Structure follows best practices for open source READMEs\"}"
+  ]
+}

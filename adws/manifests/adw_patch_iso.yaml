@@ -1,0 +1,55 @@
+name: adw_patch_iso
+description: Isolated workflow for single-issue patches with worktree isolation and dedicated ports
+category: building
+effects:
+  creates_worktree: true
+  posts_comments: true  # Uses provider pattern
+  allocates_ports: true
+  creates_branch: true
+  creates_commits: true
+  creates_pr: true  # Only for GitHub issues
+module_dependencies:
+  - adw_modules.state
+  - adw_modules.git_ops
+  - adw_modules.github
+  - adw_modules.workflow_ops
+  - adw_modules.worktree_ops
+  - adw_modules.utils
+  - adw_modules.data_types
+  - adw_modules.agent
+  - adw_modules.issue_providers
+slash_command_dependencies:
+  - patch
+  - implement
+  - conditional_docs
+env_vars:
+  required:
+    - ANTHROPIC_API_KEY
+  optional:
+    - GH_TOKEN  # Only required for GitHub issues
+validation:
+  import_test:
+    enabled: true
+    timeout: 30
+  cli_test:
+    enabled: false
+    reason: "Requires issue reference argument"
+  dry_run:
+    enabled: true
+    command: "local:fix-workflow_ops test-adw-id --dry-run"
+    expected_output:
+      - "[DRY RUN]"
+features:
+  - Searches for 'adw_patch' keyword in issue comments or body
+  - Creates isolated git worktree under trees/<adw_id>/
+  - Allocates unique ports (9100-9114 backend, 9200-9214 frontend)
+  - Creates patch plan from keyword-containing content
+  - Implements patch in isolated environment
+  - Commits and pushes changes
+  - Creates or updates pull request
+workflow_type: isolated
+isolation_features:
+  - Dedicated worktree per ADW ID
+  - Unique port allocation
+  - Parallel execution safe
+  - Working directory isolation for all operations

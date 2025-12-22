@@ -1,0 +1,8 @@
+{
+  "session_id": "06ae4446-6ccf-4dfc-9102-e1017a934a5c",
+  "prompts": [
+    "/prime ",
+    "I want to run this analysis uv run ./adws/adw_analyze_iso.py \"https://github.com/anthropics/claude-cookbooks/blob/main/skills/notebooks/02_skills_financial_applications.ipynb\" --plan --output-dir \"/Users/ameno/dev/brainstorm/finance-skills\" I want to make sure that the plan file that's created is available in the same brainstorm directory where all the documentation is going. Do we need to make a change to the analyze workflow or can this be modified via parameter? ",
+    "Move this work to a new worktree, commit changes and open new pr"
+  ]
+}

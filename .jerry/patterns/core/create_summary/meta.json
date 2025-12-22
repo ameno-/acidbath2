@@ -1,0 +1,11 @@
+{
+  "name": "create_summary",
+  "category": "core",
+  "description": "Create Summary pattern",
+  "fabric_source": "/Users/ameno/.config/fabric/patterns/create_summary",
+  "synced_at": "2025-12-16T04:31:34.189278+00:00",
+  "files": [
+    "system.md"
+  ],
+  "checksum": "sha256:29d393bf16f9a89464ef1f734cfd523e5949c01e5e580039540fd65823bc4a06"
+}

@@ -1,0 +1,9 @@
+{
+  "session_id": "a40b6b27-fdc2-42ef-8b32-4cf8029bfa25",
+  "prompts": [
+    "/prime ",
+    "review @ai_docs/genesis/plan.md @ai_docs/genesis/phase1_import_workflow_report.md and continue with next phases",
+    "I want to better understand how tokens were used in this most recent session including how sub-agents and adw's consumed tokens. What data can you find?",
+    "no, let's commit these changes and work on the next thing"
+  ]
+}

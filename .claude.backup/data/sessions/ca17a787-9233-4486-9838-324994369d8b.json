@@ -1,0 +1,10 @@
+{
+  "session_id": "ca17a787-9233-4486-9838-324994369d8b",
+  "prompts": [
+    "commit changes but only for used images. Delete others. Once commited push changes to production",
+    "This is ready now: git remote add origin git@github.com:ameno-/acidbath2.git",
+    "Deploys are actually made through cloudflare. can we configure it to deploy on merges to main",
+    "This seems incorrect I see no option to connect git",
+    "no this is fine. lets run a deploy now"
+  ]
+}

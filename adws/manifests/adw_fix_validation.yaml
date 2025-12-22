@@ -1,0 +1,72 @@
+name: adw_fix_validation
+description: Self-healing workflow that identifies and fixes broken ADW validations
+category: utility
+version: "1.0.0"
+
+effects:
+  creates:
+    - issues/issue-fix-*.md (local issues for tracking)
+    - agents/{adw_id}/ (agent outputs)
+  modifies:
+    - adws/*.py (fixes validation failures)
+    - adws/adw_modules/*.py (fixes module failures)
+    - adws/adw_triggers/*.py (fixes trigger failures)
+  triggers:
+    - /patch command for each broken ADW
+
+module_dependencies:
+  - adws.adw_modules.state
+  - adws.adw_modules.utils
+  - adws.adw_modules.data_types
+  - adws.adw_modules.issue_providers
+  - adws.adw_modules.agent
+  - adws.adw_modules.workflow_ops
+
+environment_variables:
+  required: []
+  optional:
+    - ANTHROPIC_API_KEY
+
+validation:
+  import:
+    enabled: true
+    command: "python3 -c \"from adws.adw_fix_validation import main; print('OK')\""
+    timeout: 30
+    expected_exit_code: 0
+
+  cli:
+    enabled: true
+    command: "uv run adws/adw_fix_validation.py --help"
+    timeout: 30
+    expected_exit_code: 1  # Exits with usage when no args
+
+  dry_run:
+    enabled: true
+    command: "uv run adws/adw_fix_validation.py --dry-run"
+    timeout: 120
+    expected_exit_code: 0
+
+usage:
+  examples:
+    - description: "Fix all broken ADWs (dry run)"
+      command: "uv run adws/adw_fix_validation.py --dry-run"
+    - description: "Fix a specific ADW"
+      command: "uv run adws/adw_fix_validation.py --adw-name workflow_ops"
+    - description: "Fix all broken ADWs"
+      command: "uv run adws/adw_fix_validation.py"
+
+workflow_steps:
+  1: Parse VALIDATION_STATUS.md to identify broken ADWs
+  2: Sort broken ADWs by complexity (simplest first)
+  3: For each broken ADW, create/fetch local issue
+  4: Run validation to capture actual error
+  5: Use /patch command to fix the issue
+  6: Re-run validation to verify fix
+  7: Update local issue status
+  8: Report summary
+
+notes:
+  - Prioritizes simpler fixes first for faster wins
+  - Creates local issues in issues/ directory for tracking
+  - Updates issue status as work progresses
+  - Can be run in dry-run mode for safe testing

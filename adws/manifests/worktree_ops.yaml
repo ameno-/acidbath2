@@ -1,0 +1,106 @@
+name: worktree_ops
+description: Worktree and port management operations for isolated ADW workflows
+category: utility
+type: module  # This is a utility module, not a standalone ADW
+
+effects:
+  creates_worktree: true
+  removes_worktree: true
+  allocates_ports: true
+  posts_github: false
+
+module_dependencies:
+  - adw_modules.state
+
+env_vars:
+  required: []
+  optional: []
+
+validation:
+  import_test:
+    enabled: true
+    timeout: 30
+  cli_test:
+    enabled: false  # Not a CLI tool, it's a utility module
+  dry_run:
+    enabled: false  # Not applicable for utility modules
+
+functions:
+  - name: create_worktree
+    description: Create a git worktree for isolated ADW execution
+    args:
+      - adw_id: str
+      - branch_name: str
+      - logger: logging.Logger
+    returns: Tuple[str, Optional[str]]
+    major_effect: true
+
+  - name: validate_worktree
+    description: Validate worktree exists in state, filesystem, and git
+    args:
+      - adw_id: str
+      - state: ADWState
+    returns: Tuple[bool, Optional[str]]
+    major_effect: false
+
+  - name: get_worktree_path
+    description: Get absolute path to worktree
+    args:
+      - adw_id: str
+    returns: str
+    major_effect: false
+
+  - name: remove_worktree
+    description: Remove a worktree and clean up
+    args:
+      - adw_id: str
+      - logger: logging.Logger
+    returns: Tuple[bool, Optional[str]]
+    major_effect: true
+
+  - name: setup_worktree_environment
+    description: Set up worktree environment by creating .ports.env file
+    args:
+      - worktree_path: str
+      - backend_port: int
+      - frontend_port: int
+      - logger: logging.Logger
+    returns: None
+    major_effect: true
+
+  - name: get_ports_for_adw
+    description: Deterministically assign ports based on ADW ID
+    args:
+      - adw_id: str
+    returns: Tuple[int, int]
+    major_effect: false
+
+  - name: is_port_available
+    description: Check if a port is available for binding
+    args:
+      - port: int
+    returns: bool
+    major_effect: false
+
+  - name: find_next_available_ports
+    description: Find available ports starting from deterministic assignment
+    args:
+      - adw_id: str
+      - max_attempts: int
+    returns: Tuple[int, int]
+    major_effect: false
+
+notes: |
+  This module provides utilities for managing git worktrees and port allocation
+  in Jerry's agentic layer. It enables isolated execution environments where
+  multiple ADWs can run concurrently without port conflicts.
+
+  Port allocation strategy:
+  - Backend ports: 9100-9114 (15 slots)
+  - Frontend ports: 9200-9214 (15 slots)
+  - Deterministic assignment based on ADW ID with fallback to next available
+
+  Worktree organization:
+  - All worktrees live under trees/<adw_id>/
+  - Each worktree gets a .ports.env file with port configuration
+  - Cleanup is handled via remove_worktree() function

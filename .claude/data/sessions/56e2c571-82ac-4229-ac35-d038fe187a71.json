@@ -1,0 +1,6 @@
+{
+  "session_id": "56e2c571-82ac-4229-ac35-d038fe187a71",
+  "prompts": [
+    "/classify_issue {\"number\": \"prompt-7f259ef8\", \"title\": \"Jerry validation test - add health check\", \"body\": \"Jerry validation test - add health check\"}"
+  ]
+}

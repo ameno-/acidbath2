@@ -1,0 +1,8 @@
+{
+  "session_id": "7ef00a4e-bde8-449c-a041-399fce101fa6",
+  "prompts": [
+    "How do you have access to fabric cli too",
+    "I need to determine where this is installed locally. where can I find the source and modify it?",
+    "I need to determine what repository the fabric project is linked to. I think I made my own when cloning the binary, but I must veruyf"
+  ]
+}

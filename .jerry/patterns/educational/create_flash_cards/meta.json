@@ -1,0 +1,11 @@
+{
+  "name": "create_flash_cards",
+  "category": "educational",
+  "description": "Create Flash Cards pattern",
+  "fabric_source": "/Users/ameno/.config/fabric/patterns/create_flash_cards",
+  "synced_at": "2025-12-16T04:31:34.228456+00:00",
+  "files": [
+    "system.md"
+  ],
+  "checksum": "sha256:1649562432f696ba239e290f1de4e10b37c73e7625e359b0eba64cf174b8377e"
+}

@@ -1,0 +1,11 @@
+{
+  "name": "extract_references",
+  "category": "core",
+  "description": "Extract References pattern",
+  "fabric_source": "/Users/ameno/.config/fabric/patterns/extract_references",
+  "synced_at": "2025-12-16T04:31:34.194709+00:00",
+  "files": [
+    "system.md"
+  ],
+  "checksum": "sha256:dada08eff4dda660002e232668bbb5d7db09bd37232f0a173acccbf5263703b6"
+}

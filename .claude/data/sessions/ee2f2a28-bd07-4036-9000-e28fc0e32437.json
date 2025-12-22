@@ -1,0 +1,6 @@
+{
+  "session_id": "ee2f2a28-bd07-4036-9000-e28fc0e32437",
+  "prompts": [
+    "/classify_issue {\"number\": \"32\", \"title\": \"Import test workflow\", \"body\": \"adw_plan_build_iso\\nadw_import_workflow\\n\\nImport the test workflow from: legacy/tac8_app5__nlq_to_sql_aea/adws/adw_test_iso.py\\n\\nImport this workflow from. a legacy app. Make sure it passes validation and documentation is updated after implementation\\n\\npath: \\\"legacy/tac8_app5__nlq_to_sql_aea/adws/adw_test_iso.py\\\"\\nmode: merge\"}"
+  ]
+}

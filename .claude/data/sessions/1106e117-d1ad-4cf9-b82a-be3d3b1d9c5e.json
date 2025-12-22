@@ -1,0 +1,6 @@
+{
+  "session_id": "1106e117-d1ad-4cf9-b82a-be3d3b1d9c5e",
+  "prompts": [
+    "-4 sibling directory, you will find various workflows related to GitLab. There are also workflows related to Linear but for now we're going to focus on the GitLab workflows and the trigger webhook workflows. This is the first utility that we're going to import as a new provider. GitLab has its own way to manage issues and GitLab has its own specific implementation with GitOps and other CLI implementation details Little differences in nomenclature"
+  ]
+}

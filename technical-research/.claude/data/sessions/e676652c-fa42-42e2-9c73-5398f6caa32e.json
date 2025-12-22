@@ -1,0 +1,14 @@
+{
+  "session_id": "e676652c-fa42-42e2-9c73-5398f6caa32e",
+  "prompts": [
+    "/yt_full https://www.youtube.com/watch?v=gyjoXC8lzIw",
+    "What bash permissions did you need to complete this analysis? Can I provide you with more permissions to work more autonomously",
+    "I had to approve many bash commands for fabric and other things. That is what I want to limit. Review all the instances of requested permissions or user involvement",
+    "Another issue here Resolved. I want to add an additional output format for HTML pages After the analysis is complete we should produce an HTML page that contains all the aggregated data, provides a link back to the YouTube video, transcripts, and other helpful information. This HTML page should be the main place we use for understanding Another change that needs to be made: the name of the directories. The directories must use a better name that includes the title of the YouTube video. It can be kebab-cased, cleaned up to remove spaces and special characters, but this current system is not good enough ",
+    "After completing, use this video to test the new flow: https://www.youtube.com/watch?v=6wR6xblSays",
+    "begin",
+    "continue, dont play audio",
+    "Just registered the agent by restarting claude. Use the agent, don't do it yourself ",
+    "let's now rename the other anlysis result directories to use the new format. Let's also generate html for all the previous analysis attempts"
+  ]
+}

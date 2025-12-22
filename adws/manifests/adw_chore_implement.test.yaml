@@ -1,0 +1,43 @@
+name: adw_chore_implement
+description: Run chore planning and implementation workflow.
+category: building
+version: 1.0.0
+effects:
+  creates_worktree: false
+  creates_branch: false
+  creates_files: true
+  posts_github: false
+  creates_commits: false
+  creates_pr: false
+  modifies_main_repo: false
+  runs_tests: false
+  allocates_ports: false
+module_dependencies:
+- adw_modules.agent
+- adw_modules.state
+- adw_modules.utils
+env_vars:
+  required:
+  - ANTHROPIC_API_KEY
+  optional:
+  - GITHUB_PAT
+validation:
+  import_test:
+    enabled: true
+    timeout: 30
+  cli_test:
+    enabled: true
+    command: --help
+    exit_code: 0
+    timeout: 30
+    expected_output: null
+  dry_run:
+    enabled: false
+    args: []
+    exit_code: 0
+    timeout: 120
+    expected_output: null
+documentation:
+  usage_example: uv run adw_chore_implement.py [args]
+  related_adws: []
+  workflow_sequence: null

@@ -1,0 +1,6 @@
+{
+  "session_id": "990bff9d-a706-4d09-89cc-510d24041f86",
+  "prompts": [
+    "/generate_branch_name feature df621e72 {\"number\": \"32\", \"title\": \"Import test workflow\", \"body\": \"adw_plan_build_iso\\nadw_import_workflow\\n\\nImport the test workflow from: legacy/tac8_app5__nlq_to_sql_aea/adws/adw_test_iso.py\\n\\nImport this workflow from. a legacy app. Make sure it passes validation and documentation is updated after implementation\\n\\npath: \\\"legacy/tac8_app5__nlq_to_sql_aea/adws/adw_test_iso.py\\\"\\nmode: merge\"}"
+  ]
+}

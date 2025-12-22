@@ -1,0 +1,8 @@
+{
+  "session_id": "d3aea3ac-ef4d-4c6d-b65b-617b26e934c9",
+  "prompts": [
+    "/prime ",
+    "This branch has conflicts with main. Let's resolve. Logs directory for example should be deleted",
+    "no need to delete from disk Let's commit all missing files and update PR"
+  ]
+}

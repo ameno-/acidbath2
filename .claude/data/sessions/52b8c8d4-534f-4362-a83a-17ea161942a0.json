@@ -1,0 +1,6 @@
+{
+  "session_id": "52b8c8d4-534f-4362-a83a-17ea161942a0",
+  "prompts": [
+    "/import_workflow /Users/ameno/dev/tac/tac-8/tac8_app5__nlq_to_sql_aea/.claude/commands/cleanup_worktrees.md adapt /Users/ameno/dev/tac/tac-8/jerry/.claude/commands/cleanup_worktrees.md"
+  ]
+}

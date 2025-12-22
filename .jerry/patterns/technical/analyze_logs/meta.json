@@ -1,0 +1,11 @@
+{
+  "name": "analyze_logs",
+  "category": "technical",
+  "description": "Analyze Logs pattern",
+  "fabric_source": "/Users/ameno/.config/fabric/patterns/analyze_logs",
+  "synced_at": "2025-12-16T04:31:34.220126+00:00",
+  "files": [
+    "system.md"
+  ],
+  "checksum": "sha256:886723b15c3f68b9867f5439bffcd0f8bcfd82699a8b728034e7aef9db64bbeb"
+}

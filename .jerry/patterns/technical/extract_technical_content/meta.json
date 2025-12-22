@@ -1,0 +1,11 @@
+{
+  "name": "extract_technical_content",
+  "category": "technical",
+  "description": "Extract Technical Content pattern",
+  "fabric_source": "/Users/ameno/.config/fabric/patterns/extract_technical_content",
+  "synced_at": "2025-12-16T04:31:34.208424+00:00",
+  "files": [
+    "system.md"
+  ],
+  "checksum": "sha256:6f2d893bc8da330cfaf5e63cbd235bc50d73f500d4c658ae5cee359fef9a0fb5"
+}

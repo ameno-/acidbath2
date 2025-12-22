@@ -1,0 +1,7 @@
+{
+  "session_id": "1b5f972c-26ce-4211-94b9-3eae0c20af21",
+  "prompts": [
+    "/prime ",
+    "Need to install Jerry in this directory: /Users/ameno/dev/acidbath2/specs\nThis will be the first app that fully implements the export/install/update workflows. Let's make sure the install works/update works. Use dry run commands after existing validation steps to verify"
+  ]
+}

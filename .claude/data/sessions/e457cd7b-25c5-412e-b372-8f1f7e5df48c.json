@@ -1,0 +1,6 @@
+{
+  "session_id": "e457cd7b-25c5-412e-b372-8f1f7e5df48c",
+  "prompts": [
+    "/commit sdlc_implementor feature {\"number\": \"50\", \"title\": \"Unit tests\", \"body\": \"Add meaningful test coverage to every ADW, script, or executable in Jerry. Focus on testing key functionality and consider refactors and decomposition to improve consistency of key adw workflows and modules.\"}"
+  ]
+}

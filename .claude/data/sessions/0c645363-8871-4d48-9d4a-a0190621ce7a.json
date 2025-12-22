@@ -1,0 +1,9 @@
+{
+  "session_id": "0c645363-8871-4d48-9d4a-a0190621ce7a",
+  "prompts": [
+    "/prime ",
+    "This branch implements a new feature to review all open PRs. let's test it now and verify it works",
+    "There was an issue with the screenshot upload in this issue: https://github.com/ameno-/jerry/issues/29#issuecomment-3621234300 Review the problem and fix the bug. It could be related to my R2 configuration. Review logs for review agent responsible for that task.",
+    "commit changes and push patch to parralel workflow branch"
+  ]
+}

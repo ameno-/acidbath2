@@ -1,0 +1,12 @@
+{
+  "name": "extract_article_wisdom",
+  "category": "research",
+  "description": "Extract Article Wisdom pattern",
+  "fabric_source": "/Users/ameno/.config/fabric/patterns/extract_article_wisdom",
+  "synced_at": "2025-12-16T04:31:34.242460+00:00",
+  "files": [
+    "system.md",
+    "user.md"
+  ],
+  "checksum": "sha256:c84062f2a8de09e03d52c40889ee612f73fc2f81e84a6a33f9eb1cf77eb410e1"
+}

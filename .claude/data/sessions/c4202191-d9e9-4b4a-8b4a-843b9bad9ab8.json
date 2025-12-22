@@ -1,0 +1,9 @@
+{
+  "session_id": "c4202191-d9e9-4b4a-8b4a-843b9bad9ab8",
+  "prompts": [
+    "I need to run the chore_implement adw workflow, but I get this error: ./adws/adw_chore_implement.py \"ensure adws#available-workflows section in documentation is accurate based on most recent run results\"",
+    "/commit ",
+    "/cleanup_worktrees ",
+    "/cleanup_worktrees all"
+  ]
+}

@@ -1,0 +1,6 @@
+{
+  "session_id": "fcf17db6-edd0-4ab7-8afb-e03e70982b89",
+  "prompts": [
+    "/generate_branch_name bug 8d9d3662 {\"number\": \"2\", \"title\": \"Sync GitLab main branch before creating MRs\", \"body\": \"## Problem\\n\\nWhen creating GitLab Merge Requests from ADW workflows, if the GitLab repository's `main` branch is behind GitHub's `main`, the MR will include unrelated changes from the sync gap.\\n\\nThis happened in MR !1 which showed 34 files changed instead of just the workflow-generated spec file.\\n\\n## Root Cause\\n\\nThe workflow pushes the feature branch to GitLab but doesn't ensure GitLab's `main` branch is up-to-date. When GitLab compares the feature branch against its outdated `main`, it includes all the commits that exist in GitHub but not in GitLab.\\n\\n## Proposed Solution\\n\\nAlways make sure all `main` branch remotes are synced. We must have the complete context for Jerry before beginning any new work.\\n\\n## Acceptance Criteria\\n\\n- [ ] ALWAYS Check sync status and perform a sync before starting on a task.\\n- [ ] `main` branch is always considered default\\n- [ ] Handle case where GitLab remotes and mirrors don't exist gracefully\\n- [ ] Log sync operation for observability\\n\\n## Related\\n\\n- GitHub PR #27: GitLab MR support\\n- MR !1 (closed): Example of the sync issue\"}"
+  ]
+}

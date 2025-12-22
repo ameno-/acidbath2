@@ -1,0 +1,12 @@
+{
+  "session_id": "c3735e71-00d4-4cf3-92c6-3aeefa41b1c5",
+  "prompts": [
+    "/commit ",
+    "/prime ",
+    "Let's work on fixing any of the broken adw flows. Create a new adw that checks @adws/README.md and @adws/VALIDATION_STATUS.md and works on fixing errors. This new ADW should also use the /patch command. Keep in mind that there is an issue in the patch workflow where it expects a GitHub issue that will need to be refactored. The patch workflow should now expect either a GitHub issue or an You pass to it in the prompt as an argument Past in the prompt as an argument we should create a new directory where we can track the issue, tasks, and status. The patch agent and other agents working on the same task should update that shared status We may have to refactor the logic within the rest of the application to expect issues in this new directory or as a GitHub issue or as a Linear issue. The truth really is the issue type is going to be extremely dynamic. What will be consistent is the format of the issue and the way that it is being handled so we must figure out a way to abstract that value inside all of our ADWs ",
+    "fix validation workflow isn't completing the validation reporting in the ticket. @issues/issue-fix-workflow_ops.md is marked as resolved, but there is no confirmation the acceptance criteria has been validated",
+    "Let's review the existing issues and work on a plan to fix. It appears that sub adws like build are breaking meta adws like plan_build.\n  Also, I've added \"gh\" to the terminal, so the github related issues should be fixed, but there should not be an expectation that github is used. If there are specific github features used by the plan/build, we must abstract that into a layer that is generic. This agentic layer will be integrated with gitlab, github, linear, jira, etc. Sometimes simmultaneously. So we must maintain enough context to and generic functionality to perform all ADW operations in a generic way.",
+    "continue",
+    "/commit "
+  ]
+}

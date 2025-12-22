@@ -1,0 +1,10 @@
+{
+  "session_id": "6aea66fb-4525-4712-8726-d422ebe05a93",
+  "prompts": [
+    "/prime ",
+    "describe the briainstorm command and it's usecases compared to analyze. Also, is the youtube specific adw even relevant? I'd prefer an intellegent analyze command that accepts various content types. Also The analysis depth should be high and deep by default. We should always prioritize extracting working POCs and use Jerry as the ideal implementor...so how exactly would jerry integrate this new agentic pattern? Also, I want to test it now with some content and a youtube video. Provide sample commands I can use to validate the features are all working",
+    "Instead of \"Auto-route POCs to implementation\" lets focus on a plan. You can add to the existing spec for the brainstorm features. ",
+    "Let's run an analysis for this: https://github.com/anthropics/claude-cookbooks/blob/main/skills/notebooks/02_skills_financial_applications.ipynb\nIt is a technical document that has immense opportunities. Let's do some checks to see if POCs, agents, and other key technical details are extracted. I want to understand how much the system will do implicitely vs specific direction through params",
+    "Let's work on those fixes. Switch back to that branch and begin work in a separate worktree. Use available commands to help Create work trees and manage the workflow and plan a task"
+  ]
+}

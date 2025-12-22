@@ -1,0 +1,7 @@
+{
+  "session_id": "ff2a9c6e-a361-4ef2-99c2-e3ca31785887",
+  "prompts": [
+    "/prime ",
+    "review @ai_docs/genesis/plan.md @ai_docs/genesis/phase1_import_workflow_report.md and help me verify the first imported flow"
+  ]
+}

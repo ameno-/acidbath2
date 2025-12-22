@@ -1,0 +1,11 @@
+{
+  "name": "analyze_claims",
+  "category": "research",
+  "description": "Analyze Claims pattern",
+  "fabric_source": "/Users/ameno/.config/fabric/patterns/analyze_claims",
+  "synced_at": "2025-12-16T04:31:34.233947+00:00",
+  "files": [
+    "system.md"
+  ],
+  "checksum": "sha256:5650bdfcad97f1404cac5515a268a98d801199655225aaf6994b0b5d2f1d093c"
+}

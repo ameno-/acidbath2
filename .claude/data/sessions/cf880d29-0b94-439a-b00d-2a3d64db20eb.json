@@ -1,0 +1,6 @@
+{
+  "session_id": "cf880d29-0b94-439a-b00d-2a3d64db20eb",
+  "prompts": [
+    "/classify_issue {\"number\": \"prompt-a5c985ba\", \"title\": \"--help\", \"body\": \"--help\"}"
+  ]
+}

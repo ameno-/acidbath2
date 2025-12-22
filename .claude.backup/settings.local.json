@@ -1,0 +1,37 @@
+{
+  "permissions": {
+    "allow": [
+      "WebFetch(domain:github.com)",
+      "WebFetch(domain:docs.astro.build)",
+      "WebFetch(domain:raw.githubusercontent.com)",
+      "WebFetch(domain:owickstrom.github.io)",
+      "WebFetch(domain:cdn.jsdelivr.net)",
+      "WebFetch(domain:unpkg.com)",
+      "WebSearch",
+      "Bash(npx wrangler:*)",
+      "WebFetch(domain:developers.cloudflare.com)",
+      "Bash(du:*)",
+      "Bash(done)",
+      "Bash(wc:*)",
+      "Bash(git branch:*)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(claude mcp list:*)",
+      "mcp__nano-banana__generate_image",
+      "mcp__nano-banana__get_configuration_status",
+      "mcp__nano-banana__continue_editing",
+      "Bash(curl:*)",
+      "Bash(git checkout:*)",
+      "Bash(git pull:*)",
+      "Bash(node scripts/generate-llms-txt.js:*)",
+      "Bash(git push:*)",
+      "Bash(gh pr merge:*)",
+      "Bash(git fetch:*)",
+      "Bash(git reset:*)"
+    ]
+  },
+  "enableAllProjectMcpServers": true,
+  "enabledMcpjsonServers": [
+    "nano-banana"
+  ]
+}

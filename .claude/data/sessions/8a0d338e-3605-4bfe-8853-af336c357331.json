@@ -1,0 +1,9 @@
+{
+  "session_id": "8a0d338e-3605-4bfe-8853-af336c357331",
+  "prompts": [
+    "/prime ",
+    "Traceback (most recent call last):\n  File \"/Users/ameno/dev/jerry-next/adws/adw_plan_iso.py\", line 541, in <module>\n    main()\n  File \"/Users/ameno/dev/jerry-next/adws/adw_plan_iso.py\", line 486, in main\n    gitlab_provider = GitLabCodeReviewProvider(repo_path=issue.repo_path, logger=logger)\n                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nTypeError: GitLabCodeReviewProvider.__init__() got an unexpected keyword argument 'repo_path' There was a bug we investigated for the import/export flow that was related to the execution of the plan/build workflows. It appears that gitlab is the source of these issues and we must have a fix. I need you to first cleanup deb/jerry-next and re-export jerry with all the latest changes. First, it looks the recent patch for a gitlab issue was not implemented in Jerry correctly. We must open a PR and fully document the error and fix even if it's uncovered while we develop fix other things. Review recent conversations to better understand unnaceptable agent behavior. NEVER DO THIS AGAIN. This adw: test1208a and this adw: test1208a are the most recent attempts to fully verify the export/bootstrap workflow review specs/feature-issue-10-5934eeda-import-review-workflow.md for additional context",
+    "add a spec file, create a new branch and commit changes using /commit. Once complete push fix to new PR. Also, make sure you update the gitlab mirror with the latest changes from main",
+    "continue"
+  ]
+}

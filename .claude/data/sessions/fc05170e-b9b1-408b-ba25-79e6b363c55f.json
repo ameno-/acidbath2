@@ -1,0 +1,6 @@
+{
+  "session_id": "fc05170e-b9b1-408b-ba25-79e6b363c55f",
+  "prompts": [
+    "/pull_request feature-issue-10-adw-5934eeda-import-review-workflow {\"number\": \"10\", \"title\": \"Import review workflow\", \"body\": \"\\nadw_plan_build_iso\\nadw_import_workflow\\n\\nImport this workflow from. a legacy app. Make sure it passes validation and documentation is updated after implementation\\n\\npath: \\\"legacy/tac8_app5__nlq_to_sql_aea/adws/adw_review_iso.py\\\"\\nmode: merge\\n\"} specs/feature-issue-10-5934eeda-import-review-workflow.md 5934eeda"
+  ]
+}

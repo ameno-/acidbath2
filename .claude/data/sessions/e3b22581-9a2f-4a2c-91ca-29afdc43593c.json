@@ -1,0 +1,6 @@
+{
+  "session_id": "e3b22581-9a2f-4a2c-91ca-29afdc43593c",
+  "prompts": [
+    "/pull_request feat-issue-50-adw-1cc4d84c-add-unit-test-coverage {\"number\": \"50\", \"title\": \"Unit tests\", \"body\": \"Add meaningful test coverage to every ADW, script, or executable in Jerry. Focus on testing key functionality and consider refactors and decomposition to improve consistency of key adw workflows and modules.\"} specs/feature-1cc4d84c-unit-test-coverage.md 1cc4d84c"
+  ]
+}

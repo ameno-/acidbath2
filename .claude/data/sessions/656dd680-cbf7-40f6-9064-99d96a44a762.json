@@ -1,0 +1,11 @@
+{
+  "session_id": "656dd680-cbf7-40f6-9064-99d96a44a762",
+  "prompts": [
+    "/prime ",
+    "We recently implemented a /bootstrap command that will help us bootstrap Jerry into an existing application. Before testing it on a real working application, let's first clone a Next.js app and verify that the /bootstrap command is working as expected I've created a new dir: dev/jerry-next. Clone Next.js using npx, pnpm, it doesn't really matter. But just clone Next.js into this repo, install it, make sure it runs, check the browser and verify that local host is loading. Then we will start the bootstrap process of importing Jerry into that repository. Next I will go through and work through the configurations set up GitHub and GitLab and we can verify adding new features to this new application ",
+    "try again",
+    "Next apps is running correctly now on: http://localhost:3001/",
+    "The env file is updated, but there is a problem, the details for cloudflare/r2 were not included. This is necessary for review workflows and should be added even as an optional value",
+    "let's make a small commit with this template update so we don't lose track. Use /commit and we'll continue collecting fixes along the way. Continue with next step"
+  ]
+}

@@ -1,0 +1,55 @@
+name: adw_build_iso
+description: Agentic building in isolated worktrees - implements plans and commits changes
+category: building
+effects:
+  creates_worktree: false  # Uses existing worktree from adw_plan_iso or adw_patch_iso
+  modifies_worktree: true
+  creates_commits: true
+  pushes_to_github: true  # Only for GitHub issues
+  creates_pr: true  # Only for GitHub issues
+  posts_comments: true  # Uses provider pattern
+module_dependencies:
+  - adw_modules.state
+  - adw_modules.git_ops
+  - adw_modules.workflow_ops
+  - adw_modules.utils
+  - adw_modules.data_types
+  - adw_modules.worktree_ops
+  - adw_modules.issue_providers
+slash_command_dependencies:
+  - implement
+  - commit
+env_vars:
+  required:
+    - ANTHROPIC_API_KEY  # For AI agent implementation
+  optional:
+    - GH_TOKEN  # Only required for GitHub issues
+validation:
+  import_test:
+    enabled: true
+    timeout: 30
+  cli_test:
+    enabled: false
+    reason: "Requires issue-ref and adw-id arguments"
+  dry_run:
+    enabled: true
+    command: "local:fix-workflow_ops test-adw-id --dry-run"
+usage:
+  command: "uv run adws/adw_build_iso.py <issue-ref> <adw-id> [--dry-run]"
+  examples:
+    - "uv run adws/adw_build_iso.py 42 adw_20240304_1234"
+    - "uv run adws/adw_build_iso.py local:fix-bug adw_20240304_1234 --dry-run"
+prerequisites:
+  - "Run adw_plan_iso.py or adw_patch_iso.py first to create worktree and state"
+workflow_steps:
+  1: "Load state and validate worktree exists"
+  2: "Find existing plan (from state)"
+  3: "Implement the solution based on plan in worktree"
+  4: "Commit implementation in worktree"
+  5: "Push and update PR"
+adaptations:
+  - "Removed app-specific references"
+  - "Added --dry-run flag for validation"
+  - "Replaced finalize_git_operations with inline implementation using Jerry's git_ops functions"
+  - "Generalized port display (backend/frontend ports may not exist in all deployments)"
+  - "Made deployment-agnostic by removing hardcoded app-specific values"

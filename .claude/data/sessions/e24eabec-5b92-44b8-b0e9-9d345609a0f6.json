@@ -1,0 +1,6 @@
+{
+  "session_id": "e24eabec-5b92-44b8-b0e9-9d345609a0f6",
+  "prompts": [
+    "/import_workflow /Users/ameno/dev/tac/tac-8/tac8_app5__nlq_to_sql_aea/.claude/commands/generate_branch_name.md adapt /Users/ameno/dev/tac/tac-8/jerry/.claude/commands/generate_branch_name.md"
+  ]
+}

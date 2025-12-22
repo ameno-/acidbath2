@@ -1,23 +1,45 @@
-# Dependencies
-node_modules/
-
-# Build output
-dist/
-.astro/
-
-# Cloudflare
-.wrangler/
-
 # Environment variables
 .env
-.env.local
-.env.production
+app/server/.env
+.ports.env
+
+# Worktree-specific config files (should not be committed to main repo)
+.mcp.json
+playwright-mcp-config.json
+worktree.config
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+.venv
+*.egg-info/
+.pytest_cache/
+
+# Node
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+dist/
+.npm
+
+# Database
+*.db
+*.sqlite
+*.sqlite3
+!app/server/db/backup.db
 
 # IDE
 .vscode/
 .idea/
 *.swp
 *.swo
+*~
 
 # OS
 .DS_Store
@@ -25,43 +47,44 @@ Thumbs.db
 
 # Logs
 *.log
+
+trees/
+!trees/README.md
+
+# Claude hooks logs
 logs/
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
 
-# TypeScript
-*.tsbuildinfo
+# Agent output directories
+agents/
 
-# Temporary files
-tmp/
-temp/
+claude-max-output.json
+claude-max-output.jsonl
 
-# Python cache
-__pycache__/
-*.pyc
-*.pyo
+storage.json
 
-# Session data (contains conversation history)
-.claude/data/sessions/
-**/data/sessions/
+deep_specs/
 
-# Audio files in analysis output
-*.m4a
-*.mp3
+screenshots/
 
-# Local MCP configuration
-.mcp.json
+# Playwright video recordings
+videos/
 
-# AI documentation (local)
-ai_docs/
+# Bun lock files
+bun.lock
+bun.lockb
 
-# Generated images (working files)
-generated_imgs/
+deep_docs/
 
-# Root assets folder (use public/assets)
-/assets/
+# Jerry export artifacts
+jerry-export-*.tar.gz
+jerry-export-*.zip
+.jerry/exports/
+export-report-*.txt
 
-# Playwright test artifacts
-playwright-report/
-test-results/
+# Jerry pattern sync temporary artifacts
+.jerry/patterns/.sync_tmp/
+.jerry/patterns/.execution_cache/
+
+# Backup directories
+*_backup_to_delete/
+apps_backup_to_delete/

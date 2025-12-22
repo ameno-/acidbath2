@@ -1,0 +1,6 @@
+{
+  "session_id": "e24b1235-4de9-46ad-8f98-cbf7906b23ff",
+  "prompts": [
+    "/commit sdlc_planner bug {\"number\": \"24\", \"title\": \".gitignore is allowing log directory in PRs\", \"body\": \"bug\\nadw_plan_build_iso\\n\\n\\\".gitignore\\\" file isn't working correctly and it's allowing /log directory into MRs and PRs. Fix the issue and make sure \\\".gitignore\\\" is accurately ignoring log files. This includes log files in the main directory and any and all sub-directories once completed let's make sure that the log directory that currently exists and is currently being tracked anywhere in source code is removed. Keep in mind these are logs specifically related to chats with Claude, not logs on features and logs on workflows. Those are critical. \"}"
+  ]
+}

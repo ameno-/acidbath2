@@ -1,0 +1,9 @@
+{
+  "session_id": "53aa2036-c094-419d-84b3-cdae952a3d31",
+  "prompts": [
+    "The new blog posts read very simialr to the original content from /technical-research. You must edit this content and focus on the /patterns for each topic and also use 'fabric' cli yourself to create compelling content based on the source material.",
+    "Make sure you add POCs or provide \"agent opportunities\" in the relevant blogs. Use mermaid diagrams or ascii diagrams to demo data-flow. Add more actual usable code into these posts so there's continuous value. Focus on depth in each post, not breadth. If there is one interesting concept from the content, emphasise that.",
+    "This is great. let's publish everything to prod",
+    "Update the dates for the post and delete the original test posts"
+  ]
+}

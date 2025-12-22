@@ -1,0 +1,7 @@
+{
+  "session_id": "51ddfe06-2790-417b-89b4-eceb7feeee51",
+  "prompts": [
+    "/prime ",
+    "Let's fix the readme and make sure its a \"merge\" of the original content for Acidbath, the content_strategy, and key context information, but also include Jerry, skills, and high-level details and plans. Once done, let's open a new pull request using the brand new jerry commands to create/save plan, commit changes, open new PR for review and merge"
+  ]
+}

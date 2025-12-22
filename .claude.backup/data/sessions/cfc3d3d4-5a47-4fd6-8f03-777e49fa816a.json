@@ -1,0 +1,6 @@
+{
+  "session_id": "cfc3d3d4-5a47-4fd6-8f03-777e49fa816a",
+  "prompts": [
+    "<bash-notification>\n<shell-id>bff4ba5</shell-id>\n<output-file>/tmp/claude/-Users-ameno-dev-acidbath2/tasks/bff4ba5.output</output-file>\n<status>failed</status>\n<summary>Background command \"Start Astro dev server\" failed with exit code 137.</summary>\nRead the output file to retrieve the output.\n</bash-notification>\n<bash-notification>\n<shell-id>b6f88fc</shell-id>\n<output-file>/tmp/claude/-Users-ameno-dev-acidbath2/tasks/b6f88fc.output</output-file>\n<status>failed</status>\n<summary>Background command \"Start preview server\" failed with exit code 137.</summary>\nRead the output file to retrieve the output.\n</bash-notification>"
+  ]
+}

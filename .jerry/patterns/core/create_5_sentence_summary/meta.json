@@ -1,0 +1,11 @@
+{
+  "name": "create_5_sentence_summary",
+  "category": "core",
+  "description": "Create 5 Sentence Summary pattern",
+  "fabric_source": "/Users/ameno/.config/fabric/patterns/create_5_sentence_summary",
+  "synced_at": "2025-12-16T04:31:34.192132+00:00",
+  "files": [
+    "system.md"
+  ],
+  "checksum": "sha256:b44fee8d7758c53a633efbe7fceff5591bd81e666bfa9fae74d3bb5c363dd3d3"
+}

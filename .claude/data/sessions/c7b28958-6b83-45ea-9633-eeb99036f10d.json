@@ -1,0 +1,6 @@
+{
+  "session_id": "c7b28958-6b83-45ea-9633-eeb99036f10d",
+  "prompts": [
+    "/classify_issue {\"number\": \"prompt-3cabe612\", \"title\": \"--dry-run\", \"body\": \"--dry-run\"}"
+  ]
+}

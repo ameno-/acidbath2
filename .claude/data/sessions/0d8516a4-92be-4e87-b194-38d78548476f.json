@@ -1,0 +1,6 @@
+{
+  "session_id": "0d8516a4-92be-4e87-b194-38d78548476f",
+  "prompts": [
+    "/import_workflow /Users/ameno/dev/tac/tac-8/tac8_app5__nlq_to_sql_aea/.claude/commands/classify_issue.md adapt /Users/ameno/dev/tac/tac-8/jerry/.claude/commands/classify_issue.md"
+  ]
+}

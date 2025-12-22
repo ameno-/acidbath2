@@ -1,0 +1,44 @@
+name: adw_import_workflow
+description: Import ADW from sibling directory into Jerry's agentic layer
+category: utility
+version: "1.0.0"
+
+effects:
+  creates_worktree: false
+  creates_branch: false
+  creates_files: true
+  posts_github: false
+  creates_commits: false
+  creates_pr: false
+  modifies_main_repo: false
+  runs_tests: false
+  allocates_ports: false
+
+module_dependencies:
+  - adw_modules.agent
+  - adw_modules.state
+  - adw_modules.utils
+  - adw_modules.data_types
+
+env_vars:
+  required:
+    - ANTHROPIC_API_KEY
+  optional:
+    - GITHUB_PAT
+    - CLAUDE_CODE_PATH
+
+validation:
+  import_test:
+    enabled: true
+    timeout: 30
+  cli_test:
+    enabled: true
+    command: "--help"
+    exit_code: 0
+  dry_run:
+    enabled: false
+
+documentation:
+  usage_example: "uv run adws/adw_import_workflow.py /path/to/source.py --mode adapt"
+  related_adws: []
+  workflow_sequence: null

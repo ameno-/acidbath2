@@ -1,0 +1,6 @@
+{
+  "session_id": "4248efc3-a3c9-49d6-9b27-581a435905ee",
+  "prompts": [
+    "I've added a new dir /techincal-research that contains various research on youtube videos. This analysis was done using fabric and claude. I want you to review all the content and create blog posts. In order to create these posts, use Fabric to create diagrams, images. Also, each post should have catchy useful callouts. Create a way to generate \"callout quotes\" that are designed as ascii art. I haven't yet found my voice, so let's have fun with these blogs. Use different mix of fabric patterns, content, layout for each technical research topic in this dir. "
+  ]
+}

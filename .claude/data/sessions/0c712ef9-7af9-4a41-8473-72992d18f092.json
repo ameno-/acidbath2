@@ -1,0 +1,6 @@
+{
+  "session_id": "0c712ef9-7af9-4a41-8473-72992d18f092",
+  "prompts": [
+    "/commit sdlc_implementor bug {\"number\": \"15\", \"title\": \"Gitlab integration is not\", \"body\": \"/bug\\nThe Gitlab integration is failing to find and pickup changes in a gitlab issue. Review the implementation and verify that we can consume gitlab issues and trigger adws. The functionality should identical to github.\\n\\nGitlab issue: https://gitlab.com/ameno13/jerry/-/issues/1\\n\\nHere is the log output:\\n\\n```\\nCreated new ADW ID and state: 7e4b818e\\nUsing ADW ID: 7e4b818e\\n\\n=== ISOLATED PLAN PHASE ===\\nRunning: uv run /Users/ameno/dev/tac/tac-8/adws/adw_plan_iso.py gitlab:1 7e4b818e\\nADW Logger initialized - ID: 7e4b818e\\nFound existing state from /Users/ameno/dev/tac/tac-8/agents/7e4b818e/adw_state.json\\nFound existing ADW state for ID: 7e4b818e\\nFound existing state from /Users/ameno/dev/tac/tac-8/agents/7e4b818e/adw_state.json\\nADW Logger initialized - ID: 7e4b818e\\nADW Plan Iso starting - ID: 7e4b818e, Issue ref: gitlab:1\\n\\n   ERROR\\n\\n  404 Not Found.\\n\\n\\nError parsing GitLab issue data: Failed to fetch GitLab issue:\\n   ERROR\\n\\n  404 Not Found.\\n\\n\\nError resolving issue: Failed to fetch GitLab issue:\\n   ERROR\\n\\n  404 Not Found.\\n\\n\\nIsolated plan phase failed\\n```\"}"
+  ]
+}

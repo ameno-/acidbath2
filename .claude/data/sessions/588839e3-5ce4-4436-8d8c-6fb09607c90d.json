@@ -1,0 +1,6 @@
+{
+  "session_id": "588839e3-5ce4-4436-8d8c-6fb09607c90d",
+  "prompts": [
+    "/commit sdlc_implementor feature {\"number\": \"10\", \"title\": \"Import review workflow\", \"body\": \"\\nadw_plan_build_iso\\nadw_import_workflow\\n\\nImport this workflow from. a legacy app. Make sure it passes validation and documentation is updated after implementation\\n\\npath: \\\"legacy/tac8_app5__nlq_to_sql_aea/adws/adw_review_iso.py\\\"\\nmode: merge\\n\"}"
+  ]
+}

@@ -1,0 +1,75 @@
+# ACIDBATH Preset: Blog Post Generation with Technical Depth
+#
+# ACIDBATH: Analysis, Code, Insights, Data, Blog-style, Agent opportunities, Testing, How-to
+#
+# This preset is optimized for analyzing technical content and extracting
+# everything needed to write comprehensive, actionable blog posts.
+
+name: acidbath
+description: >
+  Comprehensive pattern preset for blog post generation. Extracts POCs, metrics,
+  failure modes, agent opportunities, and technical insights from content.
+  Optimized for ACIDBATH blog structure.
+
+use_case: blogging
+
+# Patterns that always run for ACIDBATH analysis
+always_run:
+  # Core technical extraction
+  - technical/extract_poc  # Code examples and proof-of-concepts (A: Analysis, C: Code)
+  - youtube/extract_agent_opportunities  # Agent/automation opportunities (A: Agent)
+  - technical/extract_technical_content  # Technical details and implementation (C: Code, T: Testing)
+
+# Custom blogging-specific patterns
+custom:
+  - blogging/extract_numbers_and_metrics  # Numerical data and benchmarks (D: Data)
+  - blogging/extract_failure_modes  # Failure modes, gotchas, edge cases (T: Testing, H: How-to)
+  - blogging/generate_acidbath_outline  # Blog post outline (B: Blog-style)
+
+# Supporting patterns for additional context
+supporting:
+  - core/extract_wisdom  # Key insights and learnings (I: Insights)
+  - core/extract_insights  # Patterns and mental models (I: Insights)
+  - core/extract_recommendations  # Actionable recommendations (H: How-to)
+
+# Execution configuration
+execution:
+  # Use parallel execution for performance (default: true)
+  parallel: true
+
+  # Maximum concurrent pattern executions (default: 4)
+  max_workers: 4
+
+  # Default model for pattern execution (default: sonnet)
+  # Options: haiku (fast, cheap), sonnet (balanced), opus (deep analysis)
+  model: sonnet
+
+  # Continue on pattern failure (default: true)
+  continue_on_error: true
+
+# Pattern execution order (optional - for dependencies)
+# If not specified, patterns run in parallel
+execution_order:
+  - phase_1:  # Core extraction first
+      - technical/extract_poc
+      - technical/extract_technical_content
+      - blogging/extract_numbers_and_metrics
+      - blogging/extract_failure_modes
+  - phase_2:  # Then insights and synthesis
+      - core/extract_wisdom
+      - core/extract_insights
+      - core/extract_recommendations
+      - youtube/extract_agent_opportunities
+  - phase_3:  # Finally generate outline using all previous outputs
+      - blogging/generate_acidbath_outline
+
+# Output configuration
+output:
+  # Generate combined summary report
+  generate_summary: true
+
+  # Include pattern metadata in outputs
+  include_metadata: true
+
+  # Create HTML dashboard
+  generate_dashboard: false

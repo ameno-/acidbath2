@@ -1,0 +1,7 @@
+{
+  "session_id": "f9884c8d-f847-4670-87f4-b0c2477b4c25",
+  "prompts": [
+    "/prime ",
+    "50 ADW ID: 1cc4d84c We're working on this. The previous agent didn't complete the implementation because it ran out of tokens. I want to continue working on this entire feature and let's also improve our logging as we're working on these agents. We need an accurate accounting of token usage per agent. So make sure that is always included in the output summary so we can better track and improve our processing and efficiency"
+  ]
+}

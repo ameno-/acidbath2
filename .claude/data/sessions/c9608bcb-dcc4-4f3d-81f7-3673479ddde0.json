@@ -1,0 +1,12 @@
+{
+  "session_id": "c9608bcb-dcc4-4f3d-81f7-3673479ddde0",
+  "prompts": [
+    "/prime ",
+    "open worktree in vscode",
+    "I want to verify the implementation of ADWs. First, the directories must be relative. Next, the env variables must truly be local and not dependent on global env vars. I also want to make sure that I can add my own remotes for github and gitlab. The current implementation on main relies on github/gitlab cli access and not tokens. Can Jerry continue using the cli's for gitlab and github with just tokens? I must verify that all key workflows work. We can test by running workflows from this worktree using tokens. ",
+    "Revisit the spec and original plan. I expected all the validation steps (espescially the newly added ones) to be run",
+    "these validations can be run in parralel",
+    "The other processes are waiting. They may be waiting for permissions. I will give broad permissions for all three levels of tests to be run inside of the validation pipeline ",
+    "Make sure that all these validations are runAs part of the import validation workflow. Verify that these validations, all five levels, will run during the validation process. Once that's done commit these changes using the /commit command, push the changes to the pull request, and update the spec file as needed. Once done we will run another validation flow to make sure that all the changes work "
+  ]
+}

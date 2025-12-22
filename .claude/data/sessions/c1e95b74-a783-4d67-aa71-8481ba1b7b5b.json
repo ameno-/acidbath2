@@ -1,0 +1,6 @@
+{
+  "session_id": "c1e95b74-a783-4d67-aa71-8481ba1b7b5b",
+  "prompts": [
+    "<bash-notification>\n<shell-id>b190d51</shell-id>\n<output-file>/tmp/claude/tasks/b190d51.output</output-file>\n<status>failed</status>\n<summary>Background command \"Count and list all Fabric patterns\" failed with exit code 137.</summary>\nRead the output file to retrieve the output.\n</bash-notification>"
+  ]
+}

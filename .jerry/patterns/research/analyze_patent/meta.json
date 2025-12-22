@@ -1,0 +1,11 @@
+{
+  "name": "analyze_patent",
+  "category": "research",
+  "description": "Analyze Patent pattern",
+  "fabric_source": "/Users/ameno/.config/fabric/patterns/analyze_patent",
+  "synced_at": "2025-12-16T04:31:34.239502+00:00",
+  "files": [
+    "system.md"
+  ],
+  "checksum": "sha256:0428f30f27c91615571458e236ffde8157c5510ca7d98df2879e3f4f4def8de9"
+}

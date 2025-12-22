@@ -1,0 +1,9 @@
+{
+  "session_id": "345b3503-c6fb-4405-af28-f870531a5865",
+  "prompts": [
+    "/prime ",
+    "Is there a command I can use to easily set a new remote and push code to a new github remote repo?",
+    "Here is my remote. I want to push this repo there and start verifying all the adw's that rely on github. Is there an access token thats needed as well? or will the GH cli be used for all github ops?",
+    "https://github.com/ameno-/jerry I have authenticated gh"
+  ]
+}

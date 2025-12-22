@@ -1,13 +1,31 @@
 ---
 import BaseLayout from './BaseLayout.astro';
+import TableOfContents from '../components/TableOfContents.astro';
+import CodeEnhancer from '../components/CodeEnhancer.astro';
 import type { CollectionEntry } from 'astro:content';
+import { calculateReadingTime, formatReadingTime } from '../utils/readingTime';
 
 interface Props {
   post: CollectionEntry<'blog'>;
+  headings: { depth: number; slug: string; text: string }[];
 }
 
-const { post } = Astro.props;
-const { title, description, pubDate, updatedDate, author, tags, banner, seoTitle } = post.data;
+const { post, headings } = Astro.props;
+const {
+  title,
+  description,
+  pubDate,
+  updatedDate,
+  author,
+  tags,
+  banner,
+  seoTitle,
+  tldr,
+  keyTakeaways,
+  category,
+  difficulty,
+  seoKeywords
+} = post.data;
 
 const formattedDate = pubDate.toLocaleDateString('en-US', {
   year: 'numeric',
@@ -22,12 +40,57 @@ const formattedUpdatedDate = updatedDate?.toLocaleDateString('en-US', {
 });
 
 const pageTitle = seoTitle || title;
+
+// Calculate reading time from post body
+const readingTime = calculateReadingTime(post.body || '');
+const readingTimeText = formatReadingTime(readingTime);
+
+// Generate JSON-LD structured data for AI crawlers and SEO
+const structuredData = {
+  "@context": "https://schema.org",
+  "@type": "TechArticle",
+  "headline": title,
+  "description": description,
+  "author": {
+    "@type": "Person",
+    "name": author,
+    "url": "https://blog.amenoacids.com/about"
+  },
+  "datePublished": pubDate.toISOString(),
+  "dateModified": (updatedDate || pubDate).toISOString(),
+  "publisher": {
+    "@type": "Organization",
+    "name": "ACIDBATH"
+  },
+  "proficiencyLevel": difficulty || "Intermediate",
+  "keywords": [...tags, ...(seoKeywords || [])].join(", "),
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": `https://blog.amenoacids.com/blog/${post.slug}`
+  }
+};
 ---
 
 <BaseLayout title={pageTitle} description={description}>
+  <!-- JSON-LD Structured Data -->
+  <script type="application/ld+json" set:html={JSON.stringify(structuredData)} slot="head" />
+
+  <!-- AI-specific meta tags -->
+  {tldr && <meta name="ai-summary" content={tldr} slot="head" />}
+  {difficulty && <meta name="ai-difficulty" content={difficulty} slot="head" />}
+  {category && <meta name="ai-category" content={category} slot="head" />}
+
   <article>
     <header>
+      <!-- Post metadata badges -->
+      <div class="post-badges">
+        {category && <span class="badge badge-category">{category}</span>}
+        {difficulty && <span class="badge badge-difficulty">{difficulty}</span>}
+        <span class="badge badge-time">{readingTimeText}</span>
+      </div>
+
       <h1>{title}</h1>
+
       <div class="meta">
         <time datetime={pubDate.toISOString()}>{formattedDate}</time>
         {updatedDate && (
@@ -35,6 +98,7 @@ const pageTitle = seoTitle || title;
         )}
         <span> · {author}</span>
       </div>
+
       {tags.length > 0 && (
         <div class="tags">
           {tags.map((tag) => (
@@ -43,16 +107,45 @@ const pageTitle = seoTitle || title;
         </div>
       )}
     </header>
+
     <hr />
+
     {banner && (
       <div class="post-banner">
         <img src={banner} alt={title} class="post-banner-img" />
       </div>
     )}
+
+    <!-- TL;DR section for AI and quick readers -->
+    {tldr && (
+      <div class="tldr-section">
+        <h2>TL;DR</h2>
+        <p>{tldr}</p>
+      </div>
+    )}
+
+    <!-- Table of Contents -->
+    <TableOfContents headings={headings} />
+
     <div class="prose">
       <slot />
     </div>
+
+    <!-- Key Takeaways section -->
+    {keyTakeaways && keyTakeaways.length > 0 && (
+      <div class="takeaways-section">
+        <h2>Key Takeaways</h2>
+        <ol class="takeaways-list">
+          {keyTakeaways.map((takeaway) => (
+            <li>{takeaway}</li>
+          ))}
+        </ol>
+      </div>
+    )}
   </article>
+
+  <!-- Code block enhancements (copy button) -->
+  <CodeEnhancer />
 
   <!-- Mermaid diagram rendering -->
   <div id="mermaid-modal" class="mermaid-modal">
@@ -194,6 +287,84 @@ const pageTitle = seoTitle || title;
 </BaseLayout>
 
 <style>
+  /* Post badges (category, difficulty, reading time) */
+  .post-badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: var(--spacing-line);
+  }
+
+  .badge {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding: 0.25rem 0.5rem;
+    border: 1px solid var(--color-foreground-alt);
+    color: var(--color-foreground-alt);
+  }
+
+  .badge-category {
+    border-color: var(--color-accent);
+    color: var(--color-accent);
+  }
+
+  .badge-difficulty {
+    border-color: var(--color-foreground);
+    color: var(--color-foreground);
+  }
+
+  .badge-time {
+    border-color: var(--color-foreground-alt);
+  }
+
+  /* TL;DR section */
+  .tldr-section {
+    margin: var(--spacing-line) 0;
+    padding: var(--spacing-line) 1ch;
+    border-left: 4px solid var(--color-accent);
+    background: var(--color-background-alt);
+  }
+
+  .tldr-section h2 {
+    margin-top: 0;
+    font-size: 0.85rem;
+    color: var(--color-accent);
+  }
+
+  .tldr-section p {
+    margin: 0;
+    font-size: 1rem;
+    line-height: 1.6;
+  }
+
+  /* Key Takeaways section */
+  .takeaways-section {
+    margin: calc(var(--spacing-line) * 2) 0 var(--spacing-line);
+    padding: var(--spacing-line) 1ch;
+    border: var(--border-width-thick) solid var(--color-accent);
+    background: var(--color-background-alt);
+  }
+
+  .takeaways-section h2 {
+    margin-top: 0;
+    color: var(--color-accent);
+  }
+
+  .takeaways-list {
+    margin: 0;
+    padding-left: 3ch;
+  }
+
+  .takeaways-list li {
+    margin-bottom: 0.5rem;
+  }
+
+  .takeaways-list li:last-child {
+    margin-bottom: 0;
+  }
+
+  /* Post banner */
   .post-banner {
     width: 100%;
     max-height: 250px;

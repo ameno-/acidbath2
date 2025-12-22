@@ -1,0 +1,1319 @@
+# ACIDBATH - Complete Content
+
+> This file contains the full text of all ACIDBATH blog posts,
+> formatted for AI consumption.
+> Last updated: 2025-12-22T19:52:43.543Z
+
+
+---
+
+## AI Document Skills: Automated File Generation That Actually Ships
+
+*Published: 2025-12-17*
+*Category: Production Patterns*
+*Difficulty: Intermediate*
+*URL: /blog/document-generation-skills*
+
+### TL;DR
+
+Claude Skills API automates Excel, PowerPoint, and PDF generation in 5-6 minutes instead of 100+ minutes of manual work. Chain skills together for complete document pipelines. Real production use saves 95% of effort with ~$2-3 token cost per run.
+
+### Key Takeaways
+
+1. Document generation is unsexy but saves massive hours—100 minutes manual → 5 minutes automated
+2. Skills API chains: Data → Excel → PowerPoint → PDF in a single pipeline
+3. Token cost is minimal: ~$2-3 per complete document generation run
+4. Failure modes: complex formatting, conditional logic, multi-sheet references
+5. Human review is still required—5 minutes of review vs 100 minutes of creation
+
+### Content
+
+Document generation is the unsexy automation that saves hours.
+
+Not code generation. Not chat interfaces. Document generation—the Excel reports, PowerPoint decks, and PDFs that every business runs on. Claude Skills turn this from hours of manual work into minutes of automated execution.
+
+This is Part 1 of a series on AI document skills. We'll cover the core pattern, build a working POC, and measure what actually happens in production. Financial reporting is the example, but the pattern applies anywhere you need structured documents from data.
+
+The Core Problem: Manual Documents Don't Scale
+
+[code block]
+
+This is busy work. Highly paid knowledge workers doing copy-paste operations.
+
+The Pattern: Skills API Document Pipeline
+
+[code block]
+
+The Skills API generates professional documents with formulas, charts, and formatting. You describe what you want; Claude builds it.
+
+POC: Complete Working Implementation
+
+This is the full code. Copy it, run it, modify it for your use case.
+
+Step 1: Setup and Configuration
+
+Create documentpipeline.py:
+
+[code block]
+
+Step 2: Excel Generation Function
+
+[code block]
+
+Step 3: PowerPoint Generation Function
+
+[code block]
+
+Step 4: PDF Generation Function
+
+[code block]
+
+Step 5: Pipeline Orchestration
+
+[code block]
+
+Step 6: Sample Data File
+
+Create sampledata.json:
+
+[code block]
+
+Run the pipeline:
+
+[code block]
+
+The Numbers: What Actually Happens
+
+Real measurements from running this pipeline:
+
+| Document Type | Generation Time | Input Tokens | Output Tokens | Cost |
+|---------------|-----------------|--------------|---------------|------|
+| Excel (2 sheets) | 1-2 min | 2,500 | 3,000 | $0.05 |
+| PowerPoint (4 slides) | 1-2 min | 2,000 | 2,500 | $0.04 |
+| PDF (full report) | 1-2 min | 1,800 | 2,200 | $0.04 |
+| Pipeline Total | 5-6 min | 6,300 | 7,700 | $0.13 |
+
+Compare to manual:
+
+| Metric | Manual | Skills Pipeline | Improvement |
+|--------|--------|-----------------|-------------|
+| Time | 100 min | 10 min (5 gen + 5 review) | 10x |
+| Cost | $50/hour labor | $0.13 API | 380x |
+| Consistency | Variable | Identical | ∞ |
+| Error rate | Human errors | Prompt errors | Different |
+
+Token efficiency note: Skills use 90% fewer tokens than manually instructing Claude to build documents step by step. The skill encapsulates document structure knowledge.
+
+When This Works: Ideal Use Cases
+
+[code block]
+
+When This Fails: Honest Limitations
+
+Skills are not magic. Here's what breaks.
+
+Document Complexity Limits
+
+Recommended limits:
+• Excel: 2-3 sheets per workbook
+• PowerPoint: 5-7 slides per deck
+• PDF: 10-15 pages
+
+Beyond these, reliability degrades. Generation time increases exponentially, and partial failures become common.
+
+Workaround: Break complex documents into multiple focused files.
+
+[code block]
+
+Data Format Sensitivity
+
+Skills are sensitive to input data structure. Slight variations cause unpredictable output.
+
+Example failure:
+[code block]
+
+Mitigation: Validate data structure before sending to Skills.
+
+[code block]
+
+Rate Limits and Timeouts
+
+Failure modes:
+• Generating multiple complex documents simultaneously hits rate limits
+• Generation time can vary from 30 seconds to 5 minutes
+• No guaranteed maximum completion time
+
+Mitigation: Implement retry logic and sequential execution.
+
+[code block]
+
+Numeric Precision
+
+Financial calculations can lose precision. Rounding errors accumulate.
+
+Example:
+[code block]
+
+Mitigation: Specify precision explicitly in prompts.
+
+[code block]
+
+No Persistent State
+
+Each Skills call is stateless. Documents generated in separate calls may have subtle inconsistencies.
+
+Example failure:
+• Excel shows revenue of $14.5M
+• PowerPoint shows revenue of $14.51M (different rounding)
+
+Mitigation: Generate all documents from the same data dict in the same session. Pass exact values, not calculated values.
+
+[code block]
+
+Pipeline Fragility
+
+If step 2 fails, step 3 never runs. One failure breaks the entire pipeline.
+
+Mitigation: Implement robust error handling with partial success tracking.
+
+[code block]
+
+Best Practices: What We Learned
+
+Document structure:
+• 2-3 sheets/slides per document for reliable generation
+• Focus each sheet on a single purpose
+• Break complex reports into multiple files
+• Chain documents sequentially, not in parallel
+
+Prompt design:
+• Use structured data (JSON) not prose descriptions
+• Specify exact formatting requirements
+• Include examples of expected output
+• Be explicit about formulas and calculations
+
+Error handling:
+• Validate data before sending to Skills
+• Implement retry logic with exponential backoff
+• Track partial successes separately from complete failures
+• Log token usage for cost monitoring
+
+Maintenance:
+• Monitor token usage trends over time
+• Test prompts when updating to new SDK versions
+• Keep prompt templates versioned with your code
+• Build automated tests for document generation
+
+Agent Opportunity: Document Generation Agent
+
+Build a specialized agent for document generation:
+
+[code block]
+
+This agent can be triggered by file drops in a watched directory—see the Directory Watchers post for that pattern.
+
+---
+
+Key Takeaways:
+• Skills generate professional documents (Excel, PowerPoint, PDF) in 1-2 minutes each
+• Pipeline approach: data → Excel → PowerPoint → PDF, 5-6 minutes total
+• 90% fewer tokens than manual document instructions
+• Cost: $0.13 per complete pipeline vs $50+ manual labor
+• Reliability limits: 2-3 sheets per Excel, 5-7 slides per PowerPoint
+• Common failures: complexity limits, data format sensitivity, rate limits
+• Mitigations: break complex docs into focused files, validate data, implement retries
+• Best fit: recurring reports, data-to-document conversion, template-based generation
+
+Try It Now:
+Copy the documentpipeline.py and sampledata.json files above. Run uv run documentpipeline.py --data sampledata.json --output ./reports. Check the generated files. Modify the prompts for your use case. Track token usage to estimate your costs.
+
+---
+
+Next in series: Part 2 covers advanced patterns—custom templates, conditional formatting, and multi-source data aggregation.
+
+
+---
+
+## Agent Architecture: From Custom Agents to Effective Delegation
+
+*Published: 2025-12-15*
+*Category: Agent Architecture*
+*Difficulty: Advanced*
+*URL: /blog/agent-architecture*
+
+### TL;DR
+
+Custom agents start with a system prompt that defines their identity—same model, completely different behavior. Sub-agents work best as researchers that write findings to files, not as direct implementers. The file system is your ultimate context management system for delegation.
+
+### Key Takeaways
+
+1. System prompts define agent identity—change the prompt, change the product entirely
+2. Custom agents are built for your codebase, default agents are built for everyone's
+3. Sub-agents should be researchers, not implementers—they gather context, the parent agent uses it
+4. File-based context transfer reduces token usage by 80% compared to in-memory context passing
+5. The file system is the ultimate context management system for reliable agent delegation
+
+### Content
+
+The system prompt is everything. Change it and you change the product entirely.
+
+The file system is the ultimate context management system. Use it and delegation actually works.
+
+This post shows you how to build custom agents and delegate research reliably, with complete working examples.
+
+Why Custom Agents Matter
+
+[code block]
+
+Default agents are built for everyone's codebase. Custom agents are built for yours.
+
+POC 1: The Simplest Custom Agent
+
+Create agents/pongagent.py:
+
+[code block]
+
+Test it:
+[code block]
+
+The system prompt completely overrides default behavior. This is the foundation.
+
+POC 2: Agent with Custom Tools
+
+Create agents/calculatoragent.py:
+
+[code block]
+
+Test it:
+[code block]
+
+The agent uses deterministic tool execution while maintaining conversational flow.
+
+The Key Pattern: Sub-Agents as Researchers
+
+Custom agents enable specialization. Specialization enables delegation. But delegation has a critical problem:
+
+[code block]
+
+The parent agent has limited information about what the sub-agent actually did. When something isn't 100% correct and you want to fix it—that's where everything breaks down.
+
+File-Based Context: The Solution
+
+[code block]
+
+Conversation history gets compacted. Files don't.
+
+Token reduction: 80%
+
+Before: Sub-agent returns full research in conversation (10,000+ tokens)
+After: Sub-agent returns file path (50 tokens)
+
+Parent reads file on-demand when ready to implement.
+
+POC 3: Complete File-Based Context System
+
+Step 1: Context File Template
+
+Create .claude/templates/context.md:
+
+[code block]
+
+Step 2: Research Agent Definition
+
+Create .claude/agents/researcher.md:
+
+[code block]
+
+Step 3: Implementation Flow
+
+[code block]
+
+Step 4: Putting It Together
+
+Parent agent's workflow for delegating research:
+
+[code block]
+   Write to ./tmp/context-{task}.md:
+• Current state of the feature
+• Specific questions to answer
+• Constraints and requirements
+• Expected output format
+   [code block]
+   Task: "Research [topic]. Read context from ./tmp/context-{task}.md.
+         Write report to ./tmp/research-{task}.md"
+   Agent: researcher
+   Model: haiku (fast, cheap)
+   [code block]
+   Read ./tmp/research-{task}.md
+   [code block]
+
+POC 4: Service-Specific Researchers
+
+Build specialized research agents for services you use frequently:
+
+Stripe Research Agent
+
+Create .claude/agents/stripe-researcher.md:
+
+[code block]yaml
+recommendation:
+  approach: "description"
+  confidence: high|medium|low
+  stripeapiversion: "2024-xx-xx"
+
+implementationsteps:
+• step: 1
+    action: "what to do"
+    code: |
+      // example code
+
+potentialissues:
+• issue: "description"
+    mitigation: "how to handle"
+
+filestomodify:
+• path: "file path"
+    changes: "what changes"
+[code block]
+
+Supabase Research Agent
+
+Create .claude/agents/supabase-researcher.md:
+
+[code block]
+
+When This Fails
+
+This architecture isn't magic. Here are the real limitations:
+• Context Isolation Still Exists
+
+The researcher agent doesn't have access to the parent's conversation history. If critical information only exists in the parent's memory, the researcher will miss it.
+
+Mitigation: Be explicit in context.md. Don't assume the researcher "knows" anything.
+
+Example Failure:
+[code block]
+
+Example Fix:
+[code block]
+• Research Can Be Wrong
+
+Haiku is fast and cheap but makes mistakes on complex analysis. The researcher might miss edge cases or misunderstand requirements.
+
+Mitigation: Review the research report before implementing. Don't blindly trust it.
+
+Example Failure:
+[code block]
+
+This is outdated. Payment Intents is the modern approach. A senior engineer would catch this.
+• Overhead on Simple Tasks
+
+Creating context files, spawning agents, reading reports—this adds 30-60 seconds of overhead.
+
+When to skip delegation:
+• Task takes < 2 minutes to implement directly
+• You already know exactly what to do
+• No external research needed
+• Single file change with obvious solution
+
+Numbers:
+• Simple task direct: 2 minutes
+• Simple task with delegation: 3 minutes (50% overhead)
+• Complex task direct: 30 minutes
+• Complex task with delegation: 15 minutes (50% time saved)
+
+Delegation shines on complex, research-heavy tasks. It's overkill for simple edits.
+• File Coordination Complexity
+
+Multiple sub-agents writing to files simultaneously can cause conflicts. If Agent A writes research-stripe.md while Agent B tries to read it, race conditions occur.
+
+Mitigation: Use distinct file names with timestamps or task IDs.
+
+[code block]
+• Debugging Gets Harder
+
+When implementation fails, you now have three places to debug:
+• The context file (was the request clear?)
+• The research report (was the research correct?)
+• The implementation (was the code correct?)
+
+Mitigation: Keep research reports. Don't delete them. When debugging, check all three layers.
+• Cost on Failed Research
+
+If the researcher misunderstands the task and produces useless output, you've wasted:
+• Haiku API calls (cheap but not free)
+• 30-60 seconds of time
+• Mental context switching
+
+Mitigation: Write very specific context files. Vague requests produce vague research.
+
+Example Vague Request:
+[code block]
+
+Example Specific Request:
+[code block]
+
+The specific version gets useful research. The vague version gets generic documentation summaries.
+
+Model Selection Strategy
+
+| Task Type | Model | Cost/M | Speed |
+|-----------|-------|--------|-------|
+| Simple routing | Haiku | $0.25 | ⚡⚡⚡ |
+| Text extraction | Haiku | $0.25 | ⚡⚡⚡ |
+| Classification | Haiku | $0.25 | ⚡⚡⚡ |
+| Research (simple) | Haiku | $0.25 | ⚡⚡⚡ |
+| Code review | Sonnet | $3 | ⚡⚡ |
+| Implementation | Sonnet | $3 | ⚡⚡ |
+| Analysis | Sonnet | $3 | ⚡⚡ |
+| Research (complex) | Sonnet | $3 | ⚡⚡ |
+| Complex reasoning | Opus | $15 | ⚡ |
+| Architecture decisions | Opus | $15 | ⚡ |
+| Edge case handling | Opus | $15 | ⚡ |
+| Research (critical) | Opus | $15 | ⚡ |
+
+Rule: Use the cheapest model that solves the problem. Most tasks are Haiku tasks. Don't over-engineer.
+
+For researchers:
+• Haiku: Documentation lookup, simple API pattern research, file structure analysis
+• Sonnet: Cross-service integration research, security pattern analysis, performance optimization research
+• Opus: Architecture decisions, critical production patterns, edge case exploration
+
+Start with Haiku. Upgrade only if the research is inadequate.
+
+Architecture: Custom Agent Stack
+
+[code block]
+
+System prompts define what the agent does. Tools define how it does it. Model selection defines cost and quality. Context files enable delegation.
+
+What This Architecture Enables
+
+Domain-specific logic — Operations the model can't reason through reliably become deterministic tool calls.
+
+Optimized context — Strip out the 12 tools you never use. Add the 3 you always need.
+
+Specialized behavior — System prompts tuned for exactly your use cases.
+
+Cost control — Haiku for simple tasks, Sonnet for complex ones. No over-engineering.
+
+Team patterns — Shared agents that enforce your team's conventions.
+
+Parallel research — Multiple sub-agents researching different aspects simultaneously.
+
+Persistent knowledge — Research reports accumulate in your project. Future work references past decisions.
+
+Debuggable workflows — Always know what was planned and why. Three months later, git log shows the research report that led to the implementation.
+
+The Data Flow
+
+[code block]
+
+Conversation history compacts. Files don't. This is the key insight.
+
+Rules That Prevent Disasters
+
+Add these to your research agent definitions:
+
+[code block]
+
+One level of delegation. Researcher agents never spawn their own sub-agents. This prevents:
+• Recursive delegation loops
+• Cost explosions (agent spawns agent spawns agent...)
+• Context fragmentation
+• Debugging nightmares
+
+Quick Start: Your First Custom Agent
+• Identify your most repetitive AI task
+• Write a system prompt that focuses on that task
+• Choose the cheapest model that works (probably Haiku)
+• Add tools only if you need deterministic execution
+• Test with edge cases
+• Deploy and iterate
+
+For delegation:
+• Create the context template (.claude/templates/context.md)
+• Create the researcher agent (.claude/agents/researcher.md)
+• Next time you need research, write a context file and spawn the agent
+• Read the research report
+• Implement based on the plan
+
+The endgame isn't renting computational power from default agents. The endgame is owning specialized agents tuned precisely for your problems, with reliable delegation patterns that actually work.
+
+---
+
+Key Takeaways:
+• System prompt = agent identity (same model, different prompt = different product)
+• Tools provide deterministic execution when reasoning isn't reliable
+• Sub-agents research, parent agents implement (context isolation is real)
+• File system is persistent memory between agent sessions (conversation history compacts, files don't)
+• Context files define what to research, research reports contain the full plan
+• 80% token reduction by returning file paths not content
+• One level of delegation prevents recursive loops and cost explosions
+• Match model to task complexity (Haiku → Sonnet → Opus, most tasks are Haiku tasks)
+• Delegation overhead is 30-60 seconds (only worth it for complex tasks)
+• Review research reports before implementing (Haiku makes mistakes on complex analysis)
+
+Try It Now:
+Create .claude/agents/researcher.md using the template above. Next time you need to research a new API integration or library, write a context file and delegate to the researcher. Read the report. Implement based on the plan. See if you save time.
+
+
+---
+
+## Context Engineering: From Token Optimization to Large Codebase Mastery
+
+*Published: 2025-12-15*
+*Category: Context Engineering*
+*Difficulty: Advanced*
+*URL: /blog/context-engineering*
+
+### TL;DR
+
+Context is your budget—every token loaded is a tax on productivity. Progressive disclosure reduces context consumption by 94% by loading tools only when needed. For large codebases (55K+ files), semantic search with tools like Serena MCP provides 36x performance improvements over naive approaches.
+
+### Key Takeaways
+
+1. MCP servers can consume 20% of your context before work begins—if tools consume >15%, you have an architecture problem
+2. Progressive disclosure with UV scripts reduces context from 40,000 to 2,500 tokens (94% reduction)
+3. Semantic search outperforms ripgrep at scale: 36x faster search, 28x faster symbol navigation, 23x faster references
+4. Real cost savings: $2.40 per 100 queries with semantic search vs $86.40 with full context loading
+5. The 15% rule: if upfront context consumption exceeds 15%, refactor to progressive disclosure
+
+### Content
+
+Context is finite. Every token your agent loads before it starts working is a tax on productivity.
+
+This post shows you how to engineer context consumption—from basic token optimization with progressive disclosure, to large codebase mastery with semantic search. Working code, hard numbers, honest failure modes included.
+
+The Core Problem: Context is Precious
+
+Your context window is your budget. MCP servers spend it like a trust fund kid.
+
+[code block]
+
+Four MCP servers at 10,000 tokens each = 40,000 tokens consumed before you type a single character.
+
+If tools consume more than 15% of your context, you have an architecture problem.
+
+Pattern 1: Progressive Disclosure
+
+Progressive disclosure loads tools only when needed. Instead of front-loading everything, give your agent an index of what exists—and let it load only what it uses.
+
+[code block]
+
+Result: 2,500 tokens instead of 40,000. 94% reduction.
+
+Implementation: Tool Index + UV Scripts
+
+Create a tool index as a simple markdown file:
+
+/tools/README.md
+[code block]
+
+This index costs 200 tokens. The agent knows WHERE tools are without loading them.
+
+Each tool is a UV single-file script with embedded dependencies:
+
+/tools/market/search.py
+[code block]
+
+The Flow in Practice
+
+[code block]
+
+Progressive Disclosure Numbers
+
+| Approach | Initial Load | Per-Tool Cost | 4 Tools Used |
+|----------|-------------|---------------|--------------|
+| MCP Server | 10,000 tokens | 0 (pre-loaded) | 10,000 |
+| Progressive | 200 tokens | 500-2,000 | 2,200-8,200 |
+
+Progressive disclosure wins when you use fewer than all available tools—which is almost always. Most tasks use 2-3 tools out of 20 available.
+
+Pattern 2: Semantic Search for Large Codebases
+
+Progressive disclosure optimizes tool loading. But when you're working with large codebases, the problem isn't tool overhead—it's search strategy.
+
+Brute-force text search doesn't scale. Semantic search does.
+
+Why Text Search Fails
+
+[code block]
+
+The build-fail-retry cycle is the productivity bottleneck. Text search guarantees you'll hit it.
+
+How Semantic Search Works
+
+[code block]
+
+The key difference:
+• Text search: "Find this string anywhere"
+• Semantic search: "Find this symbol in the AST"
+
+Semantic search understands code structure. It knows the difference between a type name, a string literal that happens to contain that text, and a comment mentioning it.
+
+Setting Up Serena MCP
+
+Serena provides semantic search for multiple languages (TypeScript, JavaScript, Python, Go, Rust).
+
+Installation:
+
+[code block]
+
+Configuration for Claude Code:
+
+Add to /.claude/mcp.json:
+
+[code block]
+
+Available tools:
+
+| Tool | Description |
+|------|-------------|
+| findsymbol | Find symbol definition and all usages |
+| findreferences | Find all references to a symbol |
+| getdefinition | Get the definition of a symbol at a location |
+| semanticsearch | Search code semantically, not just text |
+| getfilesymbols | List all symbols in a file |
+
+Adding Language-Specific Refactoring
+
+For C#/.NET, add Refactor MCP for Roslyn-powered operations:
+
+[code block]
+
+Add to MCP config:
+
+[code block]
+
+Available refactoring operations:
+
+| Tool | Description |
+|------|-------------|
+| renamesymbol | Rename with full semantic awareness |
+| extractmethod | Extract code into a new method |
+| inlinemethod | Inline a method at call sites |
+| extractinterface | Create interface from class |
+| movetype | Move type to another file/namespace |
+
+The Numbers: 55,000 File Codebase
+
+Real measurements from a production codebase:
+
+| Metric | Text Search | Semantic Search | Improvement |
+|--------|-------------|-----------------|-------------|
+| Time | 3 hours | 5 minutes | 36x |
+| Tokens | 28M | 1M | 28x |
+| Cost | $14 | $0.60 | 23x |
+| Human intervention | Constant | None | ∞ |
+| Build failures | 4 | 0 | - |
+
+The cost of NOT having semantic tools scales with codebase size. A 10x larger codebase isn't 10x worse—it's 100x worse with text search.
+
+Workflow Comparison
+
+Without semantic tools (3 hours):
+
+[code block]
+
+With semantic tools (5 minutes):
+
+[code block]
+
+When This Fails: Honest Limitations
+
+Both patterns have failure modes. Here's what doesn't work.
+
+Progressive Disclosure Failures
+
+Setup overhead becomes the bottleneck:
+• If you're prototyping and need 15 different tools quickly, progressive disclosure adds friction
+• Writing UV scripts and maintaining a tool index takes time
+• For one-off tasks, the setup cost exceeds the savings
+
+Language and dependency constraints:
+• UV is Python-focused; other languages need different patterns
+• Binary tools require wrapper scripts
+• Complex authentication flows are harder to embed in single files
+
+When tool reuse is low:
+• If every task needs a new custom script, you're not saving context
+• The index becomes noise if most tools are one-time use
+
+Semantic Search Failures
+
+Initial indexing cost:
+• First run on a large codebase can take minutes to hours
+• Index storage can be GBs for very large projects
+• Re-indexing after major refactors adds overhead
+
+Language support gaps:
+• Not all languages have mature semantic tooling
+• Dynamic languages (Ruby, PHP) have weaker semantic analysis
+• Mixed codebases (Python + JavaScript + Go) need multiple MCP servers
+
+False confidence in refactoring:
+• Semantic tools can't catch runtime-only issues
+• Reflection-heavy code may still break
+• Cross-service boundaries aren't tracked
+
+Setup complexity:
+• Requires building/installing language-specific servers
+• Configuration mistakes lead to silent failures
+• Version mismatches between tools and target code
+
+Cost isn't always lower:
+• For small codebases (< 100 files), text search is faster
+• For simple string replacements, grep is sufficient
+• If you only search once, indexing overhead dominates
+
+Decision Framework: When to Use Which Pattern
+
+[code block]
+
+The Selection Test
+
+Ask these questions:
+• How many files will be touched?
+• < 10 files: Text search is fine
+• 10-100 files: Text search with careful prompting
+• 100-1,000 files: Consider semantic
+• 1,000+ files: Semantic is required
+• How many tools will be used?
+• All of them: MCP upfront loading is fine
+• Most of them: MCP is fine
+• Some of them: Progressive disclosure wins
+• Few of them: Progressive disclosure wins heavily
+• What's the task complexity?
+• String replacement: Text search works
+• Symbol renaming: Semantic required
+• Cross-file refactoring: Semantic required
+• Type hierarchy changes: Semantic required
+• Is this a one-off or repeated work?
+• One-off: Setup cost dominates, use simple tools
+• Repeated: Setup cost amortizes, invest in optimization
+
+Key Takeaways
+• Context is finite; every pre-loaded token is a tax on productivity
+• Progressive disclosure reduces tool overhead by 90%+ when you don't use all tools
+• Semantic search provides 28x token reduction and 36x speed improvement on large codebases
+• Combine both: use progressive disclosure for tool loading, semantic search for code operations
+• Text search fails at scale due to build-fail-retry cycles
+• Setup overhead is real; optimize only when the math supports it
+• Most codebases (< 100 files) don't need semantic tools
+• Tool sophistication matters more than raw model capability for large codebases
+
+Try It Now
+
+For progressive disclosure:
+Create /tools/README.md with an index of 3 UV scripts. Point your agent at it instead of loading an MCP server. Track token consumption with /context in Claude Code.
+
+For semantic search:
+Install Serena MCP. Run findsymbol on a type in your codebase. Compare the results and token usage to grep -r. If you're touching more than 100 files, measure the difference.
+
+The best context engineering is invisible. Your agent just works faster, costs less, and fails less often.
+
+
+---
+
+## Directory Watchers: File-Based AI Automation That Scales
+
+*Published: 2025-12-15*
+*Category: Production Patterns*
+*Difficulty: Intermediate*
+*URL: /blog/directory-watchers*
+
+### TL;DR
+
+Directory watchers turn your file system into an AI interface—drop a file, get processed results. Build with Python's watchdog library, configure zones via YAML, and handle production concerns like race conditions, error recovery, and monitoring.
+
+### Key Takeaways
+
+1. Drop zones eliminate the chat interface—drag a file, get results automatically
+2. Use watchdog events with pattern matching for flexible zone configuration
+3. Production concerns: file locks, race conditions, atomic moves, error recovery
+4. Archive originals before processing for debugging and audit trails
+5. Add monitoring with simple JSON logs and file-based alerts for reliability
+
+### Content
+
+Directory watchers turn your file system into an AI interface.
+
+Drag a file into a folder. An agent processes it automatically. You get results. No chat. No prompting. No human-in-the-loop.
+
+This post shows you how to build a complete drop zone system with working Python code, then walks through what breaks in production and how to fix it.
+
+The Architecture
+
+[code block]
+
+POC: Complete Drop Zone System
+
+Step 1: Configuration File
+
+Create drops.yaml:
+
+[code block]
+
+Step 2: The Core Watcher
+
+Create dropwatcher.py:
+
+[code block]
+
+Step 3: Agent Prompt Templates
+
+Create prompts/analyze.md:
+
+[code block]
+
+Create prompts/dataanalysis.md:
+
+[code block]
+
+Step 4: Image Generation Agent
+
+Create agents/imagegen.py:
+
+[code block]
+
+Data Flow: File Drop to Result
+
+[code block]
+
+When Drop Zones Fail
+
+The POC above works for clean, isolated files. Production breaks in predictable ways.
+
+Files That Need Context
+
+A code file dropped into a review zone lacks its dependencies, imports, and surrounding architecture. The agent sees import UserService from '../services' but doesn't know what UserService does.
+
+What breaks: Reviews are shallow. "This looks fine" instead of "This violates the retry policy established in commit abc123."
+
+Fix: Add a context builder. Before processing, scan the repository for related files:
+
+[code block]
+
+This increases token usage 3-5x but improves accuracy significantly. For a 200-line Python file with 8 imports, you go from 800 tokens to 3,200 tokens. Cost per review goes from $0.02 to $0.08 with claude-3-5-sonnet-20241022.
+
+Multi-File Inputs
+
+Sometimes the task requires multiple files processed together. A blog post draft plus supporting research notes. Three screenshots that show a UI flow. CSV data plus its schema definition.
+
+What breaks: The watcher processes files individually. Drop three related screenshots, get three unconnected analyses instead of one coherent flow analysis.
+
+Fix: Add a staging area with batch processing:
+
+[code block]
+
+Buffer files for 30 seconds. If 3+ files arrive, process as a batch. If timeout hits with fewer files, process what you have.
+
+Race Conditions: Incomplete Writes
+
+You drop a 500MB video file. Watchdog fires on create. The agent starts processing while the file is still copying. Whisper transcribes 8 seconds of a 45-minute video.
+
+What breaks: Partial processing. Silent failures. Confusing output.
+
+Fix: Verify file stability before processing:
+
+[code block]
+
+Replace the POC's time.sleep(0.5) with this. A 500MB file takes 6-10 seconds to copy on typical hardware. Three-second stability window catches 99% of cases without excessive waiting.
+
+Agent Failures Mid-Processing
+
+API rate limit hit. Network timeout. Model refuses the prompt due to content policy. The agent fails after archiving the input file but before writing output.
+
+What breaks: Input file is gone. No output exists. No way to retry. User thinks it worked because no error appeared.
+
+Fix: Transactional processing with rollback:
+
+[code block]
+
+Keep failed files in place. Log failures to a dead letter queue. Provide a manual retry command. For our use case running 200 files/day, we see 3-5 transient failures per day. All are recoverable with retry.
+
+Token Limit Exceeded
+
+A 15,000-line CSV file hits the analyze zone. The agent tries to stuff it all into a prompt. Claude returns a 400 error: maximum context length exceeded.
+
+What breaks: Processing fails. File size limits aren't obvious. No graceful degradation.
+
+Fix: Add size checks and chunking strategy:
+
+[code block]
+
+For a 200K-token model, set maxtokens to 150K to leave room for prompts and output. Files that exceed limits go to a manual review folder with a clear error message.
+
+Files Requiring Human Review
+
+Some automation needs a human checkpoint. Legal contract analysis that might inform business decisions. Code deployments to production. Financial data processing.
+
+What breaks: Full automation isn't always desirable. No way to inject human judgment. Liability concerns.
+
+Fix: Add an approval workflow:
+
+[code block]
+
+[code block]
+
+Set up an approval directory. Agent processes the file and moves it there with its output. Human reviews both. Approve by dropping in /approvals/accept/, reject to /approvals/reject/. A second watcher handles the approval directories.
+
+Production Deployment Considerations
+
+POC works on your laptop. Production needs operational rigor.
+
+Monitoring and Alerting
+
+The problem: Silent failures. You think it's working. It's been down for three days.
+
+What to track:
+• Processing rate: Files processed per hour
+• Failure rate: Percentage of files that fail
+• Processing latency: Time from drop to output
+• Queue depth: Files waiting in drop zones
+• API health: Response times and error rates
+
+Instrument the watcher:
+
+[code block]
+
+Set alerts:
+• Processing rate drops below 10 files/hour when average is 50/hour
+• Failure rate exceeds 10% over a 15-minute window
+• No files processed in 2 hours during business hours
+• Queue depth exceeds 100 files
+
+For our production deployment handling 800 files/day, we get 1-2 actionable alerts per week. Most are transient API issues that self-resolve.
+
+Logging and Audit Trails
+
+Every file processed needs a record: who dropped it, when, what agent processed it, what the output was, any errors encountered.
+
+[code block]
+
+Logs go to structured JSON for easy parsing. Ship to your log aggregation service. When a user asks "did my file process?", you have answers.
+
+Resource Limits
+
+CPU and Memory: Watchdog is lightweight, but agents aren't. Whisper transcription spikes CPU to 100% for 30-60 seconds per file. Claude Code execution can use 2GB RAM.
+
+Set process limits:
+
+[code block]
+
+API Rate Limits: Claude API: 50 requests/minute on tier 1, 5,000 requests/minute on tier 4. Replicate varies by model.
+
+Add rate limiting:
+
+[code block]
+
+Leave headroom. 45 requests/minute for a 50 req/min limit. Shared rate limiters if you have multiple services using the same API key.
+
+Graceful Degradation
+
+APIs go down. Networks fail. Disk fills up. Production systems need fallbacks.
+
+When Claude API is unavailable:
+
+[code block]
+
+When disk space is low:
+
+[code block]
+
+Check before each file. Pause processing if disk is full. Alert on low space. For systems processing 50GB/day, check every 10 files and alert at 10GB free.
+
+Security: Validating File Contents
+
+Users drop files. Users are unpredictable. Protect your system.
+
+File type validation:
+
+[code block]
+
+Content sanitization:
+
+[code block]python", "[code block]bash", "[code block]
+
+Never execute code from dropped files directly. Treat all input as untrusted. Validate, sanitize, then process.
+
+The Automation Decision Framework
+
+Not every task deserves automation. Use specific thresholds.
+
+| Frequency | ROI Threshold | Action |
+|-----------|---------------|--------|
+| Once | N/A | Use chat |
+| 2-5x/month | > 5 min saved | Maybe automate |
+| Weekly | > 2 min saved | Consider zone |
+| Daily | > 30 sec saved | Build zone |
+| 10+ times/day | Any time saved | Definitely zone |
+
+| Complexity | Time to Build | Approach |
+|------------|---------------|----------|
+| Single step | 5 minutes | Bash agent |
+| Multi-step | 30 minutes | Python agent |
+| AI reasoning | 15 minutes | Claude agent |
+| Mixed flow | 1-2 hours | Chain agents |
+| Needs approval | 2-3 hours | Approval workflow |
+
+| Risk Level | Requirements | Safety |
+|------------|--------------|--------|
+| Low | None | Full auto |
+| Medium | Logging | Auto + audit |
+| High | Review | Approval required |
+| Critical | Sign-off | Manual only |
+
+Real numbers from our deployment:
+• Morning meeting transcription: 10x/week, saves 15 min/day, ROI: 2.5 hours/week
+• Code review: 30x/week, saves 3 min each, ROI: 1.5 hours/week
+• Data analysis: 5x/week, saves 20 min each, ROI: 1.7 hours/week
+• Legal contract review: 2x/month, approval required, ROI: 40 min/month
+
+Total time saved: 22 hours/month. Setup time: 8 hours. Break-even in 2 weeks.
+
+Agent Opportunity: Build Your Drop Zone Library
+
+Start with these high-value zones:
+
+Morning Debrief Zone
+
+[code block]
+
+Code Review Zone
+
+[code block]
+
+Research Paper Zone
+
+[code block]
+
+Running the System
+
+[code block]
+
+The Key Insight
+
+Repeat workflows benefit most from automation.
+
+The first time you do something, chat is fine. The tenth time, you should have a drop zone.
+
+Directory watchers work because they match how you already work. You already organize files into folders. You already drag and drop. The interface is invisible.
+
+They're called agents for a reason. They're capable of agency. Lean into the autonomy.
+
+---
+
+Key Takeaways:
+• Directory watchers turn the file system into an AI interface with zero learning curve
+• YAML config makes adding new zones a 5-minute task
+• Pattern matching routes files to appropriate agents automatically
+• Production requires monitoring, logging, rate limiting, and error handling
+• Failure modes are predictable: context gaps, race conditions, size limits, approval needs
+• ROI threshold: anything you do 10+ times/week that takes more than 30 seconds
+• Start with your highest-frequency task and expand from there
+
+Try It Now:
+Copy dropwatcher.py and drops.yaml above. Create the directory structure. Start the watcher. Drop a text file into /drops/analyze/. Watch it process automatically and check /output/analyze/ for results.
+
+
+---
+
+## Workflow Prompts: The Pattern That Makes AI Engineering Predictable
+
+*Published: 2025-12-15*
+*Category: Agentic Patterns*
+*Difficulty: Intermediate*
+*URL: /blog/workflow-prompts*
+
+### TL;DR
+
+Workflow prompts follow an Input → Workflow → Output structure that makes AI agent behavior predictable. The workflow section—numbered, sequential steps—drives 90% of the value. Use break-even math (time to write / time saved per use) to decide if a workflow is worth building.
+
+### Key Takeaways
+
+1. Workflow sections are S-tier value with C-tier difficulty—the most valuable component is also the easiest to execute
+2. Workflow prompts fail on complex judgment calls, ambiguous requirements, and real-time adaptation tasks
+3. Break-even calculation: (Time to write) / (Time saved per use) = minimum uses needed
+4. A 30-minute workflow prompt pays off after 3 uses of a 15-minute task
+5. Build a library of reusable workflow prompts for maximum team ROI
+
+### Content
+
+The workflow section is the most important thing you'll write in any agentic prompt.
+
+Not the metadata. Not the variables. Not the fancy control flow. The workflow—your step-by-step play for what the agent should do—drives 90% of the value you'll capture from AI-assisted engineering.
+
+This post shows you how to build workflow prompts that actually work, with templates you can use today. It also covers the failure modes you'll encounter and how to calculate whether a workflow prompt is worth writing.
+
+The Core Pattern: Input → Workflow → Output
+
+Every effective agentic prompt follows this three-step structure:
+
+[code block]
+
+The workflow section is where your agent's actual work happens. It's rated S-tier usefulness with C-tier difficulty—the most valuable component is also the easiest to execute well.
+
+POC: A Working Workflow Prompt
+
+Here's a complete, production-ready workflow prompt you can use as a Claude Code command:
+
+[code block]
+
+Save this as .claude/commands/analyze.md and run with /analyze src/main.py.
+
+The Workflow Section Deep Dive
+
+What makes workflow sections powerful:
+
+Sequential clarity - Numbered steps eliminate ambiguity. The agent knows exactly what order to execute.
+
+[code block]
+
+Nested detail - Add specifics under each step without breaking the sequence:
+
+[code block]
+
+Conditional branches - Handle different scenarios:
+
+[code block]
+
+When Workflow Prompts Fail
+
+Workflow prompts are powerful, but they're not universal. Here are the failure modes I've hit in production:
+
+Overly complex tasks requiring human judgment mid-execution
+
+I tried building a workflow prompt for database migration planning. The prompt could analyze schema differences and generate SQL, but it couldn't decide which migrations were safe to auto-apply versus which needed DBA review. The decision tree had too many branches: data volume considerations, cross-region timing, rollback complexity, customer impact windows.
+
+The workflow kept requesting human input at steps 3, 5, 7, and 9 of a 12-step process. At that point, you're better off doing it interactively. Workflow prompts excel when the decision points are clear and the execution path is deterministic.
+
+Rule of thumb: If your workflow has more than 2 "stop and ask the user" points, it's probably not a good fit.
+
+Ambiguous requirements that can't be specified upfront
+
+"Generate a blog post outline for our next marketing campaign" sounds like a good workflow candidate. It's not. The requirements shift based on the output. You see the first draft and realize you want a different tone. The second section needs more technical depth. The third needs less.
+
+I wrote a 300-line workflow prompt for content generation that included 15 different quality checks and formatting rules. The agent followed it perfectly and produced consistently mediocre output. The problem wasn't execution—it was that I couldn't articulate "make it interesting" in workflow steps.
+
+Interactive prompting lets you course-correct in real-time. Workflow prompts lock in your assumptions upfront.
+
+Tasks requiring real-time adaptation
+
+Debugging sessions are the classic example. You can't write a workflow for "figure out why the auth service is returning 500 errors" because each finding changes what you need to check next. Step 1 might be "check logs," but what you find in the logs determines whether step 2 is "inspect database connections" or "review API gateway config" or "check Redis cache status."
+
+Workflow prompts assume a static execution path. Debugging requires dynamic branching based on runtime discoveries.
+
+When the overhead of writing the prompt exceeds the task time
+
+This is the trap I see most often. Someone spends 2 hours writing a workflow prompt for a task that takes 30 minutes to do manually. They run it once, it works great, and then they never use it again.
+
+If you're not going to run a workflow at least 5 times, don't build it. Do it manually or use interactive prompting.
+
+Edge case: Workflows that seem simple but have hidden complexity
+
+"Rename this function across the codebase" sounds trivial. Write a workflow prompt: search for all instances, replace them, update imports, done. Except the function is called get() and your codebase has 47 different get() functions. Or it's used in generated code. Or it's referenced in documentation strings that need different formatting. Or it's in test mocks that need manual review.
+
+I've seen 10-step workflow prompts fail at step 8 because an edge case no one anticipated appeared. The agent either halted with an error or plowed ahead and broke things. Neither outcome is great when you're at 80% completion.
+
+For tasks with hidden complexity, start with interactive prompting. Once you've hit the edge cases manually, then codify the workflow.
+
+Measuring Workflow ROI
+
+The question you should ask before writing any workflow prompt: "Will this pay for itself?"
+
+Time to write workflow prompt vs time saved
+
+A workflow prompt takes between 20 minutes (simple, templated) and 3 hours (complex, multi-step). Most fall in the 45-60 minute range if you're building from scratch.
+
+Task execution time varies, but here's the break-even math:
+
+[code block]
+
+Example 1: Code review workflow
+• Time to write: 60 minutes
+• Manual review time: 20 minutes
+• Time with workflow: 5 minutes (you review the agent's output)
+• Time saved per use: 15 minutes
+• Break-even: 60 / 15 = 4 uses
+
+If you review code 4+ times, the workflow prompt pays off.
+
+Example 2: API endpoint scaffolding
+• Time to write: 90 minutes (includes error handling, validation, tests)
+• Manual scaffold time: 40 minutes
+• Time with workflow: 8 minutes (review and tweak)
+• Time saved per use: 32 minutes
+• Break-even: 90 / 32 = 2.8 uses (round to 3)
+
+If you build 3+ similar endpoints, the workflow prompt pays off.
+
+The multiplier effect
+
+This calculation assumes only you use the workflow. If your team uses it, divide break-even by team size.
+
+A 30-minute workflow prompt on a 5-person team needs to save each person just 6 minutes once to break even. That's a no-brainer for common tasks like "add API endpoint," "generate test file," or "create component boilerplate."
+
+The hidden cost: maintenance
+
+Workflow prompts break when your codebase evolves. Your folder structure changes. Your testing framework updates. Your naming conventions shift.
+
+I maintain about 40 workflow prompts for client projects. Roughly 10% break each quarter and need updates. Budget 15-30 minutes per quarter per active workflow for maintenance.
+
+If a workflow saves you 2 hours per month but costs 30 minutes per quarter to maintain, the net ROI is still massive: 24 hours saved vs 2 hours maintenance over a year.
+
+When to skip the ROI calculation
+
+Some workflows are worth it regardless of break-even math:
+• Team onboarding tasks (new hires benefit disproportionately)
+• Critical path operations where consistency matters more than speed
+• Compliance tasks that require documented, repeatable processes
+
+If the task is high-stakes or high-variance, the value of predictability can exceed the value of time saved.
+
+Agent Opportunity: Build a Prompt Library
+
+Here's where you can multiply your impact:
+
+[code block]
+
+Why Workflows Beat Ad-Hoc Prompting
+
+[code block]
+
+The workflow prompt transforms a vague request into an executable engineering plan. One workflow prompt executing for an hour can generate work that would take you 20 hours.
+
+Building Your First Workflow Prompt
+
+Start with your most common task. The one you do every day. The one where you think "I should automate this."
+• Write out the steps you take manually
+• Convert each step to a numbered instruction
+• Add variables for the parts that change
+• Add early returns for failure cases
+• Specify the output format you want
+
+Test it. Iterate. Add to your library.
+
+The prompt is the new fundamental unit of engineering. The workflow section is where that engineering actually happens.
+
+---
+
+Key Takeaways:
+• Workflow sections are S-tier value, C-tier difficulty
+• Input → Workflow → Output is the universal pattern
+• Numbered steps create predictable execution
+• Early returns handle failure cases cleanly
+• Workflows fail on complex judgment calls, ambiguous requirements, and real-time adaptation tasks
+• Break-even calculation: (Time to write) / (Time saved per use) = minimum uses needed
+• A 30-minute workflow prompt pays off after 3 uses of a 15-minute task
+• Build a library of reusable workflow prompts for maximum team ROI
+• One good workflow prompt = 20+ hours of work
+
+Try It Now:
+Copy the analyze.md template above, save to .claude/commands/analyze.md, and run /analyze on any file in your codebase. Time how long it takes to write the prompt and how long the analysis takes to run. Calculate your break-even point for the next time you need to analyze a file.
+
+
+---
+
+*End of content. For navigation, see [/llms.txt](/llms.txt)*

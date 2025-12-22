@@ -1,0 +1,108 @@
+---
+// This component enhances all code blocks on the page with copy buttons
+// Include this in your layout to enable copy functionality globally
+---
+
+<script>
+  function enhanceCodeBlocks() {
+    const codeBlocks = document.querySelectorAll('pre:not([data-enhanced])');
+
+    codeBlocks.forEach(pre => {
+      // Skip if already enhanced or if it's a mermaid block
+      if (pre.dataset.enhanced || pre.closest('.mermaid')) return;
+
+      pre.dataset.enhanced = 'true';
+
+      // Create wrapper
+      const wrapper = document.createElement('div');
+      wrapper.className = 'enhanced-code-block';
+      pre.parentNode?.insertBefore(wrapper, pre);
+      wrapper.appendChild(pre);
+
+      // Create copy button
+      const button = document.createElement('button');
+      button.className = 'code-copy-btn';
+      button.setAttribute('aria-label', 'Copy code');
+      button.innerHTML = '<span class="copy-text">Copy</span><span class="copied-text">Copied!</span>';
+
+      wrapper.appendChild(button);
+
+      // Add click handler
+      button.addEventListener('click', async () => {
+        const code = pre.querySelector('code')?.textContent || pre.textContent || '';
+
+        try {
+          await navigator.clipboard.writeText(code);
+          button.classList.add('copied');
+
+          setTimeout(() => {
+            button.classList.remove('copied');
+          }, 2000);
+        } catch (err) {
+          console.error('Failed to copy:', err);
+        }
+      });
+    });
+  }
+
+  // Run on page load
+  document.addEventListener('DOMContentLoaded', enhanceCodeBlocks);
+
+  // Re-run on view transitions (for Astro)
+  document.addEventListener('astro:after-swap', enhanceCodeBlocks);
+
+  // Also run immediately in case DOMContentLoaded already fired
+  if (document.readyState !== 'loading') {
+    enhanceCodeBlocks();
+  }
+</script>
+
+<style is:global>
+  .enhanced-code-block {
+    position: relative;
+    margin: var(--spacing-line) 0;
+  }
+
+  .enhanced-code-block pre {
+    margin-top: 0 !important;
+  }
+
+  .code-copy-btn {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+    background: var(--color-background);
+    color: var(--color-foreground-alt);
+    border: 1px solid var(--color-foreground-alt);
+    padding: 0.25rem 0.75rem;
+    font-family: var(--font-family-mono);
+    font-size: 0.75rem;
+    cursor: pointer;
+    z-index: 10;
+    transition: all 0.15s ease;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .code-copy-btn:hover {
+    color: var(--color-foreground);
+    border-color: var(--color-foreground);
+  }
+
+  .code-copy-btn.copied {
+    color: var(--color-accent);
+    border-color: var(--color-accent);
+  }
+
+  .code-copy-btn .copied-text {
+    display: none;
+  }
+
+  .code-copy-btn.copied .copy-text {
+    display: none;
+  }
+
+  .code-copy-btn.copied .copied-text {
+    display: inline;
+  }
+</style>

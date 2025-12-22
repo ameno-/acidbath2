@@ -1,0 +1,57 @@
+# ACIDBATH
+
+> Production AI engineering patterns for senior engineers and technical leaders.
+> Code-first, practitioner-focused content on agentic AI, context engineering,
+> and LLM cost optimization.
+
+## What This Site Covers
+
+ACIDBATH provides deep technical content on building production AI systems:
+
+- **Agentic AI Patterns**: Sub-agent architecture, workflow prompts, orchestration
+- **Context Engineering**: Token optimization, progressive disclosure, semantic search
+- **Claude Code**: Best practices, commands, custom agents, MCP integration
+- **Production AI Economics**: Cost analysis, model routing, real-world benchmarks
+
+## Recent Posts
+
+- [AI Document Skills: Automated File Generation That Actually Ships](/blog/document-generation-skills): Skills generate Excel, PowerPoint, and PDF files in minutes, not hours. Complete POC code, real token numbers, and honest failure modes for production document pipelines.
+- [Agent Architecture: From Custom Agents to Effective Delegation](/blog/agent-architecture): System prompts define agent identity. File systems enable delegation. Learn how to build specialized agents and delegate research work reliably with working code you can use today.
+- [Context Engineering: From Token Optimization to Large Codebase Mastery](/blog/context-engineering): Progressive disclosure and semantic search are the difference between burning tokens and shipping features. Learn when to use each pattern with working code and hard numbers.
+- [Directory Watchers: File-Based AI Automation That Scales](/blog/directory-watchers): Turn your file system into an AI interface. Build drop zones that process files automatically with working Python code and production considerations.
+- [Workflow Prompts: The Pattern That Makes AI Engineering Predictable](/blog/workflow-prompts): The workflow section drives 90% of the value in agentic prompts. Learn to build workflow prompts that work, when they fail, and how to measure ROI.
+
+## Topics
+
+### Production Patterns
+
+- [AI Document Skills: Automated File Generation That Actually Ships](/blog/document-generation-skills): Skills generate Excel, PowerPoint, and PDF files in minutes, not hours. Complete POC code, real token numbers, and honest failure modes for production document pipelines.
+- [Directory Watchers: File-Based AI Automation That Scales](/blog/directory-watchers): Turn your file system into an AI interface. Build drop zones that process files automatically with working Python code and production considerations.
+
+### Agent Architecture
+
+- [Agent Architecture: From Custom Agents to Effective Delegation](/blog/agent-architecture): System prompts define agent identity. File systems enable delegation. Learn how to build specialized agents and delegate research work reliably with working code you can use today.
+
+### Context Engineering
+
+- [Context Engineering: From Token Optimization to Large Codebase Mastery](/blog/context-engineering): Progressive disclosure and semantic search are the difference between burning tokens and shipping features. Learn when to use each pattern with working code and hard numbers.
+
+### Agentic Patterns
+
+- [Workflow Prompts: The Pattern That Makes AI Engineering Predictable](/blog/workflow-prompts): The workflow section drives 90% of the value in agentic prompts. Learn to build workflow prompts that work, when they fail, and how to measure ROI.
+
+## About
+
+ACIDBATH is the critical, code-first voice that senior technical leaders trust.
+We focus on what actually works in production, including honest coverage of
+failures and limitations. No hype, no hand-waving—just working code and
+real numbers.
+
+## Contact
+
+- Website: https://blog.amenoacids.com
+- Email: contact@amenoacids.com
+
+---
+
+*For full post content, see [/llms-full.txt](/llms-full.txt)*

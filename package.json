@@ -4,10 +4,11 @@
   "version": "1.0.0",
   "scripts": {
     "dev": "astro dev",
-    "build": "astro build",
+    "build": "node scripts/generate-llms-txt.js && astro build",
     "preview": "astro preview",
     "astro": "astro",
-    "deploy": "astro build && wrangler pages deploy ./dist"
+    "deploy": "npm run build && wrangler pages deploy ./dist",
+    "generate:llms": "node scripts/generate-llms-txt.js"
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.1.18",

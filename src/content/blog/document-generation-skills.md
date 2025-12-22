@@ -5,6 +5,15 @@ pubDate: 2025-12-17
 author: "Acidbath"
 tags: ["ai", "claude", "skills", "automation", "document-generation", "excel", "powerpoint", "pdf"]
 banner: "/assets/posts/document-generation-skills-banner.png"
+category: "Production Patterns"
+difficulty: "Intermediate"
+tldr: "Claude Skills API automates Excel, PowerPoint, and PDF generation in 5-6 minutes instead of 100+ minutes of manual work. Chain skills together for complete document pipelines. Real production use saves 95% of effort with ~$2-3 token cost per run."
+keyTakeaways:
+  - "Document generation is unsexy but saves massive hours—100 minutes manual → 5 minutes automated"
+  - "Skills API chains: Data → Excel → PowerPoint → PDF in a single pipeline"
+  - "Token cost is minimal: ~$2-3 per complete document generation run"
+  - "Failure modes: complex formatting, conditional logic, multi-sheet references"
+  - "Human review is still required—5 minutes of review vs 100 minutes of creation"
 ---
 
 Document generation is the unsexy automation that saves hours.

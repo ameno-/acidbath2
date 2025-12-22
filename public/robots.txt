@@ -1,0 +1,46 @@
+# ACIDBATH robots.txt
+# https://blog.amenoacids.com
+
+# Allow all crawlers by default
+User-agent: *
+Allow: /
+
+# AI Crawlers - Welcome
+# These crawlers power AI assistants and search features
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: Claude-Web
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Anthropic-AI
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+# AI Content Files
+# Point crawlers to structured content for better understanding
+# llms.txt contains site overview and post summaries
+# llms-full.txt contains complete post content
+
+# Sitemap location
+Sitemap: https://blog.amenoacids.com/sitemap-index.xml
+
+# Crawl-delay: Be nice to the server
+Crawl-delay: 1

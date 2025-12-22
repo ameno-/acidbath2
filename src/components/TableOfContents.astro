@@ -1,0 +1,136 @@
+---
+interface Heading {
+  depth: number;
+  slug: string;
+  text: string;
+}
+
+interface Props {
+  headings: Heading[];
+  title?: string;
+}
+
+const { headings, title = 'Contents' } = Astro.props;
+
+// Filter to only show h2 and h3 headings
+const tocHeadings = headings.filter(h => h.depth >= 2 && h.depth <= 3);
+---
+
+{tocHeadings.length > 0 && (
+  <nav class="toc" aria-label="Table of contents">
+    <details open>
+      <summary class="toc-title">{title}</summary>
+      <ul class="toc-list">
+        {tocHeadings.map((heading) => (
+          <li class={`toc-item toc-depth-${heading.depth}`}>
+            <a href={`#${heading.slug}`} class="toc-link">
+              {heading.text}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </details>
+  </nav>
+)}
+
+<style>
+  .toc {
+    margin: var(--spacing-line) 0;
+    padding: var(--spacing-line) 1ch;
+    border: var(--border-width-thick) solid var(--color-foreground-alt);
+    background: var(--color-background-alt);
+  }
+
+  .toc-title {
+    font-weight: 800;
+    text-transform: uppercase;
+    cursor: pointer;
+    user-select: none;
+  }
+
+  .toc-list {
+    list-style: none;
+    padding: 0;
+    margin: var(--spacing-line) 0 0;
+  }
+
+  .toc-item {
+    margin: 0;
+    padding: 0;
+    line-height: 1.4;
+  }
+
+  .toc-item + .toc-item {
+    margin-top: 0.5rem;
+  }
+
+  .toc-depth-3 {
+    padding-left: 2ch;
+  }
+
+  .toc-depth-3::before {
+    content: "└─ ";
+    color: var(--color-foreground-alt);
+  }
+
+  .toc-link {
+    color: var(--color-foreground-alt);
+    text-decoration: none;
+    transition: color 0.15s ease;
+  }
+
+  .toc-link:hover {
+    color: var(--color-accent);
+    text-decoration: underline;
+  }
+
+  /* Sticky TOC for desktop */
+  @media (min-width: 1200px) {
+    .toc {
+      position: sticky;
+      top: var(--spacing-line);
+    }
+  }
+</style>
+
+<script>
+  // Highlight current section in TOC
+  function initTocHighlight() {
+    const tocLinks = document.querySelectorAll('.toc-link');
+    const headings = Array.from(tocLinks).map(link => {
+      const id = link.getAttribute('href')?.slice(1);
+      return id ? document.getElementById(id) : null;
+    }).filter(Boolean) as HTMLElement[];
+
+    if (headings.length === 0) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const id = entry.target.id;
+            tocLinks.forEach(link => {
+              link.classList.toggle('active', link.getAttribute('href') === `#${id}`);
+            });
+          }
+        });
+      },
+      {
+        rootMargin: '-20% 0px -60% 0px',
+        threshold: 0
+      }
+    );
+
+    headings.forEach(heading => observer.observe(heading));
+  }
+
+  document.addEventListener('DOMContentLoaded', initTocHighlight);
+  document.addEventListener('astro:after-swap', initTocHighlight);
+</script>
+
+<style is:global>
+  .toc-link.active {
+    color: var(--color-accent);
+    font-weight: 600;
+  }
+</style>

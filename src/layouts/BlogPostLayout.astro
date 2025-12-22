@@ -53,6 +53,144 @@ const pageTitle = seoTitle || title;
       <slot />
     </div>
   </article>
+
+  <!-- Mermaid diagram rendering -->
+  <div id="mermaid-modal" class="mermaid-modal">
+    <div class="mermaid-modal-content">
+      <span class="mermaid-modal-close">&times;</span>
+      <div class="mermaid-modal-body"></div>
+    </div>
+  </div>
+
+  <script type="module">
+    import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: 'dark',
+      themeVariables: {
+        primaryColor: '#4a9eff',
+        primaryTextColor: '#e1e4e8',
+        primaryBorderColor: '#30363d',
+        lineColor: '#8b949e',
+        secondaryColor: '#238636',
+        tertiaryColor: 'transparent',
+        background: 'transparent',
+        mainBkg: 'transparent',
+        nodeBorder: '#30363d',
+        clusterBkg: 'transparent',
+        clusterBorder: '#30363d',
+        titleColor: '#e1e4e8',
+        edgeLabelBackground: 'transparent',
+      }
+    });
+
+    // Click to zoom functionality
+    document.addEventListener('DOMContentLoaded', () => {
+      setTimeout(() => {
+        const diagrams = document.querySelectorAll('.mermaid');
+        const modal = document.getElementById('mermaid-modal');
+        const modalBody = modal.querySelector('.mermaid-modal-body');
+        const closeBtn = modal.querySelector('.mermaid-modal-close');
+
+        diagrams.forEach(diagram => {
+          diagram.style.cursor = 'zoom-in';
+          diagram.title = 'Click to enlarge';
+
+          diagram.addEventListener('click', () => {
+            const svg = diagram.querySelector('svg');
+            if (svg) {
+              modalBody.innerHTML = svg.outerHTML;
+              modal.classList.add('active');
+              document.body.style.overflow = 'hidden';
+            }
+          });
+        });
+
+        closeBtn.addEventListener('click', () => {
+          modal.classList.remove('active');
+          document.body.style.overflow = '';
+        });
+
+        modal.addEventListener('click', (e) => {
+          if (e.target === modal) {
+            modal.classList.remove('active');
+            document.body.style.overflow = '';
+          }
+        });
+
+        document.addEventListener('keydown', (e) => {
+          if (e.key === 'Escape' && modal.classList.contains('active')) {
+            modal.classList.remove('active');
+            document.body.style.overflow = '';
+          }
+        });
+      }, 500);
+    });
+  </script>
+
+  <style is:global>
+    .mermaid {
+      display: flex;
+      justify-content: center;
+      margin: 2rem 0;
+      transition: opacity 0.2s;
+    }
+    .mermaid:hover {
+      opacity: 0.8;
+    }
+    .mermaid svg {
+      max-width: 100%;
+      height: auto;
+    }
+
+    /* Modal styles */
+    .mermaid-modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.9);
+      z-index: 1000;
+      align-items: center;
+      justify-content: center;
+    }
+    .mermaid-modal.active {
+      display: flex;
+    }
+    .mermaid-modal-content {
+      position: relative;
+      max-width: 95vw;
+      max-height: 95vh;
+      overflow: auto;
+      padding: 2rem;
+    }
+    .mermaid-modal-close {
+      position: fixed;
+      top: 1rem;
+      right: 1.5rem;
+      font-size: 2.5rem;
+      color: #e1e4e8;
+      cursor: pointer;
+      z-index: 1001;
+      line-height: 1;
+    }
+    .mermaid-modal-close:hover {
+      color: #fff;
+    }
+    .mermaid-modal-body {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .mermaid-modal-body svg {
+      max-width: 90vw;
+      max-height: 85vh;
+      width: auto;
+      height: auto;
+    }
+  </style>
 </BaseLayout>
 
 <style>

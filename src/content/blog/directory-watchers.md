@@ -15,38 +15,31 @@ This post shows you how to build a complete drop zone system with working Python
 
 ## The Architecture
 
-```
-┌─────────────────────────────────────────────────────────────┐
-│                    DROP ZONE ARCHITECTURE                   │
-├─────────────────────────────────────────────────────────────┤
-│                                                             │
-│   ~/drops/                                                  │
-│   ├── transcribe/     ──────▶  Whisper → text             │
-│   ├── analyze/        ──────▶  Claude → summary           │
-│   ├── images/         ──────▶  Replicate → generations    │
-│   └── data/           ──────▶  Claude → analysis          │
-│                                                             │
-│   ┌─────────────────────────────────────────────────────┐   │
-│   │              DIRECTORY WATCHER                       │   │
-│   │                                                      │   │
-│   │   ┌──────────┐    ┌──────────┐    ┌──────────┐     │   │
-│   │   │ watchdog │───▶│ Pattern  │───▶│  Agent   │     │   │
-│   │   │  events  │    │  Match   │    │ Execute  │     │   │
-│   │   └──────────┘    └──────────┘    └──────────┘     │   │
-│   │                                                      │   │
-│   └─────────────────────────────────────────────────────┘   │
-│                           │                                 │
-│                           ▼                                 │
-│   ┌─────────────────────────────────────────────────────┐   │
-│   │                    OUTPUTS                           │   │
-│   │   ~/output/                                          │   │
-│   │   └── {zone}/{timestamp}-{filename}.{result}        │   │
-│   │                                                      │   │
-│   │   ~/archive/                                         │   │
-│   │   └── {zone}/{timestamp}-{filename}.{original}      │   │
-│   └─────────────────────────────────────────────────────┘   │
-│                                                             │
-└─────────────────────────────────────────────────────────────┘
+```mermaid
+flowchart TB
+    subgraph DROPS["~/drops/"]
+        D1["transcribe/"] --> W1["Whisper → text"]
+        D2["analyze/"] --> W2["Claude → summary"]
+        D3["images/"] --> W3["Replicate → generations"]
+        D4["data/"] --> W4["Claude → analysis"]
+    end
+
+    subgraph WATCHER["DIRECTORY WATCHER"]
+        E1[watchdog events] --> E2[Pattern Match] --> E3[Agent Execute]
+    end
+
+    DROPS --> WATCHER
+
+    subgraph OUTPUT["OUTPUTS"]
+        O1["~/output/{zone}/{timestamp}-{filename}.{result}"]
+        O2["~/archive/{zone}/{timestamp}-{filename}.{original}"]
+    end
+
+    WATCHER --> OUTPUT
+
+    style DROPS fill:#e3f2fd
+    style WATCHER fill:#fff3e0
+    style OUTPUT fill:#c8e6c9
 ```
 
 ## POC: Complete Drop Zone System
@@ -936,36 +929,28 @@ Never execute code from dropped files directly. Treat all input as untrusted. Va
 
 Not every task deserves automation. Use specific thresholds.
 
-```
-┌─────────────────────────────────────────────────────────────┐
-│                   AUTOMATION DECISION                       │
-├─────────────────────────────────────────────────────────────┤
-│                                                             │
-│   Frequency          ROI Threshold       Action             │
-│   ─────────          ──────────────      ──────             │
-│   Once               N/A                 Use chat           │
-│   2-5x/month         > 5 min saved       Maybe automate     │
-│   Weekly             > 2 min saved       Consider zone      │
-│   Daily              > 30 sec saved      Build zone         │
-│   10+ times/day      Any time saved      Definitely zone    │
-│                                                             │
-│   Complexity         Time to Build       Approach           │
-│   ──────────         ─────────────       ────────           │
-│   Single step        5 minutes           Bash agent         │
-│   Multi-step         30 minutes          Python agent       │
-│   AI reasoning       15 minutes          Claude agent       │
-│   Mixed flow         1-2 hours           Chain agents       │
-│   Needs approval     2-3 hours           Approval workflow  │
-│                                                             │
-│   Risk Level         Requirements        Safety             │
-│   ──────────         ────────────        ──────             │
-│   Low                None                 Full auto         │
-│   Medium             Logging              Auto + audit      │
-│   High               Review               Approval required │
-│   Critical           Sign-off             Manual only       │
-│                                                             │
-└─────────────────────────────────────────────────────────────┘
-```
+| Frequency | ROI Threshold | Action |
+|-----------|---------------|--------|
+| Once | N/A | Use chat |
+| 2-5x/month | > 5 min saved | Maybe automate |
+| Weekly | > 2 min saved | Consider zone |
+| Daily | > 30 sec saved | Build zone |
+| 10+ times/day | Any time saved | Definitely zone |
+
+| Complexity | Time to Build | Approach |
+|------------|---------------|----------|
+| Single step | 5 minutes | Bash agent |
+| Multi-step | 30 minutes | Python agent |
+| AI reasoning | 15 minutes | Claude agent |
+| Mixed flow | 1-2 hours | Chain agents |
+| Needs approval | 2-3 hours | Approval workflow |
+
+| Risk Level | Requirements | Safety |
+|------------|--------------|--------|
+| Low | None | Full auto |
+| Medium | Logging | Auto + audit |
+| High | Review | Approval required |
+| Critical | Sign-off | Manual only |
 
 **Real numbers from our deployment:**
 - Morning meeting transcription: 10x/week, saves 15 min/day, ROI: 2.5 hours/week

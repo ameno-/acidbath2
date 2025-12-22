@@ -107,7 +107,7 @@ const structuredData = {
         {tags.length > 0 && (
           <div class="tags">
             {tags.map((tag) => (
-              <span class="tag">[{tag}]</span>
+              <a href={`/tags/${tag}`} class="tag">[{tag}]</a>
             ))}
           </div>
         )}
@@ -419,6 +419,12 @@ const structuredData = {
     color: var(--color-text-muted, #888);
     font-size: 0.85rem;
     margin-right: 0.5ch;
+    text-decoration: none;
+  }
+
+  .tag:hover {
+    color: var(--color-accent);
+    text-decoration: underline;
   }
 </style>
 

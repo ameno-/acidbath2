@@ -1,6 +1,6 @@
 ---
 title: "AI Document Skills: Automated File Generation That Actually Ships"
-description: "Skills generate Excel, PowerPoint, and PDF files in minutes, not hours. Complete POC code, real token numbers, and honest failure modes for production document pipelines."
+description: "Skills generate Excel, PowerPoint, and PDF files in minutes. Complete POC code, real token numbers, and honest failure modes for production."
 pubDate: 2025-12-17
 author: "Acidbath"
 tags: ["ai", "claude", "skills", "automation", "document-generation", "excel", "powerpoint", "pdf"]

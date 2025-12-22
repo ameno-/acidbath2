@@ -61,3 +61,7 @@ generated_imgs/
 
 # Root assets folder (use public/assets)
 /assets/
+
+# Playwright test artifacts
+playwright-report/
+test-results/

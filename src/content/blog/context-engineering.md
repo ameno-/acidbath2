@@ -1,6 +1,6 @@
 ---
 title: "Context Engineering: From Token Optimization to Large Codebase Mastery"
-description: "Progressive disclosure and semantic search are the difference between burning tokens and shipping features. Learn when to use each pattern with working code and hard numbers."
+description: "Progressive disclosure and semantic search: the difference between burning tokens and shipping features. Working code and hard numbers inside."
 pubDate: 2025-12-15
 author: "Acidbath"
 tags: ["ai", "context-window", "mcp", "semantic-search", "optimization"]

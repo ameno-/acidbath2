@@ -211,93 +211,56 @@ I built this decision tree after migrating half my MCP servers to Skills:
 
 ## POC: Frontend Aesthetics Skill
 
-Here's a complete Skill I extracted from Anthropic's cookbook. This one guides Claude to generate distinctive UI designs instead of generic "AI slop":
+Here's a complete Skill I extracted from Anthropic's cookbook. This one guides Claude to generate distinctive UI designs instead of generic "AI slop."
 
-```markdown
----
+### Skill Frontmatter (Tier 1 Metadata)
+
+```yaml
 name: frontend-aesthetics
 description: Creates distinctive, creative frontend designs with intentional typography, color, and motion choices. Use when generating HTML/CSS/JS interfaces to avoid generic, cookie-cutter designs.
----
+```
 
-# Frontend Aesthetics Skill
+### Skill Instructions (Tier 2 Content)
 
-<frontend_aesthetics>
-You tend to converge toward generic, "on distribution" outputs. Your default choices create visually bland frontends that users call "AI slop."
+The full instruction set (approximately 2K tokens) includes typography, color, motion, and background guidance:
 
-## Typography
+**Typography Guidelines:**
+| Avoid | Use Instead |
+|-------|-------------|
+| Inter, Roboto, Open Sans, Lato | Code: JetBrains Mono, Fira Code, Space Grotesk |
+| Default system fonts | Editorial: Playfair Display, Crimson Pro, Fraunces |
+| Overused sans-serifs | Startup: Clash Display, Satoshi, Cabinet Grotesk |
 
-**Avoid These Fonts:**
-- Inter, Roboto, Open Sans, Lato, Arial
-- Default system fonts
-- Overused sans-serifs
-
-**Use Instead:**
-- Code aesthetic: JetBrains Mono, Fira Code, Space Grotesk
-- Editorial: Playfair Display, Crimson Pro, Fraunces
-- Startup: Clash Display, Satoshi, Cabinet Grotesk
-- Technical: IBM Plex family, Source Sans 3
-- Distinctive: Bricolage Grotesque, Obviously, Newsreader
-
-**Principles:**
+**Typography Principles:**
 - High contrast in font pairings
 - Extreme font weights (100/200 vs 800/900)
 - Size jumps of 3x or more
 - Choose one distinctive font and use it decisively
 
-## Color & Theme
+**Color & Theme:**
+| Avoid | Use |
+|-------|-----|
+| Purple gradients on white backgrounds | CSS variables for cohesive themes |
+| Generic blue/gray corporate palettes | Layered gradients for depth |
+| Single flat colors with no depth | Context-specific color stories |
 
-**Avoid:**
-- Purple gradients on white backgrounds
-- Generic blue/gray corporate palettes
-- Single flat colors with no depth
-
-**Use:**
-- CSS variables for cohesive themes
-- Layered gradients for depth
-- Geometric patterns for texture
-- Context-specific color stories
-
-## Motion
-
-**Avoid:**
-- Scattered micro-interactions
-- Animation for animation's sake
-
-**Use:**
-- Focus on high-impact moments
+**Motion:**
+- Focus on high-impact moments, not scattered micro-interactions
 - CSS-only animations for performance
 - Lightweight libraries (Motion for React)
-- Intentional choreography
 
-## Backgrounds
+**Implementation Example:**
 
-**Avoid:**
-- Solid colors
-- Generic gradients
-
-**Use:**
-- Atmospheric depth through layering
-- Geometric patterns
-- Organic textures
-- Grid systems with visual interest
-
-## Implementation
-
-Load fonts from Google Fonts:
 ```html
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;700&display=swap" rel="stylesheet">
 ```
 
-Use Tailwind CSS for variables:
 ```css
 :root {
   --color-primary: #your-choice;
   --color-secondary: #your-choice;
   --font-display: 'Space Grotesk', sans-serif;
 }
-```
-
-</frontend_aesthetics>
 ```
 
 ### Usage

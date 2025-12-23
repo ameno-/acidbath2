@@ -1,0 +1,2553 @@
+{
+  "total_posts": 7,
+  "total_blocks": 138,
+  "post_stats": {
+    "agent-architecture.md": {
+      "total_blocks": 26,
+      "blocks": [
+        {
+          "language": "mermaid",
+          "line_count": 15,
+          "filepath": "/Users/ameno/dev/acidbath2/trees/40d4951f/src/content/blog/agent-architecture.md",
+          "line_number": 27,
+          "context": "## Why Custom Agents Matter",
+          "code_preview": "flowchart LR\n    subgraph DEFAULT[\"Default Claude Code\"]\n        A[\"You are a helpful AI assistant.....",
+          "category": "diagram"
+        },
+        {
+          "language": "python",
+          "line_count": 41,
+          "filepath": "/Users/ameno/dev/acidbath2/trees/40d4951f/src/content/blog/agent-architecture.md",
+          "line_number": 51,
+          "context": "## POC 1: The Simplest Custom Agent",
+          "code_preview": "#!/usr/bin/env -S uv run\n# /// script\n# dependencies = [\n#   \"anthropic>=0.40.0\",\n# ]\n# ///\n\"\"\"\nSimp...",
+          "category": "complete_example"
+        },
+        {
+          "language": "bash",
+          "line_count": 8,
+          "filepath": "/Users/ameno/dev/acidbath2/trees/40d4951f/src/content/blog/agent-architecture.md",
+          "line_number": 96,
+          "context": "# ///",
+          "code_preview": "$ uv run pong_agent.py \"hello\"\npong\n\n$ uv run pong_agent.py \"what is the meaning of life?\"\npong\n\n$ u...",
+          "category": "snippet"
+        },
+        {
+          "language": "python",
+          "line_count": 132,
+          "filepath": "/Users/ameno/dev/acidbath2/trees/40d4951f/src/content/blog/agent-architecture.md",
+          "line_number": 113,
+          "context": "## POC 2: Agent with Custom Tools",
+          "code_preview": "#!/usr/bin/env -S uv run\n# /// script\n# dependencies = [\n#   \"anthropic>=0.40.0\",\n# ]\n# ///\n\"\"\"\nCalc...",
+          "category": "complete_example"
+        },
+        {
+          "language": "bash",
+          "line_count": 5,
+          "filepath": "/Users/ameno/dev/acidbath2/trees/40d4951f/src/content/blog/agent-architecture.md",
+          "line_number": 249,
+          "context": "No context",
+          "code_preview": "$ uv run calculator_agent.py \"what is 15% of 847?\"\n15% of 847 is 127.05\n\n$ uv run calculator_agent.p...",
+          "category": "snippet"
+        },
+        {
+          "language": "mermaid",
+          "line_count": 14,
+          "filepath": "/Users/ameno/dev/acidbath2/trees/40d4951f/src/content/blog/agent-architecture.md",
+          "line_number": 263,
+          "context": "## The Key Pattern: Sub-Agents as Researchers",
+          "code_preview": "sequenceDiagram\n    participant P as Parent Agent\n    participant S as Sub-Agent (isolated)\n\n    P->...",
+          "category": "diagram"
+        },
+        {
+          "language": "mermaid",
+          "line_count": 19,
+          "filepath": "/Users/ameno/dev/acidbath2/trees/40d4951f/src/content/blog/agent-architecture.md",
+          "line_number": 284,
+          "context": "## File-Based Context: The Solution",
+          "code_preview": "sequenceDiagram\n    participant P as Parent Agent\n    participant F as File System\n    participant S...",
+          "category": "diagram"
+        },
+        {
+          "language": "markdown",
+          "line_count": 28,
+          "filepath": "/Users/ameno/dev/acidbath2/trees/40d4951f/src/content/blog/agent-architecture.md",
+          "line_number": 321,
+          "context": "### Step 1: Context File Template",
+          "code_preview": "# Project Context\n\n## Current State\n<!-- What exists now, what's working, what's not -->\n\n## Researc...",
+          "category": "medium_example"
+        },
+        {
+          "language": "markdown",
+          "line_count": 49,
+          "filepath": "/Users/ameno/dev/acidbath2/trees/40d4951f/src/content/blog/agent-architecture.md",
+          "line_number": 356,
+          "context": "### Step 2: Research Agent Definition",
+          "code_preview": "---\nname: researcher\ndescription: Research sub-agent that gathers information and creates implementa...",
+          "category": "complete_example"
+        },
+        {
+          "language": "mermaid",
+          "line_count": 26,
+          "filepath": "/Users/ameno/dev/acidbath2/trees/40d4951f/src/content/blog/agent-architecture.md",
+          "line_number": 410,
+          "context": "### Step 3: Implementation Flow",
+          "code_preview": "sequenceDiagram\n    participant U as User\n    participant P as Parent Agent\n    participant F as Fil...",
+          "category": "diagram"
+        },
+        {
+          "language": "markdown",
+          "line_count": 3,
+          "filepath": "/Users/ameno/dev/acidbath2/trees/40d4951f/src/content/blog/agent-architecture.md",
+          "line_number": 443,
+          "context": "### Step 4: Putting It Together",
+          "code_preview": "## When you need to research something complex:\n\n1. Create context file:",
+          "category": "snippet"
+        },
+        {
+          "language": "unknown",
+          "line_count": 1,
+          "filepath": "/Users/ameno/dev/acidbath2/trees/40d4951f/src/content/blog/agent-architecture.md",
+          "line_number": 453,
+          "context": "## When you need to research something complex:",
+          "code_preview": "2. Spawn research sub-agent:",
+          "category": "snippet"
+        },
+        {
+          "language": "unknown",
+          "line_count": 1,
+          "filepath": "/Users/ameno/dev/acidbath2/trees/40d4951f/src/content/blog/agent-architecture.md",
+          "line_number": 461,
+          "context": "## When you need to research something complex:",
+          "code_preview": "3. Wait for completion, then:",
+          "category": "snippet"
+        },
+        {
+          "language": "unknown",
+          "line_count": 3,
+          "filepath": "/Users/ameno/dev/acidbath2/trees/40d4951f/src/content/blog/agent-architecture.md",
+          "line_number": 466,
+          "context": "## When you need to research something complex:",
+          "code_preview": "4. Implement based on research report\n\n5. Clean up temp files when done",
+          "category": "snippet"
+        },
+        {
+          "language": "markdown",
+          "line_count": 24,
+          "filepath": "/Users/ameno/dev/acidbath2/trees/40d4951f/src/content/blog/agent-architecture.md",
+          "line_number": 481,
+          "context": "### Stripe Research Agent",
+          "code_preview": "---\nname: stripe-researcher\ndescription: Research Stripe integration patterns and best practices\ntoo...",
+          "category": "medium_example"
+        },
+        {
+          "language": "unknown",
+          "line_count": 1,
+          "filepath": "/Users/ameno/dev/acidbath2/trees/40d4951f/src/content/blog/agent-architecture.md",
+          "line_number": 525,
+          "context": "## Output Format",
+          "code_preview": "",
+          "category": "snippet"
+        },
+        {
+          "language": "markdown",
+          "line_count": 23,
+          "filepath": "/Users/ameno/dev/acidbath2/trees/40d4951f/src/content/blog/agent-architecture.md",
+          "line_number": 532,
+          "context": "### Supabase Research Agent",
+          "code_preview": "---\nname: supabase-researcher\ndescription: Research Supabase database patterns and RLS policies\ntool...",
+          "category": "medium_example"
+        },
+        {
+          "language": "unknown",
+          "line_count": 2,
+          "filepath": "/Users/ameno/dev/acidbath2/trees/40d4951f/src/content/blog/agent-architecture.md",
+          "line_number": 569,
+          "context": "### 1. Context Isolation Still Exists",
+          "code_preview": "Parent: \"Add error handling like we did for auth\"\nResearcher: ??? (doesn't know how auth error handl...",
+          "category": "snippet"
+        },
+        {
+          "language": "markdown",
+          "line_count": 4,
+          "filepath": "/Users/ameno/dev/acidbath2/trees/40d4951f/src/content/blog/agent-architecture.md",
+          "line_number": 575,
+          "context": "### 1. Context Isolation Still Exists",
+          "code_preview": "# context.md\n## Error Handling Pattern\nSee src/auth/handler.ts lines 45-67 for our standard error ha...",
+          "category": "snippet"
+        },
+        {
+          "language": "yaml",
+          "line_count": 3,
+          "filepath": "/Users/ameno/dev/acidbath2/trees/40d4951f/src/content/blog/agent-architecture.md",
+          "line_number": 589,
+          "context": "### 2. Research Can Be Wrong",
+          "code_preview": "recommendation:\n  approach: \"Use Stripe Charges API\"\n  confidence: high",
+          "category": "snippet"
+        },
+        {
+          "language": "bash",
+          "line_count": 6,
+          "filepath": "/Users/ameno/dev/acidbath2/trees/40d4951f/src/content/blog/agent-architecture.md",
+          "line_number": 621,
+          "context": "### 4. File Coordination Complexity",
+          "code_preview": "# Good\ntmp/context-stripe-1703012400.md\ntmp/research-stripe-1703012400.md\n\n# Bad\ntmp/context.md  # W...",
+          "category": "snippet"
+        },
+        {
+          "language": "markdown",
+          "line_count": 2,
+          "filepath": "/Users/ameno/dev/acidbath2/trees/40d4951f/src/content/blog/agent-architecture.md",
+          "line_number": 649,
+          "context": "### 6. Cost on Failed Research",
+          "code_preview": "## Research Needed\n1. How to add payments",
+          "category": "snippet"
+        },
+        {
+          "language": "markdown",
+          "line_count": 6,
+          "filepath": "/Users/ameno/dev/acidbath2/trees/40d4951f/src/content/blog/agent-architecture.md",
+          "line_number": 655,
+          "context": "## Research Needed",
+          "code_preview": "## Research Needed\n1. Which Stripe API version should we use? (prefer latest stable)\n2. Payment Inte...",
+          "category": "snippet"
+        },
+        {
+          "language": "mermaid",
+          "line_count": 26,
+          "filepath": "/Users/ameno/dev/acidbath2/trees/40d4951f/src/content/blog/agent-architecture.md",
+          "line_number": 694,
+          "context": "## Architecture: Custom Agent Stack",
+          "code_preview": "flowchart TB\n    subgraph \"Custom Agent\"\n        SP[System Prompt]\n        UP[User Prompt]\n        T...",
+          "category": "diagram"
+        },
+        {
+          "language": "mermaid",
+          "line_count": 24,
+          "filepath": "/Users/ameno/dev/acidbath2/trees/40d4951f/src/content/blog/agent-architecture.md",
+          "line_number": 745,
+          "context": "## The Data Flow",
+          "code_preview": "flowchart TB\n    subgraph Parent[\"PARENT AGENT\"]\n        CH[Conversation History<br/>compacts over t...",
+          "category": "diagram"
+        },
+        {
+          "language": "markdown",
+          "line_count": 21,
+          "filepath": "/Users/ameno/dev/acidbath2/trees/40d4951f/src/content/blog/agent-architecture.md",
+          "line_number": 778,
+          "context": "## Rules That Prevent Disasters",
+          "code_preview": "## Mandatory Rules\n\n1. **Always read context file first**\n   - Never start work without understandin...",
+          "category": "medium_example"
+        }
+      ]
+    },
+    "claude-skills-deep-dive.md": {
+      "total_blocks": 27,
+      "blocks": [
+        {
+          "language": "yaml",
+          "line_count": 4,
+          "filepath": "/Users/ameno/dev/acidbath2/trees/40d4951f/src/content/blog/claude-skills-deep-dive.md",
+          "line_number": 49,
+          "context": "### Tier 1: Metadata (Loaded at Startup)",
+          "code_preview": "---\nname: pdf-processing\ndescription: Extracts text and tables from PDF files, fills forms, and merg...",
+          "category": "snippet"
+        },
+        {
+          "language": "unknown",
+          "line_count": 9,
+          "filepath": "/Users/ameno/dev/acidbath2/trees/40d4951f/src/content/blog/claude-skills-deep-dive.md",
+          "line_number": 74,
+          "context": "### Tier 3: Reference Files (Loaded on Demand)",
+          "code_preview": "pdf-processing/\n\u251c\u2500\u2500 SKILL.md                    # Main instructions\n\u251c\u2500\u2500 scripts/\n\u2502   \u251c\u2500\u2500 extract_tex...",
+          "category": "snippet"
+        },
+        {
+          "language": "markdown",
+          "line_count": 32,
+          "filepath": "/Users/ameno/dev/acidbath2/trees/40d4951f/src/content/blog/claude-skills-deep-dive.md",
+          "line_number": 92,
+          "context": "## Working Example: Document Generation Skill",
+          "code_preview": "---\nname: document-generator\ndescription: Creates professional Excel spreadsheets, PowerPoint presen...",
+          "category": "medium_example"
+        },
+        {
+          "language": "unknown",
+          "line_count": 1,
+          "filepath": "/Users/ameno/dev/acidbath2/trees/40d4951f/src/content/blog/claude-skills-deep-dive.md",
+          "line_number": 173,
+          "context": "# Download generated file",
+          "code_preview": "",
+          "category": "snippet"
+        },
+        {
+          "language": "yaml",
+          "line_count": 2,
+          "filepath": "/Users/ameno/dev/acidbath2/trees/40d4951f/src/content/blog/claude-skills-deep-dive.md",
+          "line_number": 218,
+          "context": "### Skill Frontmatter (Tier 1 Metadata)",
+          "code_preview": "name: frontend-aesthetics\ndescription: Creates distinctive, creative frontend designs with intention...",
+          "category": "snippet"
+        },
+        {
+          "language": "html",
+          "line_count": 1,
+          "filepath": "/Users/ameno/dev/acidbath2/trees/40d4951f/src/content/blog/claude-skills-deep-dive.md",
+          "line_number": 254,
+          "context": "### Skill Instructions (Tier 2 Content)",
+          "code_preview": "<link href=\"https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;700&display=swap\" rel=\"s...",
+          "category": "snippet"
+        },
+        {
+          "language": "css",
+          "line_count": 5,
+          "filepath": "/Users/ameno/dev/acidbath2/trees/40d4951f/src/content/blog/claude-skills-deep-dive.md",
+          "line_number": 258,
+          "context": "### Skill Instructions (Tier 2 Content)",
+          "code_preview": ":root {\n  --color-primary: #your-choice;\n  --color-secondary: #your-choice;\n  --font-display: 'Space...",
+          "category": "snippet"
+        },
+        {
+          "language": "python",
+          "line_count": 18,
+          "filepath": "/Users/ameno/dev/acidbath2/trees/40d4951f/src/content/blog/claude-skills-deep-dive.md",
+          "line_number": 270,
+          "context": "### Usage",
+          "code_preview": "from anthropic import Anthropic\n\nclient = Anthropic(api_key=API_KEY)\n\nresponse = client.beta.message...",
+          "category": "snippet"
+        },
+        {
+          "language": "yaml",
+          "line_count": 4,
+          "filepath": "/Users/ameno/dev/acidbath2/trees/40d4951f/src/content/blog/claude-skills-deep-dive.md",
+          "line_number": 299,
+          "context": "### 1. Metadata Design (Tier 1)",
+          "code_preview": "---\nname: your-skill-name              # Max 64 chars, lowercase, hyphens only\ndescription: Third-pe...",
+          "category": "snippet"
+        },
+        {
+          "language": "markdown",
+          "line_count": 9,
+          "filepath": "/Users/ameno/dev/acidbath2/trees/40d4951f/src/content/blog/claude-skills-deep-dive.md",
+          "line_number": 316,
+          "context": "### 2. Progressive Disclosure (Tier 2 to Tier 3)",
+          "code_preview": "# Main Skill Instructions\n\n[Core workflow and examples here]\n\n## Additional Resources\n\nFor detailed ...",
+          "category": "snippet"
+        },
+        {
+          "language": "markdown",
+          "line_count": 8,
+          "filepath": "/Users/ameno/dev/acidbath2/trees/40d4951f/src/content/blog/claude-skills-deep-dive.md",
+          "line_number": 334,
+          "context": "### 3. Workflow Patterns",
+          "code_preview": "## Workflow: Multi-step Document Processing\n\n1. **Validate Input**\n   - Check file exists\n   - Verif...",
+          "category": "snippet"
+        },
+        {
+          "language": "unknown",
+          "line_count": 9,
+          "filepath": "/Users/ameno/dev/acidbath2/trees/40d4951f/src/content/blog/claude-skills-deep-dive.md",
+          "line_number": 348,
+          "context": "## Workflow: Multi-step Document Processing",
+          "code_preview": "3. **Process Data**\n   - Parse extracted text\n   - Identify form fields\n   - Validate data structure...",
+          "category": "snippet"
+        },
+        {
+          "language": "python",
+          "line_count": 20,
+          "filepath": "/Users/ameno/dev/acidbath2/trees/40d4951f/src/content/blog/claude-skills-deep-dive.md",
+          "line_number": 367,
+          "context": "### 4. Utility Scripts (Part of Tier 3)",
+          "code_preview": "# scripts/extract_text.py\n\nimport sys\nimport pdfplumber\n\ndef extract_text(pdf_path):\n    \"\"\"Extract ...",
+          "category": "snippet"
+        },
+        {
+          "language": "python",
+          "line_count": 4,
+          "filepath": "/Users/ameno/dev/acidbath2/trees/40d4951f/src/content/blog/claude-skills-deep-dive.md",
+          "line_number": 423,
+          "context": "### 1. Network Access Limitations",
+          "code_preview": "# THIS DOESN'T WORK IN SKILLS\nimport requests\n\nresponse = requests.get(\"https://api.example.com/data...",
+          "category": "snippet"
+        },
+        {
+          "language": "python",
+          "line_count": 2,
+          "filepath": "/Users/ameno/dev/acidbath2/trees/40d4951f/src/content/blog/claude-skills-deep-dive.md",
+          "line_number": 436,
+          "context": "### 2. Skill Versioning Issues",
+          "code_preview": "\"skill_id\": \"xlsx\",\n\"version\": \"latest\"  # Can change unexpectedly",
+          "category": "snippet"
+        },
+        {
+          "language": "python",
+          "line_count": 1,
+          "filepath": "/Users/ameno/dev/acidbath2/trees/40d4951f/src/content/blog/claude-skills-deep-dive.md",
+          "line_number": 448,
+          "context": "### 2. Skill Versioning Issues",
+          "code_preview": "\"version\": \"1.2.0\"  # Explicit version",
+          "category": "snippet"
+        },
+        {
+          "language": "python",
+          "line_count": 7,
+          "filepath": "/Users/ameno/dev/acidbath2/trees/40d4951f/src/content/blog/claude-skills-deep-dive.md",
+          "line_number": 472,
+          "context": "### 4. File Lifetime Limitations",
+          "code_preview": "# File is available for ~1 hour\nfile_id = response.content[1].file_id\nfile_content = client.files.co...",
+          "category": "snippet"
+        },
+        {
+          "language": "json",
+          "line_count": 11,
+          "filepath": "/Users/ameno/dev/acidbath2/trees/40d4951f/src/content/blog/claude-skills-deep-dive.md",
+          "line_number": 522,
+          "context": "### Step 2: Extract Core Instructions",
+          "code_preview": "{\n  \"name\": \"format_code\",\n  \"description\": \"Formats code using Prettier with custom rules\",\n  \"inpu...",
+          "category": "snippet"
+        },
+        {
+          "language": "markdown",
+          "line_count": 14,
+          "filepath": "/Users/ameno/dev/acidbath2/trees/40d4951f/src/content/blog/claude-skills-deep-dive.md",
+          "line_number": 538,
+          "context": "### Step 2: Extract Core Instructions",
+          "code_preview": "---\nname: code-formatter\ndescription: Formats code using Prettier with ACIDBATH style rules. Use for...",
+          "category": "snippet"
+        },
+        {
+          "language": "unknown",
+          "line_count": 1,
+          "filepath": "/Users/ameno/dev/acidbath2/trees/40d4951f/src/content/blog/claude-skills-deep-dive.md",
+          "line_number": 563,
+          "context": "## Configuration",
+          "code_preview": "## Execution",
+          "category": "snippet"
+        },
+        {
+          "language": "unknown",
+          "line_count": 1,
+          "filepath": "/Users/ameno/dev/acidbath2/trees/40d4951f/src/content/blog/claude-skills-deep-dive.md",
+          "line_number": 573,
+          "context": "# Format file",
+          "code_preview": "",
+          "category": "snippet"
+        },
+        {
+          "language": "python",
+          "line_count": 4,
+          "filepath": "/Users/ameno/dev/acidbath2/trees/40d4951f/src/content/blog/claude-skills-deep-dive.md",
+          "line_number": 590,
+          "context": "### Step 4: Monitor Token Usage",
+          "code_preview": "response = client.beta.messages.create(...)\n\nprint(f\"Input tokens: {response.usage.input_tokens}\")\np...",
+          "category": "snippet"
+        },
+        {
+          "language": "markdown",
+          "line_count": 8,
+          "filepath": "/Users/ameno/dev/acidbath2/trees/40d4951f/src/content/blog/claude-skills-deep-dive.md",
+          "line_number": 607,
+          "context": "### 1. Create Your First Skill",
+          "code_preview": "---\nname: your-workflow-name\ndescription: What this Skill does and when to use it. Include key trigg...",
+          "category": "snippet"
+        },
+        {
+          "language": "unknown",
+          "line_count": 4,
+          "filepath": "/Users/ameno/dev/acidbath2/trees/40d4951f/src/content/blog/claude-skills-deep-dive.md",
+          "line_number": 622,
+          "context": "### 2. Test Progressive Loading",
+          "code_preview": "your-workflow/\n\u251c\u2500\u2500 SKILL.md\n\u2514\u2500\u2500 reference/\n    \u2514\u2500\u2500 detailed_guide.md",
+          "category": "snippet"
+        },
+        {
+          "language": "markdown",
+          "line_count": 1,
+          "filepath": "/Users/ameno/dev/acidbath2/trees/40d4951f/src/content/blog/claude-skills-deep-dive.md",
+          "line_number": 631,
+          "context": "### 2. Test Progressive Loading",
+          "code_preview": "For detailed examples, see [reference/detailed_guide.md](reference/detailed_guide.md).",
+          "category": "snippet"
+        },
+        {
+          "language": "python",
+          "line_count": 6,
+          "filepath": "/Users/ameno/dev/acidbath2/trees/40d4951f/src/content/blog/claude-skills-deep-dive.md",
+          "line_number": 657,
+          "context": "## When to Combine Skills and MCP",
+          "code_preview": "# MCP server fetches data\ntools = [{\n    \"type\": \"mcp\",\n    \"server\": \"database\",\n    \"name\": \"query...",
+          "category": "snippet"
+        },
+        {
+          "language": "python",
+          "line_count": 6,
+          "filepath": "/Users/ameno/dev/acidbath2/trees/40d4951f/src/content/blog/claude-skills-deep-dive.md",
+          "line_number": 667,
+          "context": "# MCP server fetches data",
+          "code_preview": "container = {\n    \"skills\": [{\n        \"type\": \"anthropic\",\n        \"skill_id\": \"xlsx\"\n    }]\n}",
+          "category": "snippet"
+        }
+      ]
+    },
+    "context-engineering.md": {
+      "total_blocks": 14,
+      "blocks": [
+        {
+          "language": "mermaid",
+          "line_count": 6,
+          "filepath": "/Users/ameno/dev/acidbath2/trees/40d4951f/src/content/blog/context-engineering.md",
+          "line_number": 27,
+          "context": "## The Core Problem: Context is Precious",
+          "code_preview": "flowchart TD\n    A([Agent starts]) --> B[Load ALL tools<br/>from ALL MCPs]\n    B --> |10,000 tokens<...",
+          "category": "diagram"
+        },
+        {
+          "language": "mermaid",
+          "line_count": 8,
+          "filepath": "/Users/ameno/dev/acidbath2/trees/40d4951f/src/content/blog/context-engineering.md",
+          "line_number": 44,
+          "context": "## Pattern 1: Progressive Disclosure",
+          "code_preview": "flowchart TD\n    A([Agent starts]) --> B[Load PRIME only<br/>index of tools]\n    B --> |~500 tokens|...",
+          "category": "diagram"
+        },
+        {
+          "language": "markdown",
+          "line_count": 21,
+          "filepath": "/Users/ameno/dev/acidbath2/trees/40d4951f/src/content/blog/context-engineering.md",
+          "line_number": 62,
+          "context": "### Implementation: Tool Index + UV Scripts",
+          "code_preview": "# Available Tools\n\nYou have access to the following tool scripts. **Do not read script contents unle...",
+          "category": "medium_example"
+        },
+        {
+          "language": "python",
+          "line_count": 70,
+          "filepath": "/Users/ameno/dev/acidbath2/trees/40d4951f/src/content/blog/context-engineering.md",
+          "line_number": 91,
+          "context": "## When you need a tool:",
+          "code_preview": "#!/usr/bin/env -S uv run\n# /// script\n# dependencies = [\n#   \"requests>=2.31.0\",\n#   \"rich>=13.0.0\",...",
+          "category": "complete_example"
+        },
+        {
+          "language": "unknown",
+          "line_count": 12,
+          "filepath": "/Users/ameno/dev/acidbath2/trees/40d4951f/src/content/blog/context-engineering.md",
+          "line_number": 166,
+          "context": "### The Flow in Practice",
+          "code_preview": "User: \"What's the current price on election markets?\"\n\nAgent:\n1. Reads ~/tools/README.md (200 tokens...",
+          "category": "snippet"
+        },
+        {
+          "language": "mermaid",
+          "line_count": 35,
+          "filepath": "/Users/ameno/dev/acidbath2/trees/40d4951f/src/content/blog/context-engineering.md",
+          "line_number": 200,
+          "context": "### Why Text Search Fails",
+          "code_preview": "flowchart TD\n    TASK[\"Task: Rename UserService \u2192 UserManager\"]\n    TASK --> S1\n\n    subgraph S1[\"St...",
+          "category": "diagram"
+        },
+        {
+          "language": "mermaid",
+          "line_count": 27,
+          "filepath": "/Users/ameno/dev/acidbath2/trees/40d4951f/src/content/blog/context-engineering.md",
+          "line_number": 242,
+          "context": "### How Semantic Search Works",
+          "code_preview": "flowchart TD\n    TASK[\"Task: Rename UserService \u2192 UserManager\"]\n    TASK --> S1\n\n    subgraph S1[\"St...",
+          "category": "diagram"
+        },
+        {
+          "language": "bash",
+          "line_count": 9,
+          "filepath": "/Users/ameno/dev/acidbath2/trees/40d4951f/src/content/blog/context-engineering.md",
+          "line_number": 284,
+          "context": "### Setting Up Serena MCP",
+          "code_preview": "# Clone the repository\ngit clone https://github.com/oramasearch/serena.git\ncd serena\n\n# Install depe...",
+          "category": "snippet"
+        },
+        {
+          "language": "json",
+          "line_count": 11,
+          "filepath": "/Users/ameno/dev/acidbath2/trees/40d4951f/src/content/blog/context-engineering.md",
+          "line_number": 300,
+          "context": "# Build the project",
+          "code_preview": "{\n  \"mcpServers\": {\n    \"serena\": {\n      \"command\": \"node\",\n      \"args\": [\"/absolute/path/to/seren...",
+          "category": "snippet"
+        },
+        {
+          "language": "bash",
+          "line_count": 6,
+          "filepath": "/Users/ameno/dev/acidbath2/trees/40d4951f/src/content/blog/context-engineering.md",
+          "line_number": 328,
+          "context": "### Adding Language-Specific Refactoring",
+          "code_preview": "# Clone the repository\ngit clone https://github.com/JetBrains/refactor-mcp.git\ncd refactor-mcp\n\n# Bu...",
+          "category": "snippet"
+        },
+        {
+          "language": "json",
+          "line_count": 11,
+          "filepath": "/Users/ameno/dev/acidbath2/trees/40d4951f/src/content/blog/context-engineering.md",
+          "line_number": 339,
+          "context": "# Build",
+          "code_preview": "{\n  \"mcpServers\": {\n    \"refactor\": {\n      \"command\": \"dotnet\",\n      \"args\": [\"run\", \"--project\", ...",
+          "category": "snippet"
+        },
+        {
+          "language": "unknown",
+          "line_count": 13,
+          "filepath": "/Users/ameno/dev/acidbath2/trees/40d4951f/src/content/blog/context-engineering.md",
+          "line_number": 381,
+          "context": "### Workflow Comparison",
+          "code_preview": "User: \"Rename UserService to UserManager across the codebase\"\n\nAgent:\n1. grep -r \"UserService\" . \u2192 8...",
+          "category": "snippet"
+        },
+        {
+          "language": "unknown",
+          "line_count": 8,
+          "filepath": "/Users/ameno/dev/acidbath2/trees/40d4951f/src/content/blog/context-engineering.md",
+          "line_number": 399,
+          "context": "### Workflow Comparison",
+          "code_preview": "User: \"Rename UserService to UserManager across the codebase\"\n\nAgent:\n1. find_symbol(\"UserService\") ...",
+          "category": "snippet"
+        },
+        {
+          "language": "mermaid",
+          "line_count": 32,
+          "filepath": "/Users/ameno/dev/acidbath2/trees/40d4951f/src/content/blog/context-engineering.md",
+          "line_number": 459,
+          "context": "## Decision Framework: When to Use Which Pattern",
+          "code_preview": "flowchart LR\n    subgraph MCP[\"Standard MCP (80%)\"]\n        M1[External APIs]\n        M2[Vendor tool...",
+          "category": "diagram"
+        }
+      ]
+    },
+    "directory-watchers.md": {
+      "total_blocks": 26,
+      "blocks": [
+        {
+          "language": "mermaid",
+          "line_count": 24,
+          "filepath": "/Users/ameno/dev/acidbath2/trees/40d4951f/src/content/blog/directory-watchers.md",
+          "line_number": 27,
+          "context": "## The Architecture",
+          "code_preview": "flowchart TB\n    subgraph DROPS[\"~/drops/\"]\n        D1[\"transcribe/\"] --> W1[\"Whisper \u2192 text\"]\n     ...",
+          "category": "diagram"
+        },
+        {
+          "language": "yaml",
+          "line_count": 51,
+          "filepath": "/Users/ameno/dev/acidbath2/trees/40d4951f/src/content/blog/directory-watchers.md",
+          "line_number": 60,
+          "context": "### Step 1: Configuration File",
+          "code_preview": "# Drop Zone Configuration\n# Each zone watches a directory and triggers an agent on file events\n\noutp...",
+          "category": "complete_example"
+        },
+        {
+          "language": "python",
+          "line_count": 218,
+          "filepath": "/Users/ameno/dev/acidbath2/trees/40d4951f/src/content/blog/directory-watchers.md",
+          "line_number": 118,
+          "context": "### Step 2: The Core Watcher",
+          "code_preview": "#!/usr/bin/env -S uv run\n# /// script\n# dependencies = [\n#   \"watchdog>=4.0.0\",\n#   \"pyyaml>=6.0\",\n#...",
+          "category": "complete_example"
+        },
+        {
+          "language": "markdown",
+          "line_count": 29,
+          "filepath": "/Users/ameno/dev/acidbath2/trees/40d4951f/src/content/blog/directory-watchers.md",
+          "line_number": 343,
+          "context": "### Step 3: Agent Prompt Templates",
+          "code_preview": "# Document Analysis Agent\n\nAnalyze the following document and provide a structured summary.\n\n## Docu...",
+          "category": "medium_example"
+        },
+        {
+          "language": "markdown",
+          "line_count": 36,
+          "filepath": "/Users/ameno/dev/acidbath2/trees/40d4951f/src/content/blog/directory-watchers.md",
+          "line_number": 377,
+          "context": "### Confidence",
+          "code_preview": "# Data Analysis Agent\n\nAnalyze the following data file and provide insights.\n\n## Data Content\n\n{cont...",
+          "category": "medium_example"
+        },
+        {
+          "language": "python",
+          "line_count": 76,
+          "filepath": "/Users/ameno/dev/acidbath2/trees/40d4951f/src/content/blog/directory-watchers.md",
+          "line_number": 420,
+          "context": "### Step 4: Image Generation Agent",
+          "code_preview": "#!/usr/bin/env -S uv run\n# /// script\n# dependencies = [\n#   \"replicate>=0.25.0\",\n#   \"requests>=2.3...",
+          "category": "complete_example"
+        },
+        {
+          "language": "mermaid",
+          "line_count": 28,
+          "filepath": "/Users/ameno/dev/acidbath2/trees/40d4951f/src/content/blog/directory-watchers.md",
+          "line_number": 501,
+          "context": "## Data Flow: File Drop to Result",
+          "code_preview": "flowchart LR\n    subgraph Input\n        A[User drops file.txt]\n    end\n\n    subgraph Watcher\n       ...",
+          "category": "diagram"
+        },
+        {
+          "language": "python",
+          "line_count": 19,
+          "filepath": "/Users/ameno/dev/acidbath2/trees/40d4951f/src/content/blog/directory-watchers.md",
+          "line_number": 544,
+          "context": "### Files That Need Context",
+          "code_preview": "def gather_context(filepath: str) -> dict:\n    \"\"\"Gather related files for context.\"\"\"\n    context =...",
+          "category": "snippet"
+        },
+        {
+          "language": "yaml",
+          "line_count": 8,
+          "filepath": "/Users/ameno/dev/acidbath2/trees/40d4951f/src/content/blog/directory-watchers.md",
+          "line_number": 576,
+          "context": "### Multi-File Inputs",
+          "code_preview": "# In drops.yaml\nui_review:\n  directory: ~/drops/ui-review\n  patterns: [\"*.png\", \"*.jpg\"]\n  agent: ui...",
+          "category": "snippet"
+        },
+        {
+          "language": "python",
+          "line_count": 20,
+          "filepath": "/Users/ameno/dev/acidbath2/trees/40d4951f/src/content/blog/directory-watchers.md",
+          "line_number": 597,
+          "context": "### Race Conditions: Incomplete Writes",
+          "code_preview": "def wait_for_stable_file(filepath: str, timeout: int = 30) -> bool:\n    \"\"\"Wait until file size stop...",
+          "category": "snippet"
+        },
+        {
+          "language": "python",
+          "line_count": 18,
+          "filepath": "/Users/ameno/dev/acidbath2/trees/40d4951f/src/content/blog/directory-watchers.md",
+          "line_number": 630,
+          "context": "### Agent Failures Mid-Processing",
+          "code_preview": "def _process_file(self, filepath: str):\n    if not self._matches_pattern(filepath):\n        return\n\n...",
+          "category": "snippet"
+        },
+        {
+          "language": "python",
+          "line_count": 19,
+          "filepath": "/Users/ameno/dev/acidbath2/trees/40d4951f/src/content/blog/directory-watchers.md",
+          "line_number": 661,
+          "context": "### Token Limit Exceeded",
+          "code_preview": "def _check_size_limits(self, filepath: str) -> tuple[bool, str]:\n    \"\"\"Check if file is processable...",
+          "category": "snippet"
+        },
+        {
+          "language": "yaml",
+          "line_count": 6,
+          "filepath": "/Users/ameno/dev/acidbath2/trees/40d4951f/src/content/blog/directory-watchers.md",
+          "line_number": 693,
+          "context": "### Files Requiring Human Review",
+          "code_preview": "contracts:\n  directory: ~/drops/contracts\n  patterns: [\"*.pdf\"]\n  agent: contract_analyzer\n  approva...",
+          "category": "snippet"
+        },
+        {
+          "language": "python",
+          "line_count": 10,
+          "filepath": "/Users/ameno/dev/acidbath2/trees/40d4951f/src/content/blog/directory-watchers.md",
+          "line_number": 702,
+          "context": "### Files Requiring Human Review",
+          "code_preview": "def _process_file(self, filepath: str):\n    output_path = self._run_agent(filepath)\n\n    if self.zon...",
+          "category": "snippet"
+        },
+        {
+          "language": "python",
+          "line_count": 18,
+          "filepath": "/Users/ameno/dev/acidbath2/trees/40d4951f/src/content/blog/directory-watchers.md",
+          "line_number": 735,
+          "context": "### Monitoring and Alerting",
+          "code_preview": "import statsd  # Or your metrics library\n\nmetrics = statsd.StatsClient('localhost', 8125)\n\ndef _proc...",
+          "category": "snippet"
+        },
+        {
+          "language": "python",
+          "line_count": 31,
+          "filepath": "/Users/ameno/dev/acidbath2/trees/40d4951f/src/content/blog/directory-watchers.md",
+          "line_number": 768,
+          "context": "### Logging and Audit Trails",
+          "code_preview": "import json\nimport logging\n\nlogging.basicConfig(\n    filename=os.path.expanduser(\"~/logs/dropzone.lo...",
+          "category": "medium_example"
+        },
+        {
+          "language": "python",
+          "line_count": 10,
+          "filepath": "/Users/ameno/dev/acidbath2/trees/40d4951f/src/content/blog/directory-watchers.md",
+          "line_number": 810,
+          "context": "### Resource Limits",
+          "code_preview": "import resource\n\ndef _run_agent(self, filepath: str) -> str:\n    # Limit memory to 4GB\n    resource....",
+          "category": "snippet"
+        },
+        {
+          "language": "python",
+          "line_count": 27,
+          "filepath": "/Users/ameno/dev/acidbath2/trees/40d4951f/src/content/blog/directory-watchers.md",
+          "line_number": 827,
+          "context": "### Resource Limits",
+          "code_preview": "from time import time\nfrom collections import deque\n\nclass RateLimiter:\n    def __init__(self, max_r...",
+          "category": "medium_example"
+        },
+        {
+          "language": "python",
+          "line_count": 11,
+          "filepath": "/Users/ameno/dev/acidbath2/trees/40d4951f/src/content/blog/directory-watchers.md",
+          "line_number": 865,
+          "context": "### Graceful Degradation",
+          "code_preview": "def _run_claude_agent(self, filepath: str, output_dir: str) -> str:\n    try:\n        # Normal Claude...",
+          "category": "snippet"
+        },
+        {
+          "language": "python",
+          "line_count": 9,
+          "filepath": "/Users/ameno/dev/acidbath2/trees/40d4951f/src/content/blog/directory-watchers.md",
+          "line_number": 881,
+          "context": "### Graceful Degradation",
+          "code_preview": "def _check_disk_space(self) -> bool:\n    stat = os.statvfs(os.path.expanduser(\"~/output\"))\n    free_...",
+          "category": "snippet"
+        },
+        {
+          "language": "python",
+          "line_count": 15,
+          "filepath": "/Users/ameno/dev/acidbath2/trees/40d4951f/src/content/blog/directory-watchers.md",
+          "line_number": 901,
+          "context": "### Security: Validating File Contents",
+          "code_preview": "import magic  # python-magic library\n\ndef _validate_file(self, filepath: str) -> tuple[bool, str]:\n ...",
+          "category": "snippet"
+        },
+        {
+          "language": "python",
+          "line_count": 3,
+          "filepath": "/Users/ameno/dev/acidbath2/trees/40d4951f/src/content/blog/directory-watchers.md",
+          "line_number": 921,
+          "context": "### Security: Validating File Contents",
+          "code_preview": "def _sanitize_content(self, content: str) -> str:\n    # Remove potential injection attacks\n    conte...",
+          "category": "snippet"
+        },
+        {
+          "language": "unknown",
+          "line_count": 42,
+          "filepath": "/Users/ameno/dev/acidbath2/trees/40d4951f/src/content/blog/directory-watchers.md",
+          "line_number": 933,
+          "context": "### Security: Validating File Contents",
+          "code_preview": "Never execute code from dropped files directly. Treat all input as untrusted. Validate, sanitize, th...",
+          "category": "complete_example"
+        },
+        {
+          "language": "unknown",
+          "line_count": 1,
+          "filepath": "/Users/ameno/dev/acidbath2/trees/40d4951f/src/content/blog/directory-watchers.md",
+          "line_number": 998,
+          "context": "# In drops.yaml",
+          "code_preview": "### Code Review Zone",
+          "category": "snippet"
+        },
+        {
+          "language": "unknown",
+          "line_count": 1,
+          "filepath": "/Users/ameno/dev/acidbath2/trees/40d4951f/src/content/blog/directory-watchers.md",
+          "line_number": 1014,
+          "context": "### Code Review Zone",
+          "code_preview": "### Research Paper Zone",
+          "category": "snippet"
+        },
+        {
+          "language": "unknown",
+          "line_count": 1,
+          "filepath": "/Users/ameno/dev/acidbath2/trees/40d4951f/src/content/blog/directory-watchers.md",
+          "line_number": 1029,
+          "context": "### Research Paper Zone",
+          "code_preview": "## Running the System",
+          "category": "snippet"
+        }
+      ]
+    },
+    "document-generation-skills.md": {
+      "total_blocks": 19,
+      "blocks": [
+        {
+          "language": "mermaid",
+          "line_count": 12,
+          "filepath": "/Users/ameno/dev/acidbath2/trees/40d4951f/src/content/blog/document-generation-skills.md",
+          "line_number": 27,
+          "context": "## The Core Problem: Manual Documents Don't Scale",
+          "code_preview": "flowchart TD\n    A([Data arrives]) --> B[Analyst opens<br/>Excel template]\n    B --> |10 minutes| C[...",
+          "category": "diagram"
+        },
+        {
+          "language": "mermaid",
+          "line_count": 12,
+          "filepath": "/Users/ameno/dev/acidbath2/trees/40d4951f/src/content/blog/document-generation-skills.md",
+          "line_number": 46,
+          "context": "## The Pattern: Skills API Document Pipeline",
+          "code_preview": "flowchart TD\n    A([Data arrives]) --> B[\"Skills API Call<br/>'Generate Excel with this data'\"]\n    ...",
+          "category": "diagram"
+        },
+        {
+          "language": "python",
+          "line_count": 73,
+          "filepath": "/Users/ameno/dev/acidbath2/trees/40d4951f/src/content/blog/document-generation-skills.md",
+          "line_number": 71,
+          "context": "### Step 1: Setup and Configuration",
+          "code_preview": "#!/usr/bin/env -S uv run\n# /// script\n# dependencies = [\n#   \"anthropic>=0.69.0\",\n#   \"pandas>=2.0.0...",
+          "category": "complete_example"
+        },
+        {
+          "language": "python",
+          "line_count": 31,
+          "filepath": "/Users/ameno/dev/acidbath2/trees/40d4951f/src/content/blog/document-generation-skills.md",
+          "line_number": 149,
+          "context": "### Step 2: Excel Generation Function",
+          "code_preview": "def generate_excel(data: dict, output_dir: Path) -> dict:\n    \"\"\"\n    Generate Excel workbook with d...",
+          "category": "medium_example"
+        },
+        {
+          "language": "python",
+          "line_count": 43,
+          "filepath": "/Users/ameno/dev/acidbath2/trees/40d4951f/src/content/blog/document-generation-skills.md",
+          "line_number": 185,
+          "context": "### Step 3: PowerPoint Generation Function",
+          "code_preview": "def generate_powerpoint(data: dict, output_dir: Path) -> dict:\n    \"\"\"\n    Generate executive presen...",
+          "category": "complete_example"
+        },
+        {
+          "language": "python",
+          "line_count": 41,
+          "filepath": "/Users/ameno/dev/acidbath2/trees/40d4951f/src/content/blog/document-generation-skills.md",
+          "line_number": 233,
+          "context": "### Step 4: PDF Generation Function",
+          "code_preview": "def generate_pdf(data: dict, output_dir: Path) -> dict:\n    \"\"\"\n    Generate formal PDF documentatio...",
+          "category": "complete_example"
+        },
+        {
+          "language": "python",
+          "line_count": 58,
+          "filepath": "/Users/ameno/dev/acidbath2/trees/40d4951f/src/content/blog/document-generation-skills.md",
+          "line_number": 279,
+          "context": "### Step 5: Pipeline Orchestration",
+          "code_preview": "def run_pipeline(data_path: str, output_dir: str) -> dict:\n    \"\"\"\n    Run complete document generat...",
+          "category": "complete_example"
+        },
+        {
+          "language": "json",
+          "line_count": 27,
+          "filepath": "/Users/ameno/dev/acidbath2/trees/40d4951f/src/content/blog/document-generation-skills.md",
+          "line_number": 344,
+          "context": "### Step 6: Sample Data File",
+          "code_preview": "{\n  \"title\": \"Q4 2024 Business Review\",\n  \"date\": \"January 2025\",\n  \"executive_summary\": \"Q4 2024 sh...",
+          "category": "configuration"
+        },
+        {
+          "language": "bash",
+          "line_count": 1,
+          "filepath": "/Users/ameno/dev/acidbath2/trees/40d4951f/src/content/blog/document-generation-skills.md",
+          "line_number": 376,
+          "context": "### Step 6: Sample Data File",
+          "code_preview": "uv run document_pipeline.py --data sample_data.json --output ./reports",
+          "category": "snippet"
+        },
+        {
+          "language": "mermaid",
+          "line_count": 32,
+          "filepath": "/Users/ameno/dev/acidbath2/trees/40d4951f/src/content/blog/document-generation-skills.md",
+          "line_number": 404,
+          "context": "## When This Works: Ideal Use Cases",
+          "code_preview": "flowchart LR\n    subgraph R[\"Recurring Reports\"]\n        R1[\"Weekly, monthly, quarterly\"]\n        R2...",
+          "category": "diagram"
+        },
+        {
+          "language": "python",
+          "line_count": 7,
+          "filepath": "/Users/ameno/dev/acidbath2/trees/40d4951f/src/content/blog/document-generation-skills.md",
+          "line_number": 454,
+          "context": "### Document Complexity Limits",
+          "code_preview": "# Bad: One complex 10-sheet Excel\ngenerate_excel(full_data, \"complete_report.xlsx\")  # Fails at scal...",
+          "category": "snippet"
+        },
+        {
+          "language": "python",
+          "line_count": 8,
+          "filepath": "/Users/ameno/dev/acidbath2/trees/40d4951f/src/content/blog/document-generation-skills.md",
+          "line_number": 469,
+          "context": "### Data Format Sensitivity",
+          "code_preview": "# Works\ndata = {\"revenue\": 14500000, \"growth\": 17.9}\n\n# Fails (missing field)\ndata = {\"revenue\": 145...",
+          "category": "snippet"
+        },
+        {
+          "language": "python",
+          "line_count": 4,
+          "filepath": "/Users/ameno/dev/acidbath2/trees/40d4951f/src/content/blog/document-generation-skills.md",
+          "line_number": 482,
+          "context": "# Fails (wrong type)",
+          "code_preview": "def validate_data(data: dict) -> bool:\n    required_fields = [\"revenue\", \"growth\", \"net_income\"]\n   ...",
+          "category": "snippet"
+        },
+        {
+          "language": "python",
+          "line_count": 14,
+          "filepath": "/Users/ameno/dev/acidbath2/trees/40d4951f/src/content/blog/document-generation-skills.md",
+          "line_number": 498,
+          "context": "### Rate Limits and Timeouts",
+          "code_preview": "import time\nfrom tenacity import retry, stop_after_attempt, wait_exponential\n\n@retry(stop=stop_after...",
+          "category": "snippet"
+        },
+        {
+          "language": "unknown",
+          "line_count": 2,
+          "filepath": "/Users/ameno/dev/acidbath2/trees/40d4951f/src/content/blog/document-generation-skills.md",
+          "line_number": 520,
+          "context": "### Numeric Precision",
+          "code_preview": "Expected: $14,500,000.00\nGenerated: $14,499,999.99",
+          "category": "snippet"
+        },
+        {
+          "language": "python",
+          "line_count": 6,
+          "filepath": "/Users/ameno/dev/acidbath2/trees/40d4951f/src/content/blog/document-generation-skills.md",
+          "line_number": 527,
+          "context": "### Numeric Precision",
+          "code_preview": "prompt = \"\"\"\nFormat all currency values:\n- Use exactly 2 decimal places\n- Round to nearest cent usin...",
+          "category": "snippet"
+        },
+        {
+          "language": "python",
+          "line_count": 8,
+          "filepath": "/Users/ameno/dev/acidbath2/trees/40d4951f/src/content/blog/document-generation-skills.md",
+          "line_number": 546,
+          "context": "### No Persistent State",
+          "code_preview": "# Good: Same canonical data\ndata = {\"revenue\": 14500000}\ngenerate_excel(data, ...)\ngenerate_powerpoi...",
+          "category": "snippet"
+        },
+        {
+          "language": "python",
+          "line_count": 19,
+          "filepath": "/Users/ameno/dev/acidbath2/trees/40d4951f/src/content/blog/document-generation-skills.md",
+          "line_number": 563,
+          "context": "### Pipeline Fragility",
+          "code_preview": "def resilient_pipeline(data: dict) -> dict:\n    results = {\"excel\": None, \"powerpoint\": None, \"pdf\":...",
+          "category": "snippet"
+        },
+        {
+          "language": "markdown",
+          "line_count": 37,
+          "filepath": "/Users/ameno/dev/acidbath2/trees/40d4951f/src/content/blog/document-generation-skills.md",
+          "line_number": 615,
+          "context": "## Agent Opportunity: Document Generation Agent",
+          "code_preview": "---\nname: document-generator\ndescription: Generate multi-format business documents from structured d...",
+          "category": "medium_example"
+        }
+      ]
+    },
+    "single-file-scripts.md": {
+      "total_blocks": 18,
+      "blocks": [
+        {
+          "language": "typescript",
+          "line_count": 23,
+          "filepath": "/Users/ameno/dev/acidbath2/trees/40d4951f/src/content/blog/single-file-scripts.md",
+          "line_number": 52,
+          "context": "### 1. Dual-Mode Execution in One File",
+          "code_preview": "#!/usr/bin/env bun\n/**\n * CLI Usage:\n *   bun dolph.ts --task test-connection\n *   bun dolph.ts --ch...",
+          "category": "medium_example"
+        },
+        {
+          "language": "typescript",
+          "line_count": 24,
+          "filepath": "/Users/ameno/dev/acidbath2/trees/40d4951f/src/content/blog/single-file-scripts.md",
+          "line_number": 82,
+          "context": "### 2. Type-Safe Without Separate Type Files",
+          "code_preview": "// Types defined inline with Zod schemas\nconst listTablesTool = tool({\n  name: \"list_tables\",\n  desc...",
+          "category": "medium_example"
+        },
+        {
+          "language": "typescript",
+          "line_count": 22,
+          "filepath": "/Users/ameno/dev/acidbath2/trees/40d4951f/src/content/blog/single-file-scripts.md",
+          "line_number": 113,
+          "context": "### 3. Dual-Gate Security Pattern",
+          "code_preview": "const WRITE_PATTERNS = /^(INSERT|UPDATE|DELETE|DROP|CREATE|ALTER|TRUNCATE|REPLACE)/i;\n\nasync functio...",
+          "category": "medium_example"
+        },
+        {
+          "language": "typescript",
+          "line_count": 20,
+          "filepath": "/Users/ameno/dev/acidbath2/trees/40d4951f/src/content/blog/single-file-scripts.md",
+          "line_number": 142,
+          "context": "### 4. Built-In Performance Reporting",
+          "code_preview": "class TerminalReporter {\n  private toolStartTimes = new Map<string, number>();\n\n  onToolStart(toolCa...",
+          "category": "snippet"
+        },
+        {
+          "language": "typescript",
+          "line_count": 15,
+          "filepath": "/Users/ameno/dev/acidbath2/trees/40d4951f/src/content/blog/single-file-scripts.md",
+          "line_number": 188,
+          "context": "### Argument Parsing",
+          "code_preview": "import { parseArgs } from \"util\";\n\nconst { values, positionals } = parseArgs({\n  args: Bun.argv.slic...",
+          "category": "snippet"
+        },
+        {
+          "language": "python",
+          "line_count": 17,
+          "filepath": "/Users/ameno/dev/acidbath2/trees/40d4951f/src/content/blog/single-file-scripts.md",
+          "line_number": 207,
+          "context": "### Argument Parsing",
+          "code_preview": "#!/usr/bin/env -S uv run --script\n# /// script\n# dependencies = [\"click\"]\n# ///\n\nimport click\n\n@clic...",
+          "category": "snippet"
+        },
+        {
+          "language": "typescript",
+          "line_count": 6,
+          "filepath": "/Users/ameno/dev/acidbath2/trees/40d4951f/src/content/blog/single-file-scripts.md",
+          "line_number": 230,
+          "context": "### Environment Variables",
+          "code_preview": "// .env file auto-loaded by Bun\nconst dbUrl = Bun.env.DATABASE_URL || \"mysql://localhost:3306/db\";\nc...",
+          "category": "snippet"
+        },
+        {
+          "language": "python",
+          "line_count": 11,
+          "filepath": "/Users/ameno/dev/acidbath2/trees/40d4951f/src/content/blog/single-file-scripts.md",
+          "line_number": 240,
+          "context": "### Environment Variables",
+          "code_preview": "#!/usr/bin/env -S uv run --script\n# /// script\n# dependencies = [\"python-dotenv\"]\n# ///\n\nimport os\nf...",
+          "category": "snippet"
+        },
+        {
+          "language": "typescript",
+          "line_count": 14,
+          "filepath": "/Users/ameno/dev/acidbath2/trees/40d4951f/src/content/blog/single-file-scripts.md",
+          "line_number": 257,
+          "context": "### Database Connections",
+          "code_preview": "import mysql from \"mysql2/promise\";\n\n// Package.json dependencies\n// { \"dependencies\": { \"mysql2\": \"...",
+          "category": "snippet"
+        },
+        {
+          "language": "python",
+          "line_count": 19,
+          "filepath": "/Users/ameno/dev/acidbath2/trees/40d4951f/src/content/blog/single-file-scripts.md",
+          "line_number": 275,
+          "context": "### Database Connections",
+          "code_preview": "#!/usr/bin/env -S uv run --script\n# /// script\n# dependencies = [\"mysql-connector-python\"]\n# ///\n\nim...",
+          "category": "snippet"
+        },
+        {
+          "language": "typescript",
+          "line_count": 5,
+          "filepath": "/Users/ameno/dev/acidbath2/trees/40d4951f/src/content/blog/single-file-scripts.md",
+          "line_number": 300,
+          "context": "### HTTP Requests",
+          "code_preview": "// No dependencies needed - fetch is built-in\nconst response = await fetch(\"https://api.example.com/...",
+          "category": "snippet"
+        },
+        {
+          "language": "python",
+          "line_count": 13,
+          "filepath": "/Users/ameno/dev/acidbath2/trees/40d4951f/src/content/blog/single-file-scripts.md",
+          "line_number": 309,
+          "context": "### HTTP Requests",
+          "code_preview": "#!/usr/bin/env -S uv run --script\n# /// script\n# dependencies = [\"requests\"]\n# ///\n\nimport requests\n...",
+          "category": "snippet"
+        },
+        {
+          "language": "typescript",
+          "line_count": 59,
+          "filepath": "/Users/ameno/dev/acidbath2/trees/40d4951f/src/content/blog/single-file-scripts.md",
+          "line_number": 329,
+          "context": "## Complete Working Example: Database Agent",
+          "code_preview": "#!/usr/bin/env bun\n/**\n * Usage:\n *   bun db-agent.ts --query \"SELECT * FROM users\"\n *   import { qu...",
+          "category": "complete_example"
+        },
+        {
+          "language": "json",
+          "line_count": 5,
+          "filepath": "/Users/ameno/dev/acidbath2/trees/40d4951f/src/content/blog/single-file-scripts.md",
+          "line_number": 393,
+          "context": "No context",
+          "code_preview": "{\n  \"dependencies\": {\n    \"mysql2\": \"^3.6.5\"\n  }\n}",
+          "category": "snippet"
+        },
+        {
+          "language": "bash",
+          "line_count": 2,
+          "filepath": "/Users/ameno/dev/acidbath2/trees/40d4951f/src/content/blog/single-file-scripts.md",
+          "line_number": 402,
+          "context": "No context",
+          "code_preview": "bun install\nbun db-agent.ts --query \"SELECT VERSION()\"",
+          "category": "snippet"
+        },
+        {
+          "language": "typescript",
+          "line_count": 5,
+          "filepath": "/Users/ameno/dev/acidbath2/trees/40d4951f/src/content/blog/single-file-scripts.md",
+          "line_number": 408,
+          "context": "No context",
+          "code_preview": "import { query, close } from \"./db-agent.ts\";\n\nconst users = await query(\"SELECT * FROM users LIMIT ...",
+          "category": "snippet"
+        },
+        {
+          "language": "bash",
+          "line_count": 8,
+          "filepath": "/Users/ameno/dev/acidbath2/trees/40d4951f/src/content/blog/single-file-scripts.md",
+          "line_number": 420,
+          "context": "## Compiling Bun Scripts to Binaries",
+          "code_preview": "# Basic compilation\nbun build --compile ./dolph.ts --outfile dolph\n\n# Optimized for production (2-4x...",
+          "category": "snippet"
+        },
+        {
+          "language": "python",
+          "line_count": 12,
+          "filepath": "/Users/ameno/dev/acidbath2/trees/40d4951f/src/content/blog/single-file-scripts.md",
+          "line_number": 455,
+          "context": "## Progressive Disclosure: Inline Dependencies as Context",
+          "code_preview": "#!/usr/bin/env -S uv run --script\n# /// script\n# dependencies = [\n#   \"openai>=1.0.0\",\n#   \"mysql-co...",
+          "category": "snippet"
+        }
+      ]
+    },
+    "workflow-prompts.md": {
+      "total_blocks": 8,
+      "blocks": [
+        {
+          "language": "mermaid",
+          "line_count": 24,
+          "filepath": "/Users/ameno/dev/acidbath2/trees/40d4951f/src/content/blog/workflow-prompts.md",
+          "line_number": 29,
+          "context": "## The Core Pattern: Input \u2192 Workflow \u2192 Output",
+          "code_preview": "flowchart LR\n    subgraph INPUT[\"INPUT\"]\n        I1[Variables]\n        I2[Parameters]\n        I3[Con...",
+          "category": "diagram"
+        },
+        {
+          "language": "markdown",
+          "line_count": 59,
+          "filepath": "/Users/ameno/dev/acidbath2/trees/40d4951f/src/content/blog/workflow-prompts.md",
+          "line_number": 62,
+          "context": "## POC: A Working Workflow Prompt",
+          "code_preview": "---\ndescription: Analyze a file and create implementation plan\nallowed-tools: Read, Glob, Grep, Writ...",
+          "category": "complete_example"
+        },
+        {
+          "language": "markdown",
+          "line_count": 7,
+          "filepath": "/Users/ameno/dev/acidbath2/trees/40d4951f/src/content/blog/workflow-prompts.md",
+          "line_number": 132,
+          "context": "## The Workflow Section Deep Dive",
+          "code_preview": "## Workflow\n\n1. Read the config file\n2. Parse the JSON structure\n3. Validate required fields exist\n4...",
+          "category": "snippet"
+        },
+        {
+          "language": "markdown",
+          "line_count": 12,
+          "filepath": "/Users/ameno/dev/acidbath2/trees/40d4951f/src/content/blog/workflow-prompts.md",
+          "line_number": 144,
+          "context": "## Workflow",
+          "code_preview": "## Workflow\n\n1. **Gather requirements**\n   - Read the user's request carefully\n   - Identify explici...",
+          "category": "snippet"
+        },
+        {
+          "language": "markdown",
+          "line_count": 9,
+          "filepath": "/Users/ameno/dev/acidbath2/trees/40d4951f/src/content/blog/workflow-prompts.md",
+          "line_number": 161,
+          "context": "## Workflow",
+          "code_preview": "## Workflow\n\n1. Check if package.json exists\n2. **If exists:**\n   - Parse dependencies\n   - Check fo...",
+          "category": "snippet"
+        },
+        {
+          "language": "unknown",
+          "line_count": 1,
+          "filepath": "/Users/ameno/dev/acidbath2/trees/40d4951f/src/content/blog/workflow-prompts.md",
+          "line_number": 223,
+          "context": "## Measuring Workflow ROI",
+          "code_preview": "Break-even uses = (Time to write prompt) / (Time saved per use)",
+          "category": "snippet"
+        },
+        {
+          "language": "mermaid",
+          "line_count": 15,
+          "filepath": "/Users/ameno/dev/acidbath2/trees/40d4951f/src/content/blog/workflow-prompts.md",
+          "line_number": 272,
+          "context": "## Agent Opportunity: Build a Prompt Library",
+          "code_preview": "flowchart TD\n    subgraph LIB[\".claude/commands/\"]\n        A[\"analyze.md - File analysis\"]\n        B...",
+          "category": "diagram"
+        },
+        {
+          "language": "mermaid",
+          "line_count": 27,
+          "filepath": "/Users/ameno/dev/acidbath2/trees/40d4951f/src/content/blog/workflow-prompts.md",
+          "line_number": 292,
+          "context": "## Why Workflows Beat Ad-Hoc Prompting",
+          "code_preview": "flowchart LR\n    subgraph ADHOC[\"AD-HOC PROMPTING\"]\n        A1[\"'Help me refactor this'\"]\n        A2...",
+          "category": "diagram"
+        }
+      ]
+    }
+  },
+  "language_stats": {
+    "mermaid": 19,
+    "python": 44,
+    "bash": 8,
+    "markdown": 23,
+    "unknown": 20,
+    "yaml": 7,
+    "html": 1,
+    "css": 1,
+    "json": 5,
+    "typescript": 10
+  },
+  "category_stats": {
+    "diagram": 19,
+    "complete_example": 14,
+    "snippet": 89,
+    "medium_example": 15,
+    "configuration": 1
+  },
+  "size_distribution": {
+    "1-10": 65,
+    "11-20": 32,
+    "21-40": 27,
+    "41-100": 12,
+    "100+": 2
+  },
+  "all_blocks": [
+    {
+      "language": "mermaid",
+      "line_count": 15,
+      "filepath": "/Users/ameno/dev/acidbath2/trees/40d4951f/src/content/blog/agent-architecture.md",
+      "line_number": 27,
+      "context": "## Why Custom Agents Matter",
+      "code_preview": "flowchart LR\n    subgraph DEFAULT[\"Default Claude Code\"]\n        A[\"You are a helpful AI assistant.....",
+      "category": "diagram"
+    },
+    {
+      "language": "python",
+      "line_count": 41,
+      "filepath": "/Users/ameno/dev/acidbath2/trees/40d4951f/src/content/blog/agent-architecture.md",
+      "line_number": 51,
+      "context": "## POC 1: The Simplest Custom Agent",
+      "code_preview": "#!/usr/bin/env -S uv run\n# /// script\n# dependencies = [\n#   \"anthropic>=0.40.0\",\n# ]\n# ///\n\"\"\"\nSimp...",
+      "category": "complete_example"
+    },
+    {
+      "language": "bash",
+      "line_count": 8,
+      "filepath": "/Users/ameno/dev/acidbath2/trees/40d4951f/src/content/blog/agent-architecture.md",
+      "line_number": 96,
+      "context": "# ///",
+      "code_preview": "$ uv run pong_agent.py \"hello\"\npong\n\n$ uv run pong_agent.py \"what is the meaning of life?\"\npong\n\n$ u...",
+      "category": "snippet"
+    },
+    {
+      "language": "python",
+      "line_count": 132,
+      "filepath": "/Users/ameno/dev/acidbath2/trees/40d4951f/src/content/blog/agent-architecture.md",
+      "line_number": 113,
+      "context": "## POC 2: Agent with Custom Tools",
+      "code_preview": "#!/usr/bin/env -S uv run\n# /// script\n# dependencies = [\n#   \"anthropic>=0.40.0\",\n# ]\n# ///\n\"\"\"\nCalc...",
+      "category": "complete_example"
+    },
+    {
+      "language": "bash",
+      "line_count": 5,
+      "filepath": "/Users/ameno/dev/acidbath2/trees/40d4951f/src/content/blog/agent-architecture.md",
+      "line_number": 249,
+      "context": "No context",
+      "code_preview": "$ uv run calculator_agent.py \"what is 15% of 847?\"\n15% of 847 is 127.05\n\n$ uv run calculator_agent.p...",
+      "category": "snippet"
+    },
+    {
+      "language": "mermaid",
+      "line_count": 14,
+      "filepath": "/Users/ameno/dev/acidbath2/trees/40d4951f/src/content/blog/agent-architecture.md",
+      "line_number": 263,
+      "context": "## The Key Pattern: Sub-Agents as Researchers",
+      "code_preview": "sequenceDiagram\n    participant P as Parent Agent\n    participant S as Sub-Agent (isolated)\n\n    P->...",
+      "category": "diagram"
+    },
+    {
+      "language": "mermaid",
+      "line_count": 19,
+      "filepath": "/Users/ameno/dev/acidbath2/trees/40d4951f/src/content/blog/agent-architecture.md",
+      "line_number": 284,
+      "context": "## File-Based Context: The Solution",
+      "code_preview": "sequenceDiagram\n    participant P as Parent Agent\n    participant F as File System\n    participant S...",
+      "category": "diagram"
+    },
+    {
+      "language": "markdown",
+      "line_count": 28,
+      "filepath": "/Users/ameno/dev/acidbath2/trees/40d4951f/src/content/blog/agent-architecture.md",
+      "line_number": 321,
+      "context": "### Step 1: Context File Template",
+      "code_preview": "# Project Context\n\n## Current State\n<!-- What exists now, what's working, what's not -->\n\n## Researc...",
+      "category": "medium_example"
+    },
+    {
+      "language": "markdown",
+      "line_count": 49,
+      "filepath": "/Users/ameno/dev/acidbath2/trees/40d4951f/src/content/blog/agent-architecture.md",
+      "line_number": 356,
+      "context": "### Step 2: Research Agent Definition",
+      "code_preview": "---\nname: researcher\ndescription: Research sub-agent that gathers information and creates implementa...",
+      "category": "complete_example"
+    },
+    {
+      "language": "mermaid",
+      "line_count": 26,
+      "filepath": "/Users/ameno/dev/acidbath2/trees/40d4951f/src/content/blog/agent-architecture.md",
+      "line_number": 410,
+      "context": "### Step 3: Implementation Flow",
+      "code_preview": "sequenceDiagram\n    participant U as User\n    participant P as Parent Agent\n    participant F as Fil...",
+      "category": "diagram"
+    },
+    {
+      "language": "markdown",
+      "line_count": 3,
+      "filepath": "/Users/ameno/dev/acidbath2/trees/40d4951f/src/content/blog/agent-architecture.md",
+      "line_number": 443,
+      "context": "### Step 4: Putting It Together",
+      "code_preview": "## When you need to research something complex:\n\n1. Create context file:",
+      "category": "snippet"
+    },
+    {
+      "language": "unknown",
+      "line_count": 1,
+      "filepath": "/Users/ameno/dev/acidbath2/trees/40d4951f/src/content/blog/agent-architecture.md",
+      "line_number": 453,
+      "context": "## When you need to research something complex:",
+      "code_preview": "2. Spawn research sub-agent:",
+      "category": "snippet"
+    },
+    {
+      "language": "unknown",
+      "line_count": 1,
+      "filepath": "/Users/ameno/dev/acidbath2/trees/40d4951f/src/content/blog/agent-architecture.md",
+      "line_number": 461,
+      "context": "## When you need to research something complex:",
+      "code_preview": "3. Wait for completion, then:",
+      "category": "snippet"
+    },
+    {
+      "language": "unknown",
+      "line_count": 3,
+      "filepath": "/Users/ameno/dev/acidbath2/trees/40d4951f/src/content/blog/agent-architecture.md",
+      "line_number": 466,
+      "context": "## When you need to research something complex:",
+      "code_preview": "4. Implement based on research report\n\n5. Clean up temp files when done",
+      "category": "snippet"
+    },
+    {
+      "language": "markdown",
+      "line_count": 24,
+      "filepath": "/Users/ameno/dev/acidbath2/trees/40d4951f/src/content/blog/agent-architecture.md",
+      "line_number": 481,
+      "context": "### Stripe Research Agent",
+      "code_preview": "---\nname: stripe-researcher\ndescription: Research Stripe integration patterns and best practices\ntoo...",
+      "category": "medium_example"
+    },
+    {
+      "language": "unknown",
+      "line_count": 1,
+      "filepath": "/Users/ameno/dev/acidbath2/trees/40d4951f/src/content/blog/agent-architecture.md",
+      "line_number": 525,
+      "context": "## Output Format",
+      "code_preview": "",
+      "category": "snippet"
+    },
+    {
+      "language": "markdown",
+      "line_count": 23,
+      "filepath": "/Users/ameno/dev/acidbath2/trees/40d4951f/src/content/blog/agent-architecture.md",
+      "line_number": 532,
+      "context": "### Supabase Research Agent",
+      "code_preview": "---\nname: supabase-researcher\ndescription: Research Supabase database patterns and RLS policies\ntool...",
+      "category": "medium_example"
+    },
+    {
+      "language": "unknown",
+      "line_count": 2,
+      "filepath": "/Users/ameno/dev/acidbath2/trees/40d4951f/src/content/blog/agent-architecture.md",
+      "line_number": 569,
+      "context": "### 1. Context Isolation Still Exists",
+      "code_preview": "Parent: \"Add error handling like we did for auth\"\nResearcher: ??? (doesn't know how auth error handl...",
+      "category": "snippet"
+    },
+    {
+      "language": "markdown",
+      "line_count": 4,
+      "filepath": "/Users/ameno/dev/acidbath2/trees/40d4951f/src/content/blog/agent-architecture.md",
+      "line_number": 575,
+      "context": "### 1. Context Isolation Still Exists",
+      "code_preview": "# context.md\n## Error Handling Pattern\nSee src/auth/handler.ts lines 45-67 for our standard error ha...",
+      "category": "snippet"
+    },
+    {
+      "language": "yaml",
+      "line_count": 3,
+      "filepath": "/Users/ameno/dev/acidbath2/trees/40d4951f/src/content/blog/agent-architecture.md",
+      "line_number": 589,
+      "context": "### 2. Research Can Be Wrong",
+      "code_preview": "recommendation:\n  approach: \"Use Stripe Charges API\"\n  confidence: high",
+      "category": "snippet"
+    },
+    {
+      "language": "bash",
+      "line_count": 6,
+      "filepath": "/Users/ameno/dev/acidbath2/trees/40d4951f/src/content/blog/agent-architecture.md",
+      "line_number": 621,
+      "context": "### 4. File Coordination Complexity",
+      "code_preview": "# Good\ntmp/context-stripe-1703012400.md\ntmp/research-stripe-1703012400.md\n\n# Bad\ntmp/context.md  # W...",
+      "category": "snippet"
+    },
+    {
+      "language": "markdown",
+      "line_count": 2,
+      "filepath": "/Users/ameno/dev/acidbath2/trees/40d4951f/src/content/blog/agent-architecture.md",
+      "line_number": 649,
+      "context": "### 6. Cost on Failed Research",
+      "code_preview": "## Research Needed\n1. How to add payments",
+      "category": "snippet"
+    },
+    {
+      "language": "markdown",
+      "line_count": 6,
+      "filepath": "/Users/ameno/dev/acidbath2/trees/40d4951f/src/content/blog/agent-architecture.md",
+      "line_number": 655,
+      "context": "## Research Needed",
+      "code_preview": "## Research Needed\n1. Which Stripe API version should we use? (prefer latest stable)\n2. Payment Inte...",
+      "category": "snippet"
+    },
+    {
+      "language": "mermaid",
+      "line_count": 26,
+      "filepath": "/Users/ameno/dev/acidbath2/trees/40d4951f/src/content/blog/agent-architecture.md",
+      "line_number": 694,
+      "context": "## Architecture: Custom Agent Stack",
+      "code_preview": "flowchart TB\n    subgraph \"Custom Agent\"\n        SP[System Prompt]\n        UP[User Prompt]\n        T...",
+      "category": "diagram"
+    },
+    {
+      "language": "mermaid",
+      "line_count": 24,
+      "filepath": "/Users/ameno/dev/acidbath2/trees/40d4951f/src/content/blog/agent-architecture.md",
+      "line_number": 745,
+      "context": "## The Data Flow",
+      "code_preview": "flowchart TB\n    subgraph Parent[\"PARENT AGENT\"]\n        CH[Conversation History<br/>compacts over t...",
+      "category": "diagram"
+    },
+    {
+      "language": "markdown",
+      "line_count": 21,
+      "filepath": "/Users/ameno/dev/acidbath2/trees/40d4951f/src/content/blog/agent-architecture.md",
+      "line_number": 778,
+      "context": "## Rules That Prevent Disasters",
+      "code_preview": "## Mandatory Rules\n\n1. **Always read context file first**\n   - Never start work without understandin...",
+      "category": "medium_example"
+    },
+    {
+      "language": "yaml",
+      "line_count": 4,
+      "filepath": "/Users/ameno/dev/acidbath2/trees/40d4951f/src/content/blog/claude-skills-deep-dive.md",
+      "line_number": 49,
+      "context": "### Tier 1: Metadata (Loaded at Startup)",
+      "code_preview": "---\nname: pdf-processing\ndescription: Extracts text and tables from PDF files, fills forms, and merg...",
+      "category": "snippet"
+    },
+    {
+      "language": "unknown",
+      "line_count": 9,
+      "filepath": "/Users/ameno/dev/acidbath2/trees/40d4951f/src/content/blog/claude-skills-deep-dive.md",
+      "line_number": 74,
+      "context": "### Tier 3: Reference Files (Loaded on Demand)",
+      "code_preview": "pdf-processing/\n\u251c\u2500\u2500 SKILL.md                    # Main instructions\n\u251c\u2500\u2500 scripts/\n\u2502   \u251c\u2500\u2500 extract_tex...",
+      "category": "snippet"
+    },
+    {
+      "language": "markdown",
+      "line_count": 32,
+      "filepath": "/Users/ameno/dev/acidbath2/trees/40d4951f/src/content/blog/claude-skills-deep-dive.md",
+      "line_number": 92,
+      "context": "## Working Example: Document Generation Skill",
+      "code_preview": "---\nname: document-generator\ndescription: Creates professional Excel spreadsheets, PowerPoint presen...",
+      "category": "medium_example"
+    },
+    {
+      "language": "unknown",
+      "line_count": 1,
+      "filepath": "/Users/ameno/dev/acidbath2/trees/40d4951f/src/content/blog/claude-skills-deep-dive.md",
+      "line_number": 173,
+      "context": "# Download generated file",
+      "code_preview": "",
+      "category": "snippet"
+    },
+    {
+      "language": "yaml",
+      "line_count": 2,
+      "filepath": "/Users/ameno/dev/acidbath2/trees/40d4951f/src/content/blog/claude-skills-deep-dive.md",
+      "line_number": 218,
+      "context": "### Skill Frontmatter (Tier 1 Metadata)",
+      "code_preview": "name: frontend-aesthetics\ndescription: Creates distinctive, creative frontend designs with intention...",
+      "category": "snippet"
+    },
+    {
+      "language": "html",
+      "line_count": 1,
+      "filepath": "/Users/ameno/dev/acidbath2/trees/40d4951f/src/content/blog/claude-skills-deep-dive.md",
+      "line_number": 254,
+      "context": "### Skill Instructions (Tier 2 Content)",
+      "code_preview": "<link href=\"https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;700&display=swap\" rel=\"s...",
+      "category": "snippet"
+    },
+    {
+      "language": "css",
+      "line_count": 5,
+      "filepath": "/Users/ameno/dev/acidbath2/trees/40d4951f/src/content/blog/claude-skills-deep-dive.md",
+      "line_number": 258,
+      "context": "### Skill Instructions (Tier 2 Content)",
+      "code_preview": ":root {\n  --color-primary: #your-choice;\n  --color-secondary: #your-choice;\n  --font-display: 'Space...",
+      "category": "snippet"
+    },
+    {
+      "language": "python",
+      "line_count": 18,
+      "filepath": "/Users/ameno/dev/acidbath2/trees/40d4951f/src/content/blog/claude-skills-deep-dive.md",
+      "line_number": 270,
+      "context": "### Usage",
+      "code_preview": "from anthropic import Anthropic\n\nclient = Anthropic(api_key=API_KEY)\n\nresponse = client.beta.message...",
+      "category": "snippet"
+    },
+    {
+      "language": "yaml",
+      "line_count": 4,
+      "filepath": "/Users/ameno/dev/acidbath2/trees/40d4951f/src/content/blog/claude-skills-deep-dive.md",
+      "line_number": 299,
+      "context": "### 1. Metadata Design (Tier 1)",
+      "code_preview": "---\nname: your-skill-name              # Max 64 chars, lowercase, hyphens only\ndescription: Third-pe...",
+      "category": "snippet"
+    },
+    {
+      "language": "markdown",
+      "line_count": 9,
+      "filepath": "/Users/ameno/dev/acidbath2/trees/40d4951f/src/content/blog/claude-skills-deep-dive.md",
+      "line_number": 316,
+      "context": "### 2. Progressive Disclosure (Tier 2 to Tier 3)",
+      "code_preview": "# Main Skill Instructions\n\n[Core workflow and examples here]\n\n## Additional Resources\n\nFor detailed ...",
+      "category": "snippet"
+    },
+    {
+      "language": "markdown",
+      "line_count": 8,
+      "filepath": "/Users/ameno/dev/acidbath2/trees/40d4951f/src/content/blog/claude-skills-deep-dive.md",
+      "line_number": 334,
+      "context": "### 3. Workflow Patterns",
+      "code_preview": "## Workflow: Multi-step Document Processing\n\n1. **Validate Input**\n   - Check file exists\n   - Verif...",
+      "category": "snippet"
+    },
+    {
+      "language": "unknown",
+      "line_count": 9,
+      "filepath": "/Users/ameno/dev/acidbath2/trees/40d4951f/src/content/blog/claude-skills-deep-dive.md",
+      "line_number": 348,
+      "context": "## Workflow: Multi-step Document Processing",
+      "code_preview": "3. **Process Data**\n   - Parse extracted text\n   - Identify form fields\n   - Validate data structure...",
+      "category": "snippet"
+    },
+    {
+      "language": "python",
+      "line_count": 20,
+      "filepath": "/Users/ameno/dev/acidbath2/trees/40d4951f/src/content/blog/claude-skills-deep-dive.md",
+      "line_number": 367,
+      "context": "### 4. Utility Scripts (Part of Tier 3)",
+      "code_preview": "# scripts/extract_text.py\n\nimport sys\nimport pdfplumber\n\ndef extract_text(pdf_path):\n    \"\"\"Extract ...",
+      "category": "snippet"
+    },
+    {
+      "language": "python",
+      "line_count": 4,
+      "filepath": "/Users/ameno/dev/acidbath2/trees/40d4951f/src/content/blog/claude-skills-deep-dive.md",
+      "line_number": 423,
+      "context": "### 1. Network Access Limitations",
+      "code_preview": "# THIS DOESN'T WORK IN SKILLS\nimport requests\n\nresponse = requests.get(\"https://api.example.com/data...",
+      "category": "snippet"
+    },
+    {
+      "language": "python",
+      "line_count": 2,
+      "filepath": "/Users/ameno/dev/acidbath2/trees/40d4951f/src/content/blog/claude-skills-deep-dive.md",
+      "line_number": 436,
+      "context": "### 2. Skill Versioning Issues",
+      "code_preview": "\"skill_id\": \"xlsx\",\n\"version\": \"latest\"  # Can change unexpectedly",
+      "category": "snippet"
+    },
+    {
+      "language": "python",
+      "line_count": 1,
+      "filepath": "/Users/ameno/dev/acidbath2/trees/40d4951f/src/content/blog/claude-skills-deep-dive.md",
+      "line_number": 448,
+      "context": "### 2. Skill Versioning Issues",
+      "code_preview": "\"version\": \"1.2.0\"  # Explicit version",
+      "category": "snippet"
+    },
+    {
+      "language": "python",
+      "line_count": 7,
+      "filepath": "/Users/ameno/dev/acidbath2/trees/40d4951f/src/content/blog/claude-skills-deep-dive.md",
+      "line_number": 472,
+      "context": "### 4. File Lifetime Limitations",
+      "code_preview": "# File is available for ~1 hour\nfile_id = response.content[1].file_id\nfile_content = client.files.co...",
+      "category": "snippet"
+    },
+    {
+      "language": "json",
+      "line_count": 11,
+      "filepath": "/Users/ameno/dev/acidbath2/trees/40d4951f/src/content/blog/claude-skills-deep-dive.md",
+      "line_number": 522,
+      "context": "### Step 2: Extract Core Instructions",
+      "code_preview": "{\n  \"name\": \"format_code\",\n  \"description\": \"Formats code using Prettier with custom rules\",\n  \"inpu...",
+      "category": "snippet"
+    },
+    {
+      "language": "markdown",
+      "line_count": 14,
+      "filepath": "/Users/ameno/dev/acidbath2/trees/40d4951f/src/content/blog/claude-skills-deep-dive.md",
+      "line_number": 538,
+      "context": "### Step 2: Extract Core Instructions",
+      "code_preview": "---\nname: code-formatter\ndescription: Formats code using Prettier with ACIDBATH style rules. Use for...",
+      "category": "snippet"
+    },
+    {
+      "language": "unknown",
+      "line_count": 1,
+      "filepath": "/Users/ameno/dev/acidbath2/trees/40d4951f/src/content/blog/claude-skills-deep-dive.md",
+      "line_number": 563,
+      "context": "## Configuration",
+      "code_preview": "## Execution",
+      "category": "snippet"
+    },
+    {
+      "language": "unknown",
+      "line_count": 1,
+      "filepath": "/Users/ameno/dev/acidbath2/trees/40d4951f/src/content/blog/claude-skills-deep-dive.md",
+      "line_number": 573,
+      "context": "# Format file",
+      "code_preview": "",
+      "category": "snippet"
+    },
+    {
+      "language": "python",
+      "line_count": 4,
+      "filepath": "/Users/ameno/dev/acidbath2/trees/40d4951f/src/content/blog/claude-skills-deep-dive.md",
+      "line_number": 590,
+      "context": "### Step 4: Monitor Token Usage",
+      "code_preview": "response = client.beta.messages.create(...)\n\nprint(f\"Input tokens: {response.usage.input_tokens}\")\np...",
+      "category": "snippet"
+    },
+    {
+      "language": "markdown",
+      "line_count": 8,
+      "filepath": "/Users/ameno/dev/acidbath2/trees/40d4951f/src/content/blog/claude-skills-deep-dive.md",
+      "line_number": 607,
+      "context": "### 1. Create Your First Skill",
+      "code_preview": "---\nname: your-workflow-name\ndescription: What this Skill does and when to use it. Include key trigg...",
+      "category": "snippet"
+    },
+    {
+      "language": "unknown",
+      "line_count": 4,
+      "filepath": "/Users/ameno/dev/acidbath2/trees/40d4951f/src/content/blog/claude-skills-deep-dive.md",
+      "line_number": 622,
+      "context": "### 2. Test Progressive Loading",
+      "code_preview": "your-workflow/\n\u251c\u2500\u2500 SKILL.md\n\u2514\u2500\u2500 reference/\n    \u2514\u2500\u2500 detailed_guide.md",
+      "category": "snippet"
+    },
+    {
+      "language": "markdown",
+      "line_count": 1,
+      "filepath": "/Users/ameno/dev/acidbath2/trees/40d4951f/src/content/blog/claude-skills-deep-dive.md",
+      "line_number": 631,
+      "context": "### 2. Test Progressive Loading",
+      "code_preview": "For detailed examples, see [reference/detailed_guide.md](reference/detailed_guide.md).",
+      "category": "snippet"
+    },
+    {
+      "language": "python",
+      "line_count": 6,
+      "filepath": "/Users/ameno/dev/acidbath2/trees/40d4951f/src/content/blog/claude-skills-deep-dive.md",
+      "line_number": 657,
+      "context": "## When to Combine Skills and MCP",
+      "code_preview": "# MCP server fetches data\ntools = [{\n    \"type\": \"mcp\",\n    \"server\": \"database\",\n    \"name\": \"query...",
+      "category": "snippet"
+    },
+    {
+      "language": "python",
+      "line_count": 6,
+      "filepath": "/Users/ameno/dev/acidbath2/trees/40d4951f/src/content/blog/claude-skills-deep-dive.md",
+      "line_number": 667,
+      "context": "# MCP server fetches data",
+      "code_preview": "container = {\n    \"skills\": [{\n        \"type\": \"anthropic\",\n        \"skill_id\": \"xlsx\"\n    }]\n}",
+      "category": "snippet"
+    },
+    {
+      "language": "mermaid",
+      "line_count": 6,
+      "filepath": "/Users/ameno/dev/acidbath2/trees/40d4951f/src/content/blog/context-engineering.md",
+      "line_number": 27,
+      "context": "## The Core Problem: Context is Precious",
+      "code_preview": "flowchart TD\n    A([Agent starts]) --> B[Load ALL tools<br/>from ALL MCPs]\n    B --> |10,000 tokens<...",
+      "category": "diagram"
+    },
+    {
+      "language": "mermaid",
+      "line_count": 8,
+      "filepath": "/Users/ameno/dev/acidbath2/trees/40d4951f/src/content/blog/context-engineering.md",
+      "line_number": 44,
+      "context": "## Pattern 1: Progressive Disclosure",
+      "code_preview": "flowchart TD\n    A([Agent starts]) --> B[Load PRIME only<br/>index of tools]\n    B --> |~500 tokens|...",
+      "category": "diagram"
+    },
+    {
+      "language": "markdown",
+      "line_count": 21,
+      "filepath": "/Users/ameno/dev/acidbath2/trees/40d4951f/src/content/blog/context-engineering.md",
+      "line_number": 62,
+      "context": "### Implementation: Tool Index + UV Scripts",
+      "code_preview": "# Available Tools\n\nYou have access to the following tool scripts. **Do not read script contents unle...",
+      "category": "medium_example"
+    },
+    {
+      "language": "python",
+      "line_count": 70,
+      "filepath": "/Users/ameno/dev/acidbath2/trees/40d4951f/src/content/blog/context-engineering.md",
+      "line_number": 91,
+      "context": "## When you need a tool:",
+      "code_preview": "#!/usr/bin/env -S uv run\n# /// script\n# dependencies = [\n#   \"requests>=2.31.0\",\n#   \"rich>=13.0.0\",...",
+      "category": "complete_example"
+    },
+    {
+      "language": "unknown",
+      "line_count": 12,
+      "filepath": "/Users/ameno/dev/acidbath2/trees/40d4951f/src/content/blog/context-engineering.md",
+      "line_number": 166,
+      "context": "### The Flow in Practice",
+      "code_preview": "User: \"What's the current price on election markets?\"\n\nAgent:\n1. Reads ~/tools/README.md (200 tokens...",
+      "category": "snippet"
+    },
+    {
+      "language": "mermaid",
+      "line_count": 35,
+      "filepath": "/Users/ameno/dev/acidbath2/trees/40d4951f/src/content/blog/context-engineering.md",
+      "line_number": 200,
+      "context": "### Why Text Search Fails",
+      "code_preview": "flowchart TD\n    TASK[\"Task: Rename UserService \u2192 UserManager\"]\n    TASK --> S1\n\n    subgraph S1[\"St...",
+      "category": "diagram"
+    },
+    {
+      "language": "mermaid",
+      "line_count": 27,
+      "filepath": "/Users/ameno/dev/acidbath2/trees/40d4951f/src/content/blog/context-engineering.md",
+      "line_number": 242,
+      "context": "### How Semantic Search Works",
+      "code_preview": "flowchart TD\n    TASK[\"Task: Rename UserService \u2192 UserManager\"]\n    TASK --> S1\n\n    subgraph S1[\"St...",
+      "category": "diagram"
+    },
+    {
+      "language": "bash",
+      "line_count": 9,
+      "filepath": "/Users/ameno/dev/acidbath2/trees/40d4951f/src/content/blog/context-engineering.md",
+      "line_number": 284,
+      "context": "### Setting Up Serena MCP",
+      "code_preview": "# Clone the repository\ngit clone https://github.com/oramasearch/serena.git\ncd serena\n\n# Install depe...",
+      "category": "snippet"
+    },
+    {
+      "language": "json",
+      "line_count": 11,
+      "filepath": "/Users/ameno/dev/acidbath2/trees/40d4951f/src/content/blog/context-engineering.md",
+      "line_number": 300,
+      "context": "# Build the project",
+      "code_preview": "{\n  \"mcpServers\": {\n    \"serena\": {\n      \"command\": \"node\",\n      \"args\": [\"/absolute/path/to/seren...",
+      "category": "snippet"
+    },
+    {
+      "language": "bash",
+      "line_count": 6,
+      "filepath": "/Users/ameno/dev/acidbath2/trees/40d4951f/src/content/blog/context-engineering.md",
+      "line_number": 328,
+      "context": "### Adding Language-Specific Refactoring",
+      "code_preview": "# Clone the repository\ngit clone https://github.com/JetBrains/refactor-mcp.git\ncd refactor-mcp\n\n# Bu...",
+      "category": "snippet"
+    },
+    {
+      "language": "json",
+      "line_count": 11,
+      "filepath": "/Users/ameno/dev/acidbath2/trees/40d4951f/src/content/blog/context-engineering.md",
+      "line_number": 339,
+      "context": "# Build",
+      "code_preview": "{\n  \"mcpServers\": {\n    \"refactor\": {\n      \"command\": \"dotnet\",\n      \"args\": [\"run\", \"--project\", ...",
+      "category": "snippet"
+    },
+    {
+      "language": "unknown",
+      "line_count": 13,
+      "filepath": "/Users/ameno/dev/acidbath2/trees/40d4951f/src/content/blog/context-engineering.md",
+      "line_number": 381,
+      "context": "### Workflow Comparison",
+      "code_preview": "User: \"Rename UserService to UserManager across the codebase\"\n\nAgent:\n1. grep -r \"UserService\" . \u2192 8...",
+      "category": "snippet"
+    },
+    {
+      "language": "unknown",
+      "line_count": 8,
+      "filepath": "/Users/ameno/dev/acidbath2/trees/40d4951f/src/content/blog/context-engineering.md",
+      "line_number": 399,
+      "context": "### Workflow Comparison",
+      "code_preview": "User: \"Rename UserService to UserManager across the codebase\"\n\nAgent:\n1. find_symbol(\"UserService\") ...",
+      "category": "snippet"
+    },
+    {
+      "language": "mermaid",
+      "line_count": 32,
+      "filepath": "/Users/ameno/dev/acidbath2/trees/40d4951f/src/content/blog/context-engineering.md",
+      "line_number": 459,
+      "context": "## Decision Framework: When to Use Which Pattern",
+      "code_preview": "flowchart LR\n    subgraph MCP[\"Standard MCP (80%)\"]\n        M1[External APIs]\n        M2[Vendor tool...",
+      "category": "diagram"
+    },
+    {
+      "language": "mermaid",
+      "line_count": 24,
+      "filepath": "/Users/ameno/dev/acidbath2/trees/40d4951f/src/content/blog/directory-watchers.md",
+      "line_number": 27,
+      "context": "## The Architecture",
+      "code_preview": "flowchart TB\n    subgraph DROPS[\"~/drops/\"]\n        D1[\"transcribe/\"] --> W1[\"Whisper \u2192 text\"]\n     ...",
+      "category": "diagram"
+    },
+    {
+      "language": "yaml",
+      "line_count": 51,
+      "filepath": "/Users/ameno/dev/acidbath2/trees/40d4951f/src/content/blog/directory-watchers.md",
+      "line_number": 60,
+      "context": "### Step 1: Configuration File",
+      "code_preview": "# Drop Zone Configuration\n# Each zone watches a directory and triggers an agent on file events\n\noutp...",
+      "category": "complete_example"
+    },
+    {
+      "language": "python",
+      "line_count": 218,
+      "filepath": "/Users/ameno/dev/acidbath2/trees/40d4951f/src/content/blog/directory-watchers.md",
+      "line_number": 118,
+      "context": "### Step 2: The Core Watcher",
+      "code_preview": "#!/usr/bin/env -S uv run\n# /// script\n# dependencies = [\n#   \"watchdog>=4.0.0\",\n#   \"pyyaml>=6.0\",\n#...",
+      "category": "complete_example"
+    },
+    {
+      "language": "markdown",
+      "line_count": 29,
+      "filepath": "/Users/ameno/dev/acidbath2/trees/40d4951f/src/content/blog/directory-watchers.md",
+      "line_number": 343,
+      "context": "### Step 3: Agent Prompt Templates",
+      "code_preview": "# Document Analysis Agent\n\nAnalyze the following document and provide a structured summary.\n\n## Docu...",
+      "category": "medium_example"
+    },
+    {
+      "language": "markdown",
+      "line_count": 36,
+      "filepath": "/Users/ameno/dev/acidbath2/trees/40d4951f/src/content/blog/directory-watchers.md",
+      "line_number": 377,
+      "context": "### Confidence",
+      "code_preview": "# Data Analysis Agent\n\nAnalyze the following data file and provide insights.\n\n## Data Content\n\n{cont...",
+      "category": "medium_example"
+    },
+    {
+      "language": "python",
+      "line_count": 76,
+      "filepath": "/Users/ameno/dev/acidbath2/trees/40d4951f/src/content/blog/directory-watchers.md",
+      "line_number": 420,
+      "context": "### Step 4: Image Generation Agent",
+      "code_preview": "#!/usr/bin/env -S uv run\n# /// script\n# dependencies = [\n#   \"replicate>=0.25.0\",\n#   \"requests>=2.3...",
+      "category": "complete_example"
+    },
+    {
+      "language": "mermaid",
+      "line_count": 28,
+      "filepath": "/Users/ameno/dev/acidbath2/trees/40d4951f/src/content/blog/directory-watchers.md",
+      "line_number": 501,
+      "context": "## Data Flow: File Drop to Result",
+      "code_preview": "flowchart LR\n    subgraph Input\n        A[User drops file.txt]\n    end\n\n    subgraph Watcher\n       ...",
+      "category": "diagram"
+    },
+    {
+      "language": "python",
+      "line_count": 19,
+      "filepath": "/Users/ameno/dev/acidbath2/trees/40d4951f/src/content/blog/directory-watchers.md",
+      "line_number": 544,
+      "context": "### Files That Need Context",
+      "code_preview": "def gather_context(filepath: str) -> dict:\n    \"\"\"Gather related files for context.\"\"\"\n    context =...",
+      "category": "snippet"
+    },
+    {
+      "language": "yaml",
+      "line_count": 8,
+      "filepath": "/Users/ameno/dev/acidbath2/trees/40d4951f/src/content/blog/directory-watchers.md",
+      "line_number": 576,
+      "context": "### Multi-File Inputs",
+      "code_preview": "# In drops.yaml\nui_review:\n  directory: ~/drops/ui-review\n  patterns: [\"*.png\", \"*.jpg\"]\n  agent: ui...",
+      "category": "snippet"
+    },
+    {
+      "language": "python",
+      "line_count": 20,
+      "filepath": "/Users/ameno/dev/acidbath2/trees/40d4951f/src/content/blog/directory-watchers.md",
+      "line_number": 597,
+      "context": "### Race Conditions: Incomplete Writes",
+      "code_preview": "def wait_for_stable_file(filepath: str, timeout: int = 30) -> bool:\n    \"\"\"Wait until file size stop...",
+      "category": "snippet"
+    },
+    {
+      "language": "python",
+      "line_count": 18,
+      "filepath": "/Users/ameno/dev/acidbath2/trees/40d4951f/src/content/blog/directory-watchers.md",
+      "line_number": 630,
+      "context": "### Agent Failures Mid-Processing",
+      "code_preview": "def _process_file(self, filepath: str):\n    if not self._matches_pattern(filepath):\n        return\n\n...",
+      "category": "snippet"
+    },
+    {
+      "language": "python",
+      "line_count": 19,
+      "filepath": "/Users/ameno/dev/acidbath2/trees/40d4951f/src/content/blog/directory-watchers.md",
+      "line_number": 661,
+      "context": "### Token Limit Exceeded",
+      "code_preview": "def _check_size_limits(self, filepath: str) -> tuple[bool, str]:\n    \"\"\"Check if file is processable...",
+      "category": "snippet"
+    },
+    {
+      "language": "yaml",
+      "line_count": 6,
+      "filepath": "/Users/ameno/dev/acidbath2/trees/40d4951f/src/content/blog/directory-watchers.md",
+      "line_number": 693,
+      "context": "### Files Requiring Human Review",
+      "code_preview": "contracts:\n  directory: ~/drops/contracts\n  patterns: [\"*.pdf\"]\n  agent: contract_analyzer\n  approva...",
+      "category": "snippet"
+    },
+    {
+      "language": "python",
+      "line_count": 10,
+      "filepath": "/Users/ameno/dev/acidbath2/trees/40d4951f/src/content/blog/directory-watchers.md",
+      "line_number": 702,
+      "context": "### Files Requiring Human Review",
+      "code_preview": "def _process_file(self, filepath: str):\n    output_path = self._run_agent(filepath)\n\n    if self.zon...",
+      "category": "snippet"
+    },
+    {
+      "language": "python",
+      "line_count": 18,
+      "filepath": "/Users/ameno/dev/acidbath2/trees/40d4951f/src/content/blog/directory-watchers.md",
+      "line_number": 735,
+      "context": "### Monitoring and Alerting",
+      "code_preview": "import statsd  # Or your metrics library\n\nmetrics = statsd.StatsClient('localhost', 8125)\n\ndef _proc...",
+      "category": "snippet"
+    },
+    {
+      "language": "python",
+      "line_count": 31,
+      "filepath": "/Users/ameno/dev/acidbath2/trees/40d4951f/src/content/blog/directory-watchers.md",
+      "line_number": 768,
+      "context": "### Logging and Audit Trails",
+      "code_preview": "import json\nimport logging\n\nlogging.basicConfig(\n    filename=os.path.expanduser(\"~/logs/dropzone.lo...",
+      "category": "medium_example"
+    },
+    {
+      "language": "python",
+      "line_count": 10,
+      "filepath": "/Users/ameno/dev/acidbath2/trees/40d4951f/src/content/blog/directory-watchers.md",
+      "line_number": 810,
+      "context": "### Resource Limits",
+      "code_preview": "import resource\n\ndef _run_agent(self, filepath: str) -> str:\n    # Limit memory to 4GB\n    resource....",
+      "category": "snippet"
+    },
+    {
+      "language": "python",
+      "line_count": 27,
+      "filepath": "/Users/ameno/dev/acidbath2/trees/40d4951f/src/content/blog/directory-watchers.md",
+      "line_number": 827,
+      "context": "### Resource Limits",
+      "code_preview": "from time import time\nfrom collections import deque\n\nclass RateLimiter:\n    def __init__(self, max_r...",
+      "category": "medium_example"
+    },
+    {
+      "language": "python",
+      "line_count": 11,
+      "filepath": "/Users/ameno/dev/acidbath2/trees/40d4951f/src/content/blog/directory-watchers.md",
+      "line_number": 865,
+      "context": "### Graceful Degradation",
+      "code_preview": "def _run_claude_agent(self, filepath: str, output_dir: str) -> str:\n    try:\n        # Normal Claude...",
+      "category": "snippet"
+    },
+    {
+      "language": "python",
+      "line_count": 9,
+      "filepath": "/Users/ameno/dev/acidbath2/trees/40d4951f/src/content/blog/directory-watchers.md",
+      "line_number": 881,
+      "context": "### Graceful Degradation",
+      "code_preview": "def _check_disk_space(self) -> bool:\n    stat = os.statvfs(os.path.expanduser(\"~/output\"))\n    free_...",
+      "category": "snippet"
+    },
+    {
+      "language": "python",
+      "line_count": 15,
+      "filepath": "/Users/ameno/dev/acidbath2/trees/40d4951f/src/content/blog/directory-watchers.md",
+      "line_number": 901,
+      "context": "### Security: Validating File Contents",
+      "code_preview": "import magic  # python-magic library\n\ndef _validate_file(self, filepath: str) -> tuple[bool, str]:\n ...",
+      "category": "snippet"
+    },
+    {
+      "language": "python",
+      "line_count": 3,
+      "filepath": "/Users/ameno/dev/acidbath2/trees/40d4951f/src/content/blog/directory-watchers.md",
+      "line_number": 921,
+      "context": "### Security: Validating File Contents",
+      "code_preview": "def _sanitize_content(self, content: str) -> str:\n    # Remove potential injection attacks\n    conte...",
+      "category": "snippet"
+    },
+    {
+      "language": "unknown",
+      "line_count": 42,
+      "filepath": "/Users/ameno/dev/acidbath2/trees/40d4951f/src/content/blog/directory-watchers.md",
+      "line_number": 933,
+      "context": "### Security: Validating File Contents",
+      "code_preview": "Never execute code from dropped files directly. Treat all input as untrusted. Validate, sanitize, th...",
+      "category": "complete_example"
+    },
+    {
+      "language": "unknown",
+      "line_count": 1,
+      "filepath": "/Users/ameno/dev/acidbath2/trees/40d4951f/src/content/blog/directory-watchers.md",
+      "line_number": 998,
+      "context": "# In drops.yaml",
+      "code_preview": "### Code Review Zone",
+      "category": "snippet"
+    },
+    {
+      "language": "unknown",
+      "line_count": 1,
+      "filepath": "/Users/ameno/dev/acidbath2/trees/40d4951f/src/content/blog/directory-watchers.md",
+      "line_number": 1014,
+      "context": "### Code Review Zone",
+      "code_preview": "### Research Paper Zone",
+      "category": "snippet"
+    },
+    {
+      "language": "unknown",
+      "line_count": 1,
+      "filepath": "/Users/ameno/dev/acidbath2/trees/40d4951f/src/content/blog/directory-watchers.md",
+      "line_number": 1029,
+      "context": "### Research Paper Zone",
+      "code_preview": "## Running the System",
+      "category": "snippet"
+    },
+    {
+      "language": "mermaid",
+      "line_count": 12,
+      "filepath": "/Users/ameno/dev/acidbath2/trees/40d4951f/src/content/blog/document-generation-skills.md",
+      "line_number": 27,
+      "context": "## The Core Problem: Manual Documents Don't Scale",
+      "code_preview": "flowchart TD\n    A([Data arrives]) --> B[Analyst opens<br/>Excel template]\n    B --> |10 minutes| C[...",
+      "category": "diagram"
+    },
+    {
+      "language": "mermaid",
+      "line_count": 12,
+      "filepath": "/Users/ameno/dev/acidbath2/trees/40d4951f/src/content/blog/document-generation-skills.md",
+      "line_number": 46,
+      "context": "## The Pattern: Skills API Document Pipeline",
+      "code_preview": "flowchart TD\n    A([Data arrives]) --> B[\"Skills API Call<br/>'Generate Excel with this data'\"]\n    ...",
+      "category": "diagram"
+    },
+    {
+      "language": "python",
+      "line_count": 73,
+      "filepath": "/Users/ameno/dev/acidbath2/trees/40d4951f/src/content/blog/document-generation-skills.md",
+      "line_number": 71,
+      "context": "### Step 1: Setup and Configuration",
+      "code_preview": "#!/usr/bin/env -S uv run\n# /// script\n# dependencies = [\n#   \"anthropic>=0.69.0\",\n#   \"pandas>=2.0.0...",
+      "category": "complete_example"
+    },
+    {
+      "language": "python",
+      "line_count": 31,
+      "filepath": "/Users/ameno/dev/acidbath2/trees/40d4951f/src/content/blog/document-generation-skills.md",
+      "line_number": 149,
+      "context": "### Step 2: Excel Generation Function",
+      "code_preview": "def generate_excel(data: dict, output_dir: Path) -> dict:\n    \"\"\"\n    Generate Excel workbook with d...",
+      "category": "medium_example"
+    },
+    {
+      "language": "python",
+      "line_count": 43,
+      "filepath": "/Users/ameno/dev/acidbath2/trees/40d4951f/src/content/blog/document-generation-skills.md",
+      "line_number": 185,
+      "context": "### Step 3: PowerPoint Generation Function",
+      "code_preview": "def generate_powerpoint(data: dict, output_dir: Path) -> dict:\n    \"\"\"\n    Generate executive presen...",
+      "category": "complete_example"
+    },
+    {
+      "language": "python",
+      "line_count": 41,
+      "filepath": "/Users/ameno/dev/acidbath2/trees/40d4951f/src/content/blog/document-generation-skills.md",
+      "line_number": 233,
+      "context": "### Step 4: PDF Generation Function",
+      "code_preview": "def generate_pdf(data: dict, output_dir: Path) -> dict:\n    \"\"\"\n    Generate formal PDF documentatio...",
+      "category": "complete_example"
+    },
+    {
+      "language": "python",
+      "line_count": 58,
+      "filepath": "/Users/ameno/dev/acidbath2/trees/40d4951f/src/content/blog/document-generation-skills.md",
+      "line_number": 279,
+      "context": "### Step 5: Pipeline Orchestration",
+      "code_preview": "def run_pipeline(data_path: str, output_dir: str) -> dict:\n    \"\"\"\n    Run complete document generat...",
+      "category": "complete_example"
+    },
+    {
+      "language": "json",
+      "line_count": 27,
+      "filepath": "/Users/ameno/dev/acidbath2/trees/40d4951f/src/content/blog/document-generation-skills.md",
+      "line_number": 344,
+      "context": "### Step 6: Sample Data File",
+      "code_preview": "{\n  \"title\": \"Q4 2024 Business Review\",\n  \"date\": \"January 2025\",\n  \"executive_summary\": \"Q4 2024 sh...",
+      "category": "configuration"
+    },
+    {
+      "language": "bash",
+      "line_count": 1,
+      "filepath": "/Users/ameno/dev/acidbath2/trees/40d4951f/src/content/blog/document-generation-skills.md",
+      "line_number": 376,
+      "context": "### Step 6: Sample Data File",
+      "code_preview": "uv run document_pipeline.py --data sample_data.json --output ./reports",
+      "category": "snippet"
+    },
+    {
+      "language": "mermaid",
+      "line_count": 32,
+      "filepath": "/Users/ameno/dev/acidbath2/trees/40d4951f/src/content/blog/document-generation-skills.md",
+      "line_number": 404,
+      "context": "## When This Works: Ideal Use Cases",
+      "code_preview": "flowchart LR\n    subgraph R[\"Recurring Reports\"]\n        R1[\"Weekly, monthly, quarterly\"]\n        R2...",
+      "category": "diagram"
+    },
+    {
+      "language": "python",
+      "line_count": 7,
+      "filepath": "/Users/ameno/dev/acidbath2/trees/40d4951f/src/content/blog/document-generation-skills.md",
+      "line_number": 454,
+      "context": "### Document Complexity Limits",
+      "code_preview": "# Bad: One complex 10-sheet Excel\ngenerate_excel(full_data, \"complete_report.xlsx\")  # Fails at scal...",
+      "category": "snippet"
+    },
+    {
+      "language": "python",
+      "line_count": 8,
+      "filepath": "/Users/ameno/dev/acidbath2/trees/40d4951f/src/content/blog/document-generation-skills.md",
+      "line_number": 469,
+      "context": "### Data Format Sensitivity",
+      "code_preview": "# Works\ndata = {\"revenue\": 14500000, \"growth\": 17.9}\n\n# Fails (missing field)\ndata = {\"revenue\": 145...",
+      "category": "snippet"
+    },
+    {
+      "language": "python",
+      "line_count": 4,
+      "filepath": "/Users/ameno/dev/acidbath2/trees/40d4951f/src/content/blog/document-generation-skills.md",
+      "line_number": 482,
+      "context": "# Fails (wrong type)",
+      "code_preview": "def validate_data(data: dict) -> bool:\n    required_fields = [\"revenue\", \"growth\", \"net_income\"]\n   ...",
+      "category": "snippet"
+    },
+    {
+      "language": "python",
+      "line_count": 14,
+      "filepath": "/Users/ameno/dev/acidbath2/trees/40d4951f/src/content/blog/document-generation-skills.md",
+      "line_number": 498,
+      "context": "### Rate Limits and Timeouts",
+      "code_preview": "import time\nfrom tenacity import retry, stop_after_attempt, wait_exponential\n\n@retry(stop=stop_after...",
+      "category": "snippet"
+    },
+    {
+      "language": "unknown",
+      "line_count": 2,
+      "filepath": "/Users/ameno/dev/acidbath2/trees/40d4951f/src/content/blog/document-generation-skills.md",
+      "line_number": 520,
+      "context": "### Numeric Precision",
+      "code_preview": "Expected: $14,500,000.00\nGenerated: $14,499,999.99",
+      "category": "snippet"
+    },
+    {
+      "language": "python",
+      "line_count": 6,
+      "filepath": "/Users/ameno/dev/acidbath2/trees/40d4951f/src/content/blog/document-generation-skills.md",
+      "line_number": 527,
+      "context": "### Numeric Precision",
+      "code_preview": "prompt = \"\"\"\nFormat all currency values:\n- Use exactly 2 decimal places\n- Round to nearest cent usin...",
+      "category": "snippet"
+    },
+    {
+      "language": "python",
+      "line_count": 8,
+      "filepath": "/Users/ameno/dev/acidbath2/trees/40d4951f/src/content/blog/document-generation-skills.md",
+      "line_number": 546,
+      "context": "### No Persistent State",
+      "code_preview": "# Good: Same canonical data\ndata = {\"revenue\": 14500000}\ngenerate_excel(data, ...)\ngenerate_powerpoi...",
+      "category": "snippet"
+    },
+    {
+      "language": "python",
+      "line_count": 19,
+      "filepath": "/Users/ameno/dev/acidbath2/trees/40d4951f/src/content/blog/document-generation-skills.md",
+      "line_number": 563,
+      "context": "### Pipeline Fragility",
+      "code_preview": "def resilient_pipeline(data: dict) -> dict:\n    results = {\"excel\": None, \"powerpoint\": None, \"pdf\":...",
+      "category": "snippet"
+    },
+    {
+      "language": "markdown",
+      "line_count": 37,
+      "filepath": "/Users/ameno/dev/acidbath2/trees/40d4951f/src/content/blog/document-generation-skills.md",
+      "line_number": 615,
+      "context": "## Agent Opportunity: Document Generation Agent",
+      "code_preview": "---\nname: document-generator\ndescription: Generate multi-format business documents from structured d...",
+      "category": "medium_example"
+    },
+    {
+      "language": "typescript",
+      "line_count": 23,
+      "filepath": "/Users/ameno/dev/acidbath2/trees/40d4951f/src/content/blog/single-file-scripts.md",
+      "line_number": 52,
+      "context": "### 1. Dual-Mode Execution in One File",
+      "code_preview": "#!/usr/bin/env bun\n/**\n * CLI Usage:\n *   bun dolph.ts --task test-connection\n *   bun dolph.ts --ch...",
+      "category": "medium_example"
+    },
+    {
+      "language": "typescript",
+      "line_count": 24,
+      "filepath": "/Users/ameno/dev/acidbath2/trees/40d4951f/src/content/blog/single-file-scripts.md",
+      "line_number": 82,
+      "context": "### 2. Type-Safe Without Separate Type Files",
+      "code_preview": "// Types defined inline with Zod schemas\nconst listTablesTool = tool({\n  name: \"list_tables\",\n  desc...",
+      "category": "medium_example"
+    },
+    {
+      "language": "typescript",
+      "line_count": 22,
+      "filepath": "/Users/ameno/dev/acidbath2/trees/40d4951f/src/content/blog/single-file-scripts.md",
+      "line_number": 113,
+      "context": "### 3. Dual-Gate Security Pattern",
+      "code_preview": "const WRITE_PATTERNS = /^(INSERT|UPDATE|DELETE|DROP|CREATE|ALTER|TRUNCATE|REPLACE)/i;\n\nasync functio...",
+      "category": "medium_example"
+    },
+    {
+      "language": "typescript",
+      "line_count": 20,
+      "filepath": "/Users/ameno/dev/acidbath2/trees/40d4951f/src/content/blog/single-file-scripts.md",
+      "line_number": 142,
+      "context": "### 4. Built-In Performance Reporting",
+      "code_preview": "class TerminalReporter {\n  private toolStartTimes = new Map<string, number>();\n\n  onToolStart(toolCa...",
+      "category": "snippet"
+    },
+    {
+      "language": "typescript",
+      "line_count": 15,
+      "filepath": "/Users/ameno/dev/acidbath2/trees/40d4951f/src/content/blog/single-file-scripts.md",
+      "line_number": 188,
+      "context": "### Argument Parsing",
+      "code_preview": "import { parseArgs } from \"util\";\n\nconst { values, positionals } = parseArgs({\n  args: Bun.argv.slic...",
+      "category": "snippet"
+    },
+    {
+      "language": "python",
+      "line_count": 17,
+      "filepath": "/Users/ameno/dev/acidbath2/trees/40d4951f/src/content/blog/single-file-scripts.md",
+      "line_number": 207,
+      "context": "### Argument Parsing",
+      "code_preview": "#!/usr/bin/env -S uv run --script\n# /// script\n# dependencies = [\"click\"]\n# ///\n\nimport click\n\n@clic...",
+      "category": "snippet"
+    },
+    {
+      "language": "typescript",
+      "line_count": 6,
+      "filepath": "/Users/ameno/dev/acidbath2/trees/40d4951f/src/content/blog/single-file-scripts.md",
+      "line_number": 230,
+      "context": "### Environment Variables",
+      "code_preview": "// .env file auto-loaded by Bun\nconst dbUrl = Bun.env.DATABASE_URL || \"mysql://localhost:3306/db\";\nc...",
+      "category": "snippet"
+    },
+    {
+      "language": "python",
+      "line_count": 11,
+      "filepath": "/Users/ameno/dev/acidbath2/trees/40d4951f/src/content/blog/single-file-scripts.md",
+      "line_number": 240,
+      "context": "### Environment Variables",
+      "code_preview": "#!/usr/bin/env -S uv run --script\n# /// script\n# dependencies = [\"python-dotenv\"]\n# ///\n\nimport os\nf...",
+      "category": "snippet"
+    },
+    {
+      "language": "typescript",
+      "line_count": 14,
+      "filepath": "/Users/ameno/dev/acidbath2/trees/40d4951f/src/content/blog/single-file-scripts.md",
+      "line_number": 257,
+      "context": "### Database Connections",
+      "code_preview": "import mysql from \"mysql2/promise\";\n\n// Package.json dependencies\n// { \"dependencies\": { \"mysql2\": \"...",
+      "category": "snippet"
+    },
+    {
+      "language": "python",
+      "line_count": 19,
+      "filepath": "/Users/ameno/dev/acidbath2/trees/40d4951f/src/content/blog/single-file-scripts.md",
+      "line_number": 275,
+      "context": "### Database Connections",
+      "code_preview": "#!/usr/bin/env -S uv run --script\n# /// script\n# dependencies = [\"mysql-connector-python\"]\n# ///\n\nim...",
+      "category": "snippet"
+    },
+    {
+      "language": "typescript",
+      "line_count": 5,
+      "filepath": "/Users/ameno/dev/acidbath2/trees/40d4951f/src/content/blog/single-file-scripts.md",
+      "line_number": 300,
+      "context": "### HTTP Requests",
+      "code_preview": "// No dependencies needed - fetch is built-in\nconst response = await fetch(\"https://api.example.com/...",
+      "category": "snippet"
+    },
+    {
+      "language": "python",
+      "line_count": 13,
+      "filepath": "/Users/ameno/dev/acidbath2/trees/40d4951f/src/content/blog/single-file-scripts.md",
+      "line_number": 309,
+      "context": "### HTTP Requests",
+      "code_preview": "#!/usr/bin/env -S uv run --script\n# /// script\n# dependencies = [\"requests\"]\n# ///\n\nimport requests\n...",
+      "category": "snippet"
+    },
+    {
+      "language": "typescript",
+      "line_count": 59,
+      "filepath": "/Users/ameno/dev/acidbath2/trees/40d4951f/src/content/blog/single-file-scripts.md",
+      "line_number": 329,
+      "context": "## Complete Working Example: Database Agent",
+      "code_preview": "#!/usr/bin/env bun\n/**\n * Usage:\n *   bun db-agent.ts --query \"SELECT * FROM users\"\n *   import { qu...",
+      "category": "complete_example"
+    },
+    {
+      "language": "json",
+      "line_count": 5,
+      "filepath": "/Users/ameno/dev/acidbath2/trees/40d4951f/src/content/blog/single-file-scripts.md",
+      "line_number": 393,
+      "context": "No context",
+      "code_preview": "{\n  \"dependencies\": {\n    \"mysql2\": \"^3.6.5\"\n  }\n}",
+      "category": "snippet"
+    },
+    {
+      "language": "bash",
+      "line_count": 2,
+      "filepath": "/Users/ameno/dev/acidbath2/trees/40d4951f/src/content/blog/single-file-scripts.md",
+      "line_number": 402,
+      "context": "No context",
+      "code_preview": "bun install\nbun db-agent.ts --query \"SELECT VERSION()\"",
+      "category": "snippet"
+    },
+    {
+      "language": "typescript",
+      "line_count": 5,
+      "filepath": "/Users/ameno/dev/acidbath2/trees/40d4951f/src/content/blog/single-file-scripts.md",
+      "line_number": 408,
+      "context": "No context",
+      "code_preview": "import { query, close } from \"./db-agent.ts\";\n\nconst users = await query(\"SELECT * FROM users LIMIT ...",
+      "category": "snippet"
+    },
+    {
+      "language": "bash",
+      "line_count": 8,
+      "filepath": "/Users/ameno/dev/acidbath2/trees/40d4951f/src/content/blog/single-file-scripts.md",
+      "line_number": 420,
+      "context": "## Compiling Bun Scripts to Binaries",
+      "code_preview": "# Basic compilation\nbun build --compile ./dolph.ts --outfile dolph\n\n# Optimized for production (2-4x...",
+      "category": "snippet"
+    },
+    {
+      "language": "python",
+      "line_count": 12,
+      "filepath": "/Users/ameno/dev/acidbath2/trees/40d4951f/src/content/blog/single-file-scripts.md",
+      "line_number": 455,
+      "context": "## Progressive Disclosure: Inline Dependencies as Context",
+      "code_preview": "#!/usr/bin/env -S uv run --script\n# /// script\n# dependencies = [\n#   \"openai>=1.0.0\",\n#   \"mysql-co...",
+      "category": "snippet"
+    },
+    {
+      "language": "mermaid",
+      "line_count": 24,
+      "filepath": "/Users/ameno/dev/acidbath2/trees/40d4951f/src/content/blog/workflow-prompts.md",
+      "line_number": 29,
+      "context": "## The Core Pattern: Input \u2192 Workflow \u2192 Output",
+      "code_preview": "flowchart LR\n    subgraph INPUT[\"INPUT\"]\n        I1[Variables]\n        I2[Parameters]\n        I3[Con...",
+      "category": "diagram"
+    },
+    {
+      "language": "markdown",
+      "line_count": 59,
+      "filepath": "/Users/ameno/dev/acidbath2/trees/40d4951f/src/content/blog/workflow-prompts.md",
+      "line_number": 62,
+      "context": "## POC: A Working Workflow Prompt",
+      "code_preview": "---\ndescription: Analyze a file and create implementation plan\nallowed-tools: Read, Glob, Grep, Writ...",
+      "category": "complete_example"
+    },
+    {
+      "language": "markdown",
+      "line_count": 7,
+      "filepath": "/Users/ameno/dev/acidbath2/trees/40d4951f/src/content/blog/workflow-prompts.md",
+      "line_number": 132,
+      "context": "## The Workflow Section Deep Dive",
+      "code_preview": "## Workflow\n\n1. Read the config file\n2. Parse the JSON structure\n3. Validate required fields exist\n4...",
+      "category": "snippet"
+    },
+    {
+      "language": "markdown",
+      "line_count": 12,
+      "filepath": "/Users/ameno/dev/acidbath2/trees/40d4951f/src/content/blog/workflow-prompts.md",
+      "line_number": 144,
+      "context": "## Workflow",
+      "code_preview": "## Workflow\n\n1. **Gather requirements**\n   - Read the user's request carefully\n   - Identify explici...",
+      "category": "snippet"
+    },
+    {
+      "language": "markdown",
+      "line_count": 9,
+      "filepath": "/Users/ameno/dev/acidbath2/trees/40d4951f/src/content/blog/workflow-prompts.md",
+      "line_number": 161,
+      "context": "## Workflow",
+      "code_preview": "## Workflow\n\n1. Check if package.json exists\n2. **If exists:**\n   - Parse dependencies\n   - Check fo...",
+      "category": "snippet"
+    },
+    {
+      "language": "unknown",
+      "line_count": 1,
+      "filepath": "/Users/ameno/dev/acidbath2/trees/40d4951f/src/content/blog/workflow-prompts.md",
+      "line_number": 223,
+      "context": "## Measuring Workflow ROI",
+      "code_preview": "Break-even uses = (Time to write prompt) / (Time saved per use)",
+      "category": "snippet"
+    },
+    {
+      "language": "mermaid",
+      "line_count": 15,
+      "filepath": "/Users/ameno/dev/acidbath2/trees/40d4951f/src/content/blog/workflow-prompts.md",
+      "line_number": 272,
+      "context": "## Agent Opportunity: Build a Prompt Library",
+      "code_preview": "flowchart TD\n    subgraph LIB[\".claude/commands/\"]\n        A[\"analyze.md - File analysis\"]\n        B...",
+      "category": "diagram"
+    },
+    {
+      "language": "mermaid",
+      "line_count": 27,
+      "filepath": "/Users/ameno/dev/acidbath2/trees/40d4951f/src/content/blog/workflow-prompts.md",
+      "line_number": 292,
+      "context": "## Why Workflows Beat Ad-Hoc Prompting",
+      "code_preview": "flowchart LR\n    subgraph ADHOC[\"AD-HOC PROMPTING\"]\n        A1[\"'Help me refactor this'\"]\n        A2...",
+      "category": "diagram"
+    }
+  ]
+}

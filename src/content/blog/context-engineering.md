@@ -35,7 +35,7 @@ flowchart TD
 
 Four MCP servers at 10,000 tokens each = 40,000 tokens consumed before you type a single character.
 
-If tools consume more than 15% of your context, you have an architecture problem.
+If tools consume more than 15% of your context, you have an architecture problem. For many use cases, [Claude Skills](/blog/claude-skills-deep-dive) offer a lighter-weight alternative—loading ~100 tokens of metadata upfront and only fetching full instructions when triggered.
 
 ## Pattern 1: Progressive Disclosure
 
@@ -186,6 +186,8 @@ MCP equivalent: ~10,000 tokens
 | Progressive | 200 tokens | 500-2,000 | 2,200-8,200 |
 
 Progressive disclosure wins when you use fewer than all available tools—which is almost always. Most tasks use 2-3 tools out of 20 available.
+
+For taking this pattern further, see [Single-File Scripts](/blog/single-file-scripts)—UV and Bun scripts that replace entire MCP servers with zero-config executables.
 
 ## Pattern 2: Semantic Search for Large Codebases
 

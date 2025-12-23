@@ -15,16 +15,21 @@ ACIDBATH provides deep technical content on building production AI systems:
 
 ## Recent Posts
 
+- [Claude Skills Deep Dive: Progressive Loading and the MCP Alternative](/blog/claude-skills-deep-dive): Skills load 100 tokens of metadata upfront, then instructions on-demand. Here's when to use Skills vs MCP, with working POC code.
+- [Single-File Scripts: When One File Beats an Entire MCP Server](/blog/single-file-scripts): Dolph is 1,015 lines of TypeScript that replace an MCP server. Here's the pattern for Bun and UV single-file scripts.
 - [AI Document Skills: Automated File Generation That Actually Ships](/blog/document-generation-skills): Skills generate Excel, PowerPoint, and PDF files in minutes. Complete POC code, real token numbers, and honest failure modes for production.
 - [Agent Architecture: From Custom Agents to Effective Delegation](/blog/agent-architecture): System prompts define agent identity. File systems enable delegation. Build specialized agents and delegate research reliably with working code.
 - [Context Engineering: From Token Optimization to Large Codebase Mastery](/blog/context-engineering): Progressive disclosure and semantic search: the difference between burning tokens and shipping features. Working code and hard numbers inside.
-- [Directory Watchers: File-Based AI Automation That Scales](/blog/directory-watchers): Turn your file system into an AI interface. Build drop zones that process files automatically with working Python code and production considerations.
-- [Workflow Prompts: The Pattern That Makes AI Engineering Predictable](/blog/workflow-prompts): The workflow section drives 90% of the value in agentic prompts. Learn to build workflow prompts that work, when they fail, and how to measure ROI.
 
 ## Topics
 
+### AI Patterns
+
+- [Claude Skills Deep Dive: Progressive Loading and the MCP Alternative](/blog/claude-skills-deep-dive): Skills load 100 tokens of metadata upfront, then instructions on-demand. Here's when to use Skills vs MCP, with working POC code.
+
 ### Production Patterns
 
+- [Single-File Scripts: When One File Beats an Entire MCP Server](/blog/single-file-scripts): Dolph is 1,015 lines of TypeScript that replace an MCP server. Here's the pattern for Bun and UV single-file scripts.
 - [AI Document Skills: Automated File Generation That Actually Ships](/blog/document-generation-skills): Skills generate Excel, PowerPoint, and PDF files in minutes. Complete POC code, real token numbers, and honest failure modes for production.
 - [Directory Watchers: File-Based AI Automation That Scales](/blog/directory-watchers): Turn your file system into an AI interface. Build drop zones that process files automatically with working Python code and production considerations.
 

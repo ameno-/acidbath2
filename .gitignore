@@ -66,8 +66,11 @@ deep_specs/
 
 screenshots/
 
-# Playwright video recordings
+# Playwright artifacts
 videos/
+test-results/
+test-results.json
+playwright-report/
 
 # Bun lock files
 bun.lock

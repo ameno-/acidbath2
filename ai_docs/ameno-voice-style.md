@@ -1,5 +1,15 @@
 # Ameno Voice Style Guide
 
+## Workflow Position
+
+**This style is applied during review and finalization, not creation.**
+
+```
+/new-post → Draft (ACIDBATH) → /ai-audit → /ameno-finalize → Publish
+```
+
+---
+
 ## Core Philosophy
 
 **ACIDBATH is the star. Ameno voice is the flavor.**

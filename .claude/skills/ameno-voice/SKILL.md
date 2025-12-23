@@ -1,11 +1,19 @@
 ---
 name: ameno-voice
-description: Apply Ameno's distinctive voice style to content. Use when writing blog posts, tutorials, or technical content. Strategically deploys personality (analogies, humor, conversational tone) for exploratory/educational sections while maintaining directness for technical details.
+description: Review and finalize blog content with Ameno voice. Use during the editing phase (not creation) to add personality to concept explanations, failure modes, and takeaways while keeping introductions, code, and benchmarks direct.
 ---
 
 # Ameno Voice Style Skill
 
-Apply the Ameno voice to technical content. **ACIDBATH is the star. Ameno voice is the flavor.**
+**Review-phase skill** for applying Ameno voice to drafted content.
+
+## Workflow Position
+
+```
+/new-post → Write draft (ACIDBATH default) → /ameno-finalize → Publish
+```
+
+Creation happens in ACIDBATH's direct voice. This skill is applied during **review, editing, and finalization**.
 
 ## Core Purpose
 

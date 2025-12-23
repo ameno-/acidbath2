@@ -2,7 +2,22 @@
 
 ## Overview
 
-Create a comprehensive voice/style system extracted from "Code for Humans 0: A love story" for use in Claude skills, agents, and workflows. The system strategically deploys Ameno's personality for educational/exploratory moments while maintaining ACIDBATH's technical directness as the primary voice.
+A **review-phase** voice/style system for ACIDBATH blog content. Ameno voice is applied during editing and finalization, not creation. The system adds personality to specific sections (concept explanations, failure modes, takeaways) while preserving directness where it matters.
+
+---
+
+## Workflow Position
+
+```
+/new-post → Draft in ACIDBATH voice → /ameno-finalize → Publish
+```
+
+| Phase | Voice | Tools |
+|-------|-------|-------|
+| **Creation** | ACIDBATH (direct, technical) | `/new-post`, manual writing |
+| **Audit** | Structural (SEO, fields) | `/ai-audit` |
+| **Finalize** | Ameno (selective application) | `/ameno-finalize` |
+| **Publish** | - | Deploy |
 
 ---
 
@@ -134,16 +149,16 @@ Use these transitional phrases when shifting to Ameno voice:
 
 ## Integration Points
 
-- Hook into `/new-post` command for blog content
-- Reference in `ai_docs/` for context loading
-- Use with `/ai-audit` to verify voice consistency
+- `/ameno-finalize` - Primary invocation for review-phase voice application
+- Reference in `ai_docs/ameno-voice-style.md` for context loading
+- Runs **after** `/ai-audit` structural checks
 
 ---
 
 ## Validation Criteria
 
-- [ ] SKILL.md triggers when writing blog/tutorial content
-- [ ] Metaphor frameworks provide useful analogies for technical concepts
-- [ ] Examples demonstrate clear before/after transformation
+- [ ] `/ameno-finalize` command applies voice to appropriate sections only
+- [ ] Direct sections (intro, code, benchmarks) remain unchanged
+- [ ] Concept explanations gain clarity without forced metaphors
+- [ ] Failure modes have conversational honesty
 - [ ] Voice checklist is actionable and concise
-- [ ] Integration with existing workflows functions correctly

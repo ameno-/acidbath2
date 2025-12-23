@@ -75,7 +75,7 @@ zones:
   analyze:
 ```
 
-> ** Complete Example:** [Step Configuration File](https://github.com/ameno-/acidbath-code/tree/main/examples/production-patterns/directory-watchers/step-configuration-file)
+> ** Complete Example:** [Step Configuration File](https://github.com/ameno-/acidbath-code/tree/main/production-patterns/directory-watchers/step-configuration-file)
 >
 > Complete implementation from the 'Step 1: Configuration File' section.
 >
@@ -103,7 +103,7 @@ Usage:
 
 ```
 
-> ** Complete Example:** [Step Core Watcher](https://github.com/ameno-/acidbath-code/tree/main/examples/production-patterns/directory-watchers/step-core-watcher)
+> ** Complete Example:** [Step Core Watcher](https://github.com/ameno-/acidbath-code/tree/main/production-patterns/directory-watchers/step-core-watcher)
 >
 > Complete implementation from the 'Step 2: The Core Watcher' section.
 >
@@ -208,7 +208,7 @@ Each line in the file is a separate prompt.
 import os
 ```
 
-> ** Complete Example:** [Step Core Watcher](https://github.com/ameno-/acidbath-code/tree/main/examples/production-patterns/directory-watchers/step-core-watcher)
+> ** Complete Example:** [Step Core Watcher](https://github.com/ameno-/acidbath-code/tree/main/production-patterns/directory-watchers/step-core-watcher)
 >
 > Complete implementation from the 'Step 2: The Core Watcher' section.
 >
@@ -666,7 +666,7 @@ Not every task deserves automation. Use specific thresholds.
 | Complexity | Time to Build | Approach |
 ```
 
-> ** See Full Implementation:** [Security Validating File](https://github.com/ameno-/acidbath-code/tree/main/examples/production-patterns/directory-watchers/security-validating-file)
+> ** See Full Implementation:** [Security Validating File](https://github.com/ameno-/acidbath-code/tree/main/production-patterns/directory-watchers/security-validating-file)
 >
 > Complete implementation from the 'Security: Validating File Contents' section.
 >

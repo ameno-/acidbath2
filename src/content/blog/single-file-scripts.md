@@ -344,7 +344,7 @@ async function getConnection(): Promise<Connection> {
   if (!_db) {
 ```
 
-> ** Complete Example:** [Complete Working Example](https://github.com/ameno-/acidbath-code/tree/main/examples/workflow-tools/single-file-scripts/complete-working-example)
+> ** Complete Example:** [Complete Working Example](https://github.com/ameno-/acidbath-code/tree/main/workflow-tools/single-file-scripts/complete-working-example)
 >
 > Complete implementation from the 'Complete Working Example: Database Agent' section.
 >

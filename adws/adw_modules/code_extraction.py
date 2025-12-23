@@ -179,6 +179,106 @@ def determine_category_directory(block: CodeBlock, post_slug: str) -> str:
             return 'workflow-tools'  # Default fallback
 
 
+def extract_code_description(code: str, language: str) -> str:
+    """
+    Extract a meaningful description from the code itself.
+
+    Args:
+        code: The source code
+        language: Programming language
+
+    Returns:
+        Description string extracted from docstrings, comments, or code analysis
+    """
+    lines = code.strip().split('\n')
+
+    # For Python, look for module docstring or main function docstring
+    if language == 'python':
+        # Check for module docstring (triple quotes at start)
+        in_docstring = False
+        docstring_lines = []
+
+        for i, line in enumerate(lines):
+            stripped = line.strip()
+
+            # Skip shebang and script metadata
+            if stripped.startswith('#!') or stripped.startswith('# ///'):
+                continue
+            if stripped.startswith('# dependencies'):
+                continue
+
+            # Look for docstring
+            if '"""' in stripped or "'''" in stripped:
+                if not in_docstring:
+                    in_docstring = True
+                    # Single line docstring
+                    if stripped.count('"""') == 2 or stripped.count("'''") == 2:
+                        content = stripped.strip('"""').strip("'''").strip()
+                        if content:
+                            return content
+                    continue
+                else:
+                    # End of multiline docstring
+                    break
+
+            if in_docstring:
+                if stripped:
+                    docstring_lines.append(stripped)
+
+        if docstring_lines:
+            return ' '.join(docstring_lines[:3])  # First 3 lines
+
+    # For TypeScript/JavaScript, look for JSDoc or leading comments
+    if language in ['typescript', 'javascript']:
+        comment_lines = []
+        for line in lines[:20]:
+            stripped = line.strip()
+            if stripped.startswith('//'):
+                comment_lines.append(stripped.lstrip('/').strip())
+            elif stripped.startswith('*') and not stripped.startswith('*/'):
+                comment_lines.append(stripped.lstrip('*').strip())
+            elif stripped.startswith('/**'):
+                continue
+            elif comment_lines and not stripped.startswith(('/', '*')):
+                break
+
+        if comment_lines:
+            return ' '.join(comment_lines[:3])
+
+    # For YAML/configs, describe based on content
+    if language in ['yaml', 'yml']:
+        # Look for top-level keys
+        keys = []
+        for line in lines[:10]:
+            if line and not line.startswith(' ') and not line.startswith('#'):
+                key = line.split(':')[0].strip()
+                if key:
+                    keys.append(key)
+        if keys:
+            return f"Configuration file with: {', '.join(keys[:5])}"
+
+    # For markdown, use first non-empty line
+    if language == 'markdown':
+        for line in lines:
+            stripped = line.strip()
+            if stripped and not stripped.startswith('#'):
+                return stripped[:200]
+
+    # Fallback: analyze imports and main structures
+    if language == 'python':
+        imports = []
+        for line in lines[:30]:
+            if line.startswith('import ') or line.startswith('from '):
+                module = line.split()[1].split('.')[0]
+                if module not in imports:
+                    imports.append(module)
+
+        if imports:
+            return f"Python script using {', '.join(imports[:4])}"
+
+    return ""
+
+
 def generate_example_readme(
     example_name: str,
     post_title: str,
@@ -205,89 +305,99 @@ def generate_example_readme(
     """
     today = datetime.now().strftime('%Y-%m-%d')
 
+    # Try to extract better description from code if generic
+    if blocks and ('demonstrating' in description.lower() or not description.strip()):
+        code_desc = extract_code_description(blocks[0].code, blocks[0].language)
+        if code_desc:
+            description = code_desc
+
     readme = []
     readme.append(f"# {example_name.replace('-', ' ').title()}\n\n")
 
-    # Source section
+    # Source section with correct URL
     readme.append("## Source\n\n")
-    readme.append(f"**Blog Post:** [{post_title}](https://acidbath.sh/blog/{post_slug})\n")
-    readme.append(f"**Section:** {section_heading}\n")
+    readme.append(f"**Blog Post:** [{post_title}](https://blog.acidbath.com/blog/{post_slug})\n")
+    readme.append(f"**Section:** {section_heading.lstrip('#').strip()}\n")
     readme.append(f"**Date Extracted:** {today}\n\n")
 
     # Description
     readme.append("## Description\n\n")
-    readme.append(f"{description}\n\n")
+    if description:
+        readme.append(f"{description}\n\n")
+    else:
+        readme.append(f"Complete code example from the ACIDBATH blog post on {post_title.lower()}.\n\n")
 
-    # Context
-    readme.append("## Context\n\n")
-    readme.append(f"This code example is from the '{section_heading}' section of the blog post. ")
-    readme.append("It demonstrates a complete, working implementation that you can use as-is ")
-    readme.append("or adapt for your own projects.\n\n")
+    # Quick Start
+    readme.append("## Quick Start\n\n")
+
+    primary_lang = blocks[0].language if blocks else 'unknown'
+    filename = generate_filename(primary_lang, example_name, len(blocks))
+
+    if primary_lang == 'python':
+        # Check if it's a uv script
+        if blocks and '# /// script' in blocks[0].code:
+            readme.append("```bash\n")
+            readme.append(f"uv run {filename}\n")
+            readme.append("```\n\n")
+        else:
+            readme.append("```bash\n")
+            readme.append(f"python {filename}\n")
+            readme.append("```\n\n")
+    elif primary_lang in ['typescript']:
+        readme.append("```bash\n")
+        readme.append(f"npx ts-node {filename}\n")
+        readme.append("# or\n")
+        readme.append(f"bun run {filename}\n")
+        readme.append("```\n\n")
+    elif primary_lang == 'bash':
+        readme.append("```bash\n")
+        readme.append(f"bash {filename}\n")
+        readme.append("```\n\n")
 
     # Files section
     readme.append("## Files\n\n")
-    file_descriptions = {}
     for block in blocks:
-        # Generate filename from language
-        filename = generate_filename(block.language, example_name, len(blocks))
-        file_descriptions[filename] = f"Main {block.language} implementation"
-
-    for filename, desc in file_descriptions.items():
-        readme.append(f"- `{filename}` - {desc}\n")
+        fname = generate_filename(block.language, example_name, len(blocks))
+        readme.append(f"- **`{fname}`** - {block.language.title()} implementation ({block.line_count} lines)\n")
     readme.append("\n")
 
-    # Usage section
-    readme.append("## Usage\n\n")
-    readme.append("### Prerequisites\n\n")
+    # Dependencies (for Python scripts with inline deps)
+    if primary_lang == 'python' and blocks:
+        code = blocks[0].code
+        if '# dependencies' in code.lower():
+            readme.append("## Dependencies\n\n")
+            readme.append("This script uses inline dependencies (PEP 723). Run with `uv run` to auto-install:\n\n")
+            # Extract dependencies
+            in_deps = False
+            deps = []
+            for line in code.split('\n'):
+                if '# dependencies' in line.lower():
+                    in_deps = True
+                    continue
+                if in_deps:
+                    if line.strip().startswith('#'):
+                        break
+                    if '"' in line:
+                        dep = line.split('"')[1].split('>=')[0].split('==')[0]
+                        deps.append(dep)
+            if deps:
+                for dep in deps:
+                    readme.append(f"- {dep}\n")
+                readme.append("\n")
 
-    # Detect prerequisites from language
-    languages = set(block.language for block in blocks)
-    if 'python' in languages:
-        readme.append("- Python 3.11+\n")
-    if 'typescript' in languages or 'javascript' in languages:
-        readme.append("- Node.js 18+\n")
-    if 'bash' in languages:
-        readme.append("- Bash shell\n")
-
-    readme.append("\n### Running the Example\n\n")
-
-    if usage_notes:
-        readme.append(f"{usage_notes}\n\n")
-    else:
-        # Generate default usage based on language
-        primary_lang = blocks[0].language if blocks else 'unknown'
-        if primary_lang == 'python':
-            readme.append("```bash\n")
-            readme.append("python " + list(file_descriptions.keys())[0] + "\n")
-            readme.append("```\n\n")
-        elif primary_lang in ['typescript', 'javascript']:
-            readme.append("```bash\n")
-            readme.append("node " + list(file_descriptions.keys())[0] + "\n")
-            readme.append("```\n\n")
-        elif primary_lang == 'bash':
-            readme.append("```bash\n")
-            readme.append("bash " + list(file_descriptions.keys())[0] + "\n")
-            readme.append("```\n\n")
-
-    # Key Concepts
-    readme.append("## Key Concepts\n\n")
-    readme.append("This example demonstrates:\n\n")
-    readme.append("- **Implementation Pattern:** See the blog post for detailed explanation\n")
-    readme.append("- **Best Practices:** Code follows production-ready patterns\n")
-    readme.append("- **Extensibility:** Adapt for your specific use case\n\n")
-
-    # Modifications
-    readme.append("## Modifications\n\n")
-    readme.append("To adapt this code for your use case:\n\n")
-    readme.append("1. Review the code and understand the core logic\n")
-    readme.append("2. Modify configuration or parameters as needed\n")
-    readme.append("3. Test thoroughly before using in production\n\n")
+    # Blog Context
+    readme.append("## Blog Context\n\n")
+    section_clean = section_heading.lstrip('#').strip()
+    readme.append(f"This code is from the **{section_clean}** section of [{post_title}](https://blog.acidbath.com/blog/{post_slug}).\n\n")
+    readme.append("The blog post provides:\n")
+    readme.append("- Detailed explanation of the implementation\n")
+    readme.append("- Context for when and why to use this pattern\n")
+    readme.append("- Related examples and best practices\n\n")
 
     # Notes
-    readme.append("## Notes\n\n")
-    readme.append("This code is extracted from the ACIDBATH blog and follows the POC Rule: ")
-    readme.append("it's working, copy-paste code that you can use immediately. ")
-    readme.append("See the original blog post for context and detailed explanation.\n")
+    readme.append("## License\n\n")
+    readme.append("This code follows the **POC Rule**: working, copy-paste code you can use immediately.\n")
+    readme.append("See the [ACIDBATH blog](https://blog.acidbath.com) for more AI engineering content.\n")
 
     return ''.join(readme)
 

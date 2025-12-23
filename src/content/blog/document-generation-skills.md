@@ -86,7 +86,7 @@ Usage:
 Generates Excel, PowerPoint, and PDF from structured data.
 ```
 
-> ** Complete Example:** [Step Setup Configuration](https://github.com/ameno-/acidbath-code/tree/main/examples/production-patterns/document-generation-skills/step-setup-configuration)
+> ** Complete Example:** [Step Setup Configuration](https://github.com/ameno-/acidbath-code/tree/main/production-patterns/document-generation-skills/step-setup-configuration)
 >
 > Complete implementation from the 'Step 1: Setup and Configuration' section.
 >
@@ -106,7 +106,7 @@ Create an Excel workbook with 2 sheets:
 
 ```
 
-> ** Complete Example:** [Step Setup Configuration](https://github.com/ameno-/acidbath-code/tree/main/examples/production-patterns/document-generation-skills/step-setup-configuration)
+> ** Complete Example:** [Step Setup Configuration](https://github.com/ameno-/acidbath-code/tree/main/production-patterns/document-generation-skills/step-setup-configuration)
 >
 > Complete implementation from the 'Step 1: Setup and Configuration' section.
 >
@@ -125,7 +125,7 @@ def generate_powerpoint(data: dict, output_dir: Path) -> dict:
 
 ```
 
-> ** Complete Example:** [Step Setup Configuration](https://github.com/ameno-/acidbath-code/tree/main/examples/production-patterns/document-generation-skills/step-setup-configuration)
+> ** Complete Example:** [Step Setup Configuration](https://github.com/ameno-/acidbath-code/tree/main/production-patterns/document-generation-skills/step-setup-configuration)
 >
 > Complete implementation from the 'Step 1: Setup and Configuration' section.
 >
@@ -145,7 +145,7 @@ Create a PDF document:
 
 ```
 
-> ** Complete Example:** [Step Setup Configuration](https://github.com/ameno-/acidbath-code/tree/main/examples/production-patterns/document-generation-skills/step-setup-configuration)
+> ** Complete Example:** [Step Setup Configuration](https://github.com/ameno-/acidbath-code/tree/main/production-patterns/document-generation-skills/step-setup-configuration)
 >
 > Complete implementation from the 'Step 1: Setup and Configuration' section.
 >
@@ -166,7 +166,7 @@ def run_pipeline(data_path: str, output_dir: str) -> dict:
 
 ```
 
-> ** Complete Example:** [Step Setup Configuration](https://github.com/ameno-/acidbath-code/tree/main/examples/production-patterns/document-generation-skills/step-setup-configuration)
+> ** Complete Example:** [Step Setup Configuration](https://github.com/ameno-/acidbath-code/tree/main/production-patterns/document-generation-skills/step-setup-configuration)
 >
 > Complete implementation from the 'Step 1: Setup and Configuration' section.
 >

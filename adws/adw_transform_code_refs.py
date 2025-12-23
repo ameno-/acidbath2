@@ -42,6 +42,7 @@ console = Console()
 # Constants
 ACIDBATH_CODE_LOCAL = Path.home() / "dev" / "acidbath-code"
 BLOG_DIR = Path(__file__).parent.parent / "src" / "content" / "blog"
+# Root-level categories, no examples/ prefix
 GITHUB_BASE_URL = "https://github.com/ameno-/acidbath-code/tree/main"
 
 

@@ -196,8 +196,8 @@ def write_example_to_repo(
     post_slug = example["post_slug"]
     example_name = example["example_name"]
 
-    # Create directory path
-    example_dir = repo_path / "examples" / category / post_slug / example_name
+    # Create directory path - categories at root level, not under examples/
+    example_dir = repo_path / category / post_slug / example_name
 
     result = {
         "path": str(example_dir.relative_to(repo_path)),
@@ -304,11 +304,11 @@ def update_manifest(
                 "extracted_examples": [],
             }
 
-        # Add example to post
+        # Add example to post - path at root level, not under examples/
         manifest["posts"][post_slug]["extracted_examples"].append({
             "name": example["example_name"],
             "category": example["category"],
-            "path": f"examples/{example['category']}/{post_slug}/{example['example_name']}",
+            "path": f"{example['category']}/{post_slug}/{example['example_name']}",
             "language": block.language,
             "lines": block.line_count,
             "section": block.context,

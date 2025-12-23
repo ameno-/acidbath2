@@ -66,7 +66,7 @@ import sys
 from anthropic import Anthropic
 ```
 
-> ** See Full Implementation:** [Poc Simplest Custom](https://github.com/ameno-/acidbath-code/tree/main/examples/agentic-patterns/agent-architecture/poc-simplest-custom)
+> ** See Full Implementation:** [Poc Simplest Custom](https://github.com/ameno-/acidbath-code/tree/main/agentic-patterns/agent-architecture/poc-simplest-custom)
 >
 > Complete implementation from the 'POC 1: The Simplest Custom Agent' section.
 >
@@ -108,7 +108,7 @@ import json
 import sys
 ```
 
-> ** See Full Implementation:** [Poc Simplest Custom](https://github.com/ameno-/acidbath-code/tree/main/examples/agentic-patterns/agent-architecture/poc-simplest-custom)
+> ** See Full Implementation:** [Poc Simplest Custom](https://github.com/ameno-/acidbath-code/tree/main/agentic-patterns/agent-architecture/poc-simplest-custom)
 >
 > Complete implementation from the 'POC 1: The Simplest Custom Agent' section.
 >
@@ -240,7 +240,7 @@ You are a research sub-agent. Your job is to gather information and create detai
    - Always start by reading the context.md file passed to you
 ```
 
-> ** See Full Implementation:** [Step Research Agent](https://github.com/ameno-/acidbath-code/tree/main/examples/agentic-patterns/agent-architecture/step-research-agent)
+> ** See Full Implementation:** [Step Research Agent](https://github.com/ameno-/acidbath-code/tree/main/agentic-patterns/agent-architecture/step-research-agent)
 >
 > Complete implementation from the 'Step 2: Research Agent Definition' section.
 >

@@ -106,7 +106,7 @@ Arguments:
     --query, -q    Search term (required)
 ```
 
-> ** Complete Example:** [When You Need](https://github.com/ameno-/acidbath-code/tree/main/examples/agentic-patterns/context-engineering/when-you-need)
+> ** Complete Example:** [When You Need](https://github.com/ameno-/acidbath-code/tree/main/agentic-patterns/context-engineering/when-you-need)
 >
 > Complete implementation from the 'When you need a tool:' section.
 >

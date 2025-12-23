@@ -77,7 +77,7 @@ Analyze the provided file and create a detailed implementation plan for improvem
 
 ```
 
-> ** Complete Example:** [Poc Working Workflow](https://github.com/ameno-/acidbath-code/tree/main/examples/workflow-tools/workflow-prompts/poc-working-workflow)
+> ** Complete Example:** [Poc Working Workflow](https://github.com/ameno-/acidbath-code/tree/main/workflow-tools/workflow-prompts/poc-working-workflow)
 >
 > Complete implementation from the 'POC: A Working Workflow Prompt' section.
 >

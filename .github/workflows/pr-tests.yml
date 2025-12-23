@@ -89,16 +89,6 @@ jobs:
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           command: pages deploy dist --project-name=acidbath --branch=${{ github.head_ref }}
 
-      - name: Get preview URL
-        id: preview
-        run: |
-          # Extract URL from deploy output or construct it
-          BRANCH="${{ github.head_ref }}"
-          # Sanitize branch name for URL (replace special chars with -)
-          SANITIZED_BRANCH=$(echo "$BRANCH" | sed 's/[^a-zA-Z0-9]/-/g' | tr '[:upper:]' '[:lower:]')
-          PREVIEW_URL="https://${SANITIZED_BRANCH}.acidbath.pages.dev"
-          echo "url=$PREVIEW_URL" >> $GITHUB_OUTPUT
-
       - name: Comment on PR
         if: always()
         uses: actions/github-script@v7
@@ -111,7 +101,7 @@ jobs:
             const status = '${{ steps.results.outputs.status }}';
             const emoji = '${{ steps.results.outputs.emoji }}';
             const sha = context.sha.substring(0, 7);
-            const previewUrl = '${{ steps.preview.outputs.url }}';
+            const previewUrl = '${{ steps.deploy.outputs.deployment-url }}';
 
             let body = `## ${emoji} PR Status Report\n\n`;
             body += `**Commit:** \`${sha}\`\n\n`;
@@ -185,7 +175,7 @@ jobs:
             const failed = '${{ steps.results.outputs.failed }}';
             const sha = context.sha.substring(0, 7);
             const prNumber = context.issue.number;
-            const previewUrl = '${{ steps.preview.outputs.url }}';
+            const previewUrl = '${{ steps.deploy.outputs.deployment-url }}';
 
             let body = `### ${emoji} PR #${prNumber} Status Update\n\n`;
             body += `**Commit:** \`${sha}\`\n`;

@@ -1,0 +1,169 @@
+---
+interface Props {
+  title: string;
+  preview?: string;
+  variant?: 'default' | 'compact' | 'prominent';
+  defaultOpen?: boolean;
+}
+
+const { title, preview, variant = 'default', defaultOpen = false } = Astro.props;
+---
+
+<details class={`collapse collapse-${variant}`} open={defaultOpen}>
+  <summary>
+    <span class="collapse-chevron">▸</span>
+    <span class="collapse-title">{title}</span>
+    {preview && (
+      <span class="collapse-preview">{preview}</span>
+    )}
+    <span class="collapse-hint">
+      <span class="collapse-hint-expand">Expand</span>
+      <span class="collapse-hint-collapse">Collapse</span>
+    </span>
+  </summary>
+  <div class="collapse-content">
+    <slot />
+  </div>
+</details>
+
+<style>
+  .collapse {
+    margin: var(--space-6) 0;
+    border: var(--border-width-thick) solid var(--color-foreground);
+    border-radius: var(--radius-sm);
+    background: var(--color-background);
+    transition: background var(--transition-base);
+  }
+
+  .collapse:hover {
+    background: var(--color-background-hover);
+  }
+
+  .collapse-compact {
+    margin: var(--space-4) 0;
+  }
+
+  .collapse-prominent {
+    border-color: var(--color-accent-primary);
+    border-left-width: 4px;
+  }
+
+  .collapse-prominent:hover {
+    background: rgba(57, 255, 20, 0.05);
+  }
+
+  summary {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    padding: var(--space-4);
+    cursor: pointer;
+    list-style: none;
+    user-select: none;
+    font-weight: 600;
+    transition: color var(--transition-base);
+  }
+
+  .collapse-compact summary {
+    padding: var(--space-3);
+  }
+
+  summary::-webkit-details-marker {
+    display: none;
+  }
+
+  summary:hover {
+    color: var(--color-accent-primary);
+  }
+
+  summary:hover .collapse-chevron {
+    color: var(--color-accent-primary);
+  }
+
+  .collapse-chevron {
+    display: inline-block;
+    font-size: var(--text-sm);
+    transition: transform var(--transition-base);
+    color: var(--color-foreground-alt);
+    min-width: 1em;
+  }
+
+  details[open] .collapse-chevron {
+    transform: rotate(90deg);
+  }
+
+  .collapse-title {
+    flex: 1;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-size: var(--text-sm);
+  }
+
+  .collapse-prominent .collapse-title {
+    color: var(--color-accent-primary);
+  }
+
+  .collapse-preview {
+    color: var(--color-foreground-alt);
+    font-size: var(--text-sm);
+    font-weight: 400;
+    font-style: italic;
+    margin-left: var(--space-2);
+  }
+
+  details[open] .collapse-preview {
+    display: none;
+  }
+
+  .collapse-hint {
+    margin-left: auto;
+    font-size: var(--text-xs);
+    color: var(--color-foreground-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-weight: 500;
+  }
+
+  .collapse-hint-collapse {
+    display: none;
+  }
+
+  details[open] .collapse-hint-expand {
+    display: none;
+  }
+
+  details[open] .collapse-hint-collapse {
+    display: inline;
+  }
+
+  .collapse-content {
+    padding: 0 var(--space-4) var(--space-4);
+    border-top: 1px solid var(--color-foreground-alt);
+    margin-top: var(--space-2);
+    padding-top: var(--space-4);
+  }
+
+  .collapse-compact .collapse-content {
+    padding: 0 var(--space-3) var(--space-3);
+    padding-top: var(--space-3);
+  }
+
+  /* Handle nested CodeBlock margins */
+  .collapse-content :global(pre) {
+    margin-top: 0;
+  }
+
+  .collapse-content :global(> *:first-child) {
+    margin-top: 0;
+  }
+
+  .collapse-content :global(> *:last-child) {
+    margin-bottom: 0;
+  }
+
+  /* Nested element spacing */
+  .collapse-content :global(> * + *) {
+    margin-top: var(--space-4);
+  }
+</style>

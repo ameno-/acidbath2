@@ -8,80 +8,175 @@ interface Heading {
 interface Props {
   headings: Heading[];
   title?: string;
+  maxTopLevel?: number;
 }
 
-const { headings, title = 'On This Page' } = Astro.props;
+const { headings, title = 'On This Page', maxTopLevel = 8 } = Astro.props;
 
 // Filter to only show h2 and h3 headings
 const tocHeadings = headings.filter(h => h.depth >= 2 && h.depth <= 3);
+
+// Group h3s under their parent h2
+interface HeadingGroup {
+  h2: Heading;
+  h3s: Heading[];
+}
+
+const headingGroups: HeadingGroup[] = [];
+let currentGroup: HeadingGroup | null = null;
+
+tocHeadings.forEach(heading => {
+  if (heading.depth === 2) {
+    currentGroup = { h2: heading, h3s: [] };
+    headingGroups.push(currentGroup);
+  } else if (heading.depth === 3 && currentGroup) {
+    currentGroup.h3s.push(heading);
+  }
+});
+
+const totalSections = headingGroups.length;
+const showMoreButton = totalSections > maxTopLevel;
+const initialGroups = showMoreButton ? headingGroups.slice(0, maxTopLevel) : headingGroups;
+const hiddenGroups = showMoreButton ? headingGroups.slice(maxTopLevel) : [];
 ---
 
 {tocHeadings.length > 0 && (
   <aside class="toc-sidebar" aria-label="Table of contents">
     <nav class="toc-nav">
-      <div class="toc-header">{title}</div>
-      <ul class="toc-list">
-        {tocHeadings.map((heading) => (
-          <li class={`toc-item toc-depth-${heading.depth}`}>
-            <a href={`#${heading.slug}`} class="toc-link">
-              {heading.text}
-            </a>
-          </li>
+      <div class="toc-header">
+        <span class="toc-title">{title}</span>
+        <span class="toc-count">{totalSections} sections</span>
+      </div>
+      <div class="toc-progress-bar">
+        <div class="toc-progress-fill"></div>
+      </div>
+      <div class="toc-groups">
+        {initialGroups.map((group) => (
+          <details class="toc-group" data-slug={group.h2.slug} open={group.h3s.length === 0}>
+            <summary class="toc-group-summary">
+              <span class="toc-chevron">▸</span>
+              <a href={`#${group.h2.slug}`} class="toc-link toc-link-h2" data-slug={group.h2.slug}>
+                {group.h2.text}
+              </a>
+              {group.h3s.length > 0 && (
+                <span class="toc-subcount">({group.h3s.length})</span>
+              )}
+            </summary>
+            {group.h3s.length > 0 && (
+              <ul class="toc-sublist">
+                {group.h3s.map((h3) => (
+                  <li class="toc-item toc-depth-3">
+                    <a href={`#${h3.slug}`} class="toc-link toc-link-h3" data-slug={h3.slug}>
+                      {h3.text}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            )}
+          </details>
         ))}
-      </ul>
+        {showMoreButton && (
+          <div class="toc-hidden-groups" style="display: none;">
+            {hiddenGroups.map((group) => (
+              <details class="toc-group" data-slug={group.h2.slug}>
+                <summary class="toc-group-summary">
+                  <span class="toc-chevron">▸</span>
+                  <a href={`#${group.h2.slug}`} class="toc-link toc-link-h2" data-slug={group.h2.slug}>
+                    {group.h2.text}
+                  </a>
+                  {group.h3s.length > 0 && (
+                    <span class="toc-subcount">({group.h3s.length})</span>
+                  )}
+                </summary>
+                {group.h3s.length > 0 && (
+                  <ul class="toc-sublist">
+                    {group.h3s.map((h3) => (
+                      <li class="toc-item toc-depth-3">
+                        <a href={`#${h3.slug}`} class="toc-link toc-link-h3" data-slug={h3.slug}>
+                          {h3.text}
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+                )}
+              </details>
+            ))}
+          </div>
+        )}
+      </div>
+      {showMoreButton && (
+        <button class="toc-show-more" aria-label="Show more sections">
+          <span class="show-more-text">Show {hiddenGroups.length} more</span>
+          <span class="show-less-text">Show less</span>
+        </button>
+      )}
     </nav>
   </aside>
 )}
 
 <script>
   /**
-   * Table of Contents Active State Management
-   *
-   * This script ensures the TOC sidebar stays synchronized with the currently visible content.
-   * It uses three complementary mechanisms to maintain accurate highlighting:
-   *
-   * 1. IntersectionObserver: Primary mechanism for detecting visible headings
-   *    - Configured with wider rootMargin (-20% 0px -20% 0px) for reliable detection
-   *    - Multiple threshold values for granular visibility tracking
-   *
-   * 2. URL Hash Synchronization: Handles browser navigation and direct links
-   *    - Sets initial active state on page load from URL hash
-   *    - Responds to hashchange events (back/forward buttons)
-   *
-   * 3. Scroll Event Fallback: Ensures updates even when IntersectionObserver misses changes
-   *    - Debounced to 100ms to prevent performance issues
-   *    - Finds the heading closest to viewport top (20% from top)
-   *
-   * Bug Fix: Issue #5 - Side-nav sub-heading highlighting
-   * Previous issues: narrow IntersectionObserver zone, missing URL hash sync, no fallback
+   * Enhanced Table of Contents with hierarchical grouping and scroll progress
    */
-  function initTocHighlight() {
-    const tocLinks = document.querySelectorAll('.toc-link');
+  function initEnhancedToc() {
+    const tocSidebar = document.querySelector('.toc-sidebar');
+    if (!tocSidebar) return;
+
+    const tocLinks = document.querySelectorAll<HTMLAnchorElement>('.toc-link');
+    const tocGroups = document.querySelectorAll<HTMLDetailsElement>('.toc-group');
+    const progressFill = document.querySelector<HTMLDivElement>('.toc-progress-fill');
+    const showMoreButton = document.querySelector<HTMLButtonElement>('.toc-show-more');
+    const hiddenGroupsContainer = document.querySelector<HTMLDivElement>('.toc-hidden-groups');
+
+    // Get all headings from the page
     const headings = Array.from(tocLinks).map(link => {
-      const id = link.getAttribute('href')?.slice(1);
-      return id ? document.getElementById(id) : null;
-    }).filter(Boolean) as HTMLElement[];
+      const slug = link.getAttribute('data-slug');
+      return slug ? document.getElementById(slug) : null;
+    }).filter((el): el is HTMLElement => el !== null);
 
     if (headings.length === 0) return;
 
-    // Track current active heading
-    let currentActive: string | null = null;
+    let currentActiveSlug: string | null = null;
 
-    // Helper function to update active state for a given heading ID
-    function setActiveHeading(id: string) {
-      if (id !== currentActive) {
-        currentActive = id;
-        tocLinks.forEach(link => {
-          const isActive = link.getAttribute('href') === `#${id}`;
-          link.classList.toggle('active', isActive);
+    // Update scroll progress bar
+    function updateScrollProgress() {
+      if (!progressFill) return;
 
-          // Also add visual indicator to parent li
-          link.parentElement?.classList.toggle('is-active', isActive);
-        });
-      }
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const scrolled = window.scrollY;
+      const progress = (scrolled / docHeight) * 100;
+
+      progressFill.style.width = `${Math.min(progress, 100)}%`;
     }
 
-    // Initialize active state based on URL hash on page load
+    // Set active heading and expand parent group
+    function setActiveHeading(slug: string) {
+      if (slug === currentActiveSlug) return;
+      currentActiveSlug = slug;
+
+      tocLinks.forEach(link => {
+        const linkSlug = link.getAttribute('data-slug');
+        const isActive = linkSlug === slug;
+        link.classList.toggle('active', isActive);
+
+        // Expand parent group if this is an h3
+        if (isActive && link.classList.contains('toc-link-h3')) {
+          const parentDetails = link.closest<HTMLDetailsElement>('.toc-group');
+          if (parentDetails) {
+            parentDetails.open = true;
+          }
+        }
+      });
+
+      // Highlight active group
+      tocGroups.forEach(group => {
+        const groupSlug = group.getAttribute('data-slug');
+        const isActiveGroup = groupSlug === slug;
+        group.classList.toggle('is-active', isActiveGroup);
+      });
+    }
+
+    // Initialize from URL hash
     function initFromUrlHash() {
       const hash = window.location.hash.slice(1);
       if (hash) {
@@ -92,7 +187,7 @@ const tocHeadings = headings.filter(h => h.depth >= 2 && h.depth <= 3);
       }
     }
 
-    // Handle URL hash changes (browser back/forward, direct navigation)
+    // Handle hash changes
     function handleHashChange() {
       const hash = window.location.hash.slice(1);
       if (hash) {
@@ -103,14 +198,12 @@ const tocHeadings = headings.filter(h => h.depth >= 2 && h.depth <= 3);
       }
     }
 
+    // Intersection Observer for active tracking
     const observer = new IntersectionObserver(
       (entries) => {
-        // Find all headings currently intersecting with the viewport
         const visibleEntries = entries.filter(e => e.isIntersecting);
 
         if (visibleEntries.length > 0) {
-          // Get the topmost visible heading (closest to top of viewport)
-          // This ensures we highlight the heading the user is most likely reading
           const topEntry = visibleEntries.reduce((prev, curr) => {
             return prev.boundingClientRect.top < curr.boundingClientRect.top ? prev : curr;
           });
@@ -118,20 +211,15 @@ const tocHeadings = headings.filter(h => h.depth >= 2 && h.depth <= 3);
           const id = topEntry.target.id;
           setActiveHeading(id);
         } else if (entries.length > 0) {
-          // Fallback: If no headings are in the intersection zone,
-          // find the closest heading above the viewport
-          // This handles cases where user scrolls past all headings in the detection zone
           const allHeadings = headings.map(h => ({
             id: h.id,
             top: h.getBoundingClientRect().top
           }));
 
-          // Find the last heading that's above the viewport center
           const viewportCenter = window.innerHeight / 2;
           const headingsAboveCenter = allHeadings.filter(h => h.top < viewportCenter);
 
           if (headingsAboveCenter.length > 0) {
-            // Get the closest one to the center (the one we most recently scrolled past)
             const closest = headingsAboveCenter.reduce((prev, curr) => {
               return Math.abs(curr.top - viewportCenter) < Math.abs(prev.top - viewportCenter) ? curr : prev;
             });
@@ -140,30 +228,21 @@ const tocHeadings = headings.filter(h => h.depth >= 2 && h.depth <= 3);
         }
       },
       {
-        // More reliable detection zone: centered viewport band
-        // This creates a trigger zone from 20% below top to 20% above bottom
-        // Catches headings in a wider range for better scroll tracking
         rootMargin: '-20% 0px -20% 0px',
-        // Lower threshold to trigger on any visibility, not just 50%+
-        // This ensures small headings and quick scrolling are detected
         threshold: [0, 0.1, 0.25, 0.5, 0.75, 1]
       }
     );
 
     headings.forEach(heading => observer.observe(heading));
 
-    // Scroll event fallback with debouncing
-    // This ensures TOC updates even if IntersectionObserver misses an update
+    // Scroll event for progress bar
     let scrollTimeout: ReturnType<typeof setTimeout>;
     function handleScroll() {
-      // Clear previous timeout
+      updateScrollProgress();
+
       clearTimeout(scrollTimeout);
-
-      // Debounce scroll events to avoid performance issues
       scrollTimeout = setTimeout(() => {
-        // Find the heading closest to the top of the viewport
-        const viewportTop = window.scrollY + window.innerHeight * 0.2; // 20% from top
-
+        const viewportTop = window.scrollY + window.innerHeight * 0.2;
         let closestHeadingId: string | null = null;
         let closestDistance = Infinity;
 
@@ -180,19 +259,60 @@ const tocHeadings = headings.filter(h => h.depth >= 2 && h.depth <= 3);
         if (closestHeadingId) {
           setActiveHeading(closestHeadingId);
         }
-      }, 100); // 100ms debounce delay
+      }, 100);
     }
 
-    // Add scroll listener as fallback
     window.addEventListener('scroll', handleScroll, { passive: true });
-
-    // Set initial state based on URL hash
-    initFromUrlHash();
-
-    // Listen for hash changes
     window.addEventListener('hashchange', handleHashChange);
 
-    // Cleanup on page transitions
+    // Show more functionality
+    if (showMoreButton && hiddenGroupsContainer) {
+      let expanded = false;
+
+      showMoreButton.addEventListener('click', () => {
+        expanded = !expanded;
+        hiddenGroupsContainer.style.display = expanded ? 'block' : 'none';
+        showMoreButton.classList.toggle('expanded', expanded);
+      });
+    }
+
+    // Smooth scroll with history
+    tocLinks.forEach(link => {
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        const slug = link.getAttribute('data-slug');
+        if (slug) {
+          const target = document.getElementById(slug);
+          if (target) {
+            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            history.pushState(null, '', `#${slug}`);
+            setActiveHeading(slug);
+          }
+        }
+      });
+    });
+
+    // Prevent details toggle from triggering link navigation
+    tocGroups.forEach(group => {
+      const summary = group.querySelector('summary');
+      if (summary) {
+        summary.addEventListener('click', (e) => {
+          const target = e.target as HTMLElement;
+          // Only prevent default if clicking the summary itself, not the link
+          if (target.tagName !== 'A') {
+            // Let the details toggle naturally
+          } else {
+            e.stopPropagation(); // Prevent details toggle when clicking link
+          }
+        });
+      }
+    });
+
+    // Initialize
+    initFromUrlHash();
+    updateScrollProgress();
+
+    // Cleanup
     return () => {
       headings.forEach(heading => observer.unobserve(heading));
       window.removeEventListener('hashchange', handleHashChange);
@@ -203,9 +323,10 @@ const tocHeadings = headings.filter(h => h.depth >= 2 && h.depth <= 3);
 
   // Initialize
   if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initTocHighlight);
+    document.addEventListener('DOMContentLoaded', initEnhancedToc);
   } else {
-    initTocHighlight();
+    initEnhancedToc();
   }
-  document.addEventListener('astro:after-swap', initTocHighlight);
+  document.addEventListener('astro:after-swap', initEnhancedToc);
+  document.addEventListener('astro:page-load', initEnhancedToc);
 </script>

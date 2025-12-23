@@ -2,7 +2,7 @@
 
 > This file contains the full text of all ACIDBATH blog posts,
 > formatted for AI consumption.
-> Last updated: 2025-12-23T20:30:12.418Z
+> Last updated: 2025-12-23T23:18:23.861Z
 
 
 ---
@@ -617,6 +617,10 @@ Here's a minimal but complete single-file database agent pattern:
 
 [code block]
 
+Complete Example: Complete Working Example
+Complete implementation from the 'Complete Working Example: Database Agent' section.
+Language: typescript | Lines: 59
+
 Save as db-agent.ts with this package.json:
 
 [code block]
@@ -766,21 +770,41 @@ Create documentpipeline.py:
 
 [code block]
 
+Complete Example: Step Setup Configuration
+Complete implementation from the 'Step 1: Setup and Configuration' section.
+Language: python | Lines: 73
+
 Step 2: Excel Generation Function
 
 [code block]
+
+Complete Example: Step Setup Configuration
+Complete implementation from the 'Step 1: Setup and Configuration' section.
+Language: python | Lines: 73
 
 Step 3: PowerPoint Generation Function
 
 [code block]
 
+Complete Example: Step Setup Configuration
+Complete implementation from the 'Step 1: Setup and Configuration' section.
+Language: python | Lines: 73
+
 Step 4: PDF Generation Function
 
 [code block]
 
+Complete Example: Step Setup Configuration
+Complete implementation from the 'Step 1: Setup and Configuration' section.
+Language: python | Lines: 73
+
 Step 5: Pipeline Orchestration
 
 [code block]
+
+Complete Example: Step Setup Configuration
+Complete implementation from the 'Step 1: Setup and Configuration' section.
+Language: python | Lines: 73
 
 Step 6: Sample Data File
 
@@ -983,6 +1007,10 @@ Create agents/pongagent.py:
 
 [code block]
 
+See Full Implementation: Poc Simplest Custom
+Complete implementation from the 'POC 1: The Simplest Custom Agent' section.
+Language: python | Lines: 41
+
 Test it:
 [code block]
 
@@ -993,6 +1021,10 @@ POC 2: Agent with Custom Tools
 Create agents/calculatoragent.py:
 
 [code block]
+
+See Full Implementation: Poc Simplest Custom
+Complete implementation from the 'POC 1: The Simplest Custom Agent' section.
+Language: python | Lines: 41
 
 Test it:
 [code block]
@@ -1033,6 +1065,10 @@ Step 2: Research Agent Definition
 Create .claude/agents/researcher.md:
 
 [code block]
+
+See Full Implementation: Step Research Agent
+Complete implementation from the 'Step 2: Research Agent Definition' section.
+Language: markdown | Lines: 49
 
 Step 3: Implementation Flow
 
@@ -1327,6 +1363,10 @@ Each tool is a UV single-file script with embedded dependencies:
 /tools/market/search.py
 [code block]
 
+Complete Example: When You Need
+Complete implementation from the 'When you need a tool:' section.
+Language: python | Lines: 70
+
 The Flow in Practice
 
 [code block]
@@ -1567,11 +1607,19 @@ Create drops.yaml:
 
 [code block]
 
+Complete Example: Step Configuration File
+Complete implementation from the 'Step 1: Configuration File' section.
+Language: yaml | Lines: 51
+
 Step 2: The Core Watcher
 
 Create dropwatcher.py:
 
 [code block]
+
+Complete Example: Step Core Watcher
+Complete implementation from the 'Step 2: The Core Watcher' section.
+Language: python | Lines: 218
 
 Step 3: Agent Prompt Templates
 
@@ -1588,6 +1636,10 @@ Step 4: Image Generation Agent
 Create agents/imagegen.py:
 
 [code block]
+
+Complete Example: Step Core Watcher
+Complete implementation from the 'Step 2: The Core Watcher' section.
+Language: python | Lines: 218
 
 Data Flow: File Drop to Result
 
@@ -1746,8 +1798,7 @@ File type validation:
 
 Content sanitization:
 
-[code block]python", "[code block]bash", "[code block]
-
+[code block]python", "[code block]bash", "[code block]unknown
 Never execute code from dropped files directly. Treat all input as untrusted. Validate, sanitize, then process.
 
 The Automation Decision Framework
@@ -1763,34 +1814,6 @@ Not every task deserves automation. Use specific thresholds.
 | 10+ times/day | Any time saved | Definitely zone |
 
 | Complexity | Time to Build | Approach |
-|------------|---------------|----------|
-| Single step | 5 minutes | Bash agent |
-| Multi-step | 30 minutes | Python agent |
-| AI reasoning | 15 minutes | Claude agent |
-| Mixed flow | 1-2 hours | Chain agents |
-| Needs approval | 2-3 hours | Approval workflow |
-
-| Risk Level | Requirements | Safety |
-|------------|--------------|--------|
-| Low | None | Full auto |
-| Medium | Logging | Auto + audit |
-| High | Review | Approval required |
-| Critical | Sign-off | Manual only |
-
-Real numbers from our deployment:
-• Morning meeting transcription: 10x/week, saves 15 min/day, ROI: 2.5 hours/week
-• Code review: 30x/week, saves 3 min each, ROI: 1.5 hours/week
-• Data analysis: 5x/week, saves 20 min each, ROI: 1.7 hours/week
-• Legal contract review: 2x/month, approval required, ROI: 40 min/month
-
-Total time saved: 22 hours/month. Setup time: 8 hours. Break-even in 2 weeks.
-
-Agent Opportunity: Build Your Drop Zone Library
-
-Start with these high-value zones:
-
-Morning Debrief Zone
-
 [code block]
 
 Code Review Zone
@@ -1872,6 +1895,10 @@ POC: A Working Workflow Prompt
 Here's a complete, production-ready workflow prompt you can use as a Claude Code command:
 
 [code block]
+
+Complete Example: Poc Working Workflow
+Complete implementation from the 'POC: A Working Workflow Prompt' section.
+Language: markdown | Lines: 59
 
 Save this as .claude/commands/analyze.md and run with /analyze src/main.py.
 

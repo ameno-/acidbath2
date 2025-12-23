@@ -342,51 +342,13 @@ let _db: Connection | null = null;
 
 async function getConnection(): Promise<Connection> {
   if (!_db) {
-    _db = await mysql.createConnection({
-      host: Bun.env.MYSQL_HOST || "localhost",
-      user: Bun.env.MYSQL_USER || "root",
-      password: Bun.env.MYSQL_PASS || "",
-      database: Bun.env.MYSQL_DB || "mysql",
-    });
-  }
-  return _db;
-}
-
-export async function query(sql: string): Promise<any[]> {
-  const db = await getConnection();
-  const [rows] = await db.execute(sql);
-  return Array.isArray(rows) ? rows : [];
-}
-
-export async function close(): Promise<void> {
-  if (_db) {
-    await _db.end();
-    _db = null;
-  }
-}
-
-// CLI mode
-if (import.meta.main) {
-  const { values } = parseArgs({
-    args: Bun.argv.slice(2),
-    options: {
-      query: { type: "string", short: "q" },
-    },
-  });
-
-  if (!values.query) {
-    console.error("Usage: bun db-agent.ts --query 'SELECT ...'");
-    process.exit(1);
-  }
-
-  try {
-    const results = await query(values.query);
-    console.log(JSON.stringify(results, null, 2));
-  } finally {
-    await close();
-  }
-}
 ```
+
+> ** Complete Example:** [Complete Working Example](https://github.com/ameno-/acidbath-code/tree/main/examples/workflow-tools/single-file-scripts/complete-working-example)
+>
+> Complete implementation from the 'Complete Working Example: Database Agent' section.
+>
+> **Language:** typescript | **Lines:** 59
 
 Save as `db-agent.ts` with this `package.json`:
 

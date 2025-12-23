@@ -151,6 +151,12 @@ Before setting `draft: false`:
 - [ ] All code blocks have language specified
 - [ ] Images have alt text
 
+### Code Organization
+- [ ] Long code blocks (>40 lines) extracted to acidbath-code
+- [ ] Code references use proper callout format
+- [ ] Inline snippets are ≤30 lines for readability
+- [ ] No broken links to acidbath-code repository
+
 ## Post-Publish Steps
 
 After setting `draft: false` and deploying:
@@ -160,14 +166,23 @@ After setting `draft: false` and deploying:
    node scripts/generate-llms-txt.js
    ```
 
-2. **Verify structured data**:
+2. **Extract Code Blocks** (if post has >20 line code blocks):
+   ```bash
+   uv run ./adws/adw_extract_code_blocks.py --post {slug}.md
+   uv run ./adws/adw_transform_code_refs.py --post {slug}.md
+   ```
+   Or use the slash commands:
+   - `/extract-code {slug}.md` - Extract complete examples to acidbath-code
+   - `/sync-code-blocks {slug}.md` - Transform post to use code references
+
+3. **Verify structured data**:
    - Check https://blog.amenoacids.com/blog/{slug}
    - Validate JSON-LD with Google's Rich Results Test
 
-3. **Create derivative content**:
+4. **Create derivative content**:
    - Run `/project:extract-content` to generate Twitter/LinkedIn/newsletter versions
 
-4. **Submit to HN** (if appropriate):
+5. **Submit to HN** (if appropriate):
    - Best time: Wednesday 8-10am EST
    - Use factual title, no marketing speak
 

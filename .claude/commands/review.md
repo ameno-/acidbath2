@@ -15,6 +15,11 @@ review_image_dir: `<absolute path to codebase>/agents/<adw_id>/<agent_name>/revi
 - Run `git diff origin/main` to see all changes made in current branch. Continue even if there are no changes related to the spec file.
 - Find the spec file by looking for specs/*.md files in the diff that match the current branch name
 - Read the identified spec file to understand requirements
+- **Code Block Validation** (for blog post changes):
+  - Check that inline code blocks are ≤30 lines
+  - Verify code references link to valid paths in acidbath-code
+  - Validate that complete examples (>40 lines) have been extracted
+  - Ensure manifest.json is up-to-date with new examples
 - IMPORTANT: If the work can be validated by UI validation then (if not skip the section):
   - Use the playwright mcp server commands to validate the work.
   - Look for corresponding e2e test files in ./claude/commands/e2e/test_*.md that mirror the feature name

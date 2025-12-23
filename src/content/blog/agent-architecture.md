@@ -64,33 +64,13 @@ Usage:
 
 import sys
 from anthropic import Anthropic
-
-SYSTEM_PROMPT = """
-You are a pong agent.
-Always respond exactly with "pong".
-Nothing else. No explanations. Just "pong".
-"""
-
-def main():
-    if len(sys.argv) < 2:
-        print("Usage: uv run pong_agent.py <message>")
-        sys.exit(1)
-
-    client = Anthropic()
-
-    response = client.messages.create(
-        model="claude-3-haiku-20240307",  # Cheapest model for simple task
-        max_tokens=10,
-        system=SYSTEM_PROMPT,
-        messages=[{"role": "user", "content": sys.argv[1]}]
-    )
-
-    print(response.content[0].text)
-
-
-if __name__ == "__main__":
-    main()
 ```
+
+> ** See Full Implementation:** [Poc Simplest Custom](https://github.com/ameno-/acidbath-code/tree/main/examples/agentic-patterns/agent-architecture/poc-simplest-custom)
+>
+> Complete implementation from the 'POC 1: The Simplest Custom Agent' section.
+>
+> **Language:** python | **Lines:** 41
 
 Test it:
 ```bash
@@ -126,124 +106,13 @@ Usage:
 
 import json
 import sys
-from anthropic import Anthropic
-
-SYSTEM_PROMPT = """
-You are a calculator agent.
-You have access to a calculate tool for mathematical operations.
-Always use the calculate tool for any math - never do mental math.
-After getting the result, explain it clearly to the user.
-"""
-
-TOOLS = [
-    {
-        "name": "calculate",
-        "description": "Evaluate a mathematical expression. Supports +, -, *, /, **, (), and common functions like sqrt, sin, cos, log.",
-        "input_schema": {
-            "type": "object",
-            "properties": {
-                "expression": {
-                    "type": "string",
-                    "description": "The mathematical expression to evaluate, e.g., '(15/100) * 847' or 'sqrt(144)'"
-                }
-            },
-            "required": ["expression"]
-        }
-    }
-]
-
-
-def execute_calculate(expression: str) -> str:
-    """Execute a math expression safely."""
-    import math
-    # Safe eval with only math functions
-    allowed = {
-        'sqrt': math.sqrt,
-        'sin': math.sin,
-        'cos': math.cos,
-        'tan': math.tan,
-        'log': math.log,
-        'log10': math.log10,
-        'exp': math.exp,
-        'pi': math.pi,
-        'e': math.e,
-        'abs': abs,
-        'round': round,
-    }
-    try:
-        result = eval(expression, {"__builtins__": {}}, allowed)
-        return str(result)
-    except Exception as e:
-        return f"Error: {e}"
-
-
-def run_agent(user_message: str) -> str:
-    client = Anthropic()
-
-    messages = [{"role": "user", "content": user_message}]
-
-    # First API call
-    response = client.messages.create(
-        model="claude-3-5-sonnet-20241022",
-        max_tokens=1024,
-        system=SYSTEM_PROMPT,
-        tools=TOOLS,
-        messages=messages
-    )
-
-    # Handle tool use
-    while response.stop_reason == "tool_use":
-        # Find the tool use block
-        tool_use = next(
-            block for block in response.content
-            if block.type == "tool_use"
-        )
-
-        # Execute the tool
-        if tool_use.name == "calculate":
-            result = execute_calculate(tool_use.input["expression"])
-        else:
-            result = f"Unknown tool: {tool_use.name}"
-
-        # Add assistant message and tool result
-        messages.append({"role": "assistant", "content": response.content})
-        messages.append({
-            "role": "user",
-            "content": [{
-                "type": "tool_result",
-                "tool_use_id": tool_use.id,
-                "content": result
-            }]
-        })
-
-        # Continue the conversation
-        response = client.messages.create(
-            model="claude-3-5-sonnet-20241022",
-            max_tokens=1024,
-            system=SYSTEM_PROMPT,
-            tools=TOOLS,
-            messages=messages
-        )
-
-    # Return final text response
-    return next(
-        block.text for block in response.content
-        if hasattr(block, "text")
-    )
-
-
-def main():
-    if len(sys.argv) < 2:
-        print("Usage: uv run calculator_agent.py <question>")
-        sys.exit(1)
-
-    result = run_agent(" ".join(sys.argv[1:]))
-    print(result)
-
-
-if __name__ == "__main__":
-    main()
 ```
+
+> ** See Full Implementation:** [Poc Simplest Custom](https://github.com/ameno-/acidbath-code/tree/main/examples/agentic-patterns/agent-architecture/poc-simplest-custom)
+>
+> Complete implementation from the 'POC 1: The Simplest Custom Agent' section.
+>
+> **Language:** python | **Lines:** 41
 
 Test it:
 ```bash
@@ -369,41 +238,13 @@ You are a research sub-agent. Your job is to gather information and create detai
 
 1. **Read the context file**
    - Always start by reading the context.md file passed to you
-   - Understand what's being asked and the constraints
-
-2. **Research the codebase**
-   - Find relevant existing code using Grep and Glob
-   - Understand current patterns and conventions
-   - Identify dependencies and interfaces
-
-3. **Research external documentation**
-   - If the task involves external services, fetch their docs
-   - Find best practices and examples
-   - Note any recent API changes
-
-4. **Create implementation plan**
-   - Step-by-step instructions for implementation
-   - Include actual code snippets where helpful
-   - Note potential issues and how to handle them
-   - List files that will need to be modified
-
-5. **Write research report**
-   - Save to the location specified in context.md
-   - Use clear sections matching the output expected
-   - Include confidence levels for recommendations
-
-6. **Return summary only**
-   - Tell the parent agent: "Research complete. Report saved to [path]"
-   - Do NOT include the full report in your response
-   - Keep the summary under 100 words
-
-## Rules
-
-- NEVER implement code, only plan it
-- NEVER call other sub-agents
-- ALWAYS write findings to file, not conversation
-- ALWAYS read context.md first
 ```
+
+> ** See Full Implementation:** [Step Research Agent](https://github.com/ameno-/acidbath-code/tree/main/examples/agentic-patterns/agent-architecture/step-research-agent)
+>
+> Complete implementation from the 'Step 2: Research Agent Definition' section.
+>
+> **Language:** markdown | **Lines:** 49
 
 ### Step 3: Implementation Flow
 

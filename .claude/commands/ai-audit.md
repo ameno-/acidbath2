@@ -42,13 +42,27 @@ fields for llms.txt and structured data.
 | Code languages | All code blocks have language |
 | Key Takeaways section | Has `## Key Takeaways` heading |
 
+### Code Organization (POC Rule Compliance)
+
+| Check | Description |
+|-------|-------------|
+| Inline code size | No inline blocks >30 lines (threshold) |
+| Code references | All code refs link to valid acidbath-code paths |
+| Complete examples | Long code (>40 lines) extracted to repository |
+| Manifest sync | Blog post in manifest.json if has extracted code |
+| POC Rule | All code is accessible (inline or linked) |
+
 ## Audit Process
 
 1. Scan all files in `src/content/blog/`
 2. Parse frontmatter from each post
 3. Check required fields
 4. Validate content structure
-5. Generate report
+5. **Check code organization compliance**:
+   - Count inline code block sizes
+   - Verify code reference links are valid
+   - Cross-reference with acidbath-code manifest
+6. Generate report
 
 ## Audit Script
 

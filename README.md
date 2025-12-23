@@ -155,6 +155,27 @@ acidbath2/
     └── llms-full.txt             # Full content for LLMs
 ```
 
+### Companion Code Repository
+
+Complete code examples from blog posts are hosted in a dedicated repository:
+
+**Repository:** [github.com/ameno-/acidbath-code](https://github.com/ameno-/acidbath-code)
+
+```
+acidbath-code/
+├── examples/
+│   ├── agentic-patterns/         # AI agent and context engineering examples
+│   ├── production-patterns/      # Real-world implementation patterns
+│   └── workflow-tools/           # Automation and utility scripts
+└── manifest.json                 # Maps blog posts to code locations
+```
+
+**Commands:**
+- `/extract-code {post}.md` - Extract complete examples to acidbath-code
+- `/sync-code-blocks` - Transform blog posts to use code references
+
+**Documentation:** See `ai_docs/code-repository-integration.md` for the complete integration guide.
+
 ---
 
 ## Jerry Framework

@@ -6,12 +6,19 @@ Get started generating high-quality blog post banners in 60 seconds.
 
 ## Installation Check
 
-Ensure Nano Banana MCP is installed and running:
+Ensure OpenRouter API key is configured:
 ```bash
-claude mcp list
+echo $OPENROUTER_API_KEY
 ```
 
-Look for `nano-banana` in the output. If missing, install the Nano Banana MCP server first.
+If empty, configure it:
+```bash
+# Get your key from https://openrouter.ai/keys
+echo 'export OPENROUTER_API_KEY="your-key-here"' >> ~/.zshrc
+source ~/.zshrc
+```
+
+The skill uses OpenRouter's Nano Banana (Gemini 2.5 Flash Image) model for generation.
 
 ---
 
@@ -136,12 +143,12 @@ Banner saved to: `/public/assets/posts/[slug]-banner.png`
 
 ## Troubleshooting Common Issues
 
-### "Nano Banana MCP not available"
-**Problem**: MCP server not running
+### "OPENROUTER_API_KEY not set"
+**Problem**: API key not configured
 **Solution**:
-1. Check installation: `claude mcp list`
-2. Install if missing
-3. Restart Claude Code
+1. Get key from https://openrouter.ai/keys
+2. Add to ~/.zshrc: `export OPENROUTER_API_KEY="your-key"`
+3. Reload: `source ~/.zshrc`
 
 ---
 
@@ -173,9 +180,9 @@ ls -ld /Users/ameno/dev/acidbath2/public/assets/posts/
 ### Generation takes too long
 **Problem**: Timeout or very slow generation
 **Solution**:
-- Photorealistic styles (glass, newspaper) are slower—this is normal
+- Photorealistic styles (glass, newspaper) are slower—this is normal (45-90 seconds)
 - Try simpler style: `--style glitch` or `--style isometric`
-- Check MCP server status
+- Check OpenRouter status at https://openrouter.ai/activity
 
 ---
 
@@ -344,4 +351,5 @@ Generation is fast enough that trying 2-3 variations is practical.
 
 ## Version
 
+- **Quick Start v1.1** (2025-12-23): Updated for OpenRouter API integration (replaces MCP dependency)
 - **Quick Start v1.0** (2025-12-23): Initial guide for banner generation skill v1.0

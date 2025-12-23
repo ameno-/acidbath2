@@ -143,8 +143,8 @@ Resolution: 2560x1440 (16:9 aspect ratio)
 **"Invalid style name"**
 → Use one of: glass_object, isometric, blueprint, newspaper, glitch
 
-**"Nano Banana MCP not available"**
-→ Verify MCP server installed and running: `claude mcp list`
+**"OPENROUTER_API_KEY not set"**
+→ Configure API key: `echo 'export OPENROUTER_API_KEY="key"' >> ~/.zshrc && source ~/.zshrc`
 
 **"Permission denied"**
 → Check output directory exists and is writable
@@ -165,5 +165,6 @@ Resolution: 2560x1440 (16:9 aspect ratio)
 
 ## Version History
 
+- **v2.1** (2025-12-23): OpenRouter API integration replaces MCP dependency for more reliable generation
 - **v2.0** (2025-12-23): Migrated to invoke generate-post-banner skill, maintains backward compatibility with `--style glitch --auto`
 - **v1.0** (Original): Simple glitch art generation only

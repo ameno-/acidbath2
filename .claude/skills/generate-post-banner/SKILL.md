@@ -266,56 +266,64 @@ This skill transforms banner generation from a simple command into a comprehensi
 
 ### Section 5: Generation
 
-**Objective**: Call Nano Banana MCP to generate the banner image.
+**Objective**: Generate the banner image using OpenRouter API with Nano Banana model.
 
 **Process**:
 
-1. **Prepare MCP Call**:
+1. **Prepare Generation Script**:
+
+   Write a temporary Python script that uses the `openrouter_image` module:
+
+   ```python
+   # /tmp/generate_banner.py
+   from adws.adw_modules.openrouter_image import generate_banner, AspectRatio
+
+   prompt = """[composed prompt from Section 4]"""
+
+   result = generate_banner(
+       prompt=prompt,
+       output_path="/Users/ameno/dev/acidbath2/public/assets/posts/[slug]-banner.png",
+       aspect_ratio=AspectRatio.LANDSCAPE
+   )
+
+   if result.success:
+       print(f"SUCCESS: {result.file_path}")
+       if result.usage:
+           print(f"Tokens used: {result.usage.get('total_tokens', 'N/A')}")
+   else:
+       print(f"FAILED: {result.error}")
    ```
-   Tool: mcp__nano-banana__generate_image
-   Parameters:
-   - prompt: [composed prompt from Section 4]
-   - output_path: /Users/ameno/dev/acidbath2/public/assets/posts/[slug]-banner.png
+
+2. **Execute Generation**:
+   ```bash
+   cd /Users/ameno/dev/acidbath2 && uv run python /tmp/generate_banner.py
    ```
 
-2. **Invoke Nano Banana MCP**:
-   - Call `mcp__nano-banana__generate_image` with composed prompt
-   - Include timeout handling (complex prompts may take longer)
-   - Show generation progress if MCP provides status updates
+   - Generation typically takes 30-60 seconds
+   - OpenRouter handles rate limiting automatically
+   - Output is saved directly to the specified path
 
-3. **Handle MCP Errors**:
-   - **MCP Unavailable**:
+3. **Handle Errors**:
+   - **API Key Missing**:
      ```
-     ❌ ERROR: Nano Banana MCP server not available
+     ❌ ERROR: OPENROUTER_API_KEY not set
 
-     Please ensure MCP server is running:
-     1. Check MCP configuration: claude mcp list
-     2. Verify nano-banana server is installed and running
-     3. Restart MCP server if needed
-
-     Cannot proceed with banner generation without MCP access.
+     Please configure your OpenRouter API key:
+     1. Get a key from https://openrouter.ai/keys
+     2. Add to ~/.zshrc: export OPENROUTER_API_KEY="your-key"
+     3. Run: source ~/.zshrc
      ```
 
-   - **Prompt Too Long**:
+   - **Rate Limit**:
      ```
-     ⚠️  WARNING: Prompt may exceed MCP length limits
-
-     Attempting to simplify prompt by removing optional details...
-     [Retry with simplified prompt]
+     ⚠️  Rate limit hit. Waiting and retrying...
      ```
+     The module handles rate limits automatically with retry logic.
 
-   - **Generation Timeout**:
-     ```
-     ⏱️  TIMEOUT: Generation taking longer than expected
-
-     Complex photorealistic prompts may require extended processing.
-     Continuing to wait... (timeout: 300s)
-     ```
-
-   - **Other MCP Errors**:
+   - **Generation Failed**:
      ```
      ❌ ERROR: Generation failed
-     Reason: [MCP error message]
+     Reason: [error message]
 
      Options:
      - Type "retry" to attempt generation again
@@ -325,17 +333,26 @@ This skill transforms banner generation from a simple command into a comprehensi
 
 4. **Show Progress**:
    ```
-   🎨 Generating banner...
+   🎨 Generating banner via OpenRouter (Nano Banana)...
 
    Style: [Selected Style]
    Post: [Post Title]
    Output: [file path]
 
-   ⏳ Calling Nano Banana MCP... (this may take 30-60 seconds for complex prompts)
+   ⏳ This may take 30-60 seconds for complex prompts...
+   ```
+
+5. **Fallback to MCP** (Optional):
+   If OpenRouter fails and MCP is available, fall back to direct MCP call:
+   ```
+   Tool: mcp__nano-banana__generate_image
+   Parameters:
+   - prompt: [composed prompt]
    ```
 
 **Output**:
 - Generated image file at specified path
+- Token usage statistics
 - Or error message with recovery options
 
 ---
@@ -518,20 +535,29 @@ Valid styles:
 Please specify a valid style name or omit --style flag for recommendations.
 ```
 
-### MCP Server Unavailable
-**Scenario**: Nano Banana MCP not running or not configured
+### OpenRouter API Key Missing
+**Scenario**: OPENROUTER_API_KEY environment variable not set
 **Handling**:
 ```
-❌ ERROR: Nano Banana MCP server not available
+❌ ERROR: OPENROUTER_API_KEY not configured
 
-Banner generation requires the nano-banana MCP server.
+Banner generation requires an OpenRouter API key.
 
 Setup instructions:
-1. Install nano-banana MCP server
-2. Configure in Claude Code MCP settings
-3. Verify with: claude mcp list
+1. Get an API key from https://openrouter.ai/keys
+2. Add to ~/.zshrc: export OPENROUTER_API_KEY="your-key-here"
+3. Reload shell: source ~/.zshrc
 
-Cannot proceed without MCP access. Please install and configure nano-banana MCP server.
+The skill uses OpenRouter's Nano Banana (Gemini 2.5 Flash Image) model.
+```
+
+### OpenRouter Rate Limit
+**Scenario**: API rate limit exceeded
+**Handling**:
+```
+⚠️  Rate limit exceeded. The module will automatically retry.
+
+If persistent, check your OpenRouter usage at https://openrouter.ai/usage
 ```
 
 ### File Permission Issues
@@ -650,4 +676,5 @@ This skill replaces the old `.claude/commands/generate_post_banner.md` command w
 
 ## Version History
 
-- **v1.0** (2025-12-23): Initial skill with 7-section workflow, content analysis, style recommendation, and Nano Banana integration
+- **v1.1** (2025-12-23): Replaced MCP dependency with OpenRouter API integration for more reliable generation
+- **v1.0** (2025-12-23): Initial skill with 7-section workflow, content analysis, style recommendation, and Nano Banana MCP integration

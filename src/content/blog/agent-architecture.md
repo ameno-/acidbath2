@@ -7,18 +7,18 @@ tags: ["ai", "agents", "claude-code", "sub-agents", "sdk", "architecture"]
 banner: "/assets/posts/agent-architecture-banner.png"
 category: "Agent Architecture"
 difficulty: "Advanced"
-tldr: "Custom agents start with a system prompt that defines their identity—same model, completely different behavior. Sub-agents work best as researchers that write findings to files, not as direct implementers. The file system is your ultimate context management system for delegation."
+tldr: "Custom agents start with a system prompt that defines their identity—same model, completely different behavior. Sub-agents work best as researchers that write findings to files, not as direct implementers. The file system is your most reliable context management system for delegation."
 keyTakeaways:
   - "System prompts define agent identity—change the prompt, change the product entirely"
   - "Custom agents are built for your codebase, default agents are built for everyone's"
   - "Sub-agents should be researchers, not implementers—they gather context, the parent agent uses it"
   - "File-based context transfer reduces token usage by 80% compared to in-memory context passing"
-  - "The file system is the ultimate context management system for reliable agent delegation"
+  - "The file system is the most reliable context management system for agent delegation"
 ---
 
 The system prompt is everything. Change it and you change the product entirely.
 
-The file system is the ultimate context management system. Use it and delegation actually works.
+The file system is the most reliable context management system. Use it and delegation actually works.
 
 This post shows you how to build custom agents and delegate research reliably, with complete working examples.
 

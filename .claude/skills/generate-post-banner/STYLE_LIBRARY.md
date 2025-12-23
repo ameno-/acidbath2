@@ -1,566 +1,286 @@
 # Banner Style Library
 
-Comprehensive collection of banner style templates optimized for Nano Banana image generation. Each style leverages advanced prompting techniques for photorealistic materials, professional lighting, and precise composition control.
+Simplified banner style templates optimized for Nano Banana image generation. Focus on **abstract beauty** over technical accuracy.
+
+## CRITICAL: Nano Banana Limitations
+
+⚠️ **READ BEFORE COMPOSING ANY PROMPT**
+
+1. **NO complex diagrams** - Nano Banana fails at interconnected flowcharts, pipelines, and multi-component architectures
+2. **MINIMAL text** - Spelling errors are common. Use 1-3 words max, or avoid text entirely
+3. **DARK MODE ONLY** - All ACIDBATH graphics use dark backgrounds (black, navy, charcoal)
+4. **ABSTRACT > LITERAL** - Evoke the concept, don't diagram it
+5. **SINGLE FOCAL POINT** - One main subject, not multiple connected elements
 
 ---
 
 ## Style 1: Glass Object Technical
 
 ### Description
-Photorealistic glass or crystal rendering of technical objects (cameras, servers, circuits, architectural components). Emphasizes transparency, light refraction, and material luxury to represent sophisticated technical architecture.
+Single photorealistic glass/crystal object floating against dark background. Represents sophistication and technical elegance through material rendering, NOT through complexity.
 
 ### Best Use Cases
-- **Content Types**: Architecture posts, framework explanations, system design, technical foundations
-- **Topics**: Agent systems, SDK architecture, platform design, infrastructure
-- **Examples**: "The Agent Endgame", API architecture posts, framework deep-dives
+- Architecture posts, framework explanations, system design
+- Agent systems, SDK architecture, platform design
 
 ### Nano Banana Prompt Template
 
 ```
-A photorealistic, highly detailed image featuring [TECHNICAL_OBJECT] rendered in clear, highly polished transparent glass or crystal material. [The object has distinct thickness and dimensional depth, with the iconic shape of [OBJECT_DESCRIPTION]—presenting key structural elements in simplified yet extremely precise geometric structures, making it instantly recognizable without any patterns]. All edges are treated with rounded chamfers and smooth curved surfaces, creating elegant refraction effects under light. The object is placed slightly tilted, as if floating above a clean, flawless, seamless pale beige or very light gray studio background.
+A photorealistic [TECHNICAL_OBJECT] rendered in clear, polished transparent glass or crystal material. The object has elegant dimensional depth with rounded chamfers and smooth curved surfaces creating dramatic refraction effects. Simple, recognizable geometric form—[SIMPLE_SHAPE_DESCRIPTION].
 
-Lighting is bright, clean professional studio light, focusing on highlighting the transparency, specular reflection and refraction characteristics of the glass material. Sharp and delicate highlights appear on the object's chamfers, edges and key structural components, highlighting the crystal texture and luxurious vision. Subtle refraction, light bending and local distortion effects are produced when light penetrates the interior of the glass body, especially obvious in thickness variation areas and internal component details, greatly enhancing realism and visual impact. A soft, diffuse shadow falls below and slightly behind the object, giving the picture a sense of groundedness without destroying the minimalist temperament.
+The object floats slightly tilted against a deep black background with subtle gradient to dark charcoal. Dramatic rim lighting from behind creates glowing cyan and magenta edge highlights. Soft purple ambient light fills the shadows.
 
-The overall aesthetic style is minimalist, modern, and clean, presenting the visual effect of high-end product photography and concept art rendering. The focus of the picture is completely on the crystal clear material performance and precise geometric shape of the glass [TECHNICAL_OBJECT]. The image as a whole is high-key and shallow depth of field processing, keeping the object in absolute sharp focus, while the background is softly blurred, thereby maximizing the subject.
+Sharp specular highlights on glass edges. Visible light refraction and caustics beneath the object. Shallow depth of field keeps the glass object in razor-sharp focus while background fades to darkness.
 
-Technical specifications: 2560x1440 resolution, 16:9 aspect ratio optimized for blog header display.
+Aesthetic: Minimalist, luxurious, high-end product photography. Tech-noir atmosphere.
+
+Technical specifications: 2560x1440 resolution, 16:9 aspect ratio.
 ```
 
-### Material Specifications
-- **Primary Material**: Clear glass or crystal with high polish
-- **Surface Treatment**: Rounded chamfers, smooth curves, no sharp edges
-- **Transparency**: Full transparency with visible internal structure
-- **Refraction**: Light bending through material, thickness-dependent distortion
-- **Reflection**: Specular highlights on edges and curves
-
-### Lighting Setup
-- **Type**: Professional studio lighting, bright and clean
-- **Direction**: Top-front illumination for maximum transparency showcase
-- **Effects**: Sharp highlights on chamfers and edges, soft diffuse shadows below object
-- **Atmosphere**: High-key, minimalist lighting scheme
-
-### Composition Rules
-- **Placement**: Slightly tilted, floating above surface
-- **Background**: Pale beige or light gray, seamless and flawless
-- **Depth of Field**: Shallow, object in sharp focus, background softly blurred
-- **Camera**: Product photography angle, slight elevation for dimensional depth
-- **Framing**: Object occupies 60-70% of frame, surrounded by negative space
+### Key Guidelines
+- **ONE object only** - no multiple connected pieces
+- **Simple shapes** - cube, sphere, hexagon, chip—instantly recognizable
+- **Dark background** - deep black or charcoal, never light
+- **Neon rim lighting** - cyan, magenta, purple edge glow
+- **NO text or labels**
 
 ### Placeholder Variables
-- `[TECHNICAL_OBJECT]`: The main subject (e.g., "a server rack", "a circuit board", "an AI processor chip", "a distributed network node")
-- `[OBJECT_DESCRIPTION]`: Structural details that make it recognizable (e.g., "boxy server chassis with front panel, ventilation grills, status LED array", "rectangular PCB with processor socket, RAM slots, capacitor arrays")
-
-### Technical Notes
-- Glass rendering works best with objects that have clear, recognizable silhouettes
-- Avoid overly complex internal details—simplification enhances elegance
-- The "floating" effect communicates abstraction and conceptual thinking
-- Light refraction adds technical sophistication without verbosity
+- `[TECHNICAL_OBJECT]`: Single object (e.g., "processor chip", "crystal cube", "hexagonal node", "glass orb")
+- `[SIMPLE_SHAPE_DESCRIPTION]`: Basic geometry (e.g., "a hexagonal chip with beveled edges", "a perfect sphere with internal glow")
 
 ---
 
-## Style 2: Isometric Technical Diagram
+## Style 2: Simple Isometric Diagram
 
 ### Description
-Hand-drawn isometric view of technical systems, workflows, or architectures. Clean line art style with labeled components showing spatial relationships and data flow. Communicates complex systems through visual clarity.
+Isometric technical diagrams with **3-4 elements maximum**. Clean, readable layouts without text labels. The diagram structure is real, just simplified.
 
 ### Best Use Cases
-- **Content Types**: Workflow explanations, process comparisons, system overviews, how-to guides
-- **Topics**: Sub-agent patterns, data pipelines, automation workflows, architectural comparisons
-- **Examples**: "You're Using Sub-Agents Wrong", workflow automation posts, integration guides
+- Workflow/process posts
+- How-to guides, tutorials
+- System overviews
 
 ### Nano Banana Prompt Template
 
 ```
-Draw a hand-drawn isometric technical diagram of [SYSTEM_DESCRIPTION]. The illustration uses clean, precise line art in a technical drawing style with consistent line weight and professional clarity. The diagram shows [KEY_COMPONENTS] arranged in three-dimensional space using isometric projection (30-degree angles) to display spatial relationships and hierarchical structure.
+Clean isometric technical diagram showing [SIMPLE_SYSTEM] against a dark charcoal background.
 
-[FOREGROUND_LAYER]: Primary components are positioned in the foreground with bold, clear outlines and visible detail. These elements are drawn with slightly thicker lines (2-3pt) and include small labels with technical terminology. Components show dimensional depth through isometric construction.
+The diagram contains exactly [NUMBER] elements arranged in isometric 3D space:
+- [ELEMENT_1]: [simple shape description] in [COLOR_1]
+- [ELEMENT_2]: [simple shape description] in [COLOR_2]
+- [ELEMENT_3]: [simple shape description] in [COLOR_3]
 
-[MIDGROUND_LAYER]: Supporting systems and data flows are positioned in the middle ground, connected to foreground components via arrows, lines, or connection paths. These elements use medium line weight (1.5-2pt) and show process flow or information transfer.
+Elements are connected by [CONNECTION_STYLE] (glowing lines, light trails, or energy streams). Flow direction is [DIRECTION].
 
-[BACKGROUND_LAYER]: Context elements, environment, or system boundaries are positioned in deep background with lighter line weight (0.5-1pt), providing spatial context without overwhelming the primary focus.
+Style: Clean vector illustration with consistent line weights. Each element is a simple geometric solid (cubes, cylinders, hexagonal prisms). Subtle glow on edges.
 
-Annotation style: Clean sans-serif labels positioned near components using leader lines or direct placement. Labels use [LABEL_STYLE] formatting (e.g., "ALL CAPS for components", "Title Case for processes", "lowercase for metadata").
+Lighting: Soft ambient with neon accent highlights on element edges. Dark background with subtle grid pattern.
 
-Color palette: [COLOR_SCHEME] (examples: "monochromatic with blue accent highlights for active components", "black linework with orange highlights for data flow", "grayscale with cyan technical details").
+Optional labels: Each element may have a single short word (1-3 words total in image). Use ALL CAPS, simple words like [LABEL_WORDS]. Labels float near or on elements.
 
-Background: [BACKGROUND_STYLE] (examples: "white technical drawing background with subtle grid pattern", "light gray with blueprint-style border and title block", "clean white with drop shadow beneath diagram").
-
-Lighting and depth: Soft directional lighting from top-left creates subtle shadows beneath and behind components, establishing depth hierarchy. No harsh shadows—maintain technical drawing clarity.
-
-Technical specifications: 2560x1440 resolution, 16:9 aspect ratio, optimized for blog header with clear readability at multiple scales.
+Technical specifications: 2560x1440 resolution, 16:9 aspect ratio.
 ```
 
-### Material Specifications
-- **Line Quality**: Clean, consistent technical linework
-- **Line Weight Hierarchy**: Bold (foreground) → Medium (midground) → Light (background)
-- **Surface**: Matte, non-reflective technical drawing aesthetic
-- **Texture**: Minimal—clarity over decoration
-
-### Lighting Setup
-- **Type**: Soft, even illumination with subtle directional component
-- **Direction**: Top-left for conventional shadow placement
-- **Effects**: Light drop shadows for depth, no dramatic lighting
-- **Atmosphere**: Clean technical workspace lighting
-
-### Composition Rules
-- **Projection**: Isometric (30-degree angles, no perspective distortion)
-- **Layering**: Distinct foreground/midground/background separation
-- **Component Spacing**: Adequate negative space between elements for clarity
-- **Flow Direction**: Left-to-right or top-to-bottom for Western reading patterns
-- **Label Placement**: Non-overlapping, leader lines when necessary
+### Key Guidelines
+- **3-4 elements MAXIMUM** - not 5, not 6, exactly 3-4
+- **Simple shapes only** - cubes, cylinders, hexagons
+- **1-3 words total** - one simple word per element, ALL CAPS
+- **Dark background** - charcoal or dark navy with subtle grid
+- **Glowing connections** - light trails instead of arrows
+- **Clear flow direction** - left-to-right or top-to-bottom
 
 ### Placeholder Variables
-- `[SYSTEM_DESCRIPTION]`: What the diagram represents (e.g., "a multi-agent research workflow", "context window management system", "file-based automation pipeline")
-- `[KEY_COMPONENTS]`: Main elements to show (e.g., "parent agent, specialized research sub-agents, shared file system, implementation output")
-- `[FOREGROUND_LAYER]`: Primary focus elements
-- `[MIDGROUND_LAYER]`: Supporting/connecting elements
-- `[BACKGROUND_LAYER]`: Context/environment elements
-- `[LABEL_STYLE]`: Typography approach for annotations
-- `[COLOR_SCHEME]`: Color palette selection
-- `[BACKGROUND_STYLE]`: Background treatment
-
-### Technical Notes
-- Isometric projection maintains parallel lines—no vanishing points
-- Keep component count manageable (5-12 main elements) for blog header scale
-- Use consistent sizing to indicate importance hierarchy
-- Arrow styles should match overall aesthetic (technical, clean, purposeful)
+- `[SIMPLE_SYSTEM]`: What diagram represents (e.g., "a three-stage data pipeline", "input-process-output flow")
+- `[NUMBER]`: Exactly 3 or 4
+- `[ELEMENT_1/2/3]`: Simple shapes (cube, cylinder, hexagon)
+- `[COLOR_1/2/3]`: Distinct neon colors (cyan, magenta, green)
+- `[CONNECTION_STYLE]`: How elements connect (glowing lines, energy streams)
+- `[DIRECTION]`: Flow direction (left-to-right, top-to-bottom)
+- `[LABEL_WORDS]`: Optional 1-3 simple words (e.g., "INPUT, WORK, OUTPUT" or "DATA, AGENT, RESULT")
 
 ---
 
 ## Style 3: Technical Blueprint
 
 ### Description
-Engineering schematic or blueprint style with technical annotations, measurements, and grid backgrounds. Emphasizes precision, technical rigor, and systematic thinking. Communicates data-driven analysis and performance optimization.
+Blueprint-style schematic with **ONE main element** and supporting grid. Real technical drawing aesthetic, just simplified to what Nano Banana can render accurately.
 
 ### Best Use Cases
-- **Content Types**: Performance analysis, technical deep-dives, benchmark comparisons, optimization guides
-- **Topics**: Token optimization, performance metrics, cost analysis, scalability studies
-- **Examples**: "55,000 Files in 5 Minutes", "Context Window Bleeding", technical benchmarks
+- Performance analysis, benchmarks
+- Technical deep-dives
+- Data-driven content
 
 ### Nano Banana Prompt Template
 
 ```
-A technical blueprint-style engineering schematic showing [TECHNICAL_SUBJECT]. The image uses the aesthetic of professional engineering blueprints with [COLOR_SCHEME] linework on [BACKGROUND_COLOR] background (classic options: "white lines on deep cyan blueprint background", "cyan lines on dark navy background", "white/gray lines on black background", "orange/yellow lines on dark gray background").
+Technical blueprint schematic showing [MAIN_ELEMENT] in the center. Classic blueprint aesthetic with [LINE_COLOR] lines on deep navy blue background.
 
-The schematic displays [PRIMARY_ELEMENTS] in technical drawing style with precise geometric construction. Main elements are drawn with clean vector-style lines showing [TECHNICAL_DETAILS] (e.g., "cross-sectional views", "exploded component separation", "dimensional callouts", "tolerance specifications").
+The main element is a [ELEMENT_DESCRIPTION]—rendered in clean wireframe style with precise geometric construction. The element is centered and occupies about 50% of the frame.
 
-Annotation layer: The blueprint includes technical callouts and measurements:
-- [METRIC_1]: Positioned at [LOCATION_1] with leader line pointing to relevant component
-- [METRIC_2]: Positioned at [LOCATION_2] showing comparative data
-- [METRIC_3]: Positioned at [LOCATION_3] with emphasis box or highlight
-- Additional labels showing [TECHNICAL_METADATA]
+Background: Deep navy blue (#0a1628) with subtle engineering grid pattern. Major grid lines visible, minor grid lines faint. Vignette darkening at edges.
 
-Grid and measurement system: [GRID_STYLE] (examples: "subtle grid pattern with major/minor divisions", "measurement rulers along edges", "coordinate system markers", "scale reference in corner").
+The schematic has bright glowing edges with subtle bloom effect. A few [ACCENT_COLOR] highlight points mark key areas of the element.
 
-Title block: Traditional blueprint title block in [POSITION] corner containing:
-- Project title: [TITLE_TEXT]
-- Key specifications or metrics
-- Date/version information (optional)
+Optional: [2-3 simple geometric callout lines] pointing to parts of the main element, but NO text on them.
 
-Visual hierarchy:
-- Primary focus elements: Bold lines (2-3pt weight), bright color
-- Secondary elements: Medium lines (1-2pt weight), slightly dimmed
-- Annotations and grid: Thin lines (0.5-1pt weight), subdued color
-- Highlighted metrics or problem areas: [HIGHLIGHT_COLOR] accent color or boxes
+Atmosphere: Technical, precise, engineering. Professional schematic quality.
 
-Lighting and effects: Subtle glow effect on lines creating slight luminescence as if backlit on light table. Lines have crisp, clean edges with optional subtle bloom effect for technical aesthetic. Background may have very subtle texture suggesting physical blueprint paper or digital screen.
+NO text, numbers, measurements, or readable annotations. Visual elements only.
 
-Technical specifications: 2560x1440 resolution, 16:9 aspect ratio, optimized for blog header display with readable text at full size.
+Technical specifications: 2560x1440 resolution, 16:9 aspect ratio.
 ```
 
-### Material Specifications
-- **Line Style**: Vector-clean, precise technical linework
-- **Surface**: Matte blueprint paper or digital screen aesthetic
-- **Texture**: Subtle paper grain or digital noise (very light)
-- **Effects**: Optional subtle glow/bloom on lines for backlit effect
-
-### Lighting Setup
-- **Type**: Flat, technical lighting (backlit or evenly illuminated)
-- **Direction**: Front-facing, no directional shadows
-- **Effects**: Subtle line glow, crisp edges, high contrast
-- **Atmosphere**: Technical workspace or light table environment
-
-### Composition Rules
-- **Layout**: Grid-based, organized into zones
-- **Title Block**: Traditional engineering placement (bottom-right or top-left)
-- **Annotation Placement**: Strategic callouts with leader lines, non-overlapping
-- **Visual Weight**: Heaviest elements in center-left (natural reading start)
-- **Negative Space**: Adequate spacing around callouts and measurements
+### Key Guidelines
+- **ONE main element** - don't try to show a complex system
+- **Classic blueprint colors** - cyan/white lines on navy blue
+- **Grid background** - subtle engineering grid adds authenticity
+- **NO text** - callout lines can point, but no labels
+- **Wireframe style** - clean geometric construction
 
 ### Placeholder Variables
-- `[TECHNICAL_SUBJECT]`: What the blueprint shows (e.g., "a context window allocation system", "multi-agent token flow architecture", "performance optimization pipeline")
-- `[COLOR_SCHEME]`: Line color choice
-- `[BACKGROUND_COLOR]`: Background color choice
-- `[PRIMARY_ELEMENTS]`: Main schematic components
-- `[TECHNICAL_DETAILS]`: What aspects to show in detail
-- `[METRIC_1/2/3]`: Key metrics or measurements to display
-- `[LOCATION_1/2/3]`: Where to position metrics
-- `[TECHNICAL_METADATA]`: Additional labels or specifications
-- `[GRID_STYLE]`: Grid pattern type
-- `[POSITION]`: Title block position
-- `[TITLE_TEXT]`: Blueprint title
-- `[HIGHLIGHT_COLOR]`: Accent color for emphasis
-
-### Technical Notes
-- Blueprint style excels at showing quantitative data visually
-- Metrics should be real/meaningful, not decorative
-- Color choice affects readability—ensure sufficient contrast
-- Title block adds professional polish and context
-- Grid establishes technical precision without overwhelming content
+- `[MAIN_ELEMENT]`: What the blueprint shows (e.g., "a context window diagram", "a processor cross-section", "a data flow gauge")
+- `[ELEMENT_DESCRIPTION]`: Shape details (e.g., "rectangular container with internal divisions", "circular gauge with segments")
+- `[LINE_COLOR]`: Main lines (cyan, white, light blue)
+- `[ACCENT_COLOR]`: Highlight points (orange, green, bright cyan)
 
 ---
 
-## Style 4: Newspaper Front Page
+## Style 4: Dramatic Announcement
 
 ### Description
-Close-up photograph of hands holding a newspaper, shot from above. The newspaper dominates the frame with a bold headline and central photograph. Dramatic lighting creates focus and urgency. Perfect for provocative opinion pieces and paradigm-shift content.
+**RETHOUGHT** - Newspaper style requires too much text (spelling errors). Instead, create a dramatic "breaking news" atmosphere without actual newspaper—moody lighting, urgency, bold visual impact.
 
 ### Best Use Cases
-- **Content Types**: Provocative opinions, controversial takes, paradigm shift announcements, industry commentary
-- **Topics**: Future predictions, bold claims, status quo challenges, mindset shifts
-- **Examples**: "Prompts Are the New Code", "Chat UI Is Dead", disruptive perspective posts
+- Provocative opinion pieces
+- Paradigm shift announcements
+- Controversial takes, bold claims
 
 ### Nano Banana Prompt Template
 
 ```
-A 1080x1080 pixel close-up photo composition, hands holding a white newspaper, shot downwards from above. The background is extremely blurred and dark (deep charcoal or black), making the newspaper stand out clearly with dramatic contrast. The newspaper occupies 70-80% of the picture, and its content is sharp and legible.
+Dramatic, moody photograph suggesting urgency and importance. [DRAMATIC_SUBJECT] captured in high-contrast lighting against deep black background.
 
-The hands are positioned naturally holding the newspaper from the sides, showing partial foreground presence. Hands are slightly out of focus compared to the newspaper text, maintaining emphasis on content. Skin tone is [SKIN_TONE] with natural lighting revealing hand texture and detail.
+The scene evokes "breaking news" atmosphere without any visible text. Strong chiaroscuro lighting—bright highlights against deep shadows. Single light source from [LIGHT_DIRECTION] creates dramatic modeling.
 
-The eye-catching headline dominates the top of the newspaper in bold, large typography:
-"[HEADLINE]"
+Subject: [SUBJECT_DESCRIPTION]. Rendered with photorealistic detail. The composition suggests something significant is happening or being revealed.
 
-The headline uses [HEADLINE_STYLE] typeface (examples: "bold serif newspaper font like Times New Roman or Bodoni", "strong sans-serif like Franklin Gothic or Helvetica Bold", "classic newspaper slab serif like Rockwell").
+Color grading: Desaturated with [ACCENT_COLOR] tint. Dark, serious mood. Film noir aesthetic meets tech photography.
 
-In the center of the picture is a large black and white photograph showing [PHOTO_DESCRIPTION]. The photograph is clearly visible and professionally composed, appearing as if it were printed in newspaper halftone dots. The image supports and amplifies the headline message.
+Background: Pure black or very dark charcoal. No distractions. All focus on the dramatic subject.
 
-Below the photograph, newspaper body copy is visible in multiple columns with [COLUMN_COUNT] columns of readable text. The layout follows traditional newspaper design with justified text, column rules, and professional typographic hierarchy. Text appears authentic and legible at the image's full resolution, though individual word reading is not critical.
+Atmosphere: Urgent, important, paradigm-shifting. The image itself makes a statement through visual impact, not through text.
 
-Additional newspaper elements:
-- Publication name/masthead: "[PUBLICATION_NAME]" in traditional newspaper header styling
-- Date: [NEWSPAPER_DATE] positioned in standard location
-- Subheadlines or pull quotes (optional): "[SUBHEADLINE]"
-- Byline: "By [AUTHOR_NAME]" if specified
+NO text, headlines, or words visible anywhere in the image.
 
-Lighting setup: Strong directional light from upper-left creates dramatic reading light effect. The light emphasizes the newspaper's whiteness and text clarity while creating natural shadows that add depth. The extremely blurred and dark background ensures total focus on the newspaper content. Depth of field is very shallow—hands slightly soft, newspaper in razor-sharp focus, background completely out of focus.
-
-Photographic style: High-contrast, documentary aesthetic with professional color grading. Slight vignette darkening edges. The composition suggests urgency, importance, and breaking news. Shot with photojournalism style attention to realistic detail.
-
-Technical specifications: Initially composed at 1080x1080 for social media, then cropped/adapted to 2560x1440 for blog header maintaining newspaper legibility and dramatic composition.
+Technical specifications: 2560x1440 resolution, 16:9 aspect ratio.
 ```
 
-### Material Specifications
-- **Newspaper**: White or off-white newsprint with visible texture
-- **Ink**: High-contrast black ink, slightly matte finish
-- **Photography**: Halftone dot pattern for embedded photo
-- **Hands**: Natural skin texture with realistic lighting
-
-### Lighting Setup
-- **Type**: Dramatic directional reading light
-- **Direction**: Upper-left, creating natural reading scenario
-- **Effects**: Strong shadows, high contrast, vignette darkening
-- **Atmosphere**: Intimate, focused, urgent
-
-### Composition Rules
-- **Camera Angle**: Directly overhead, slight tilt for dynamism
-- **Subject Placement**: Newspaper fills 70-80% of frame
-- **Depth of Field**: Very shallow—newspaper sharp, hands/background soft
-- **Background**: Extremely blurred, dark (charcoal/black)
-- **Typography**: Large, bold headline; readable body copy; professional layout
+### Key Guidelines
+- **ABSOLUTELY NO TEXT** - this is critical for this style
+- **Dramatic lighting** - high contrast, single source, film noir
+- **Dark background** - black or near-black
+- **Single subject** - one focal point
+- **Mood over message** - the atmosphere carries the meaning
 
 ### Placeholder Variables
-- `[SKIN_TONE]`: Realistic description (e.g., "light olive", "deep brown", "pale neutral")
-- `[HEADLINE]`: The provocative headline text (keep to 5-10 words max)
-- `[HEADLINE_STYLE]`: Typography choice for headline
-- `[PHOTO_DESCRIPTION]`: What the embedded photograph shows (e.g., "a crowded server room with glowing status lights", "an engineer looking frustrated at terminal output", "abstract visualization of AI neural pathways")
-- `[COLUMN_COUNT]`: Number of text columns (typically 3-4 for newspaper authenticity)
-- `[PUBLICATION_NAME]`: Masthead name (e.g., "ACIDBATH TECHNICAL JOURNAL", "THE AI ENGINEER", "TECH PARADIGM DAILY")
-- `[NEWSPAPER_DATE]`: Date on newspaper (can match post publish date)
-- `[SUBHEADLINE]`: Optional supporting headline
-- `[AUTHOR_NAME]`: Byline name
-
-### Technical Notes
-- Headline must be provocative and attention-grabbing—this style lives or dies on headline quality
-- Embedded photo should support headline emotionally/conceptually
-- Newspaper layout must feel authentic—professional typography hierarchy essential
-- Shallow depth of field creates urgency and focus
-- Dark background ensures newspaper "pops" from the image
-- Works best when headline is genuinely controversial or paradigm-challenging
+- `[DRAMATIC_SUBJECT]`: Main visual (e.g., "hands on keyboard in shadow", "glowing screen in darkness", "silhouette of figure against bright light")
+- `[SUBJECT_DESCRIPTION]`: Details of the subject
+- `[LIGHT_DIRECTION]`: Where light comes from (upper-left, behind, etc.)
+- `[ACCENT_COLOR]`: Color tint (cool blue, warm orange, neutral)
 
 ---
 
-## Style 5: Enhanced Glitch Corruption
+## Style 5: Glitch Corruption (Default/Fallback)
 
 ### Description
-Upgraded version of the classic digital glitch art style with improved depth, material rendering, and spatial effects. Combines digital corruption aesthetics with holographic distortion and neon accents. Universal fallback style that works across all content types while maintaining backward compatibility.
+The signature ACIDBATH style. Digital glitch art with holographic effects and neon accents. Universal style that works for any content type. This is the default when other styles don't clearly fit.
 
 ### Best Use Cases
-- **Content Types**: Universal—works for all post types when other styles don't fit
-- **Topics**: Technology, AI, digital transformation, any technical subject
-- **Examples**: Any post needing visual interest without specific style requirements
+- Universal fallback for any post
+- Technology, AI, digital topics
+- When you want visual impact without specific conceptual ties
 
 ### Nano Banana Prompt Template
 
 ```
-A digital glitch art composition featuring [SUBJECT_DESCRIPTION] with layered corruption effects and holographic distortion. The image uses a dark, tech-noir aesthetic with [PRIMARY_COLOR] neon accents against a deep black or very dark [BACKGROUND_COLOR] gradient background.
+Digital glitch art composition featuring [ABSTRACT_SUBJECT] with holographic corruption effects. Dark tech-noir aesthetic.
 
-The primary subject [SUBJECT_PLACEMENT] shows [CORRUPTION_LEVEL] digital corruption:
-- Scanline artifacts running horizontally across the image with varying intensity
-- RGB channel separation creating colored edge fringing (red/cyan or magenta/green shifts)
-- Pixelation zones with distinct mosaic effects in [PIXELATION_AREAS]
-- Datamoshing effects showing temporal compression artifacts
-- Glitch displacement creating horizontal or vertical tears in the image
+The image shows [SIMPLE_FOCAL_ELEMENT] with visible digital corruption: RGB channel separation creating cyan/magenta edge fringing, horizontal scanline artifacts, and subtle pixelation zones. Holographic shimmer on surfaces creates iridescent rainbow reflections.
 
-Holographic material effects:
-The subject exhibits holographic foil properties with iridescent shimmer. Light creates rainbow spectral reflections across the surface, shifting between [COLOR_RANGE] (e.g., "cyan, magenta, and yellow", "purple, blue, and pink", "green, orange, and red"). The holographic texture is layered beneath and interwoven with the glitch corruption, creating depth where digital artifacts appear to float above a shimmering metallic base.
+Background: Deep black gradient with atmospheric depth fog. Subtle particle effects floating in space.
 
-Spatial layering:
-- **Foreground**: Sharp glitch elements, highest corruption intensity, bright neon accents
-- **Midground**: Primary subject with moderate corruption and holographic shimmer
-- **Background**: Deep atmospheric effects, gradient darkness, subtle particle systems
+Lighting: [PRIMARY_COLOR] and [SECONDARY_COLOR] neon glow emanating from corrupted edges. Chromatic aberration at image borders. Subtle bloom on bright elements.
 
-Lighting and effects:
-- Neon glow emanating from corrupted edges and glitch artifacts
-- Volumetric light rays or god rays cutting through the scene (optional)
-- Chromatic aberration especially pronounced at image edges
-- Subtle bloom and glow on bright elements creating cyberpunk atmosphere
-- Depth fog or atmospheric haze in background layers
+Color palette: [PRIMARY_COLOR] as main accent, [SECONDARY_COLOR] for contrast, holographic rainbow shimmer, deep black background.
 
-Technical corruption patterns:
-- [GLITCH_TYPE_1]: (e.g., "horizontal scanline displacement", "vertical tearing", "block compression artifacts")
-- [GLITCH_TYPE_2]: (e.g., "color banding", "digital noise clusters", "data corruption blocks")
-- [GLITCH_TYPE_3]: (e.g., "wireframe overlay segments", "hexadecimal text fragments", "error code overlays")
+Aesthetic: Cyberpunk, tech-noir, digital dystopia. Bold and visually striking.
 
-Typography integration (optional):
-Distorted text reading "[TEXT_OVERLAY]" appears partially corrupted with glitch effects, positioned at [TEXT_POSITION]. Text uses [FONT_STYLE] with heavy digital distortion.
+NO text or readable words—pure visual abstraction with glitch effects.
 
-Color palette:
-- Primary: [PRIMARY_COLOR] (e.g., "cyan", "magenta", "neon green", "electric purple")
-- Secondary: [SECONDARY_COLOR] for contrast and accents
-- Background: Deep blacks with dark [BACKGROUND_COLOR] gradients
-- Accents: Bright neon highlights and holographic rainbow shimmer
-
-The overall composition balances recognizability of the subject with artistic corruption, ensuring the image reads clearly as a blog header while maintaining strong visual impact through glitch aesthetics.
-
-Technical specifications: 2560x1440 resolution, 16:9 aspect ratio, optimized for blog header with sufficient corruption for visual interest without sacrificing clarity.
+Technical specifications: 2560x1440 resolution, 16:9 aspect ratio.
 ```
 
-### Material Specifications
-- **Base**: Digital/holographic with iridescent properties
-- **Corruption**: Pixelated, scanlined, RGB-separated
-- **Surface**: Layered depth—glitch artifacts float above base
-- **Effects**: Neon glow, chromatic aberration, bloom
-
-### Lighting Setup
-- **Type**: Neon/cyberpunk lighting with strong color accents
-- **Direction**: Variable—often front-lit with edge lighting
-- **Effects**: Glow, bloom, volumetric rays (optional), atmospheric haze
-- **Atmosphere**: Tech-noir, cyberpunk, digital dystopia
-
-### Composition Rules
-- **Layering**: Distinct foreground/midground/background separation
-- **Subject Placement**: Center or rule-of-thirds, depending on subject
-- **Corruption Balance**: Enough to be visually interesting, not so much it's illegible
-- **Color Contrast**: Bright neons against deep darks for pop
-- **Depth**: Use fog, blur, and layering to create spatial depth
+### Key Guidelines
+- **NO text** - glitch text looks terrible
+- **Simple subject** - one abstract focal point
+- **Dark background** - pure black or near-black
+- **Neon accents** - cyan, magenta, purple glow
+- **Moderate corruption** - visible but not overwhelming
+- **Always works** - this is the safe fallback style
 
 ### Placeholder Variables
-- `[SUBJECT_DESCRIPTION]`: What the image depicts (e.g., "abstract AI neural network visualization", "corrupted terminal interface", "glitching code editor window")
-- `[PRIMARY_COLOR]`: Main neon accent color
-- `[BACKGROUND_COLOR]`: Dark gradient base color
-- `[SUBJECT_PLACEMENT]`: Where subject sits (e.g., "centered in frame", "offset to left third", "filling most of the frame")
-- `[CORRUPTION_LEVEL]`: Intensity (e.g., "moderate", "heavy", "subtle")
-- `[PIXELATION_AREAS]`: Where mosaic effects appear
-- `[COLOR_RANGE]`: Holographic color spectrum
-- `[GLITCH_TYPE_1/2/3]`: Specific glitch effects to include
-- `[TEXT_OVERLAY]`: Optional corrupted text
-- `[TEXT_POSITION]`: Where text appears
-- `[FONT_STYLE]`: Typography choice for overlay text
-- `[SECONDARY_COLOR]`: Contrasting accent color
-
-### Technical Notes
-- This style is the most forgiving—works when content mapping is unclear
-- Balance corruption with legibility—blog headers must still communicate
-- Holographic layer adds sophistication over basic glitch art
-- Spatial depth prevents flat, dated glitch aesthetics
-- Neon colors should complement post theme when possible (e.g., red/orange for performance issues, cyan/blue for architecture, purple/magenta for creative/opinion)
+- `[ABSTRACT_SUBJECT]`: What the image suggests (e.g., "digital consciousness", "data stream", "corrupted interface")
+- `[SIMPLE_FOCAL_ELEMENT]`: Main visual (e.g., "a glowing geometric shape", "abstract holographic sphere", "neon wireframe structure")
+- `[PRIMARY_COLOR]`: Main neon (cyan, magenta, electric blue)
+- `[SECONDARY_COLOR]`: Contrast accent (purple, orange, green)
 
 ---
 
-## Prompt Composition Guidance
+## Quick Reference
 
-### Filling Template Placeholders
+### Style Selection
 
-1. **Analyze Post Content**: Extract key concepts, technical objects, metaphors, and tone
-2. **Identify Placeholder Variables**: Each template has `[PLACEHOLDER]` markers
-3. **Map Content to Placeholders**: Match extracted concepts to appropriate variables
-4. **Maintain Template Structure**: Keep all non-placeholder text intact
-5. **Verify Completeness**: Ensure no unfilled placeholders remain before generation
+| Content Type | Primary Style | Why |
+|--------------|---------------|-----|
+| Architecture/Framework | Glass Object | Sophistication through material |
+| Workflow/Process | Simple Isometric Diagram | 3-4 elements showing flow |
+| Performance/Benchmarks | Technical Blueprint | One schematic element on grid |
+| Provocative Opinion | Dramatic Announcement | Urgency through lighting |
+| Any/Unknown | Glitch Corruption | Always works |
 
-### Mixing Base Styles with Content-Specific Elements
+### ACIDBATH Color Palette
 
-Templates are designed to be modular. You can:
-- **Add Subject-Specific Details**: Enhance placeholders with post-specific language
-- **Adjust Color Palettes**: Match colors to post theme or brand
-- **Modify Composition**: Tweak placement and framing for specific content needs
-- **Layer Multiple Effects**: Combine elements from different templates when appropriate
+**Neon Accents** (on dark backgrounds):
+- Cyan `#00ffff`
+- Magenta `#ff00ff`
+- Electric Blue `#0066ff`
+- Purple `#9933ff`
+- Orange `#ff6600` (for warnings)
 
-Example: A post about "AI agent cost optimization" could use:
-- **Base Style**: Technical Blueprint (performance-focused)
-- **Color Modification**: Red/orange accents instead of cyan (cost = warning)
-- **Subject Addition**: Include dollar signs or cost metrics in annotations
-- **Composition Tweak**: Title block shows cost savings comparison
+**Backgrounds**:
+- Pure Black `#000000`
+- Charcoal `#1a1a1a`
+- Deep Navy `#0a1628`
 
-### Smart Defaults for Common Placeholders
+### Universal Prompt Checklist
 
-When content analysis doesn't provide clear values:
+Before generating:
+- [ ] Dark background specified (black/navy/charcoal)
+- [ ] Single focal subject (not multiple connected pieces)
+- [ ] NO text or labels
+- [ ] Neon accent colors defined
+- [ ] "2560x1440 resolution, 16:9 aspect ratio" included
 
-- **Technical Objects**: Default to abstract geometric representations (cubes, spheres, networks)
-- **Colors**: Use brand colors or neutral technical palette (cyan, white, gray)
-- **Backgrounds**: Stick to template defaults (they're already optimized)
-- **Typography**: Use template-recommended fonts (they match the style aesthetic)
-- **Measurements/Metrics**: Use placeholder values like "X% improvement" or "N ms latency" if real data unavailable
+### If Generation Fails
 
-### Validation Checklist Before Generation
-
-- [ ] All `[PLACEHOLDER]` variables filled with specific content
-- [ ] Color choices complement each other (no clashing)
-- [ ] Technical specifications included (2560x1440, 16:9 aspect ratio)
-- [ ] Subject description is clear and detailed enough for recognition
-- [ ] Composition rules followed (placement, depth, focus)
-- [ ] Lighting setup specified completely
-- [ ] Material properties defined
-- [ ] No contradictory instructions (e.g., "shallow depth of field" + "everything in focus")
-
----
-
-## Troubleshooting Common Nano Banana Generation Issues
-
-### Issue: Subject Not Recognizable
-**Symptoms**: Generated image is abstract blob, unclear what object is supposed to be
-**Solutions**:
-- Add more geometric detail to `[OBJECT_DESCRIPTION]` placeholders
-- Specify key identifying features explicitly (e.g., "rectangular body with circular lens in center")
-- Use comparative language ("shaped like X but with Y features")
-- Simplify—fewer complex features often render more clearly than many subtle ones
-
-### Issue: Colors Look Muddy or Washed Out
-**Symptoms**: Low contrast, colors blend together, lacks visual punch
-**Solutions**:
-- Increase color separation (brighter accents against darker backgrounds)
-- Specify "high contrast" or "vivid saturation" in prompt
-- Use complementary colors (blue/orange, purple/yellow, red/cyan)
-- Add specular highlights or glowing accents to increase tonal range
-
-### Issue: Composition Feels Flat or Boring
-**Symptoms**: No depth, everything on same plane, lacks spatial interest
-**Solutions**:
-- Explicitly define foreground/midground/background layers
-- Add depth-of-field instructions (what's sharp vs. blurred)
-- Include shadows, reflections, or other depth cues
-- Specify camera angle or viewing perspective
-- Add atmospheric haze or fog in background layers
-
-### Issue: Too Much Detail, Overwhelming Clutter
-**Symptoms**: Image is busy, hard to focus, confusing for blog header use
-**Solutions**:
-- Reduce number of elements in composition
-- Emphasize "minimalist" or "clean" aesthetic in prompt
-- Use more negative space and simpler backgrounds
-- Focus lighting on primary subject, darken secondary elements
-- Simplify geometric forms—fewer complex shapes
-
-### Issue: Lighting Doesn't Match Style Intent
-**Symptoms**: Wrong mood, technical piece looks dramatic, opinion piece looks clinical
-**Solutions**:
-- Match lighting to content emotion: clean/bright for technical, dramatic/directional for provocative
-- Specify light source position and intensity explicitly
-- Add or remove shadow intensity
-- Adjust background brightness (dark = dramatic, light = clean/professional)
-- Include atmospheric effects (god rays, volumetric fog, glow) for mood
-
-### Issue: Text/Typography Unreadable
-**Symptoms**: Blurry text, wrong font, poor placement, illegible at blog header size
-**Solutions**:
-- Specify exact font names (not just "bold" or "serif")
-- Increase text size in composition ("large", "dominant", "60% of newspaper area")
-- Ensure high contrast between text and background
-- Request "sharp focus on text" or "legible at full resolution"
-- Simplify text content—fewer words render more clearly
-
-### Issue: Style Doesn't Match Content Tone
-**Symptoms**: Serious technical post gets playful style, opinion piece looks too clinical
-**Solutions**:
-- Review style selection—may need different base template
-- Adjust color palette to match emotional tone
-- Modify lighting (bright = approachable, dark/dramatic = serious/provocative)
-- Change material properties (glass = sophisticated, glitch = edgy, blueprint = rigorous)
-- Consider newspaper style for controversial takes, blueprint for data-driven
-
-### Issue: Generation Takes Too Long or Fails
-**Symptoms**: Timeout errors, MCP server unresponsive, generation aborted
-**Solutions**:
-- Simplify prompt—remove optional details
-- Reduce resolution temporarily for testing (can upscale later)
-- Check MCP server status and restart if needed
-- Break complex prompts into multiple attempts (generate base, then add effects)
-- Use more common/standard artistic references (Nano Banana may have better training on certain styles)
-
----
-
-## Advanced Techniques
-
-### Progressive Disclosure in Prompts
-Start with core subject and composition, then layer in material, lighting, and effects. This structure helps Nano Banana prioritize what matters most:
-
-1. **Foundation**: Subject + placement + basic composition
-2. **Material Layer**: Surface properties, textures, transparency
-3. **Lighting Layer**: Light sources, shadows, atmospheric effects
-4. **Detail Layer**: Annotations, fine details, special effects
-5. **Technical Specs**: Resolution, aspect ratio, quality parameters
-
-### Conditional Complexity
-Match prompt complexity to content importance:
-- **High-stakes posts** (major launches, controversial takes): Use full template with all optional details
-- **Standard posts** (regular blog content): Use core template, skip optional flourishes
-- **Quick posts** (updates, minor content): Simplify to essential placeholders only
-
-### Style Mixing
-When appropriate, combine elements from multiple templates:
-- **Base structure** from one style (e.g., Isometric layout)
-- **Material properties** from another (e.g., Glass rendering)
-- **Lighting/atmosphere** from a third (e.g., Blueprint's technical precision)
-
-Only mix when you have clear rationale—random mixing degrades quality.
-
-### Iterative Refinement
-If first generation is close but not perfect:
-1. Identify specific issue (refer to Troubleshooting section)
-2. Modify only the relevant prompt section
-3. Keep successful elements unchanged
-4. Regenerate with refined prompt
-5. Repeat until satisfied
-
-Don't start from scratch—preserve what works.
-
----
-
-## Style Selection Quick Reference
-
-| Content Type | Primary Style | Alternative Styles |
-|--------------|---------------|-------------------|
-| Architecture/Framework | Glass Object Technical | Isometric Technical Diagram |
-| Workflow/Process | Isometric Technical Diagram | Technical Blueprint |
-| Performance/Benchmarks | Technical Blueprint | Isometric Technical Diagram |
-| Provocative Opinion | Newspaper Front Page | Enhanced Glitch Corruption |
-| How-To/Tutorial | Isometric Technical Diagram | Glass Object Technical |
-| Cost Analysis | Technical Blueprint | Newspaper Front Page |
-| Paradigm Shift | Newspaper Front Page | Glass Object Technical |
-| Tool Comparison | Isometric Technical Diagram | Technical Blueprint |
-| Universal/Unknown | Enhanced Glitch Corruption | (any other based on analysis) |
+1. **Simplify** - Remove complexity, keep one focal element
+2. **Remove text** - Any text will have errors
+3. **Go abstract** - Don't try to literally depict concepts
+4. **Use Glitch style** - It always works as fallback
 
 ---
 
 ## Version History
 
-- **v1.0** (2025-12-23): Initial library with 5 core styles, comprehensive templates, troubleshooting guide
+- **v2.0** (2025-12-23): Simplified for Nano Banana limitations—dark mode only, no complex diagrams, minimal text
+- **v1.0** (2025-12-23): Initial library

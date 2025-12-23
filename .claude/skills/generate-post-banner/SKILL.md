@@ -24,6 +24,96 @@ This skill transforms banner generation from a simple command into a comprehensi
 
 ---
 
+## Nano Banana Prompting Guidelines
+
+**CRITICAL**: Follow these rules when composing prompts to avoid common Nano Banana failures.
+
+### Rule 1: Simplicity Over Accuracy
+
+Nano Banana struggles with complex interconnected diagrams. **Do NOT** create:
+- Flowcharts with more than 3-4 connected elements
+- Pipelines with multiple arrows and nodes
+- Detailed system architectures with many components
+- Isometric diagrams with intricate connections
+
+**DO** create:
+- Single focal objects with atmospheric effects
+- Abstract representations of concepts
+- Mood-driven visuals that evoke the topic
+- Clean compositions with 1-2 primary elements
+
+### Rule 2: Text Guidelines (1-3 Words Max)
+
+Nano Banana makes spelling mistakes. When using text:
+
+**Allowed**:
+- 1-3 simple words maximum
+- Common, short words (INPUT, OUTPUT, DATA, AGENT, etc.)
+- ALL CAPS works best for readability
+- Single word per element/shape
+
+**Avoid**:
+- Technical terminology (will be misspelled)
+- Words longer than 8 characters
+- Multiple words on same element
+- Sentences or phrases
+
+**Best practice**: Use text sparingly—one word labels on key elements only. If a word is complex, skip it.
+
+### Rule 3: Abstract Over Literal
+
+Don't try to literally depict technical concepts. **Instead**:
+- Use visual metaphors (glass = sophistication, glitch = digital/tech)
+- Focus on mood and atmosphere
+- Let the image suggest rather than explain
+- Prioritize aesthetic impact over technical accuracy
+
+### Rule 4: Dark Mode Aesthetic
+
+**ALL graphics must use dark backgrounds** to align with ACIDBATH brand:
+- Deep blacks, dark grays, navy blues
+- Neon accents against dark backgrounds
+- High contrast focal elements
+- Cyberpunk/tech-noir atmosphere
+
+**Never use**:
+- White or light backgrounds
+- Pastel color schemes
+- Bright, cheerful aesthetics
+
+### Rule 5: ACIDBATH Brand Alignment
+
+Visual identity guidelines:
+- **Colors**: Cyan, magenta, purple, electric blue as accents on dark backgrounds
+- **Mood**: Technical, sophisticated, slightly edgy
+- **Style**: Modern, minimal, high-contrast
+- **Feel**: Professional but with personality
+
+### Prompt Structure Template
+
+```
+[SUBJECT] - Simple, singular focal point
+[MATERIAL/STYLE] - Glass, holographic, neon, glitch effects
+[LIGHTING] - Dramatic, neon accents, rim lighting
+[BACKGROUND] - Dark (black, deep navy, charcoal)
+[ATMOSPHERE] - Subtle glow, particles, depth fog
+[SPECS] - 2560x1440, 16:9 aspect ratio
+```
+
+### Anti-Patterns to Avoid
+
+❌ "A flowchart showing INPUT → PROCESS → OUTPUT with labeled boxes"
+❌ "Technical diagram with annotations pointing to each component"
+❌ "Isometric view of a system with multiple interconnected parts"
+❌ "Blueprint with measurements and technical specifications"
+
+✅ "A glowing glass orb representing data transformation, floating against deep black"
+✅ "Abstract holographic waves with cyan and magenta accents on dark background"
+✅ "Single crystalline processor chip with dramatic rim lighting"
+✅ "Ethereal particle streams suggesting data flow, neon highlights on black"
+
+---
+
 ## Workflow Sections
 
 ### Section 1: Content Analysis

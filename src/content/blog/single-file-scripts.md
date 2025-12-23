@@ -492,14 +492,16 @@ Both should be under 200 lines. If you need more, you need a server.
 
 ## Dolph Stats
 
-- **Lines of code**: 1,015
-- **Dependencies**: 3 (openai agents SDK, mysql2, zod)
-- **Compile time**: 2.3s to standalone binary
-- **Binary size**: 89MB (includes Bun runtime + all deps)
-- **Startup time**: 52ms (compiled with --bytecode)
-- **Tools exposed**: 5 (test connection, list tables, get schema, get all schemas, run query)
-- **Modes**: 3 (CLI task mode, CLI chat mode, library import)
-- **Security gates**: 2 (parameter + environment variable for writes)
+| Metric | Value |
+|--------|-------|
+| Lines of code | 1,015 |
+| Dependencies | 3 (openai agents SDK, mysql2, zod) |
+| Compile time | 2.3s to standalone binary |
+| Binary size | 89MB (includes Bun runtime + all deps) |
+| Startup time | 52ms (compiled with --bytecode) |
+| Tools exposed | 5 (test connection, list tables, get schema, get all schemas, run query) |
+| Modes | 3 (CLI task mode, CLI chat mode, library import) |
+| Security gates | 2 (parameter + environment variable for writes) |
 
 One file. Full MySQL agent. No server process.
 

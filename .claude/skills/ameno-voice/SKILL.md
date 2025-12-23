@@ -7,61 +7,64 @@ description: Apply Ameno's distinctive voice style to content. Use when writing 
 
 Apply the Ameno voice to technical content. **ACIDBATH is the star. Ameno voice is the flavor.**
 
+## Core Purpose
+
+The Ameno voice exists for **simplification** - making difficult concepts accessible without dumbing them down. It's not about catchphrases or forced metaphors. It's about clarity with character.
+
 ## Quick Reference
 
 ### Voice Checklist
 
 Before publishing, verify:
 
-- [ ] Introduction leads with **facts and results**, not personality hook
-- [ ] Each concept has an **analogy** using construction/engineering metaphor
+- [ ] Introduction leads with **facts and results**, not personality
+- [ ] Complex concepts are **simplified**, not decorated with metaphors
 - [ ] Code blocks are **direct** - no narrative inside
 - [ ] Numbers and benchmarks are **specific and verifiable**
-- [ ] Failure sections have **conversational honesty**
-- [ ] Takeaways use **signature phrases** ("Not bad for...", "Here's the move:")
-- [ ] Emoji usage is **strategic** (max 3-4 per section)
-- [ ] Profanity is **emphasis** (sparingly), not filler
+- [ ] Failure sections have **conversational honesty** ("This is where it bites you")
+- [ ] Takeaways add **style without fluff**
+- [ ] Metaphors are used **only when they genuinely clarify** (rare)
 
 ### When to Deploy Personality
 
-| Content Type | Voice |
-|--------------|-------|
-| Concept explanation | **Ameno** - analogies, "so what?" |
-| Failure modes | **Ameno** - honest, conversational |
-| Takeaways | **Ameno** - memorable, brief |
-| Introduction | **Direct** - facts, results |
-| Code examples | **Direct** - clean, minimal |
-| Benchmarks | **Direct** - specific, no fluff |
-| Gotchas | **Direct** - bullet points |
-
-### Signature Phrases
-
-Transition INTO personality:
-- "Here's where things get a little weird."
-- "Think of it like this:"
-- "So what does that mean?"
-- "To put that into perspective..."
-
-Close with personality:
-- "Not bad for [X]."
-- "Here's the move:"
-- "Pretty damn useful."
-
-### Structural Pattern
-
-```
-Definition → "So what?" → Analogy → Code → Plain English → Takeaway
-```
+| Content Type | Voice | Notes |
+|--------------|-------|-------|
+| Concept explanation | **Ameno** - simplify, clarify | NOT with forced metaphors |
+| Failure modes | **Ameno** - honest, direct | "This is where both patterns bite you" |
+| Takeaways | **Ameno** - memorable summary | Style, not catchphrases |
+| Introduction | **Direct** - facts, results | No personality hooks |
+| Code examples | **Direct** - clean | Let code speak |
+| Benchmarks | **Direct** - specific | No fluff |
+| Configuration | **Direct** - step-by-step | No narrative |
 
 ---
 
-## Supporting Files
+## Metaphor Guidance
 
-For detailed guidance, read these files:
+**Default: Don't use metaphors.**
 
-- **[ai_docs/ameno-voice-style.md](../../ai_docs/ameno-voice-style.md)** - Full voice DNA, vocabulary, anti-patterns
-- **[METAPHOR_FRAMEWORKS.md](./METAPHOR_FRAMEWORKS.md)** - Construction/engineering metaphor library
-- **[EXAMPLES.md](./EXAMPLES.md)** - Before/after transformations
+Metaphors are helpful only when:
+1. The concept is genuinely complex (not just unfamiliar)
+2. The metaphor actually simplifies (doesn't add cognitive load)
+3. You've developed it deliberately (not reached for one on the fly)
+
+**Bad**: "Think of your context window like a cargo train with numbered cars" (adds complexity to a simple concept)
+
+**Good**: Directly explaining what happens: "MCP servers load all tool descriptions upfront. Four servers at 10K tokens each = 40K tokens gone before you start."
+
+When metaphors ARE needed for complex concepts, develop them collaboratively and deploy them consistently across related posts. See METAPHOR_FRAMEWORKS.md for the library.
+
+---
+
+## Where Conversational Phrases Help
+
+Certain phrases earn their place because they signal common patterns:
+
+- **"This is where [X] bites you"** - Signals a failure mode readers will likely hit
+- **"Here's what actually happens"** - Cuts through abstraction to reality
+- **"The numbers tell the story"** - Transitions to evidence
+
+These aren't catchphrases to deploy everywhere. They're natural transitions for specific contexts.
 
 ---
 
@@ -71,30 +74,38 @@ For detailed guidance, read these files:
 [INTRO - direct] "Context consumption averages 180K tokens per session.
 That's $0.40 per conversation before you even start."
 
-[PROBLEM - direct] "Default MCP setups dump everything upfront.
-No progressive loading."
+[PROBLEM - direct] "Default MCP setups load all tool descriptions upfront.
+Four servers at 10K tokens each = 40K tokens consumed before any work."
 
-[EXPLANATION - Ameno] "Think of it like leaving every light on in your
-house before checking which rooms you need."
+[SIMPLIFICATION - Ameno] "That's 20% of your context gone. For tools you
+might not even use."
 
-[SOLUTION - direct] "Progressive disclosure injects context only when
-the agent needs it."
+[SOLUTION - direct] "Progressive disclosure loads tools only when needed."
 
 [CODE - direct] <code block>
 
-[RESULT - direct] "20K tokens average. 89% reduction."
+[RESULT - direct] "20K tokens average. 94% reduction."
 
-[FLAVOR - Ameno] "Not bad for 20 lines of Python."
+[TAKEAWAY - Ameno] "The optimization is invisible. Your agent just works
+faster and costs less."
 ```
+
+Notice: No forced metaphor. The simplification ("That's 20% of your context gone") adds clarity without adding cognitive load.
 
 ---
 
 ## Anti-Patterns
 
-Avoid these mistakes:
+1. **Forced metaphors** - If the concept is already clear, metaphors add noise
+2. **Catchphrase deployment** - This isn't Power Rangers; earn each phrase
+3. **Personality in introductions** - Lead with value, not hooks
+4. **Decorating simple concepts** - "Context window" doesn't need a train analogy
+5. **Excessive transitions** - "Here's where things get weird" loses impact when overused
 
-1. **Starting with personality** - Lead with technical value
-2. **Forced humor** - If it doesn't land naturally, cut it
-3. **Emoji spam** - Treat like exclamation points: rare
-4. **Personality in code** - Let code be code
-5. **Excessive hedging** - Be direct, not "might/could/perhaps"
+---
+
+## Supporting Files
+
+- **[ai_docs/ameno-voice-style.md](../../ai_docs/ameno-voice-style.md)** - Full voice DNA, vocabulary
+- **[METAPHOR_FRAMEWORKS.md](./METAPHOR_FRAMEWORKS.md)** - For genuinely complex concepts (use sparingly)
+- **[EXAMPLES.md](./EXAMPLES.md)** - Before/after transformations

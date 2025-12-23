@@ -1,188 +1,123 @@
 # Metaphor Frameworks
 
-Technical concepts map better to construction and engineering metaphors. This library provides ready-to-use frameworks for explaining complex ideas.
+**WARNING: Use sparingly. Most concepts don't need metaphors.**
+
+This library exists for genuinely complex concepts that benefit from extended metaphors developed collaboratively with the author. These are NOT quick analogies to reach for - they're frameworks developed over time and deployed consistently across related content.
 
 ---
 
-## 1. Building a Bridge
+## When to Use This Library
 
-**Best for**: APIs, integrations, connecting systems, load handling
+**Ask these questions first:**
 
-### Concept Mapping
+1. Is the concept genuinely complex, or just unfamiliar?
+2. Does the metaphor actually reduce cognitive load?
+3. Has this metaphor been developed with the author?
+4. Will this metaphor be used consistently across multiple posts?
+
+If any answer is "no," don't use a metaphor. Simplify directly instead.
+
+---
+
+## Developed Frameworks
+
+The following frameworks have been developed for specific complex concepts. They should be deployed consistently when those concepts appear.
+
+### 1. Building a Bridge
+
+**For**: Complex API integrations, system interconnections with multiple failure points
+
+**When to use**: Only for multi-system integration scenarios where multiple connection points, load handling, and failure modes need explaining together.
+
+**NOT for**: Simple API calls, single endpoints, basic request/response
 
 | Technical Concept | Bridge Equivalent |
 |-------------------|-------------------|
-| API endpoint | Bridge entrance/exit |
-| Request payload | Traffic crossing |
+| API gateway | Bridge entrance checkpoint |
 | Rate limiting | Load capacity |
-| Authentication | Toll booth / checkpoint |
-| Error handling | Structural supports |
-| Timeout | Bridge closure time |
 | Retry logic | Detour routes |
-| Load balancing | Multiple lanes |
+| Circuit breaker | Structural safety cutoff |
 
-### Sample Explanations
+### 2. Train System
 
-**APIs**: "An API is a bridge between two systems. You don't need to know how the other city works - you just need to know the bridge exists and what format your cargo needs to be in to cross."
+**For**: Complex multi-stage pipelines with branching logic
 
-**Rate Limiting**: "Every bridge has a weight limit. Send too many trucks at once and the structure fails. Rate limiting is posting the 'Max 5 trucks per minute' sign before disaster hits."
+**When to use**: Only for systems with multiple sequential stages, branching paths, and cargo that transforms as it moves through the system.
 
-**Authentication**: "The toll booth at the bridge entrance. You need a valid ticket (token) to cross. No ticket? You're not getting to the other side."
-
----
-
-## 2. Train System
-
-**Best for**: Pipelines, sequential processing, data flow, routing
-
-### Concept Mapping
+**NOT for**: Simple data flow, single-function transformations, basic I/O
 
 | Technical Concept | Train Equivalent |
 |-------------------|------------------|
-| Pipeline | Train tracks |
+| Pipeline stages | Stations |
 | Data packet | Cargo car |
-| Endpoint | Station |
-| Routing | Track switches |
-| Queue | Train waiting at platform |
-| Middleware | Inspection points |
-| Backpressure | Traffic congestion |
-| Batch processing | Full train departure |
+| Routing logic | Track switches |
+| Backpressure | Track congestion |
 
-### Sample Explanations
+### 3. Factory Assembly Line
 
-**Pipelines**: "Data flows through your system like a train on tracks. Each station (function) processes the cargo and passes it to the next stop. The train doesn't skip stations."
+**For**: Complex automation workflows with quality gates
 
-**Routing**: "When data hits a junction, the switch decides which track to take. `if` statements are your track switches - they route the train based on the cargo manifest."
+**When to use**: Only for multi-stage automation with inspection points, parallel processing, and clear throughput bottlenecks.
 
-**Queues**: "The train sits at the platform until it's full or the scheduled departure time hits. That's batching - don't send half-empty trains when you can wait for efficiency."
-
----
-
-## 3. Building a House
-
-**Best for**: Architecture, dependencies, layered systems, foundations
-
-### Concept Mapping
-
-| Technical Concept | House Equivalent |
-|-------------------|------------------|
-| Foundation | Database / core models |
-| Framing | Application structure |
-| Plumbing | Data flow infrastructure |
-| Electrical | Event systems / signals |
-| Finishing | UI / presentation layer |
-| Dependencies | Building materials |
-| Refactoring | Renovation |
-| Technical debt | Shortcuts during construction |
-
-### Sample Explanations
-
-**Architecture Layers**: "You can't hang drywall without studs. You can't install studs without a foundation. Your app has the same layers - database before logic, logic before UI."
-
-**Technical Debt**: "Every shortcut during construction comes due eventually. That 'temporary' wire you ran through the wall? You'll be tearing out drywall to fix it later."
-
-**Dependencies**: "You don't manufacture your own nails. You buy them. Dependencies are your building materials - someone else made them, you just use them right."
-
----
-
-## 4. Factory Assembly Line
-
-**Best for**: Automation, workflows, throughput, quality control
-
-### Concept Mapping
+**NOT for**: Simple scripts, single-step automation, basic loops
 
 | Technical Concept | Factory Equivalent |
 |-------------------|-------------------|
-| Workflow | Assembly line |
-| Function | Work station |
-| Input validation | Quality inspection |
-| Error handling | Reject bin |
+| Workflow stages | Work stations |
+| Validation | Quality inspection |
 | Parallelism | Multiple lines |
 | Bottleneck | Slowest station |
-| Scaling | Adding shifts |
-| Testing | QA checkpoint |
-
-### Sample Explanations
-
-**Workflows**: "Each station on the line does one thing. Station 1 attaches wheels. Station 2 installs seats. Your functions should work the same way - one job per station."
-
-**Bottlenecks**: "Your factory outputs at the speed of your slowest station. If painting takes 10 minutes and everything else takes 1, you've got 9 minutes of waiting at every other station."
-
-**Parallelism**: "Why run one assembly line when you can run four? As long as they don't need the same tools at the same time, more lines = more throughput."
 
 ---
 
-## 5. Power Grid
+## Frameworks NOT Yet Developed
 
-**Best for**: Distribution, scaling, load balancing, redundancy
+The following are placeholder frameworks. They should NOT be used until developed collaboratively with the author for specific content needs:
 
-### Concept Mapping
-
-| Technical Concept | Grid Equivalent |
-|-------------------|-----------------|
-| Server | Power plant |
-| Load balancer | Transformer |
-| CDN | Substation |
-| Cache | Battery storage |
-| Failover | Backup generator |
-| Scaling | Adding capacity |
-| Peak load | Summer AC demand |
-| Circuit breaker | Fuse / breaker |
-
-### Sample Explanations
-
-**Load Balancing**: "A transformer doesn't power your house directly from the plant. It steps down the voltage and distributes the load. Your load balancer does the same - splits incoming traffic so no single server melts."
-
-**Caching**: "Battery storage holds power for when demand spikes. Your cache holds data for when requests spike. Pre-store what you'll need instead of generating it fresh every time."
-
-**Circuit Breakers**: "When the circuit overloads, the breaker trips. Better to cut one circuit than burn down the house. Circuit breaker patterns in code work the same - fail fast, fail safe."
+- **Building a House** - For architecture/dependency discussions (needs development)
+- **Power Grid** - For distribution/scaling (needs development)
+- **Plumbing System** - For stream processing (needs development)
 
 ---
 
-## 6. Plumbing System
+## How to Develop New Frameworks
 
-**Best for**: Streams, data flow, input/output, backpressure
+When a genuinely complex concept needs a metaphor:
 
-### Concept Mapping
-
-| Technical Concept | Plumbing Equivalent |
-|-------------------|---------------------|
-| Data stream | Water flow |
-| Buffer | Tank / reservoir |
-| Backpressure | Pipe pressure |
-| Valve | Gate / filter |
-| Drainage | Cleanup / disposal |
-| Leak | Memory leak |
-| Clog | Blocked queue |
-| Main line | Primary data path |
-
-### Sample Explanations
-
-**Streams**: "Data flows through your system like water through pipes. You don't bucket it and carry it - you open the tap and let it flow to where it's needed."
-
-**Backpressure**: "Turn on every faucet in your house and the pressure drops. Same thing happens when you push more data than your system can handle. Either the pressure drops (slowdown) or pipes burst (crash)."
-
-**Memory Leaks**: "A dripping faucet wastes water slowly. A memory leak wastes RAM slowly. Both seem minor until you get the bill."
+1. **Identify the complexity** - What makes this hard to explain directly?
+2. **Propose to author** - Don't develop in isolation
+3. **Map comprehensively** - Cover all aspects of the concept
+4. **Test the mapping** - Does it reduce cognitive load?
+5. **Define boundaries** - Where does the metaphor break down?
+6. **Plan deployment** - Which posts will use this consistently?
+7. **Add to this file** - Document for consistent future use
 
 ---
 
-## Usage Guidelines
+## Anti-Patterns
 
-### Choosing the Right Framework
+### Reaching for metaphors
 
-| If explaining... | Use this framework |
-|------------------|-------------------|
-| System connections | Bridge |
-| Data pipelines | Train |
-| Software architecture | House |
-| Automation workflows | Factory |
-| Scaling / distribution | Power Grid |
-| Stream processing | Plumbing |
+**Bad**: "I need to explain context windows... let me check the metaphor library..."
 
-### Framework Rules
+This is backwards. If you're reaching for a metaphor, you probably don't need one.
 
-1. **Pick one framework per concept** - Don't mix metaphors
-2. **Acknowledge limits** - "The analogy breaks down when..."
-3. **Return to technical** - Always map back to the actual concept
-4. **Keep it brief** - One paragraph max, then code
-5. **Match reader's world** - Engineers know these systems
+### One-off analogies
+
+**Bad**: Using "train cars" for context in one post, then "warehouse shelves" in another.
+
+Metaphors should be consistent. If you use one, commit to it across related content.
+
+### Decorating simple concepts
+
+**Bad**: "Think of your context window like a cargo train with numbered cars..."
+
+Context windows are already understandable. This adds cognitive load, not clarity.
+
+---
+
+## Remember
+
+**Default: Don't use metaphors.**
+
+This library exists for the rare cases where extended metaphors genuinely help. Most explanations are clearer without them.

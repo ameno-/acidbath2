@@ -20,7 +20,7 @@ Document generation is the unsexy automation that saves hours.
 
 Not code generation. Not chat interfaces. Document generation—the Excel reports, PowerPoint decks, and PDFs that every business runs on. Claude Skills turn this from hours of manual work into minutes of automated execution.
 
-This is Part 1 of a series on AI document skills. We'll cover the core pattern, build a working POC, and measure what actually happens in production. Financial reporting is the example, but the pattern applies anywhere you need structured documents from data.
+This is Part 1 of a series on AI document skills. We'll cover the core pattern, build a working POC, and measure what actually happens in production. Financial reporting is the example, but the pattern applies anywhere you need structured documents from data. For a deeper dive into Skills architecture and when to use Skills vs MCP servers, see [Claude Skills Deep Dive](/blog/claude-skills-deep-dive).
 
 ## The Core Problem: Manual Documents Don't Scale
 

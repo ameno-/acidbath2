@@ -206,13 +206,16 @@ Each line in the file is a separate prompt.
 """
 
 import os
+import sys
+from datetime import datetime
+# ... continues with image generation logic
 ```
 
-> ** Complete Example:** [Step Core Watcher](https://github.com/ameno-/acidbath-code/tree/main/production-patterns/directory-watchers/step-core-watcher)
+> ** Complete Example:** [Image Generation Agent](https://github.com/ameno-/acidbath-code/tree/main/production-patterns/directory-watchers/step-image-generation)
 >
-> Complete implementation from the 'Step 2: The Core Watcher' section.
+> Complete image generation agent using Replicate API. Processes text files containing prompts and downloads generated images.
 >
-> **Language:** python | **Lines:** 218
+> **Language:** python | **Lines:** 76
 
 ## Data Flow: File Drop to Result
 

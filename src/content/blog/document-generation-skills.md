@@ -84,93 +84,28 @@ Usage:
     uv run document_pipeline.py --data sample_data.json --output ./reports
 
 Generates Excel, PowerPoint, and PDF from structured data.
+"""
+
+import argparse
+import json
+import os
+from pathlib import Path
+# ... continues with full implementation
 ```
 
-> ** Complete Example:** [Step Setup Configuration](https://github.com/ameno-/acidbath-code/tree/main/production-patterns/document-generation-skills/step-setup-configuration)
+> ** Complete Example:** [Document Pipeline](https://github.com/ameno-/acidbath-code/tree/main/production-patterns/document-generation-skills/document-pipeline)
 >
-> Complete implementation from the 'Step 1: Setup and Configuration' section.
+> Complete document generation pipeline with Excel, PowerPoint, and PDF generation using Claude Skills API. Includes sample data file.
 >
-> **Language:** python | **Lines:** 73
+> **Language:** python | **Lines:** 215
 
-### Step 2: Excel Generation Function
-
-```python
-def generate_excel(data: dict, output_dir: Path) -> dict:
-    """
-    Generate Excel workbook with data, formulas, and charts.
-
-    Best practice: 2-3 sheets per workbook for reliable generation.
-    """
-    prompt = f"""
-Create an Excel workbook with 2 sheets:
-
-```
-
-> ** Complete Example:** [Step Setup Configuration](https://github.com/ameno-/acidbath-code/tree/main/production-patterns/document-generation-skills/step-setup-configuration)
->
-> Complete implementation from the 'Step 1: Setup and Configuration' section.
->
-> **Language:** python | **Lines:** 73
-
-### Step 3: PowerPoint Generation Function
-
-```python
-def generate_powerpoint(data: dict, output_dir: Path) -> dict:
-    """
-    Generate executive presentation from data.
-
-    Best practice: Clear, data-driven slides with minimal text.
-    """
-    summary = data.get("summary", {})
-
-```
-
-> ** Complete Example:** [Step Setup Configuration](https://github.com/ameno-/acidbath-code/tree/main/production-patterns/document-generation-skills/step-setup-configuration)
->
-> Complete implementation from the 'Step 1: Setup and Configuration' section.
->
-> **Language:** python | **Lines:** 73
-
-### Step 4: PDF Generation Function
-
-```python
-def generate_pdf(data: dict, output_dir: Path) -> dict:
-    """
-    Generate formal PDF documentation.
-
-    Best practice: Clear sections, consistent formatting.
-    """
-    prompt = f"""
-Create a PDF document:
-
-```
-
-> ** Complete Example:** [Step Setup Configuration](https://github.com/ameno-/acidbath-code/tree/main/production-patterns/document-generation-skills/step-setup-configuration)
->
-> Complete implementation from the 'Step 1: Setup and Configuration' section.
->
-> **Language:** python | **Lines:** 73
-
-### Step 5: Pipeline Orchestration
-
-```python
-def run_pipeline(data_path: str, output_dir: str) -> dict:
-    """
-    Run complete document generation pipeline.
-
-    Returns:
-        Dict with all results and token usage
-    """
-    output_path = Path(output_dir)
-    output_path.mkdir(parents=True, exist_ok=True)
-
-```
-
-> ** Complete Example:** [Step Setup Configuration](https://github.com/ameno-/acidbath-code/tree/main/production-patterns/document-generation-skills/step-setup-configuration)
->
-> Complete implementation from the 'Step 1: Setup and Configuration' section.
->
-> **Language:** python | **Lines:** 73
+The complete implementation includes:
+- `create_skills_message()` - Skills API wrapper with token tracking
+- `generate_excel()` - Excel workbook with formulas and charts
+- `generate_powerpoint()` - 4-slide executive presentation
+- `generate_pdf()` - Formal documentation
+- `run_pipeline()` - Orchestrates all three outputs
+- `sample_data.json` - Example input data
 
 ### Step 6: Sample Data File
 

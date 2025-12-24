@@ -106,13 +106,15 @@ Usage:
 
 import json
 import sys
+from anthropic import Anthropic
+# ... continues with tool definitions and agent loop
 ```
 
-> ** See Full Implementation:** [Poc Simplest Custom](https://github.com/ameno-/acidbath-code/tree/main/agentic-patterns/agent-architecture/poc-simplest-custom)
+> ** Complete Example:** [Calculator Agent](https://github.com/ameno-/acidbath-code/tree/main/agentic-patterns/agent-architecture/poc-agent-custom)
 >
-> Complete implementation from the 'POC 1: The Simplest Custom Agent' section.
+> Complete calculator agent with custom tool integration. Demonstrates the tool use loop pattern.
 >
-> **Language:** python | **Lines:** 41
+> **Language:** python | **Lines:** 132
 
 Test it:
 ```bash

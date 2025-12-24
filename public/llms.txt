@@ -16,20 +16,16 @@ ACIDBATH provides deep technical content on building production AI systems:
 ## Recent Posts
 
 - [Claude Skills Deep Dive: Progressive Loading and the MCP Alternative](/blog/claude-skills-deep-dive): Skills load 100 tokens of metadata upfront, then instructions on-demand. Here's when to use Skills vs MCP, with working POC code.
-- [ACIDBATH Design System: Acid-Green Components for Technical Content](/blog/design-system-showcase): Four new components and fluid typography transform dense technical posts into scannable, layered content. Here's the design system that makes 10,000-word posts readable.
 - [Single-File Scripts: When One File Beats an Entire MCP Server](/blog/single-file-scripts): Dolph is 1,015 lines of TypeScript that replace an MCP server. Here's the pattern for Bun and UV single-file scripts.
 - [AI Document Skills: Automated File Generation That Actually Ships](/blog/document-generation-skills): Skills generate Excel, PowerPoint, and PDF files in minutes. Complete POC code, real token numbers, and honest failure modes for production.
 - [Agent Architecture: From Custom Agents to Effective Delegation](/blog/agent-architecture): System prompts define agent identity. File systems enable delegation. Build specialized agents and delegate research reliably with working code.
+- [Context Engineering: From Token Optimization to Large Codebase Mastery](/blog/context-engineering): Progressive disclosure and semantic search: the difference between burning tokens and shipping features. Working code and hard numbers inside.
 
 ## Topics
 
 ### AI Patterns
 
 - [Claude Skills Deep Dive: Progressive Loading and the MCP Alternative](/blog/claude-skills-deep-dive): Skills load 100 tokens of metadata upfront, then instructions on-demand. Here's when to use Skills vs MCP, with working POC code.
-
-### Design
-
-- [ACIDBATH Design System: Acid-Green Components for Technical Content](/blog/design-system-showcase): Four new components and fluid typography transform dense technical posts into scannable, layered content. Here's the design system that makes 10,000-word posts readable.
 
 ### Production Patterns
 

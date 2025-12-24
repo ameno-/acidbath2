@@ -60,7 +60,7 @@ The workflow section is where your agent's actual work happens. It's rated S-tie
 Here's a complete, production-ready workflow prompt you can use as a Claude Code command:
 
 ```markdown
-<!-- github: https://github.com/ameno-/acidbath-code/blob/main/workflow-tools/workflow-prompts/analyze.md -->
+<!-- github: https://github.com/ameno-/acidbath-code/blob/main/workflow-tools/workflow-prompts/poc-working-workflow/poc-working-workflow.md -->
 ---
 description: Analyze a file and create implementation plan
 allowed-tools: Read, Glob, Grep, Write

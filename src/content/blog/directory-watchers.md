@@ -58,7 +58,7 @@ flowchart TB
 Create `drops.yaml`:
 
 ```yaml
-# github: https://github.com/ameno-/acidbath-code/blob/main/production-patterns/directory-watchers/drops.yaml
+# github: https://github.com/ameno-/acidbath-code/blob/main/production-patterns/directory-watchers/step-configuration-file/step-configuration-file.yaml
 # Drop Zone Configuration
 # Each zone watches a directory and triggers an agent on file events
 
@@ -117,7 +117,7 @@ agents:
 Create `drop_watcher.py`:
 
 ```python
-# github: https://github.com/ameno-/acidbath-code/blob/main/production-patterns/directory-watchers/drop_watcher.py
+# github: https://github.com/ameno-/acidbath-code/blob/main/production-patterns/directory-watchers/step-core-watcher/step_core_watcher.py
 #!/usr/bin/env -S uv run
 # /// script
 # dependencies = [
@@ -343,7 +343,6 @@ if __name__ == "__main__":
 Create `prompts/analyze.md`:
 
 ```markdown
-<!-- github: https://github.com/ameno-/acidbath-code/blob/main/production-patterns/directory-watchers/prompts/analyze.md -->
 # Document Analysis Agent
 
 Analyze the following document and provide a structured summary.
@@ -378,7 +377,6 @@ How confident are you in this analysis? (high/medium/low) and why.
 Create `prompts/data_analysis.md`:
 
 ```markdown
-<!-- github: https://github.com/ameno-/acidbath-code/blob/main/production-patterns/directory-watchers/prompts/data_analysis.md -->
 # Data Analysis Agent
 
 Analyze the following data file and provide insights.
@@ -422,7 +420,7 @@ Analyze the following data file and provide insights.
 Create `agents/image_gen.py`:
 
 ```python
-# github: https://github.com/ameno-/acidbath-code/blob/main/production-patterns/directory-watchers/agents/image_gen.py
+# github: https://github.com/ameno-/acidbath-code/blob/main/production-patterns/directory-watchers/step-image-generation/step_image_generation.py
 #!/usr/bin/env -S uv run
 # /// script
 # dependencies = [

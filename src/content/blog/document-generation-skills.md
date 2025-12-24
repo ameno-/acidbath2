@@ -69,7 +69,7 @@ This is the full code. Copy it, run it, modify it for your use case.
 Create `document_pipeline.py`:
 
 ```python
-# github: https://github.com/ameno-/acidbath-code/blob/main/production-patterns/document-generation-skills/document_pipeline.py
+# github: https://github.com/ameno-/acidbath-code/blob/main/production-patterns/document-generation-skills/document-pipeline/document_pipeline.py
 #!/usr/bin/env -S uv run
 # /// script
 # dependencies = [

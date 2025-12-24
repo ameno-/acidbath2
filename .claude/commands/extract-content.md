@@ -1,6 +1,6 @@
 # Content Extraction Pipeline
 
-Extract derivative content from a blog post for multi-platform distribution.
+Extract derivative content from a blog post for Typefully social publishing.
 
 ## Usage
 
@@ -12,13 +12,17 @@ Run this command after publishing a blog post:
 ## What This Command Does
 
 1. Reads the source blog post
-2. Generates three derivative content pieces:
-   - Twitter thread (8-12 tweets)
-   - LinkedIn post (800-1200 words)
-   - Newsletter edition (1000-1500 words)
-3. Generates `metadata.json` with publication data for multi-platform publishing
-4. Validates content for platform requirements
+2. Generates platform-specific content for Typefully:
+   - X/Twitter thread (8-12 tweets, 280 chars each)
+   - LinkedIn post (up to 3000 chars)
+   - Bluesky post (300 chars)
+   - Threads post (500 chars)
+   - Mastodon post (500 chars)
+3. Creates `typefully-content.json` for API publishing
+4. Validates content for platform character limits
 5. Saves outputs to `content/derivatives/{slug}/`
+
+**Note**: Developer communities (dev.to, Hashnode) and newsletter (Buttondown) are handled automatically via RSS import. See `ai_docs/rss-setup-guide.md`.
 
 ---
 
@@ -60,10 +64,6 @@ Core Insight (3-5 sentences)
 ├── The main thesis, expanded
 └── Include one specific technique
 
-Code Block (10-15 lines max)
-├── Short, readable example
-└── Syntax highlighted if possible
-
 Proof Point (2-3 sentences)
 ├── Concrete result with numbers
 └── Pattern: "After implementing this, we saw X% improvement"
@@ -77,123 +77,153 @@ CTA (1-2 sentences)
 - Write in first person
 - Be opinionated and direct
 - Short paragraphs (1-3 sentences)
-- No bullet points unless listing 3+ items
+- Maximum 3000 characters
 - Professional but not stiff
-- 800-1200 words total
 
 ---
 
-## Newsletter Edition Guidelines
+## Bluesky Post Guidelines
+
+**Character Limit:** 300 characters
 
 **Structure:**
-```
-Personal Opening (2-3 sentences)
-├── What prompted this post
-└── Pattern: "I spent last week [doing X]. It led me to..."
-
-Story/Context (1-2 paragraphs)
-├── Narrative framing
-└── Why you care about this topic
-
-The Big Idea (1-2 paragraphs)
-├── Core thesis from blog post
-└── Slightly different angle than Twitter/LinkedIn
-
-Key Technique (1 paragraph + optional code)
-├── One actionable takeaway
-└── Tease the depth, don't give everything
-
-What I'm Reading/Thinking (optional)
-├── 2-3 related links with commentary
-└── Industry trends you're following
-
-CTA
-├── Link to full post
-└── Pattern: "Full implementation with code: [link]"
-```
+- Single impactful statement or insight
+- Include link to full post
+- Use clear, direct language
 
 **Rules:**
-- First person, conversational
-- More personal than LinkedIn
-- Don't reproduce the full post—create complementary content
-- Include your opinions and reactions
-- 1000-1500 words total
+- No hashtags needed
+- Can include @mentions
+- Links count toward character limit
+- Keep it punchy—less is more
+
+**Example:**
+> Context window optimization isn't about cramming more in—it's about ruthless prioritization.
+>
+> Full deep-dive: blog.amenoacids.com/context-engineering
+
+---
+
+## Threads Post Guidelines
+
+**Character Limit:** 500 characters
+
+**Structure:**
+- Hook + single key insight
+- Optional: include one code snippet reference
+- CTA with link
+
+**Rules:**
+- More casual than LinkedIn
+- Visual/code references work well
+- Can be more opinionated
+- Link to full post
+
+**Example:**
+> Every agent codebase I review has the same problem: context bloat.
+>
+> Engineers dump everything into the prompt, wonder why costs explode, then blame the model.
+>
+> The fix is progressive disclosure. Full breakdown → blog.amenoacids.com/context-engineering
+
+---
+
+## Mastodon Post Guidelines
+
+**Character Limit:** 500 characters (default, varies by instance)
+
+**Structure:**
+- Clear technical insight
+- Link to full post
+- Optional content warning for long threads
+
+**Rules:**
+- No engagement bait
+- Technical content appreciated
+- Can use CamelCaseHashtags if relevant
+- Be genuine, not promotional
+
+**Example:**
+> New blog post on context engineering for AI agents.
+>
+> Key insight: Progressive disclosure beats RAG for most agent use cases. Cut our context by 90% while improving accuracy.
+>
+> Technical deep-dive: blog.amenoacids.com/context-engineering
+>
+> #AI #LLM #Engineering
 
 ---
 
 ## Output Format
 
-For each derivative, create a separate markdown file:
+Generate these files in `content/derivatives/{slug}/`:
 
 ```
 content/derivatives/{slug}/
-├── twitter-thread.md
-├── linkedin-post.md
-├── newsletter-edition.md
-├── metadata.json          # Publishing metadata
-└── publish-ready.json     # Marker file indicating content is ready to publish
+├── twitter-thread.md      # X/Twitter thread content
+├── linkedin-post.md       # LinkedIn post content
+├── bluesky-post.md        # Bluesky post content
+├── threads-post.md        # Threads post content
+├── mastodon-post.md       # Mastodon post content
+├── typefully-content.json # Typefully API-ready payload
+└── metadata.json          # Post metadata
 ```
 
-Each markdown file should include:
-1. Platform-specific metadata (character counts, etc.)
-2. The formatted content
-3. Any notes for manual review
+### typefully-content.json
 
-The `metadata.json` file should include:
+This file is ready to send directly to the Typefully API:
+
 ```json
 {
-  "slug": "post-slug",
-  "title": "Post Title",
-  "description": "SEO meta description (150-160 chars)",
-  "tags": ["tag1", "tag2", "tag3"],
-  "publishedDate": "2025-01-15",
-  "canonicalUrl": "https://acidbath.pages.dev/blog/post-slug",
-  "coverImage": "/images/cover.png",
-  "author": "Ameno",
-  "wordCount": 2500,
-  "readingTime": 10,
+  "draft_title": "Post Title",
+  "tags": ["blog"],
   "platforms": {
-    "twitter": {
-      "content": "twitter-thread.md",
-      "characterCount": 1500,
-      "tweetCount": 10,
-      "valid": true
+    "x": {
+      "enabled": true,
+      "posts": [
+        {"text": "First tweet (hook)"},
+        {"text": "Second tweet (insight 1)"},
+        {"text": "Third tweet (insight 2)"},
+        {"text": "Final tweet with link to blog.amenoacids.com/slug"}
+      ]
     },
     "linkedin": {
-      "content": "linkedin-post.md",
-      "characterCount": 1000,
-      "valid": true
+      "enabled": true,
+      "posts": [{"text": "LinkedIn post content (up to 3000 chars)"}]
     },
-    "devto": {
-      "title": "Post Title",
-      "tags": ["ai", "engineering"],
-      "valid": true
+    "bluesky": {
+      "enabled": true,
+      "posts": [{"text": "Bluesky post (300 chars max)"}]
     },
-    "hashnode": {
-      "title": "Post Title",
-      "tags": ["ai", "engineering"],
-      "valid": true
+    "threads": {
+      "enabled": true,
+      "posts": [{"text": "Threads post (500 chars max)"}]
     },
-    "medium": {
-      "title": "Post Title",
-      "tags": ["ai", "engineering"],
-      "valid": true
-    },
-    "newsletter": {
-      "content": "newsletter-edition.md",
-      "characterCount": 1200,
-      "valid": true
+    "mastodon": {
+      "enabled": true,
+      "posts": [{"text": "Mastodon post (500 chars max)"}]
     }
   }
 }
 ```
 
-The `publish-ready.json` marker file indicates all content is extracted and validated:
+### metadata.json
+
 ```json
 {
-  "ready": true,
+  "slug": "post-slug",
+  "title": "Post Title",
+  "description": "SEO meta description",
+  "canonicalUrl": "https://blog.amenoacids.com/blog/post-slug",
+  "publishedDate": "2025-01-15",
   "extractedAt": "2025-01-15T10:00:00Z",
-  "platforms": ["twitter", "linkedin", "devto", "hashnode", "medium", "newsletter"]
+  "platforms": {
+    "x": { "tweetCount": 8, "valid": true },
+    "linkedin": { "characterCount": 1200, "valid": true },
+    "bluesky": { "characterCount": 280, "valid": true },
+    "threads": { "characterCount": 450, "valid": true },
+    "mastodon": { "characterCount": 480, "valid": true }
+  }
 }
 ```
 
@@ -203,26 +233,24 @@ The `publish-ready.json` marker file indicates all content is extracted and vali
 
 **Source Post**: "Your Context Window Is Bleeding"
 
-**Twitter Hook**:
+**Twitter Hook:**
 > Your context window is bleeding.
-> 
+>
 > I see it in every agent codebase I review: engineers dump everything into context, wonder why costs explode, then blame the model.
-> 
+>
 > Here's the fix:
 
-**LinkedIn Opening**:
+**LinkedIn Opening:**
 > Last week I audited an agent system burning $3,000/day on API costs.
-> 
+>
 > The culprit? Context bloat. They were stuffing 180K tokens into every request when they needed 20K.
-> 
+>
 > This is the #1 mistake I see engineering teams make with AI agents...
 
-**Newsletter Opening**:
-> I've been thinking about context windows a lot lately.
-> 
-> It started when a friend asked me to review their agent architecture. Costs had ballooned from $200/day to $3,000/day in three weeks. Same functionality, same users.
-> 
-> The problem wasn't the model. It was how they were feeding it...
+**Bluesky:**
+> Context engineering > prompt engineering. Most agents fail because they stuff everything into context instead of prioritizing.
+>
+> New post on fixing this: blog.amenoacids.com/context-engineering
 
 ---
 
@@ -231,30 +259,65 @@ The `publish-ready.json` marker file indicates all content is extracted and vali
 - [ ] Review hook for punch (would YOU stop scrolling?)
 - [ ] Verify each tweet stands alone
 - [ ] Check LinkedIn doesn't give away everything
-- [ ] Ensure newsletter has personal story angle
-- [ ] Add specific links where noted
-- [ ] Validate metadata.json contains all required fields
-- [ ] Verify character counts are within platform limits
-- [ ] Check tags are appropriate for each platform (max 4-5 tags)
-- [ ] Ensure canonical URLs point to published blog post
-- [ ] Confirm publish-ready.json marker file is created
-- [ ] Schedule according to content calendar:
-  - Twitter: Day of publish or next morning (Wed 8-10am EST for HN day)
-  - LinkedIn: Same day, afternoon
-  - Newsletter: Weekly Sunday batch
+- [ ] Verify all posts include link to blog
+- [ ] Validate character counts are within limits
+- [ ] Ensure typefully-content.json is valid JSON
 
-## Integration with Multi-Channel Publishing
+---
 
-After content extraction completes successfully:
+## Publishing Workflow
 
-1. The `/publish-all` skill can automatically detect and publish the content
-2. Or manually trigger: `/publish-all {slug} --mode staged` for review before publishing
-3. Or use npm scripts: `npm run publish:all -- --post {slug} --dry-run`
+After content extraction:
 
-The metadata.json file provides all necessary data for automated publishing to:
-- Twitter (thread from twitter-thread.md)
-- LinkedIn (post from linkedin-post.md)
-- dev.to (blog post content with frontmatter)
-- Hashnode (blog post content with SEO metadata)
-- Medium (blog post content with canonical URL)
-- Newsletter (edition from newsletter-edition.md)
+### 1. Review Generated Content
+```bash
+# Check the generated files
+cat content/derivatives/{slug}/typefully-content.json | jq '.platforms.x.posts'
+```
+
+### 2. Create Typefully Draft
+```bash
+# Create draft for review (doesn't publish)
+uv run python -c "
+import json
+from adws.adw_modules.typefully_ops import TypefullyClient, TypefullyConfig
+
+with open('content/derivatives/{slug}/typefully-content.json') as f:
+    content = json.load(f)
+
+config = TypefullyConfig.from_env()
+client = TypefullyClient(config)
+
+result = client.create_draft(
+    platforms=content['platforms'],
+    draft_title=content['draft_title'],
+    tags=content.get('tags', []),
+    publish_at=None  # Save as draft
+)
+
+print(f'Draft created: {result.private_url}')
+"
+```
+
+### 3. Review in Typefully UI
+- Go to the draft URL
+- Preview on each platform
+- Make any final edits
+- Publish or schedule
+
+### 4. RSS Handles the Rest
+- dev.to will auto-import within 24 hours
+- Hashnode: trigger manual RSS import
+- Buttondown: included in next digest
+
+---
+
+## Platform Character Limits Reference
+
+| Platform | Limit | Notes |
+|----------|-------|-------|
+| X/Twitter | 280/tweet | Thread up to 25 tweets |
+| LinkedIn | 3000 | Single post |
+| Bluesky | 300 | Links count toward limit |
+| Threads | 500 | Single post |
+| Mastodon | 500 | Default, varies by instance |

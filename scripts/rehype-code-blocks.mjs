@@ -26,6 +26,7 @@ const PREVIEW_LINES = 8;
 const GITHUB_REGEX = /github[=:]\s*(https:\/\/github\.com\/[^\s]+)/i;
 const GITHUB_COMMENT_REGEX = /^#\s*github:\s*(https:\/\/github\.com\/[^\s]+)/im;
 const GITHUB_HTML_COMMENT_REGEX = /<!--\s*github:\s*(https:\/\/github\.com\/[^\s]+)\s*-->/im;
+const GITHUB_SLASHSLASH_COMMENT_REGEX = /^\/\/\s*github:\s*(https:\/\/github\.com\/[^\s]+)/im;
 
 /**
  * Extract GitHub URL from meta string or first-line comment
@@ -44,6 +45,10 @@ function extractGitHubUrl(metaString, codeContent) {
   // Try HTML comment (e.g., <!-- github: https://... -->)
   const htmlCommentMatch = codeContent.match(GITHUB_HTML_COMMENT_REGEX);
   if (htmlCommentMatch) return htmlCommentMatch[1];
+
+  // Try // comment (e.g., // github: https://... for JS/JSON/etc)
+  const slashCommentMatch = codeContent.match(GITHUB_SLASHSLASH_COMMENT_REGEX);
+  if (slashCommentMatch) return slashCommentMatch[1];
 
   return null;
 }

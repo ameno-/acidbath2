@@ -25,6 +25,7 @@ const COLLAPSE_THRESHOLD = 15;
 const PREVIEW_LINES = 8;
 const GITHUB_REGEX = /github[=:]\s*(https:\/\/github\.com\/[^\s]+)/i;
 const GITHUB_COMMENT_REGEX = /^#\s*github:\s*(https:\/\/github\.com\/[^\s]+)/im;
+const GITHUB_HTML_COMMENT_REGEX = /<!--\s*github:\s*(https:\/\/github\.com\/[^\s]+)\s*-->/im;
 
 /**
  * Extract GitHub URL from meta string or first-line comment
@@ -39,6 +40,10 @@ function extractGitHubUrl(metaString, codeContent) {
   // Try first-line comment (e.g., # github: https://...)
   const commentMatch = codeContent.match(GITHUB_COMMENT_REGEX);
   if (commentMatch) return commentMatch[1];
+
+  // Try HTML comment (e.g., <!-- github: https://... -->)
+  const htmlCommentMatch = codeContent.match(GITHUB_HTML_COMMENT_REGEX);
+  if (htmlCommentMatch) return htmlCommentMatch[1];
 
   return null;
 }
@@ -97,7 +102,13 @@ export default function rehypeCodeBlocks() {
       const lineCount = (codeContent.match(/\n/g) || []).length + 1;
 
       // Extract GitHub URL from meta or comment
-      const metaString = node.properties?.metastring || node.properties?.dataMetastring || '';
+      // Shiki/Astro stores meta in different places depending on version
+      const metaString = node.properties?.metastring
+        || node.properties?.dataMetastring
+        || node.data?.meta
+        || codeNode.properties?.metastring
+        || codeNode.data?.meta
+        || '';
       const githubUrl = extractGitHubUrl(metaString, codeContent);
       const githubInfo = parseGitHubUrl(githubUrl);
 

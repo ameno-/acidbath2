@@ -1,6 +1,36 @@
 # Voice Transformation Examples
 
-Concrete before/after examples showing how to apply the Ameno voice through **simplification**, not forced metaphors.
+Concrete before/after examples showing Ameno voice transformations in suggest_edits format. Each example includes rationale explaining why the edit improves clarity.
+
+**Pattern**: These examples now follow the suggest_edits framework - showing how Ameno voice suggestions are formatted for user review and selective application.
+
+---
+
+## Suggest_Edits Format Example
+
+All Ameno suggestions now output in this format:
+
+```markdown
+## Suggested Edit 1: Context Overhead Explanation
+
+**Type**: concept-explanation
+**Rationale**: Simplifies abstract "computational inefficiency" to concrete cost impact ("$0.40 per conversation"). Adds relatability through specific comparison ("20% of your context gone") without introducing metaphor. Preserves technical accuracy while improving clarity.
+
+### Before
+```
+MCP servers contribute significantly to overhead by loading tool descriptions upfront. This represents a computational inefficiency that impacts both response latency and API costs.
+```
+
+### After
+```
+Default MCP setups load all tool descriptions upfront. Four servers at 10K tokens each = 40K tokens consumed. That's 20% of your context gone. For tools you might not even use.
+```
+
+### Apply This Edit?
+- [ ] Yes, apply as-is
+- [ ] Apply with modifications
+- [ ] Skip this edit
+```
 
 ---
 

@@ -14,8 +14,10 @@ in the category "Context Engineering" with difficulty "Advanced"
 1. Generate URL-friendly slug from title
 2. Create file at `src/content/blog/{slug}.mdx`
 3. Add complete frontmatter with AI optimization fields
-4. Create section scaffolding
+4. Create section scaffolding in **ACIDBATH direct voice** (no personality)
 5. Remind to regenerate llms.txt after publishing
+
+**Voice**: Posts are created in ACIDBATH's **direct, factual voice**. Copywriting skills (`/ameno-finalize`, `/mad-men-edit`, `/master-copy-edit`) are applied **after drafting** as optional editing steps, not during creation.
 
 ## Frontmatter Template
 

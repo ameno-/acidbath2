@@ -7,8 +7,14 @@ import mdx from "@astrojs/mdx";
 export default defineConfig({
   site: "https://blog.amenoacids.com",
   integrations: [mdx()],
+  server: {
+    port: process.env.WORKTREE_PORT_1 ? parseInt(process.env.WORKTREE_PORT_1) : 9103,
+  },
   vite: {
     plugins: [tailwindcss()],
+    server: {
+      port: process.env.WORKTREE_PORT_2 ? parseInt(process.env.WORKTREE_PORT_2) : 9203,
+    },
   },
   markdown: {
     syntaxHighlight: {

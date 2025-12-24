@@ -95,7 +95,7 @@ Fluid typography with clamp() eliminates breakpoint-specific font sizes. One dec
 ### Data Variant
 
 <Callout type="data" title="Benchmark Results">
-Design system CSS adds 8KB gzipped. Bundle size increased 4.2% (target was <10%). LCP improved from 2.1s to 1.8s due to font-display: swap strategy.
+Design system CSS adds 8KB gzipped. Bundle size increased 4.2% (target was under 10%). LCP improved from 2.1s to 1.8s due to font-display: swap strategy.
 </Callout>
 
 **Usage**: Metrics, benchmarks, numerical results
@@ -330,7 +330,7 @@ All semantic colors include foreground and background variants:
 <Callout type="data" title="Bundle Size Analysis">
 
 - **Design System CSS**: 8KB gzipped
-- **Total Bundle Increase**: 4.2% (target: <10%)
+- **Total Bundle Increase**: 4.2% (target: under 10%)
 - **LCP Before**: 2.1s → **After**: 1.8s
 - **Font Loading Strategy**: `font-display: swap` prevents FOIT
 - **Animation Performance**: 60fps (CSS transforms, GPU-accelerated)

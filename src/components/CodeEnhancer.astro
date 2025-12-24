@@ -1,108 +1,258 @@
 ---
-// This component enhances all code blocks on the page with copy buttons
-// Include this in your layout to enable copy functionality globally
+/**
+ * CodeEnhancer - Adds interactivity to SSR-rendered code blocks
+ *
+ * The rehype-code-blocks plugin handles SSR structure (container, buttons, classes).
+ * This component only adds client-side interactivity:
+ * - Copy to clipboard
+ * - Expand/collapse toggle
+ *
+ * Include this in your layout to enable code block interactivity globally.
+ */
 ---
 
 <script>
-  function enhanceCodeBlocks() {
-    const codeBlocks = document.querySelectorAll('pre:not([data-enhanced])');
+  function initCodeBlocks() {
+    // Initialize copy buttons
+    document.querySelectorAll('.code-block-container .copy-button').forEach(button => {
+      if (button.dataset.initialized) return;
+      button.dataset.initialized = 'true';
 
-    codeBlocks.forEach(pre => {
-      // Skip if already enhanced or if it's a mermaid block
-      if (pre.dataset.enhanced || pre.closest('.mermaid')) return;
-
-      pre.dataset.enhanced = 'true';
-
-      // Create wrapper
-      const wrapper = document.createElement('div');
-      wrapper.className = 'enhanced-code-block';
-      pre.parentNode?.insertBefore(wrapper, pre);
-      wrapper.appendChild(pre);
-
-      // Create copy button
-      const button = document.createElement('button');
-      button.className = 'code-copy-btn';
-      button.setAttribute('aria-label', 'Copy code');
-      button.innerHTML = '<span class="copy-text">Copy</span><span class="copied-text">Copied!</span>';
-
-      wrapper.appendChild(button);
-
-      // Add click handler
       button.addEventListener('click', async () => {
-        const code = pre.querySelector('code')?.textContent || pre.textContent || '';
+        const container = button.closest('.code-block-container');
+        const codeElement = container?.querySelector('pre code') || container?.querySelector('pre');
 
-        try {
-          await navigator.clipboard.writeText(code);
-          button.classList.add('copied');
+        if (codeElement) {
+          const code = codeElement.textContent || '';
 
-          setTimeout(() => {
-            button.classList.remove('copied');
-          }, 2000);
-        } catch (err) {
-          console.error('Failed to copy:', err);
+          try {
+            await navigator.clipboard.writeText(code);
+            button.classList.add('copied');
+
+            setTimeout(() => {
+              button.classList.remove('copied');
+            }, 2000);
+          } catch (err) {
+            console.error('Failed to copy:', err);
+          }
+        }
+      });
+    });
+
+    // Initialize collapse toggles
+    document.querySelectorAll('.code-block-container .collapse-toggle').forEach(button => {
+      if (button.dataset.initialized) return;
+      button.dataset.initialized = 'true';
+
+      button.addEventListener('click', () => {
+        const container = button.closest('.code-block-container');
+        if (container) {
+          container.classList.toggle('expanded');
         }
       });
     });
   }
 
   // Run on page load
-  document.addEventListener('DOMContentLoaded', enhanceCodeBlocks);
+  initCodeBlocks();
 
   // Re-run on view transitions (for Astro)
-  document.addEventListener('astro:after-swap', enhanceCodeBlocks);
-
-  // Also run immediately in case DOMContentLoaded already fired
-  if (document.readyState !== 'loading') {
-    enhanceCodeBlocks();
-  }
+  document.addEventListener('astro:after-swap', initCodeBlocks);
+  document.addEventListener('astro:page-load', initCodeBlocks);
 </script>
 
 <style is:global>
-  .enhanced-code-block {
+  /* Code Block Wrapper */
+  .code-block-wrapper {
     position: relative;
-    margin: var(--spacing-line) 0;
+    margin: var(--space-6, 1.5rem) 0;
   }
 
-  .enhanced-code-block pre {
-    margin-top: 0 !important;
+  /* Code Block Header */
+  .code-block-header {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2, 0.5rem);
+    background: var(--color-background-alt, #1a1a1a);
+    border: var(--border-width-thick, 2px) solid var(--color-foreground-alt, #333);
+    border-bottom: none;
+    padding: var(--space-2, 0.5rem) var(--space-4, 1rem);
+    border-radius: var(--radius-sm, 4px) var(--radius-sm, 4px) 0 0;
   }
 
-  .code-copy-btn {
-    position: absolute;
-    top: 0.5rem;
-    right: 0.5rem;
-    background: var(--color-background);
-    color: var(--color-foreground-alt);
-    border: 1px solid var(--color-foreground-alt);
-    padding: 0.25rem 0.75rem;
-    font-family: var(--font-family-mono);
-    font-size: 0.75rem;
-    cursor: pointer;
-    z-index: 10;
-    transition: all 0.15s ease;
+  .code-block-label {
+    font-size: var(--text-sm, 0.875rem);
+    color: var(--color-foreground, #e0e0e0);
+    font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.05em;
   }
 
-  .code-copy-btn:hover {
-    color: var(--color-foreground);
-    border-color: var(--color-foreground);
+  .language-badge {
+    font-size: var(--text-xs, 0.75rem);
+    color: var(--color-accent-primary, #39ff14);
+    background: rgba(57, 255, 20, 0.1);
+    padding: var(--space-1, 0.25rem) var(--space-2, 0.5rem);
+    border-radius: var(--radius-sm, 4px);
+    font-weight: 600;
+    text-transform: uppercase;
   }
 
-  .code-copy-btn.copied {
-    color: var(--color-accent);
-    border-color: var(--color-accent);
+  /* Code Block Container */
+  .code-block-container {
+    position: relative;
+    background: var(--color-background-code, #0d0d0d);
+    border: var(--border-width-thick, 2px) solid var(--color-foreground-alt, #333);
+    border-radius: var(--radius-sm, 4px);
   }
 
-  .code-copy-btn .copied-text {
+  .code-block-header + .code-block-container {
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+  }
+
+  /* Collapsible State */
+  .code-block-container.collapsible {
+    max-height: 16rem;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+  }
+
+  .code-block-container.collapsible.expanded {
+    max-height: none;
+  }
+
+  /* Code Content */
+  .code-content {
+    position: relative;
+  }
+
+  .code-block-container pre {
+    margin: 0;
+    padding: var(--space-4, 1rem);
+    background: transparent;
+    border: none;
+    overflow-x: auto;
+  }
+
+  /* Line Numbers */
+  .code-block-container.with-line-numbers pre {
+    padding-left: var(--space-12, 3rem);
+  }
+
+  .code-block-container.with-line-numbers code {
+    counter-reset: line;
+  }
+
+  .code-block-container.with-line-numbers code .line::before {
+    counter-increment: line;
+    content: counter(line);
+    display: inline-block;
+    width: 2.5ch;
+    margin-left: calc(-1 * var(--space-12, 3rem) + var(--space-2, 0.5rem));
+    margin-right: var(--space-4, 1rem);
+    text-align: right;
+    color: var(--color-foreground-muted, #666);
+    user-select: none;
+  }
+
+  /* Copy Button */
+  .copy-button {
+    position: absolute;
+    top: var(--space-2, 0.5rem);
+    right: var(--space-2, 0.5rem);
+    background: var(--color-background, #0a0a0a);
+    color: var(--color-foreground-alt, #888);
+    border: 1px solid var(--color-foreground-alt, #333);
+    padding: var(--space-2, 0.5rem) var(--space-3, 0.75rem);
+    font-family: var(--font-family-mono, monospace);
+    font-size: var(--text-xs, 0.75rem);
+    font-weight: 600;
+    text-transform: uppercase;
+    cursor: pointer;
+    z-index: 20;
+    transition: all 0.15s ease;
+    border-radius: var(--radius-sm, 4px);
+  }
+
+  .copy-button:hover {
+    color: var(--color-foreground, #e0e0e0);
+    border-color: var(--color-foreground, #e0e0e0);
+    background: var(--color-background-hover, #1a1a1a);
+  }
+
+  .copy-button.copied {
+    color: var(--color-accent-primary, #39ff14);
+    border-color: var(--color-accent-primary, #39ff14);
+    background: rgba(57, 255, 20, 0.1);
+  }
+
+  .copied-icon {
     display: none;
   }
 
-  .code-copy-btn.copied .copy-text {
+  .copy-button.copied .copy-icon {
     display: none;
   }
 
-  .code-copy-btn.copied .copied-text {
+  .copy-button.copied .copied-icon {
     display: inline;
+  }
+
+  /* Collapse Toggle */
+  .collapse-toggle {
+    position: absolute;
+    bottom: var(--space-2, 0.5rem);
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--color-background, #0a0a0a);
+    color: var(--color-accent-primary, #39ff14);
+    border: 2px solid var(--color-accent-primary, #39ff14);
+    padding: var(--space-2, 0.5rem) var(--space-4, 1rem);
+    font-family: var(--font-family-mono, monospace);
+    font-size: var(--text-xs, 0.75rem);
+    font-weight: 700;
+    text-transform: uppercase;
+    cursor: pointer;
+    z-index: 20;
+    transition: all 0.15s ease;
+    border-radius: var(--radius-sm, 4px);
+  }
+
+  .collapse-toggle:hover {
+    background: var(--color-accent-primary, #39ff14);
+    color: var(--color-background, #0a0a0a);
+  }
+
+  .collapse-text {
+    display: none;
+  }
+
+  .code-block-container.expanded .expand-text {
+    display: none;
+  }
+
+  .code-block-container.expanded .collapse-text {
+    display: inline;
+  }
+
+  /* Fade Overlay */
+  .code-fade {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 8rem;
+    background: linear-gradient(
+      to bottom,
+      transparent 0%,
+      var(--color-background-code, #0d0d0d) 100%
+    );
+    pointer-events: none;
+    transition: opacity 0.15s ease;
+  }
+
+  .code-block-container.expanded .code-fade {
+    opacity: 0;
   }
 </style>

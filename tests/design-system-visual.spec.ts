@@ -1,6 +1,6 @@
 import { test, expect } from '@playwright/test';
 
-const SHOWCASE_URL = '/blog/design-system-showcase';
+const SHOWCASE_URL = '/design-system-showcase';
 
 /**
  * Visual Regression Tests for Design System Components

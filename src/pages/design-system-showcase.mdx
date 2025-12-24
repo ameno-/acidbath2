@@ -1,23 +1,12 @@
 ---
-title: "ACIDBATH Design System: Acid-Green Components for Technical Content"
-description: "Four new components and fluid typography transform dense technical posts into scannable, layered content. Here's the design system that makes 10,000-word posts readable."
-pubDate: 2025-12-23
-author: "Acidbath"
-tags: ["design-system", "ui", "typography", "accessibility", "frontend"]
-banner: "/assets/posts/design-system-banner.png"
-category: "Design"
-difficulty: "Beginner"
-tldr: "ACIDBATH's new design system adds Callout (7 semantic variants), Collapse (collapsible sections), enhanced CodeBlock (auto-collapse at 15+ lines), and hierarchical TableOfContents. Fluid typography scales from 0.75rem to 3.5rem, acid-green accents (#39ff14), and modular spacing create scannable technical content."
-keyTakeaways:
-  - "Callout component has 7 variants: quote, info, warning, danger, success, insight, data"
-  - "CodeBlock auto-collapses at 15+ lines with 8-line preview and fade gradient"
-  - "Collapse component supports 3 variants: default, compact, prominent"
-  - "TableOfContents groups H2/H3 hierarchically with scroll progress bar"
-  - "Fluid typography uses clamp() for responsive scaling without media queries"
+layout: ../layouts/BaseLayout.astro
+title: "Design System Showcase"
+description: "Internal showcase of ACIDBATH design system components for testing."
 ---
 
-import Callout from '../../components/Callout.astro';
-import Collapse from '../../components/Collapse.astro';
+import Callout from '../components/Callout.astro';
+import Collapse from '../components/Collapse.astro';
+import CodeEnhancer from '../components/CodeEnhancer.astro';
 
 Three months of 10,000-word technical posts revealed a problem: walls of code and dense explanations create cognitive overload. Senior engineers need to scan quickly, find relevant sections, and drill into details only when needed.
 
@@ -374,8 +363,8 @@ All components work in `.md` files with Astro's component import:
 title: "My Post"
 ---
 
-import Callout from '../../components/Callout.astro';
-import Collapse from '../../components/Collapse.astro';
+import Callout from '../components/Callout.astro';
+import Collapse from '../components/Collapse.astro';
 
 <Callout type="insight">
 This is a key insight that will appear prominently.
@@ -433,3 +422,5 @@ Full documentation available in `ai_docs/design-system.md`.
 - [CodeBlock Options](#codeblock-enhancements)
 - [Typography Scale](#typography-scale)
 - [Color Palette](#color-palette)
+
+<CodeEnhancer />

@@ -53,7 +53,7 @@ def example_function():
 Use for fully extracted code examples (40+ lines):
 
 ```markdown
-> **📦 Complete Example:** [Multi-Agent Orchestrator](https://github.com/ameno-/acidbath-code/tree/main/examples/agentic-patterns/agent-architecture/multi-agent-orchestrator)
+> **📦 Complete Example:** [Multi-Agent Orchestrator](https://github.com/ameno-/acidbath-code/tree/main/agentic-patterns/agent-architecture/multi-agent-orchestrator)
 >
 > This example demonstrates a complete multi-agent orchestration system with task distribution, agent coordination, and result aggregation.
 >
@@ -64,7 +64,7 @@ Use for fully extracted code examples (40+ lines):
 
 **Rendered:**
 
-> **📦 Complete Example:** [Multi-Agent Orchestrator](https://github.com/ameno-/acidbath-code/tree/main/examples/agentic-patterns/agent-architecture/multi-agent-orchestrator)
+> **📦 Complete Example:** [Multi-Agent Orchestrator](https://github.com/ameno-/acidbath-code/tree/main/agentic-patterns/agent-architecture/multi-agent-orchestrator)
 >
 > This example demonstrates a complete multi-agent orchestration system with task distribution, agent coordination, and result aggregation.
 >
@@ -86,7 +86,7 @@ def process_task(task):
     return result
 \`\`\`
 
-> **🔗 See Full Implementation:** [Task Processor](https://github.com/ameno-/acidbath-code/tree/main/examples/production-patterns/directory-watchers/task-processor)
+> **🔗 See Full Implementation:** [Task Processor](https://github.com/ameno-/acidbath-code/tree/main/production-patterns/directory-watchers/task-processor)
 > The complete implementation includes error handling, retry logic, and monitoring integration.
 ```
 
@@ -101,7 +101,7 @@ def process_task(task):
     return result
 ```
 
-> **🔗 See Full Implementation:** [Task Processor](https://github.com/ameno-/acidbath-code/tree/main/examples/production-patterns/directory-watchers/task-processor)
+> **🔗 See Full Implementation:** [Task Processor](https://github.com/ameno-/acidbath-code/tree/main/production-patterns/directory-watchers/task-processor)
 > The complete implementation includes error handling, retry logic, and monitoring integration.
 
 ### Format 3: Runnable Example
@@ -109,26 +109,26 @@ def process_task(task):
 Use when emphasizing that code is ready to run:
 
 ```markdown
-> **▶️ Runnable Example:** [File System Watcher](https://github.com/ameno-/acidbath-code/tree/main/examples/production-patterns/directory-watchers/file-system-watcher)
+> **▶️ Runnable Example:** [File System Watcher](https://github.com/ameno-/acidbath-code/tree/main/production-patterns/directory-watchers/file-system-watcher)
 >
 > A production-ready file system watcher with event handling and debouncing. Clone and run:
 >
 > \`\`\`bash
 > git clone https://github.com/ameno-/acidbath-code.git
-> cd acidbath-code/examples/production-patterns/directory-watchers/file-system-watcher
+> cd acidbath-code/production-patterns/directory-watchers/file-system-watcher
 > python watcher.py
 > \`\`\`
 ```
 
 **Rendered:**
 
-> **▶️ Runnable Example:** [File System Watcher](https://github.com/ameno-/acidbath-code/tree/main/examples/production-patterns/directory-watchers/file-system-watcher)
+> **▶️ Runnable Example:** [File System Watcher](https://github.com/ameno-/acidbath-code/tree/main/production-patterns/directory-watchers/file-system-watcher)
 >
 > A production-ready file system watcher with event handling and debouncing. Clone and run:
 >
 > ```bash
 > git clone https://github.com/ameno-/acidbath-code.git
-> cd acidbath-code/examples/production-patterns/directory-watchers/file-system-watcher
+> cd acidbath-code/production-patterns/directory-watchers/file-system-watcher
 > python watcher.py
 > ```
 
@@ -137,7 +137,7 @@ Use when emphasizing that code is ready to run:
 Use when code example spans multiple files:
 
 ```markdown
-> **📁 Multi-File Example:** [Agent Communication System](https://github.com/ameno-/acidbath-code/tree/main/examples/agentic-patterns/agent-architecture/agent-communication)
+> **📁 Multi-File Example:** [Agent Communication System](https://github.com/ameno-/acidbath-code/tree/main/agentic-patterns/agent-architecture/agent-communication)
 >
 > Complete agent communication implementation:
 >
@@ -151,7 +151,7 @@ Use when code example spans multiple files:
 
 **Rendered:**
 
-> **📁 Multi-File Example:** [Agent Communication System](https://github.com/ameno-/acidbath-code/tree/main/examples/agentic-patterns/agent-architecture/agent-communication)
+> **📁 Multi-File Example:** [Agent Communication System](https://github.com/ameno-/acidbath-code/tree/main/agentic-patterns/agent-architecture/agent-communication)
 >
 > Complete agent communication implementation:
 >
@@ -166,22 +166,24 @@ Use when code example spans multiple files:
 
 ### GitHub Repository URL Format
 
+Categories are at the root level (not under `examples/`):
+
 ```
-https://github.com/ameno-/acidbath-code/tree/main/examples/{category}/{post-slug}/{example-name}
+https://github.com/ameno-/acidbath-code/tree/main/{category}/{post-slug}/{example-name}
 ```
 
 **Components:**
-- `{category}`: One of `agentic-patterns`, `production-patterns`, `workflow-tools`, `configurations`
+- `{category}`: One of `agentic-patterns`, `production-patterns`, `workflow-tools`
 - `{post-slug}`: Blog post slug (e.g., `agent-architecture`, `directory-watchers`)
 - `{example-name}`: Descriptive name for the example (e.g., `multi-agent-orchestrator`)
 
 **Examples:**
 ```
-https://github.com/ameno-/acidbath-code/tree/main/examples/agentic-patterns/agent-architecture/multi-agent-orchestrator
+https://github.com/ameno-/acidbath-code/tree/main/agentic-patterns/agent-architecture/multi-agent-orchestrator
 
-https://github.com/ameno-/acidbath-code/tree/main/examples/production-patterns/directory-watchers/file-system-watcher
+https://github.com/ameno-/acidbath-code/tree/main/production-patterns/directory-watchers/file-system-watcher
 
-https://github.com/ameno-/acidbath-code/tree/main/examples/workflow-tools/single-file-scripts/git-workflow-automation
+https://github.com/ameno-/acidbath-code/tree/main/workflow-tools/single-file-scripts/git-workflow-automation
 ```
 
 ### Direct File Links
@@ -189,12 +191,12 @@ https://github.com/ameno-/acidbath-code/tree/main/examples/workflow-tools/single
 For linking to specific files:
 
 ```
-https://github.com/ameno-/acidbath-code/blob/main/examples/{category}/{post-slug}/{example-name}/{filename}
+https://github.com/ameno-/acidbath-code/blob/main/{category}/{post-slug}/{example-name}/{filename}
 ```
 
 **Example:**
 ```
-https://github.com/ameno-/acidbath-code/blob/main/examples/agentic-patterns/agent-architecture/multi-agent-orchestrator/orchestrator.py
+https://github.com/ameno-/acidbath-code/blob/main/agentic-patterns/agent-architecture/multi-agent-orchestrator/orchestrator.py
 ```
 
 ## Hybrid Approach: Snippet + Reference
@@ -213,7 +215,7 @@ def route_task(self, task: Task) -> Agent:
     raise NoAgentAvailable(task)
 \`\`\`
 
-> **📦 Complete Example:** [Multi-Agent Orchestrator](https://github.com/ameno-/acidbath-code/tree/main/examples/agentic-patterns/agent-architecture/multi-agent-orchestrator)
+> **📦 Complete Example:** [Multi-Agent Orchestrator](https://github.com/ameno-/acidbath-code/tree/main/agentic-patterns/agent-architecture/multi-agent-orchestrator)
 > The full implementation includes agent registration, task queuing, result aggregation, and error handling.
 ```
 
@@ -287,7 +289,7 @@ watcher = FileWatcher("/path/to/watch", process_file)
 watcher.start()
 \`\`\`
 
-> **▶️ Runnable Example:** [File System Watcher](https://github.com/ameno-/acidbath-code/tree/main/examples/production-patterns/directory-watchers/file-system-watcher)
+> **▶️ Runnable Example:** [File System Watcher](https://github.com/ameno-/acidbath-code/tree/main/production-patterns/directory-watchers/file-system-watcher)
 >
 > A production-ready file system watcher with event handling, debouncing, and error recovery.
 >
@@ -357,7 +359,7 @@ on:
     branches: [main]
 \`\`\`
 
-> **📦 Complete Example:** [CI/CD Workflow](https://github.com/ameno-/acidbath-code/tree/main/examples/configurations/ci-cd-workflow)
+> **📦 Complete Example:** [CI/CD Workflow](https://github.com/ameno-/acidbath-code/tree/main/workflow-tools/ci-cd-workflow)
 > Full GitHub Actions configuration with testing, deployment, and environment management.
 
 ```
@@ -385,7 +387,7 @@ def delegate_task(self, task: Task) -> Result:
     return agent.execute(task)
 \`\`\`
 
-> **📁 Multi-File Example:** [Multi-Agent Orchestrator](https://github.com/ameno-/acidbath-code/tree/main/examples/agentic-patterns/agent-architecture/multi-agent-orchestrator)
+> **📁 Multi-File Example:** [Multi-Agent Orchestrator](https://github.com/ameno-/acidbath-code/tree/main/agentic-patterns/agent-architecture/multi-agent-orchestrator)
 >
 > Complete implementation with:
 >

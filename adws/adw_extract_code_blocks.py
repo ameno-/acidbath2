@@ -413,7 +413,7 @@ def generate_extraction_report(
             report.append(f"- **Lines:** {block.line_count}\n")
             report.append(f"- **Section:** {block.context}\n")
             report.append(f"- **Validation:** {'Valid' if ex['validation'].valid else ex['validation'].message}\n")
-            report.append(f"- **Path:** `examples/{ex['category']}/{post_slug}/{ex['example_name']}`\n\n")
+            report.append(f"- **Path:** `{ex['category']}/{post_slug}/{ex['example_name']}`\n\n")
 
     report_content = "".join(report)
 

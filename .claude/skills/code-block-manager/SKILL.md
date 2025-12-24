@@ -23,30 +23,30 @@ The ACIDBATH blog maintains a companion repository (`acidbath-code`) containing 
 ## Code Organization Schema
 
 ### Repository Structure
+
+Categories are at the root level (not under `examples/`):
+
 ```
 acidbath-code/
-├── examples/
-│   ├── agentic-patterns/      # AI agent patterns
-│   │   ├── agent-architecture/
-│   │   ├── context-engineering/
-│   │   └── claude-skills-deep-dive/
-│   ├── production-patterns/   # Production-ready code
-│   │   ├── directory-watchers/
-│   │   └── document-generation-skills/
-│   ├── workflow-tools/        # Utility scripts
-│   │   ├── single-file-scripts/
-│   │   └── workflow-prompts/
-│   └── configurations/        # Config examples
+├── agentic-patterns/           # AI agent patterns
+│   ├── agent-architecture/
+│   ├── context-engineering/
+│   └── claude-skills-deep-dive/
+├── production-patterns/        # Production-ready code
+│   ├── directory-watchers/
+│   └── document-generation-skills/
+├── workflow-tools/             # Utility scripts
+│   ├── single-file-scripts/
+│   └── workflow-prompts/
 ├── scripts/
 │   └── validate-all.py
-└── manifest.json              # Blog-to-code mapping
+└── manifest.json               # Blog-to-code mapping
 ```
 
 ### Category Assignment
 - **agentic-patterns**: Posts about AI agents, Claude, context engineering
 - **production-patterns**: Posts about real-world implementation
 - **workflow-tools**: Posts about automation, scripts, utilities
-- **configurations**: Configuration files and templates
 
 ## Extraction Workflow
 
@@ -88,7 +88,7 @@ def main():
     # ...
 \`\`\`
 
-> ** Complete Example:** [Example Name](https://github.com/ameno-/acidbath-code/tree/main/examples/...)
+> ** Complete Example:** [Example Name](https://github.com/ameno-/acidbath-code/tree/main/agentic-patterns/...)
 > Description of what this code does.
 > **Language:** python | **Lines:** 87
 ```
@@ -111,11 +111,11 @@ result = validate_code_block(code, language)
 ### Directory Validation
 ```bash
 # Validate all code in acidbath-code
-uv run -c "
+python3 -c "
 from pathlib import Path
 from adws.adw_modules.code_validator import validate_directory, generate_validation_report
 
-results = validate_directory(Path('~/dev/acidbath-code/examples').expanduser())
+results = validate_directory(Path('~/dev/acidbath-code').expanduser())
 print(generate_validation_report(results))
 "
 ```
@@ -130,22 +130,22 @@ The `manifest.json` maps blog posts to extracted examples:
   "generated": "2025-12-23T10:00:00Z",
   "posts": {
     "agent-architecture": {
-      "title": "Building Multi-Agent Architectures",
+      "title": "Agent Architecture: From Custom Agents to Effective Delegation",
       "path": "src/content/blog/agent-architecture.md",
       "extracted_examples": [
         {
-          "name": "multi-agent-orchestrator",
+          "name": "poc-agent-custom",
           "category": "agentic-patterns",
-          "path": "examples/agentic-patterns/agent-architecture/multi-agent-orchestrator",
+          "path": "agentic-patterns/agent-architecture/poc-agent-custom",
           "language": "python",
           "lines": 132,
-          "section": "## Implementing the Orchestrator"
+          "section": "## POC: Building a Custom Agent"
         }
       ]
     }
   },
   "statistics": {
-    "total_posts": 7,
+    "total_posts": 6,
     "total_examples_extracted": 14
   }
 }

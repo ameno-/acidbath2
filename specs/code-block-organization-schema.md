@@ -66,63 +66,48 @@ Configuration files, schemas, and templates.
 
 ## Directory Structure
 
+Categories are at the root level (not under `examples/`):
+
 ```
 acidbath-code/
 ├── README.md                          # Repository overview and index
+├── manifest.json                      # Mapping of blog posts to examples
 ├── .github/
 │   └── workflows/
 │       └── validate-code.yml          # CI validation workflow
 ├── scripts/
 │   └── validate-all.py                # Local validation script
-├── examples/
-│   ├── agentic-patterns/
-│   │   ├── agent-architecture/
-│   │   │   ├── multi-agent-orchestrator/
-│   │   │   │   ├── README.md          # Example context and usage
-│   │   │   │   ├── orchestrator.py    # Main implementation
-│   │   │   │   ├── agents.py          # Agent definitions
-│   │   │   │   └── config.yaml        # Configuration
-│   │   │   └── agent-communication/
-│   │   │       ├── README.md
-│   │   │       └── message_bus.py
-│   │   ├── claude-skills-deep-dive/
-│   │   │   └── skill-template/
-│   │   │       ├── README.md
-│   │   │       └── skill.md
-│   │   └── context-engineering/
-│   │       └── context-manager/
-│   │           ├── README.md
-│   │           └── context_manager.py
-│   ├── production-patterns/
-│   │   ├── directory-watchers/
-│   │   │   ├── file-system-watcher/
-│   │   │   │   ├── README.md
-│   │   │   │   ├── watcher.py
-│   │   │   │   └── handlers.py
-│   │   │   └── event-processor/
-│   │   │       ├── README.md
-│   │   │       └── processor.py
-│   │   └── document-generation-skills/
-│   │       └── pdf-generator/
-│   │           ├── README.md
-│   │           └── generator.py
-│   ├── workflow-tools/
-│   │   ├── single-file-scripts/
-│   │   │   ├── git-workflow-automation/
-│   │   │   │   ├── README.md
-│   │   │   │   └── git_workflow.py
-│   │   │   └── code-analyzer/
-│   │   │       ├── README.md
-│   │   │       └── analyze.py
-│   │   └── workflow-prompts/
-│   │       └── prompt-templates/
-│   │           ├── README.md
-│   │           └── templates.md
-│   └── configurations/
-│       └── ci-cd-configs/
+├── agentic-patterns/                  # AI agent patterns
+│   ├── agent-architecture/
+│   │   ├── poc-simplest-custom/
+│   │   │   ├── README.md
+│   │   │   └── poc_simplest_custom.py
+│   │   ├── poc-agent-custom/
+│   │   │   ├── README.md
+│   │   │   └── poc_agent_custom.py
+│   │   └── step-research-agent/
+│   │       ├── README.md
+│   │       └── step_research_agent.md
+│   └── context-engineering/
+│       └── when-you-need/
 │           ├── README.md
-│           └── github-actions.yml
-└── manifest.json                      # Mapping of blog posts to examples
+│           └── when_you_need.py
+├── production-patterns/               # Production-ready code
+│   ├── directory-watchers/
+│   │   ├── step-configuration-file/
+│   │   ├── step-core-watcher/
+│   │   ├── step-image-generation/
+│   │   └── security-validating-file/
+│   └── document-generation-skills/
+│       ├── step-setup-configuration/
+│       ├── step-powerpoint-generation/
+│       ├── step-pdf-generation/
+│       └── step-pipeline-orchestration/
+└── workflow-tools/                    # Utility scripts
+    ├── single-file-scripts/
+    │   └── complete-working-example/
+    └── workflow-prompts/
+        └── poc-working-workflow/
 ```
 
 ## Naming Conventions
@@ -151,7 +136,7 @@ Each code example MUST include a README.md with the following structure:
 
 ## Source
 
-**Blog Post:** [{Post Title}](https://acidbath.sh/blog/{post-slug})
+**Blog Post:** [{Post Title}](https://blog.acidbath.com/blog/{post-slug})
 **Section:** {Section/Heading in Post}
 **Date Extracted:** {YYYY-MM-DD}
 
@@ -225,7 +210,7 @@ The `manifest.json` file maps blog posts to their extracted code examples:
         {
           "name": "multi-agent-orchestrator",
           "category": "agentic-patterns",
-          "path": "examples/agentic-patterns/agent-architecture/multi-agent-orchestrator",
+          "path": "agentic-patterns/agent-architecture/multi-agent-orchestrator",
           "language": "python",
           "lines": 87,
           "section": "## Implementing the Orchestrator",

@@ -8,15 +8,16 @@ ACIDBATH blog maintains a companion repository (`acidbath-code`) that hosts comp
 
 ```
 acidbath2/                      acidbath-code/
-├── src/content/blog/           ├── examples/
-│   ├── agent-architecture.md   │   ├── agentic-patterns/
-│   └── ...                     │   ├── production-patterns/
-├── adws/                       │   └── workflow-tools/
-│   ├── adw_extract_code_blocks.py
-│   └── adw_transform_code_refs.py
-└── .claude/commands/           └── manifest.json
-    ├── extract-code.md
-    └── sync-code-blocks.md
+├── src/content/blog/           ├── agentic-patterns/
+│   ├── agent-architecture.md   │   ├── agent-architecture/
+│   └── ...                     │   └── context-engineering/
+├── adws/                       ├── production-patterns/
+│   ├── adw_extract_code_blocks.py  │   ├── directory-watchers/
+│   └── adw_transform_code_refs.py  │   └── document-generation-skills/
+└── .claude/commands/           ├── workflow-tools/
+    ├── extract-code.md         │   ├── single-file-scripts/
+    └── sync-code-blocks.md     │   └── workflow-prompts/
+                                └── manifest.json
 ```
 
 ## Why Separate Code Repository?
@@ -60,29 +61,28 @@ uv run ./adws/adw_transform_code_refs.py --all
 
 ## Repository Structure
 
-Code is organized by category, then by source post:
+Categories are at the root level, organized by source post:
 
 ```
 acidbath-code/
-├── examples/
-│   ├── agentic-patterns/
-│   │   ├── agent-architecture/
-│   │   │   ├── poc-simplest-custom/
-│   │   │   │   ├── README.md
-│   │   │   │   └── poc_simplest_custom.py
-│   │   │   └── poc-agent-custom/
-│   │   │       ├── README.md
-│   │   │       └── poc_agent_custom.py
-│   │   └── context-engineering/
-│   │       └── when-you-need/
-│   │           ├── README.md
-│   │           └── when_you_need.py
-│   ├── production-patterns/
-│   │   ├── directory-watchers/
-│   │   └── document-generation-skills/
-│   └── workflow-tools/
-│       ├── single-file-scripts/
-│       └── workflow-prompts/
+├── agentic-patterns/
+│   ├── agent-architecture/
+│   │   ├── poc-simplest-custom/
+│   │   │   ├── README.md
+│   │   │   └── poc_simplest_custom.py
+│   │   └── poc-agent-custom/
+│   │       ├── README.md
+│   │       └── poc_agent_custom.py
+│   └── context-engineering/
+│       └── when-you-need/
+│           ├── README.md
+│           └── when_you_need.py
+├── production-patterns/
+│   ├── directory-watchers/
+│   └── document-generation-skills/
+├── workflow-tools/
+│   ├── single-file-scripts/
+│   └── workflow-prompts/
 └── manifest.json
 ```
 
@@ -91,7 +91,6 @@ acidbath-code/
 - **agentic-patterns**: Posts about AI agents, Claude, context engineering
 - **production-patterns**: Posts about real-world implementation patterns
 - **workflow-tools**: Posts about automation, scripts, utilities
-- **configurations**: Config files and templates
 
 ## Reference Format
 
@@ -105,7 +104,7 @@ def main():
     pass
 \`\`\`
 
-> ** Complete Example:** [Example Name](https://github.com/ameno-/acidbath-code/tree/main/examples/...)
+> ** Complete Example:** [Example Name](https://github.com/ameno-/acidbath-code/tree/main/agentic-patterns/...)
 > Complete implementation from the 'Section Name' section.
 > **Language:** python | **Lines:** 87
 ```
@@ -120,13 +119,13 @@ The `manifest.json` file maps blog posts to extracted examples:
   "generated": "2025-12-23T...",
   "posts": {
     "agent-architecture": {
-      "title": "Building Multi-Agent Architectures",
+      "title": "Agent Architecture: From Custom Agents to Effective Delegation",
       "path": "src/content/blog/agent-architecture.md",
       "extracted_examples": [
         {
           "name": "poc-agent-custom",
           "category": "agentic-patterns",
-          "path": "examples/agentic-patterns/agent-architecture/poc-agent-custom",
+          "path": "agentic-patterns/agent-architecture/poc-agent-custom",
           "language": "python",
           "lines": 132,
           "section": "## POC: Building a Custom Agent"
@@ -171,7 +170,7 @@ The audit checks:
 from adws.adw_modules.code_validator import validate_directory
 from pathlib import Path
 
-results = validate_directory(Path("~/dev/acidbath-code/examples"))
+results = validate_directory(Path("~/dev/acidbath-code"))
 for path, result in results.items():
     if not result.valid:
         print(f"FAIL: {path} - {result.message}")

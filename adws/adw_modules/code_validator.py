@@ -225,18 +225,23 @@ def validate_code_reference(url: str, timeout: int = 5) -> ValidationResult:
 
     # For now, just validate structure (don't make HTTP requests in validation)
     # Full link checking can be done in CI/CD
-    expected_pattern = 'https://github.com/ameno-/acidbath-code/tree/main/examples/'
-    if url.startswith(expected_pattern):
-        return ValidationResult(
-            valid=True,
-            message="GitHub URL structure is valid"
-        )
-    else:
-        return ValidationResult(
-            valid=False,
-            message="URL does not match expected acidbath-code repository pattern",
-            details=f"Expected to start with: {expected_pattern}"
-        )
+    # Categories are at root level: agentic-patterns/, production-patterns/, workflow-tools/
+    valid_categories = ['agentic-patterns/', 'production-patterns/', 'workflow-tools/']
+    base_pattern = 'https://github.com/ameno-/acidbath-code/tree/main/'
+
+    if url.startswith(base_pattern):
+        path_after_base = url[len(base_pattern):]
+        if any(path_after_base.startswith(cat) for cat in valid_categories):
+            return ValidationResult(
+                valid=True,
+                message="GitHub URL structure is valid"
+            )
+
+    return ValidationResult(
+        valid=False,
+        message="URL does not match expected acidbath-code repository pattern",
+        details=f"Expected: {base_pattern}<category>/<post-slug>/<example-name>"
+    )
 
 
 def validate_code_block(code: str, language: str, filepath: Optional[str] = None) -> ValidationResult:

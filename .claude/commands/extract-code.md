@@ -54,9 +54,9 @@ $ARGUMENTS - Blog post path or "all" to process all posts
 
 ## Output Location
 
-Extracted code is organized in acidbath-code repository:
+Extracted code is organized in acidbath-code repository (categories at root level):
 ```
-acidbath-code/examples/{category}/{post-slug}/{example-name}/
+acidbath-code/{category}/{post-slug}/{example-name}/
 ├── README.md      # Context and usage instructions
 └── {code-file}    # The actual code
 ```

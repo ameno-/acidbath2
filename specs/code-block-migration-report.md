@@ -101,6 +101,7 @@ These blocks are above the transformation threshold (30 lines) but weren't match
 ### Scripts and Workflows
 - `adws/adw_extract_code_blocks.py` - Main extraction workflow
 - `adws/adw_transform_code_refs.py` - Blog post transformation workflow
+- `scripts/regenerate_readmes.py` - README regeneration utility
 
 ### Commands
 - `.claude/commands/extract-code.md` - Slash command for extraction
@@ -117,36 +118,35 @@ These blocks are above the transformation threshold (30 lines) but weren't match
 
 ## Repository Structure
 
-The acidbath-code repository now has this structure:
+The acidbath-code repository has categories at the root level:
 
 ```
 acidbath-code/
 ├── README.md
 ├── manifest.json
-├── examples/
-│   ├── agentic-patterns/
-│   │   ├── agent-architecture/
-│   │   │   ├── poc-simplest-custom/
-│   │   │   ├── poc-agent-custom/
-│   │   │   └── step-research-agent/
-│   │   └── context-engineering/
-│   │       └── when-you-need/
-│   ├── production-patterns/
-│   │   ├── directory-watchers/
-│   │   │   ├── step-configuration-file/
-│   │   │   ├── step-core-watcher/
-│   │   │   ├── step-image-generation/
-│   │   │   └── security-validating-file/
-│   │   └── document-generation-skills/
-│   │       ├── step-setup-configuration/
-│   │       ├── step-powerpoint-generation/
-│   │       ├── step-pdf-generation/
-│   │       └── step-pipeline-orchestration/
-│   └── workflow-tools/
-│       ├── single-file-scripts/
-│       │   └── complete-working-example/
-│       └── workflow-prompts/
-│           └── poc-working-workflow/
+├── agentic-patterns/
+│   ├── agent-architecture/
+│   │   ├── poc-simplest-custom/
+│   │   ├── poc-agent-custom/
+│   │   └── step-research-agent/
+│   └── context-engineering/
+│       └── when-you-need/
+├── production-patterns/
+│   ├── directory-watchers/
+│   │   ├── step-configuration-file/
+│   │   ├── step-core-watcher/
+│   │   ├── step-image-generation/
+│   │   └── security-validating-file/
+│   └── document-generation-skills/
+│       ├── step-setup-configuration/
+│       ├── step-powerpoint-generation/
+│       ├── step-pdf-generation/
+│       └── step-pipeline-orchestration/
+├── workflow-tools/
+│   ├── single-file-scripts/
+│   │   └── complete-working-example/
+│   └── workflow-prompts/
+│       └── poc-working-workflow/
 └── scripts/
     └── validate-all.py
 ```

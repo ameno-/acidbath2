@@ -8,6 +8,7 @@ This package provides the core modules for Jerry's ADW system:
 - git_ops: Git operations
 - github: GitHub API operations
 - pattern_executor: Execute bundled Fabric patterns via Claude SDK
+- openrouter_image: Image generation via OpenRouter API (Nano Banana fallback)
 """
 
 from .data_types import (

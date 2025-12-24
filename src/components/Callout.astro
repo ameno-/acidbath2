@@ -1,0 +1,187 @@
+---
+interface Props {
+  type: 'quote' | 'info' | 'warning' | 'danger' | 'success' | 'insight' | 'data';
+  title?: string;
+  author?: string;
+}
+
+const { type, title, author } = Astro.props;
+
+const variants = {
+  quote: {
+    icon: '"',
+    borderColor: 'var(--color-foreground-alt)',
+    bgColor: 'transparent',
+    textColor: 'var(--color-foreground-alt)',
+    defaultTitle: 'Quote'
+  },
+  info: {
+    icon: 'ℹ',
+    borderColor: 'var(--color-info)',
+    bgColor: 'var(--color-info-bg)',
+    textColor: 'var(--color-info)',
+    defaultTitle: 'Info'
+  },
+  warning: {
+    icon: '⚠',
+    borderColor: 'var(--color-warning)',
+    bgColor: 'var(--color-warning-bg)',
+    textColor: 'var(--color-warning)',
+    defaultTitle: 'Warning'
+  },
+  danger: {
+    icon: '✕',
+    borderColor: 'var(--color-danger)',
+    bgColor: 'var(--color-danger-bg)',
+    textColor: 'var(--color-danger)',
+    defaultTitle: 'Danger'
+  },
+  success: {
+    icon: '✓',
+    borderColor: 'var(--color-success)',
+    bgColor: 'var(--color-success-bg)',
+    textColor: 'var(--color-success)',
+    defaultTitle: 'Success'
+  },
+  insight: {
+    icon: '★',
+    borderColor: 'var(--color-insight)',
+    bgColor: 'var(--color-insight-bg)',
+    textColor: 'var(--color-insight)',
+    defaultTitle: 'Key Insight'
+  },
+  data: {
+    icon: '#',
+    borderColor: 'var(--color-data)',
+    bgColor: 'var(--color-data-bg)',
+    textColor: 'var(--color-data)',
+    defaultTitle: 'Data'
+  }
+};
+
+const variant = variants[type];
+const displayTitle = title || variant.defaultTitle;
+---
+
+<div class={`callout callout-${type}`}>
+  {type === 'quote' && (
+    <div class="quote-mark">{variant.icon}</div>
+  )}
+  <div class="callout-header">
+    {type !== 'quote' && (
+      <span class="callout-icon">{variant.icon}</span>
+    )}
+    <span class="callout-title">{displayTitle}</span>
+  </div>
+  <div class="callout-content">
+    <slot />
+  </div>
+  {author && type === 'quote' && (
+    <div class="callout-author">— {author}</div>
+  )}
+</div>
+
+<style define:vars={{
+  borderColor: variant.borderColor,
+  bgColor: variant.bgColor,
+  textColor: variant.textColor
+}}>
+  .callout {
+    position: relative;
+    margin: var(--space-6) 0;
+    padding: var(--space-4);
+    border-left: 2px solid var(--borderColor);
+    background: var(--bgColor);
+    border-radius: var(--radius-sm);
+  }
+
+  .callout-quote {
+    border-left-width: 2px;
+    background: transparent;
+    padding-left: var(--space-8);
+  }
+
+  .callout-insight {
+    border-left-width: 4px;
+    background: linear-gradient(
+      135deg,
+      var(--color-insight-bg) 0%,
+      transparent 100%
+    );
+    padding: var(--space-6);
+  }
+
+  .quote-mark {
+    position: absolute;
+    left: var(--space-2);
+    top: var(--space-2);
+    font-size: var(--text-4xl);
+    color: var(--borderColor);
+    line-height: 1;
+    font-weight: 800;
+    opacity: 0.3;
+  }
+
+  .callout-header {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    margin-bottom: var(--space-3);
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: var(--text-sm);
+    color: var(--textColor);
+  }
+
+  .callout-quote .callout-header {
+    display: none;
+  }
+
+  .callout-icon {
+    font-size: var(--text-lg);
+    line-height: 1;
+  }
+
+  .callout-title {
+    letter-spacing: 0.05em;
+  }
+
+  .callout-content {
+    color: var(--color-foreground);
+    line-height: 1.6;
+  }
+
+  .callout-quote .callout-content {
+    font-style: italic;
+    font-size: var(--text-lg);
+    color: var(--color-foreground-alt);
+  }
+
+  .callout-content :global(p:first-child) {
+    margin-top: 0;
+  }
+
+  .callout-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .callout-content :global(code) {
+    background: var(--color-background-code);
+    padding: var(--space-1) var(--space-2);
+    border-radius: var(--radius-sm);
+    font-size: 0.9em;
+  }
+
+  .callout-author {
+    margin-top: var(--space-4);
+    font-weight: 600;
+    font-style: normal;
+    color: var(--textColor);
+    text-align: right;
+  }
+
+  /* Nested element spacing */
+  .callout-content :global(> * + *) {
+    margin-top: var(--space-4);
+  }
+</style>

@@ -11,6 +11,7 @@ ACIDBATH is a practitioner-focused technical blog for senior engineers building 
 - [What is ACIDBATH?](#what-is-acidbath)
 - [Editorial Philosophy](#editorial-philosophy)
 - [Content Strategy](#content-strategy)
+- [Design System](#design-system)
 - [Project Structure](#project-structure)
 - [Jerry Framework](#jerry-framework)
 - [Available Workflows](#available-workflows)
@@ -108,6 +109,84 @@ Use `/extract-content` skill to generate derivatives from any published post.
 
 ---
 
+## Design System
+
+ACIDBATH uses a comprehensive design system featuring acid-green theming, fluid typography, and four key UI components that transform dense technical content into scannable, layered information.
+
+### Core Components
+
+| Component | Purpose | Variants/Features |
+|-----------|---------|-------------------|
+| **Callout** | Semantic content highlighting | 7 types: quote, info, warning, danger, success, insight, data |
+| **Collapse** | Collapsible sections | 3 variants: default, compact, prominent |
+| **CodeBlock** | Enhanced code display | Auto-collapse at 15+ lines, line numbers, copy button, syntax highlighting |
+| **TableOfContents** | Navigation sidebar | Hierarchical H2/H3 grouping, scroll progress, active tracking |
+
+### Typography
+
+Fluid typography using `clamp()` scales responsively from mobile (320px) to desktop (1440px):
+
+```css
+--text-xs: clamp(0.75rem, 0.7rem + 0.25vw, 0.875rem);
+--text-base: clamp(1rem, 0.95rem + 0.25vw, 1.125rem);
+--text-2xl: clamp(1.5rem, 1.3rem + 1vw, 2.25rem);
+```
+
+### Colors
+
+**Acid-Green Accent**: `#39ff14` (12.3:1 contrast ratio, WCAG AAA)
+
+**Semantic Colors**: Warning (orange), Info (blue), Success (green), Danger (red), Insight (acid-green), Data (purple)
+
+### Component Usage
+
+```astro
+---
+import Callout from '../../components/Callout.astro';
+import Collapse from '../../components/Collapse.astro';
+---
+
+<Callout type="insight" title="Key Takeaway">
+This design system reduced scrolling by 40% on 10,000-word posts.
+</Callout>
+
+<Collapse title="Advanced Details" variant="prominent">
+Content here auto-collapses to reduce initial cognitive load.
+</Collapse>
+```
+
+### Props Reference
+
+**Callout Props**:
+- `type`: `'quote' | 'info' | 'warning' | 'danger' | 'success' | 'insight' | 'data'` (required)
+- `title`: string (optional, uses default if omitted)
+- `author`: string (optional, quote variant only)
+
+**Collapse Props**:
+- `title`: string (required)
+- `preview`: string (optional, shown when collapsed)
+- `variant`: `'default' | 'compact' | 'prominent'` (default: 'default')
+- `defaultOpen`: boolean (default: false)
+
+**CodeBlock Props**:
+- `language`: string (for syntax highlighting)
+- `filename`: string (displayed in header)
+- `showLineNumbers`: boolean (default: true)
+- `maxPreviewLines`: number (default: 8)
+- `defaultExpanded`: boolean (default: false)
+
+**TableOfContents Props**:
+- `headings`: Array<{depth, slug, text}> (required)
+- `maxTopLevel`: number (default: 8, triggers "show more")
+
+### Documentation
+
+- **Full Reference**: `ai_docs/design-system.md`
+- **Component Showcase**: `src/content/blog/design-system-showcase.md`
+- **Implementation Details**: Each component file (`src/components/*.astro`)
+
+---
+
 ## Project Structure
 
 ```
@@ -115,9 +194,13 @@ acidbath2/
 ├── src/                          # Astro blog source
 │   ├── content/blog/             # Published posts (markdown)
 │   ├── components/               # Astro components
+│   │   ├── Callout.astro         # Semantic callout (7 variants)
+│   │   ├── Collapse.astro        # Collapsible sections
+│   │   ├── CodeBlock.astro       # Enhanced code display
+│   │   └── TableOfContents.astro # Hierarchical navigation
 │   ├── layouts/                  # Page layouts
 │   ├── pages/                    # Routes
-│   └── styles/                   # Global CSS (Tailwind v4)
+│   └── styles/                   # Global CSS (Tailwind v4 + Design tokens)
 │
 ├── blog/                         # Content pipeline
 │   ├── posts/                    # Source posts with metadata.json
@@ -143,6 +226,7 @@ acidbath2/
 │   ├── astro.md                  # Astro framework reference
 │   ├── tailwind-v4-astro.md      # Tailwind v4 patterns
 │   ├── content_strategy.md       # SEO and distribution
+│   ├── design-system.md          # Design system reference
 │   └── blog_audit.md             # Post quality audit
 │
 ├── specs/                        # Implementation specifications

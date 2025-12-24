@@ -1,19 +1,81 @@
 @import "tailwindcss";
 
 @theme {
-  /* Monospace Typography */
+  /* Typography - Font Families */
+  --font-family-sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   --font-family-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
 
-  /* Dark Mode Colors */
-  --color-background: #000;
-  --color-background-alt: #111;
-  --color-foreground: #fff;
-  --color-foreground-alt: #888;
-  --color-accent: #0f0;
+  /* Typography - Fluid Sizes using clamp() */
+  --text-xs: clamp(0.75rem, 0.7rem + 0.25vw, 0.875rem);
+  --text-sm: clamp(0.875rem, 0.8rem + 0.375vw, 1rem);
+  --text-base: clamp(1rem, 0.95rem + 0.25vw, 1.125rem);
+  --text-lg: clamp(1.125rem, 1rem + 0.625vw, 1.5rem);
+  --text-xl: clamp(1.25rem, 1.1rem + 0.75vw, 1.875rem);
+  --text-2xl: clamp(1.5rem, 1.3rem + 1vw, 2.25rem);
+  --text-3xl: clamp(1.875rem, 1.6rem + 1.375vw, 3rem);
+  --text-4xl: clamp(2.25rem, 1.9rem + 1.75vw, 3.5rem);
 
-  /* Spacing based on line-height rhythm */
+  /* Colors - Backgrounds */
+  --color-background: #0a0a0a;
+  --color-background-alt: #1a1a1a;
+  --color-background-hover: #252525;
+  --color-background-code: #111111;
+
+  /* Colors - Foreground */
+  --color-foreground: #ffffff;
+  --color-foreground-alt: #888888;
+  --color-foreground-muted: #666666;
+
+  /* Colors - Accent (Acid Green) */
+  --color-accent-primary: #39ff14;
+  --color-accent-secondary: #2ee60f;
+  --color-accent-muted: #1a8008;
+
+  /* Colors - Semantic */
+  --color-warning: #ff9800;
+  --color-warning-bg: rgba(255, 152, 0, 0.1);
+  --color-info: #2196f3;
+  --color-info-bg: rgba(33, 150, 243, 0.1);
+  --color-success: #4caf50;
+  --color-success-bg: rgba(76, 175, 80, 0.1);
+  --color-danger: #f44336;
+  --color-danger-bg: rgba(244, 67, 54, 0.1);
+  --color-insight: #39ff14;
+  --color-insight-bg: rgba(57, 255, 20, 0.1);
+  --color-data: #9c27b0;
+  --color-data-bg: rgba(156, 39, 176, 0.1);
+
+  /* Spacing - Modular Scale */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.25rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
+  --space-10: 2.5rem;
+  --space-12: 3rem;
+  --space-16: 4rem;
+
+  /* Legacy spacing for backward compatibility */
   --spacing-line: 1.5rem;
   --border-width-thick: 2px;
+
+  /* Border Radius */
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-full: 9999px;
+
+  /* Transitions */
+  --transition-fast: 0.1s ease-in-out;
+  --transition-base: 0.15s ease-in-out;
+  --transition-slow: 0.3s ease-in-out;
+
+  /* Legacy color aliases for backward compatibility */
+  --color-background: #0a0a0a;
+  --color-foreground: #ffffff;
+  --color-accent: #39ff14;
 }
 
 @layer base {
@@ -86,10 +148,11 @@
     color: var(--color-foreground);
     text-decoration-thickness: var(--border-width-thick);
     text-underline-offset: 3px;
+    transition: color var(--transition-base);
   }
 
   a:hover {
-    color: var(--color-accent);
+    color: var(--color-accent-primary);
   }
 
   /* Horizontal rules */
@@ -138,7 +201,7 @@
     overflow-x: auto;
     margin: var(--spacing-line) 0;
     padding: var(--spacing-line) 1ch;
-    background: var(--color-background-alt);
+    background: var(--color-background-code);
     border: var(--border-width-thick) solid var(--color-foreground-alt);
   }
 
@@ -224,7 +287,7 @@
   }
 
   .text-accent {
-    color: var(--color-accent);
+    color: var(--color-accent-primary);
   }
 
   .bg-alt {

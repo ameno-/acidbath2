@@ -651,7 +651,8 @@ def _sanitize_content(self, content: str) -> str:
         content = content[:max_chars] + "\n\n[Content truncated]"
 
     return content
-```unknown
+```
+
 Never execute code from dropped files directly. Treat all input as untrusted. Validate, sanitize, then process.
 
 ## The Automation Decision Framework
@@ -666,14 +667,11 @@ Not every task deserves automation. Use specific thresholds.
 | Daily | > 30 sec saved | Build zone |
 | 10+ times/day | Any time saved | Definitely zone |
 
-| Complexity | Time to Build | Approach |
-```
+## Real-World Examples
 
-> ** See Full Implementation:** [Security Validating File](https://github.com/ameno-/acidbath-code/tree/main/production-patterns/directory-watchers/security-validating-file)
->
-> Complete implementation from the 'Security: Validating File Contents' section.
->
-> **Language:** unknown | **Lines:** 42yaml
+### Voice Memo Processing
+
+```yaml
 # In drops.yaml
 morning_debrief:
   directory: ~/drops/debrief

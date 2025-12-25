@@ -18,13 +18,17 @@ keyTakeaways:
 
 Skills use 100 tokens of metadata. Then load instructions only when triggered.
 
-That's the hook. Now here's why it matters and when you should use Skills instead of the Model Context Protocol.
+That's a 99% reduction in upfront context cost compared to MCP servers. If you've been burning 10K-15K tokens on tool loading before your first message even lands, this is the architectural fix you didn't know existed.
+
+Here's why it matters and when Skills should replace your MCP servers.
 
 ## The Token Economics Problem
 
 I spent six months building MCP servers for everything. Context engineering, filesystem operations, web scraping. Every MCP server adds 10K-15K tokens to your context window upfront. Before Claude reads a single message.
 
-Then I discovered Skills. Same progressive disclosure pattern I use in my context engineering work, but built into Claude's architecture.
+Four MCP servers? That's 40,000-60,000 tokens consumed before you type "hello." On a 200K context window, you've burned 20-30% of your budget on overhead.
+
+Then I discovered Skills. Same progressive disclosure pattern I use in my context engineering work, but built into Claude's architecture. The difference is dramatic.
 
 Here's the data:
 
@@ -412,9 +416,9 @@ I tracked token usage across 100 conversations with various configurations:
 
 This matters when you hit Claude's 200K token context window. Every token saved in startup costs = more room for actual conversation.
 
-## What Doesn't Work
+## What Doesn't Work (Failures That Cost Me Hours)
 
-After converting 15+ workflows from MCP to Skills, here's what I learned the hard way:
+After converting 15+ workflows from MCP to Skills, here's what I learned the hard way—including the mistakes that cost me real debugging time:
 
 ### 1. Network Access Limitations
 
@@ -596,9 +600,9 @@ print(f"Output tokens: {response.usage.output_tokens}")
 
 Compare against previous MCP implementation. Skills should reduce total context.
 
-## Try It Now
+## Try It Now (20 Minutes to Your First Skill)
 
-Here's your immediate action to test Skills architecture:
+Here's your immediate action to test Skills architecture. You'll see the token savings in your first run:
 
 ### 1. Create Your First Skill
 
@@ -702,9 +706,11 @@ From 6 months of production use:
 - Custom Skills for domain-specific expertise
 - Progressive disclosure for complex instructions
 
-The token economics speak for themselves. Skills load 100 tokens upfront. MCP loads 10K-15K. For document generation and deterministic workflows, Skills win.
+The token economics speak for themselves. Skills load 100 tokens upfront. MCP loads 10K-15K. For document generation and deterministic workflows, Skills win decisively.
 
-For everything else, there's MCP.
+**100 tokens vs 15,000 tokens. That's not an optimization. That's a different architecture.**
+
+For external services and real-time data, MCP still wins. But for everything else? Skills are the future of context-efficient AI tooling.
 
 See our [Context Engineering](/context-engineering) post for details on MCP token consumption patterns. See [AI Document Skills](/document-generation-skills) for the complete Excel/PowerPoint/PDF generation pipeline.
 

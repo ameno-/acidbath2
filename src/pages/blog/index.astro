@@ -1,6 +1,6 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import BlogPostCard from '../../components/BlogPostCard.astro';
+import { BlogPostCard } from '@/components/ui/BlogPostCard';
 import { getCollection } from 'astro:content';
 
 const allPosts = await getCollection('blog', ({ data }) => !data.draft);
@@ -34,12 +34,15 @@ const sortedPosts = allPosts.sort(
 
 <style>
   .subtitle {
-    color: var(--color-text-muted, #888);
+    color: var(--color-foreground-muted);
     margin-top: calc(var(--spacing-line) * -0.5);
     margin-bottom: var(--spacing-line);
   }
 
   .posts-list {
     margin-top: var(--spacing-line);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
   }
 </style>

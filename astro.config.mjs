@@ -4,9 +4,11 @@ import rehypeMermaid from "rehype-mermaid";
 import rehypeCodeBlocks from "./scripts/rehype-code-blocks.mjs";
 import mdx from "@astrojs/mdx";
 
+import react from "@astrojs/react";
+
 export default defineConfig({
   site: "https://blog.amenoacids.com",
-  integrations: [mdx()],
+  integrations: [mdx(), react()],
   server: {
     port: process.env.WORKTREE_PORT_1 ? parseInt(process.env.WORKTREE_PORT_1) : 9103,
   },

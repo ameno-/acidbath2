@@ -255,4 +255,72 @@
   .code-block-container.expanded .code-fade {
     opacity: 0;
   }
+
+  /* GitHub Header Link */
+  .github-header-link {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-1, 0.25rem);
+    margin-left: auto;
+    color: var(--color-foreground-alt, #888);
+    font-size: var(--text-xs, 0.75rem);
+    font-weight: 600;
+    text-decoration: none;
+    text-transform: uppercase;
+    transition: color 0.15s ease;
+  }
+
+  .github-header-link:hover {
+    color: var(--color-accent-primary, #39ff14);
+  }
+
+  .github-header-link .github-icon {
+    font-size: 0.9em;
+  }
+
+  .github-header-link .github-text {
+    letter-spacing: 0.05em;
+  }
+
+  /* Code Block Footer (SEO Link) */
+  .code-block-footer {
+    background: var(--color-background-alt, #1a1a1a);
+    border: var(--border-width-thick, 2px) solid var(--color-foreground-alt, #333);
+    border-top: none;
+    padding: var(--space-2, 0.5rem) var(--space-4, 1rem);
+    border-radius: 0 0 var(--radius-sm, 4px) var(--radius-sm, 4px);
+  }
+
+  .github-source-link {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2, 0.5rem);
+    color: var(--color-foreground-alt, #888);
+    font-size: var(--text-sm, 0.875rem);
+    text-decoration: none;
+    font-family: var(--font-family-mono, monospace);
+    transition: color 0.15s ease;
+  }
+
+  .github-source-link:hover {
+    color: var(--color-accent-primary, #39ff14);
+  }
+
+  .github-source-link .github-arrow {
+    color: var(--color-accent-primary, #39ff14);
+    font-weight: bold;
+  }
+
+  /* Adjust container when footer is present */
+  .code-block-footer + .code-block-container,
+  .code-block-container:has(+ .code-block-footer) {
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+
+  /* When header + footer both present, remove middle borders */
+  .code-block-wrapper[data-has-github="true"] .code-block-container {
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+  }
 </style>

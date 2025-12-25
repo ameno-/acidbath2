@@ -69,6 +69,7 @@ This is the full code. Copy it, run it, modify it for your use case.
 Create `document_pipeline.py`:
 
 ```python
+# github: https://github.com/ameno-/acidbath-code/blob/main/production-patterns/document-generation-skills/document-pipeline/document_pipeline.py
 #!/usr/bin/env -S uv run
 # /// script
 # dependencies = [
@@ -342,6 +343,7 @@ if __name__ == "__main__":
 Create `sample_data.json`:
 
 ```json
+// github: https://github.com/ameno-/acidbath-code/blob/main/production-patterns/document-generation-skills/sample_data.json
 {
   "title": "Q4 2024 Business Review",
   "date": "January 2025",

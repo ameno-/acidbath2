@@ -50,6 +50,7 @@ Dolph demonstrates all five. Let's break down the pattern.
 ### 1. Dual-Mode Execution in One File
 
 ```typescript
+// github: https://github.com/ameno-/acidbath-code/blob/main/workflow-tools/single-file-scripts/complete-working-example/complete-working-example.ts
 #!/usr/bin/env bun
 /**
  * CLI Usage:

@@ -20,6 +20,8 @@ The workflow section is the most important thing you'll write in any agentic pro
 
 Not the metadata. Not the variables. Not the fancy control flow. The workflow—your step-by-step play for what the agent should do—drives 90% of the value you'll capture from AI-assisted engineering.
 
+Most developers write prompts like they're having a conversation. Then they wonder why their agents produce inconsistent results, skip steps, and require constant babysitting. The difference between prompts that work and prompts that require hand-holding is the workflow section.
+
 This post shows you how to build workflow prompts that actually work, with templates you can use today. It also covers the failure modes you'll encounter and how to calculate whether a workflow prompt is worth writing.
 
 ## The Core Pattern: Input → Workflow → Output
@@ -171,9 +173,9 @@ What makes workflow sections powerful:
    - Stop and inform user this isn't a Node project
 ```
 
-## When Workflow Prompts Fail
+## When Workflow Prompts Fail (Know This Before You Invest the Time)
 
-Workflow prompts are powerful, but they're not universal. Here are the failure modes I've hit in production:
+Workflow prompts are powerful, but they're not universal. Here are the failure modes I've hit in production—each one a lesson that cost real debugging time:
 
 **Overly complex tasks requiring human judgment mid-execution**
 
@@ -322,7 +324,7 @@ flowchart LR
 
 The workflow prompt transforms a vague request into an executable engineering plan. One workflow prompt executing for an hour can generate work that would take you 20 hours.
 
-## Building Your First Workflow Prompt
+## Building Your First Workflow Prompt (Start Today)
 
 Start with your most common task. The one you do every day. The one where you think "I should automate this."
 
@@ -334,7 +336,9 @@ Start with your most common task. The one you do every day. The one where you th
 
 Test it. Iterate. Add to your library.
 
-The prompt is the new fundamental unit of engineering. The workflow section is where that engineering actually happens.
+**The prompt is the new fundamental unit of engineering.** The workflow section is where that engineering actually happens. One good workflow prompt doesn't just save time—it compounds across every use, every team member, every project.
+
+Stop typing the same instructions. Start building reusable workflows.
 
 ---
 
@@ -349,5 +353,7 @@ The prompt is the new fundamental unit of engineering. The workflow section is w
 - Build a library of reusable workflow prompts for maximum team ROI
 - One good workflow prompt = 20+ hours of work
 
-**Try It Now:**
+**Try It Now (20 Minutes to First Workflow):**
 Copy the analyze.md template above, save to `.claude/commands/analyze.md`, and run `/analyze` on any file in your codebase. Time how long it takes to write the prompt and how long the analysis takes to run. Calculate your break-even point for the next time you need to analyze a file.
+
+If you use it 4 times, you've already recouped your investment. Everything after that is pure productivity gain. Share it with your team and multiply the returns.

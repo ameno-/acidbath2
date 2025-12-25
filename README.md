@@ -323,6 +323,23 @@ Jerry is the agentic workflow layer powering ACIDBATH's automation. It transform
 
 ## Skills & Commands
 
+### Copywriting Skills Framework
+
+ACIDBATH includes three specialized copywriting skills using the **suggest_edits pattern** - they suggest changes with clear rationale, never auto-apply:
+
+| Skill | Focus | When to Use | Command |
+|-------|-------|-------------|---------|
+| **Mad Men Copywriter** | Conversion | Sales pages, CTAs, ads, product launches | `/mad-men-edit {file}` |
+| **Master Copywriter** | Persuasion | Thought leadership, brand building, high-trust sales | `/master-copy-edit {file}` |
+| **Ameno Voice** | Simplification | Technical blog posts, concept explanations | `/ameno-finalize {file}` |
+
+**Pattern**: All skills use suggest_edits framework - they **suggest** edits with rationale, you apply selectively. Original files never modified.
+
+**Documentation**:
+- [ai_docs/copywriting-skills.md](ai_docs/copywriting-skills.md) - Full comparison and decision tree
+- [ai_docs/suggest-edits-framework.md](ai_docs/suggest-edits-framework.md) - Core framework docs
+- [samples/copywriting-demos/](samples/copywriting-demos/) - Sample outputs for each skill
+
 ### Project Skills
 
 | Skill | Description |
@@ -333,7 +350,7 @@ Jerry is the agentic workflow layer powering ACIDBATH's automation. It transform
 | `/commit` | Generate git commit |
 | `/pull_request` | Create PR with summary |
 | `/review` | Review code changes |
-| `/new-post` | Create AI-optimized blog post |
+| `/new-post` | Create AI-optimized blog post (ACIDBATH direct voice) |
 | `/ai-audit` | Audit post against ACIDBATH tenets |
 | `/extract-content` | Generate Twitter/LinkedIn/Newsletter from post |
 | `/analyze` | Run fabric patterns on content |
@@ -341,8 +358,13 @@ Jerry is the agentic workflow layer powering ACIDBATH's automation. It transform
 ### Content Commands
 
 ```bash
-# Create new blog post
+# Create new blog post (direct voice)
 /new-post "Context Engineering Deep Dive"
+
+# [OPTIONAL] Apply copywriting skill for suggestions
+/mad-men-edit content/landing-page.md        # For conversion focus
+/master-copy-edit content/thought-leadership.md  # For persuasion/authority
+/ameno-finalize src/content/blog/technical-post.md  # For simplification
 
 # Audit existing post
 /ai-audit src/content/blog/workflow-prompts.md

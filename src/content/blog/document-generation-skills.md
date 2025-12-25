@@ -18,11 +18,13 @@ keyTakeaways:
 
 Document generation is the unsexy automation that saves hours.
 
-Not code generation. Not chat interfaces. Document generation—the Excel reports, PowerPoint decks, and PDFs that every business runs on. Claude Skills turn this from hours of manual work into minutes of automated execution.
+Not code generation. Not chat interfaces. Document generation—the Excel reports, PowerPoint decks, and PDFs that every business runs on. The work nobody wants to do, but everyone needs done.
+
+Claude Skills turn this from hours of manual work into minutes of automated execution. And here's the uncomfortable truth: while developers chase the latest AI code generation trends, the teams saving the most time are automating their document pipelines.
 
 This is Part 1 of a series on AI document skills. We'll cover the core pattern, build a working POC, and measure what actually happens in production. Financial reporting is the example, but the pattern applies anywhere you need structured documents from data. For a deeper dive into Skills architecture and when to use Skills vs MCP servers, see [Claude Skills Deep Dive](/blog/claude-skills-deep-dive).
 
-## The Core Problem: Manual Documents Don't Scale
+## The Core Problem: Manual Documents Don't Scale (And Nobody Admits It)
 
 ```mermaid
 flowchart TD
@@ -39,7 +41,7 @@ flowchart TD
     style H fill:#ffcdd2
 ```
 
-This is busy work. Highly paid knowledge workers doing copy-paste operations.
+This is busy work. Highly paid knowledge workers doing copy-paste operations. The kind of work nobody puts on their resume but everyone does for half the week.
 
 ## The Pattern: Skills API Document Pipeline
 
@@ -440,9 +442,9 @@ flowchart LR
     style B fill:#c8e6c9
 ```
 
-## When This Fails: Honest Limitations
+## When This Fails: Know the Limits Before You Hit Them
 
-Skills are not magic. Here's what breaks.
+Skills are not magic. Here's what breaks—and the workarounds that actually work.
 
 ### Document Complexity Limits
 
@@ -670,8 +672,10 @@ This agent can be triggered by file drops in a watched directory—see the Direc
 - Mitigations: break complex docs into focused files, validate data, implement retries
 - Best fit: recurring reports, data-to-document conversion, template-based generation
 
-**Try It Now:**
+**Try It Now (10 Minutes to First Generation):**
 Copy the `document_pipeline.py` and `sample_data.json` files above. Run `uv run document_pipeline.py --data sample_data.json --output ./reports`. Check the generated files. Modify the prompts for your use case. Track token usage to estimate your costs.
+
+If you generate documents more than 5 times per month, this pays for itself in the first week. If you're generating them weekly, the ROI is 50x.
 
 ---
 

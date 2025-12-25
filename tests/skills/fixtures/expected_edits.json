@@ -1,0 +1,147 @@
+{
+  "description": "Expected edit suggestion structure for copywriting skills testing",
+  "version": "1.0.0",
+  "edit_suggestion_schema": {
+    "required_fields": [
+      "section_name",
+      "type",
+      "rationale",
+      "before",
+      "after"
+    ],
+    "section_types": [
+      "introduction",
+      "concept-explanation",
+      "failure-mode",
+      "takeaway",
+      "cta",
+      "technical",
+      "navigation"
+    ],
+    "output_format_markers": [
+      "## Suggested Edit",
+      "**Type**:",
+      "**Rationale**:",
+      "### Before",
+      "### After",
+      "### Apply This Edit?"
+    ]
+  },
+  "validation_rules": {
+    "no_file_modification": "Skills must never write to files, only output suggestions",
+    "rationale_required": "Every suggestion must include specific rationale",
+    "before_exact_match": "Before content must exactly match source",
+    "technical_preservation": "Technical sections (code, benchmarks) should rarely be edited",
+    "section_classification": "All sections must be classified by type",
+    "suggestion_limit": "Typically 5-10 suggestions per document for high-impact changes only"
+  },
+  "skill_specific_expectations": {
+    "mad_men_copywriter": {
+      "focus": "conversion",
+      "typical_sections": ["introduction", "cta", "concept-explanation"],
+      "techniques": ["pain-first hooks", "aggressive CTAs", "value by word 50"],
+      "tone": "aggressive, direct, action-oriented",
+      "avoid_sections": ["technical", "navigation"]
+    },
+    "master_copywriter": {
+      "focus": "persuasion",
+      "typical_sections": ["introduction", "concept-explanation", "takeaway"],
+      "techniques": ["storytelling", "social proof", "authority building", "credibility signals"],
+      "tone": "authoritative, professional, trust-building",
+      "avoid_sections": ["technical", "navigation"]
+    },
+    "ameno_voice": {
+      "focus": "simplification",
+      "typical_sections": ["concept-explanation", "failure-mode", "takeaway"],
+      "techniques": ["analogies", "conversational honesty", "direct clarity"],
+      "tone": "technical-friendly, approachable, honest",
+      "avoid_sections": ["introduction", "technical", "benchmarks", "navigation"],
+      "constraints": "No metaphor abuse, preserve direct introductions"
+    }
+  },
+  "test_scenarios": {
+    "scenario_1_basic_validation": {
+      "input": "sample_content.md",
+      "validate": [
+        "All suggestions have required fields",
+        "Section types are valid",
+        "Rationale is specific and actionable",
+        "No file modification occurred"
+      ]
+    },
+    "scenario_2_technical_preservation": {
+      "input": "sample_content.md",
+      "validate": [
+        "Code blocks are not edited",
+        "Benchmark tables are not edited",
+        "Technical definitions preserve accuracy",
+        "Navigation elements unchanged"
+      ]
+    },
+    "scenario_3_section_classification": {
+      "input": "sample_content.md",
+      "validate": [
+        "Introduction classified correctly",
+        "Concept explanations identified",
+        "Failure modes recognized",
+        "CTAs identified",
+        "Technical sections flagged"
+      ]
+    },
+    "scenario_4_skill_differentiation": {
+      "input": "sample_content.md",
+      "validate": [
+        "Mad Men focuses on conversion",
+        "Master focuses on persuasion",
+        "Ameno focuses on simplification",
+        "Each produces different suggestions for same section"
+      ]
+    },
+    "scenario_5_edge_cases": {
+      "test_already_optimized": {
+        "input": "Edge Case: Already Optimized Content section",
+        "expected": "Minimal or no suggestions - content already strong"
+      },
+      "test_minimal_content": {
+        "input": "Edge Case: Minimal Content section",
+        "expected": "No suggestions or acknowledgment that content is too brief"
+      },
+      "test_pure_technical": {
+        "input": "Edge Case: Pure Technical Definition section",
+        "expected": "No suggestions - technical accuracy required"
+      }
+    },
+    "scenario_6_suggestion_limits": {
+      "input": "sample_content.md",
+      "validate": [
+        "Mad Men: 5-8 suggestions maximum",
+        "Master: 6-10 suggestions maximum",
+        "Ameno: 4-7 suggestions maximum",
+        "All focus on high-impact changes only"
+      ]
+    }
+  },
+  "format_validation": {
+    "header_pattern": "## Suggested Edit {N}: {Section Name}",
+    "required_sections": [
+      "Summary section with total counts",
+      "Individual edit suggestions",
+      "Sections Intentionally Preserved",
+      "Application Notes",
+      "Next Steps"
+    ],
+    "checklist_items": [
+      "[ ] Yes, apply as-is",
+      "[ ] Apply with modifications",
+      "[ ] Skip this edit"
+    ]
+  },
+  "anti_patterns_to_detect": {
+    "file_writing": "Skill should never call Write or Edit tools",
+    "vague_rationale": "Rationale like 'makes it better' without specifics",
+    "excessive_edits": "More than 10 suggestions indicates lack of selectivity",
+    "technical_modification": "Edits to code blocks or benchmarks without compelling reason",
+    "missing_preserved_section": "Should acknowledge sections intentionally not edited",
+    "inconsistent_format": "Output doesn't match standard template"
+  }
+}

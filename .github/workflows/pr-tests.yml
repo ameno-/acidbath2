@@ -4,6 +4,12 @@ on:
   pull_request:
     branches: [main]
     types: [opened, synchronize, reopened]
+  workflow_dispatch:
+    inputs:
+      pr_number:
+        description: 'PR number to test (optional)'
+        required: false
+        type: string
 
 permissions:
   contents: read
@@ -100,7 +106,7 @@ jobs:
             const total = '${{ steps.results.outputs.total }}';
             const status = '${{ steps.results.outputs.status }}';
             const emoji = '${{ steps.results.outputs.emoji }}';
-            const sha = context.sha.substring(0, 7);
+            const sha = (context.payload.pull_request?.head?.sha || context.sha).substring(0, 7);
             const previewUrl = '${{ steps.deploy.outputs.deployment-url }}';
 
             let body = `## ${emoji} PR Status Report\n\n`;
@@ -177,7 +183,7 @@ jobs:
             const emoji = '${{ steps.results.outputs.emoji }}';
             const passed = '${{ steps.results.outputs.passed }}';
             const failed = '${{ steps.results.outputs.failed }}';
-            const sha = context.sha.substring(0, 7);
+            const sha = (context.payload.pull_request?.head?.sha || context.sha).substring(0, 7);
             const prNumber = context.issue.number;
             const previewUrl = '${{ steps.deploy.outputs.deployment-url }}';
 

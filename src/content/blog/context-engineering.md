@@ -18,11 +18,13 @@ keyTakeaways:
 
 Context is finite. Every token your agent loads before it starts working is a tax on productivity.
 
+Most developers don't notice this tax until their agent slows down, loses track of earlier conversation, or hits the context ceiling mid-task. By then, they've been paying it on every request.
+
 This post shows you how to engineer context consumption—from basic token optimization with progressive disclosure, to large codebase mastery with semantic search. Working code, hard numbers, honest failure modes included.
 
 ## The Core Problem: Context is Precious
 
-Your context window is your budget. MCP servers spend it like a trust fund kid.
+Your context window is your budget. MCP servers spend it like a trust fund kid with no concept of scarcity.
 
 ```mermaid
 flowchart TD
@@ -410,7 +412,7 @@ Result: 5 minutes, autonomous, $0.60
 
 ## When This Fails: Honest Limitations
 
-Both patterns have failure modes. Here's what doesn't work.
+Both patterns have failure modes. Here's what doesn't work—learned through production deployments, not theory.
 
 ### Progressive Disclosure Failures
 
@@ -529,12 +531,12 @@ Ask these questions:
 - Most codebases (< 100 files) don't need semantic tools
 - Tool sophistication matters more than raw model capability for large codebases
 
-## Try It Now
+## Try It Now (15 Minutes Each)
 
 **For progressive disclosure:**
-Create `~/tools/README.md` with an index of 3 UV scripts. Point your agent at it instead of loading an MCP server. Track token consumption with `/context` in Claude Code.
+Create `~/tools/README.md` with an index of 3 UV scripts. Point your agent at it instead of loading an MCP server. Track token consumption with `/context` in Claude Code. You should see 90%+ reduction in upfront token usage.
 
 **For semantic search:**
-Install Serena MCP. Run `find_symbol` on a type in your codebase. Compare the results and token usage to `grep -r`. If you're touching more than 100 files, measure the difference.
+Install Serena MCP. Run `find_symbol` on a type in your codebase. Compare the results and token usage to `grep -r`. If you're touching more than 100 files, measure the difference—the gap is significant.
 
-The best context engineering is invisible. Your agent just works faster, costs less, and fails less often.
+**The best context engineering is invisible.** Your agent just works faster, costs less, and fails less often. That's not an optimization. That's a competitive advantage.

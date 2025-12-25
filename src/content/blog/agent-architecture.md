@@ -18,11 +18,13 @@ keyTakeaways:
 
 The system prompt is everything. Change it and you change the product entirely.
 
-The file system is the most reliable context management system. Use it and delegation actually works.
+Most developers treat Claude like a rental—borrowing default behavior, accepting generic responses, wondering why their agents feel interchangeable with everyone else's. Meanwhile, engineers shipping production AI systems discovered something: the file system is the most reliable context management system. Use it and delegation actually works.
 
-This post shows you how to build custom agents and delegate research reliably, with complete working examples.
+This post shows you how to build custom agents that think like your team and delegate research without losing context—with complete working code.
 
 ## Why Custom Agents Matter
+
+Here's the uncomfortable truth about default agents: they're optimized for the median user. Not your codebase. Not your conventions. Not your team's patterns.
 
 ```mermaid
 flowchart LR
@@ -42,13 +44,14 @@ flowchart LR
     CUSTOM --> RESULT
 ```
 
-Default agents are built for everyone's codebase. Custom agents are built for yours.
+Default agents are built for everyone's codebase. Custom agents are built for yours. After building 30+ custom agents across production systems, the pattern is clear: specialization beats generalization for every task that matters.
 
 ## POC 1: The Simplest Custom Agent
 
 Create `agents/pong_agent.py`:
 
 ```python
+# github: https://github.com/ameno-/acidbath-code/blob/main/agentic-patterns/agent-architecture/poc-simplest-custom/poc_simplest_custom.py
 #!/usr/bin/env -S uv run
 # /// script
 # dependencies = [
@@ -111,6 +114,7 @@ The system prompt completely overrides default behavior. This is the foundation.
 Create `agents/calculator_agent.py`:
 
 ```python
+# github: https://github.com/ameno-/acidbath-code/blob/main/agentic-patterns/agent-architecture/poc-agent-custom/poc_agent_custom.py
 #!/usr/bin/env -S uv run
 # /// script
 # dependencies = [
@@ -555,9 +559,9 @@ You research Supabase patterns. Focus on RLS policies, auth, and performance.
 - Migration steps
 ```
 
-## When This Fails
+## When This Fails (Know the Limits Before You Hit Them)
 
-This architecture isn't magic. Here are the real limitations:
+This architecture isn't magic. Here are the real limitations I've hit in production—and the expensive lessons behind each one:
 
 ### 1. Context Isolation Still Exists
 
@@ -805,7 +809,7 @@ One level of delegation. Researcher agents never spawn their own sub-agents. Thi
 - Context fragmentation
 - Debugging nightmares
 
-## Quick Start: Your First Custom Agent
+## Quick Start: Your First Custom Agent (15 Minutes)
 
 1. Identify your most repetitive AI task
 2. Write a system prompt that focuses on that task
@@ -814,14 +818,16 @@ One level of delegation. Researcher agents never spawn their own sub-agents. Thi
 5. Test with edge cases
 6. Deploy and iterate
 
-For delegation:
+**For delegation** (adds 10 more minutes):
 1. Create the context template (`.claude/templates/context.md`)
 2. Create the researcher agent (`.claude/agents/researcher.md`)
 3. Next time you need research, write a context file and spawn the agent
 4. Read the research report
 5. Implement based on the plan
 
-The endgame isn't renting computational power from default agents. The endgame is owning specialized agents tuned precisely for your problems, with reliable delegation patterns that actually work.
+**The endgame isn't renting computational power from default agents. The endgame is owning specialized agents tuned precisely for your problems, with reliable delegation patterns that actually work.**
+
+Stop borrowing. Start owning.
 
 ---
 

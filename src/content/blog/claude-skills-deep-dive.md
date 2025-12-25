@@ -44,6 +44,8 @@ The difference? Skills load on-demand. MCP loads everything upfront.
 
 Skills use a 3-tier progressive loading system. Here's the exact structure:
 
+![Skills 3-Tier Architecture](/assets/posts/in-post/v2-skills-tiers.png)
+
 ### Tier 1: Metadata (Loaded at Startup)
 
 ```yaml

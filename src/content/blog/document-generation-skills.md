@@ -60,6 +60,8 @@ flowchart TD
 
 The Skills API generates professional documents with formulas, charts, and formatting. You describe what you want; Claude builds it.
 
+![Document Generation Pipeline](/assets/posts/in-post/v2-doc-gen-pipeline.png)
+
 ## POC: Complete Working Implementation
 
 This is the full code. Copy it, run it, modify it for your use case.

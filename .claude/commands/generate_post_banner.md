@@ -1,15 +1,15 @@
 ---
 allowed-tools: Skill
-description: Generate high-quality banner images for blog posts (invokes generate-post-banner skill)
+description: Generate high-quality banner images for blog posts (invokes generate-design-asset skill with banner type)
 ---
 
 # Generate Post Banner
 
 Generate a banner image for the ACIDBATH blog post: $ARGUMENTS
 
-## ⚠️ Note: Enhanced Skill Available
+## ⚠️ Note: Now Part of Generalized Design Asset System
 
-This command now invokes the **generate-post-banner** skill, which provides:
+This command now invokes the **generate-design-asset** skill with `--asset-type banner`. The generalized system provides:
 - **5 distinct banner styles** (glass, isometric, blueprint, newspaper, glitch)
 - **Content-aware recommendations** based on post metadata
 - **Advanced Nano Banana prompting** for higher quality images
@@ -156,15 +156,17 @@ Resolution: 2560x1440 (16:9 aspect ratio)
 
 ## References
 
-- Full skill documentation: `.claude/skills/generate-post-banner/SKILL.md`
-- Style templates: `.claude/skills/generate-post-banner/STYLE_LIBRARY.md`
-- Mapping rules: `.claude/skills/generate-post-banner/CONTENT_STYLE_MAP.md`
-- Examples: `.claude/skills/generate-post-banner/EXAMPLES.md`
+- Full skill documentation: `.claude/skills/generate-design-asset/SKILL.md`
+- Banner style templates: `.claude/skills/generate-design-asset/assets/banner/STYLES.md`
+- Mapping rules: `.claude/skills/generate-design-asset/CONTENT_ASSET_MAP.md`
+- Banner examples: `.claude/skills/generate-design-asset/assets/banner/EXAMPLES.md`
+- **New**: Explore other asset types with `/generate-design-asset` command
 
 ---
 
 ## Version History
 
+- **v3.0** (2025-12-24): Migrated to generalized design asset system, now invokes generate-design-asset skill with banner asset type
 - **v2.1** (2025-12-23): OpenRouter API integration replaces MCP dependency for more reliable generation
 - **v2.0** (2025-12-23): Migrated to invoke generate-post-banner skill, maintains backward compatibility with `--style glitch --auto`
 - **v1.0** (Original): Simple glitch art generation only

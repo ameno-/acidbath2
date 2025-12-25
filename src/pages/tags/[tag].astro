@@ -1,6 +1,6 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import BlogPostCard from '../../components/BlogPostCard.astro';
+import { BlogPostCard } from '@/components/ui/BlogPostCard';
 import { getCollection } from 'astro:content';
 
 export async function getStaticPaths() {
@@ -67,15 +67,18 @@ const { posts } = Astro.props;
 
   h1 {
     margin-top: calc(var(--spacing-line) / 2);
-    color: var(--color-accent);
+    color: var(--color-accent-primary);
   }
 
   .subtitle {
-    color: var(--color-text-muted, #888);
+    color: var(--color-foreground-muted);
     margin-top: calc(var(--spacing-line) * -0.5);
   }
 
   .posts-list {
     margin-top: var(--spacing-line);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
   }
 </style>

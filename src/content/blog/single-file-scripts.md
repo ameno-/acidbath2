@@ -417,6 +417,8 @@ await close();
 
 Bun's killer feature: compile your script to a standalone executable with zero dependencies.
 
+![Single-File Compilation](/assets/posts/in-post/v2-single-file-compile.png)
+
 ```bash
 # Basic compilation
 bun build --compile ./dolph.ts --outfile dolph

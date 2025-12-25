@@ -56,6 +56,7 @@ Dolph demonstrates all five. Here's the architecture that makes it work.
 ### 1. Dual-Mode Execution in One File
 
 ```typescript
+// github: https://github.com/ameno-/acidbath-code/blob/main/workflow-tools/single-file-scripts/complete-working-example/complete-working-example.ts
 #!/usr/bin/env bun
 /**
  * CLI Usage:
@@ -422,6 +423,8 @@ await close();
 ## Compiling Bun Scripts to Binaries
 
 Bun's killer feature: compile your script to a standalone executable with zero dependencies.
+
+![Single-File Compilation](/assets/posts/in-post/v2-single-file-compile.png)
 
 ```bash
 # Basic compilation

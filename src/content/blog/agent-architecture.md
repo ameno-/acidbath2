@@ -51,6 +51,7 @@ Default agents are built for everyone's codebase. Custom agents are built for yo
 Create `agents/pong_agent.py`:
 
 ```python
+# github: https://github.com/ameno-/acidbath-code/blob/main/agentic-patterns/agent-architecture/poc-simplest-custom/poc_simplest_custom.py
 #!/usr/bin/env -S uv run
 # /// script
 # dependencies = [
@@ -113,6 +114,7 @@ The system prompt completely overrides default behavior. This is the foundation.
 Create `agents/calculator_agent.py`:
 
 ```python
+# github: https://github.com/ameno-/acidbath-code/blob/main/agentic-patterns/agent-architecture/poc-agent-custom/poc_agent_custom.py
 #!/usr/bin/env -S uv run
 # /// script
 # dependencies = [

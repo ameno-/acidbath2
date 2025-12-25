@@ -60,6 +60,7 @@ flowchart TB
 Create `drops.yaml`:
 
 ```yaml
+# github: https://github.com/ameno-/acidbath-code/blob/main/production-patterns/directory-watchers/step-configuration-file/step-configuration-file.yaml
 # Drop Zone Configuration
 # Each zone watches a directory and triggers an agent on file events
 
@@ -118,6 +119,7 @@ agents:
 Create `drop_watcher.py`:
 
 ```python
+# github: https://github.com/ameno-/acidbath-code/blob/main/production-patterns/directory-watchers/step-core-watcher/step_core_watcher.py
 #!/usr/bin/env -S uv run
 # /// script
 # dependencies = [
@@ -420,6 +422,7 @@ Analyze the following data file and provide insights.
 Create `agents/image_gen.py`:
 
 ```python
+# github: https://github.com/ameno-/acidbath-code/blob/main/production-patterns/directory-watchers/step-image-generation/step_image_generation.py
 #!/usr/bin/env -S uv run
 # /// script
 # dependencies = [

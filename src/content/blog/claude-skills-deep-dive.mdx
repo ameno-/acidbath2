@@ -20,6 +20,12 @@ Skills use 100 tokens of metadata. Then load instructions only when triggered.
 
 That's a 99% reduction in upfront context cost compared to MCP servers. If you've been burning 10K-15K tokens on tool loading before your first message even lands, this is the architectural fix you didn't know existed.
 
+import Callout from '../../components/Callout.astro';
+
+<Callout type="tip" title="The Token Math">
+100 tokens vs 15,000 tokens. Skills load 150x less upfront. That's not an optimization—it's a different architecture.
+</Callout>
+
 Here's why it matters and when Skills should replace your MCP servers.
 
 ## The Token Economics Problem
@@ -39,7 +45,7 @@ Here's the data:
 
 **Skills Token Cost (Progressive)**
 - Metadata at startup: ~100 tokens (64 char name + 1024 char description)
-- Full instructions when triggered: <5K tokens
+- Full instructions when triggered: less than 5K tokens
 - Reference files: 0 tokens until read
 
 The difference? Skills load on-demand. MCP loads everything upfront.
@@ -71,7 +77,7 @@ When Claude decides the Skill is relevant, it loads the full SKILL.md file. This
 - Error handling patterns
 - Links to reference files
 
-Recommended maximum: 500 lines. Typically costs <5K tokens.
+Recommended maximum: 500 lines. Typically costs under 5K tokens.
 
 ### Tier 3: Reference Files (Loaded on Demand)
 
@@ -418,6 +424,11 @@ I tracked token usage across 100 conversations with various configurations:
 
 This matters when you hit Claude's 200K token context window. Every token saved in startup costs = more room for actual conversation.
 
+<Callout type="info" title="Skills vs MCP Decision">
+**Use Skills for**: Document generation, deterministic workflows, template-based tasks, offline operations.
+**Use MCP for**: External APIs, real-time data, bidirectional communication, complex state.
+</Callout>
+
 ## What Doesn't Work (Failures That Cost Me Hours)
 
 After converting 15+ workflows from MCP to Skills, here's what I learned the hard way—including the mistakes that cost me real debugging time:
@@ -470,6 +481,10 @@ Skills work differently between claude.ai web interface and API:
 - No automatic discovery
 
 **Workaround**: Test in both environments. Don't assume behavior transfers.
+
+<Callout type="danger" title="Version Pinning Required">
+Using `"version": "latest"` means Anthropic can update the Skill between runs. Pin to specific versions in production: `"version": "1.2.0"`.
+</Callout>
 
 ### 4. File Lifetime Limitations
 

@@ -20,6 +20,12 @@ Document generation is the unsexy automation that saves hours.
 
 Not code generation. Not chat interfaces. Document generation—the Excel reports, PowerPoint decks, and PDFs that every business runs on. The work nobody wants to do, but everyone needs done.
 
+import Callout from '../../components/Callout.astro';
+
+<Callout type="tip" title="The Unsexy ROI">
+100 minutes manual → 10 minutes automated. That's 90 minutes per report. Do this quarterly and you've saved 6 hours/year per analyst. With 10 analysts, that's 60 hours/year on one workflow.
+</Callout>
+
 Claude Skills turn this from hours of manual work into minutes of automated execution. And here's the uncomfortable truth: while developers chase the latest AI code generation trends, the teams saving the most time are automating their document pipelines.
 
 This is Part 1 of a series on AI document skills. We'll cover the core pattern, build a working POC, and measure what actually happens in production. Financial reporting is the example, but the pattern applies anywhere you need structured documents from data. For a deeper dive into Skills architecture and when to use Skills vs MCP servers, see [Claude Skills Deep Dive](/blog/claude-skills-deep-dive).
@@ -441,6 +447,10 @@ flowchart LR
     style T fill:#c8e6c9
     style B fill:#c8e6c9
 ```
+
+<Callout type="warning" title="Complexity Limits">
+Keep it simple: 2-3 Excel sheets, 5-7 PowerPoint slides, 10-15 PDF pages. Beyond these limits, reliability degrades and generation time explodes.
+</Callout>
 
 ## When This Fails: Know the Limits Before You Hit Them
 

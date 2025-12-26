@@ -20,6 +20,12 @@ Context is finite. Every token your agent loads before it starts working is a ta
 
 Most developers don't notice this tax until their agent slows down, loses track of earlier conversation, or hits the context ceiling mid-task. By then, they've been paying it on every request.
 
+import Callout from '../../components/Callout.astro';
+
+<Callout type="tip" title="The 15% Rule">
+If your upfront context consumption exceeds 15% of your context window, you have an architecture problem. Four MCP servers at 10K tokens each = 20% gone before you type a single character.
+</Callout>
+
 This post shows you how to engineer context consumption—from basic token optimization with progressive disclosure, to large codebase mastery with semantic search. Working code, hard numbers, honest failure modes included.
 
 ## The Core Problem: Context is Precious
@@ -409,6 +415,10 @@ Agent:
 
 Result: 5 minutes, autonomous, $0.60
 ```
+
+<Callout type="warning" title="Semantic Search ≠ Silver Bullet">
+Semantic tools can't catch runtime-only issues, reflection-heavy code patterns, or cross-service boundaries. They excel at static analysis but won't save you from integration test failures.
+</Callout>
 
 ## When This Fails: Honest Limitations
 

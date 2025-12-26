@@ -207,19 +207,71 @@
     font-weight: 600;
   }
 
-  pre {
+  /* Base pre styles - only for non-Expressive Code blocks */
+  pre:not(.expressive-code pre) {
     white-space: pre;
     overflow-x: auto;
     margin: var(--spacing-line) 0;
     padding: var(--spacing-line) 1ch;
     background: var(--color-background-code);
     border: var(--border-width-thick) solid var(--color-foreground-alt);
-    line-height: 1.5; /* 1.4-1.5 for code */
+    line-height: 1.5;
   }
 
-  pre code {
+  pre:not(.expressive-code pre) code {
     font-weight: 500;
     font-size: var(--text-code);
+  }
+
+  /* Expressive Code enhancements */
+  .expressive-code {
+    margin: var(--space-6) 0;
+    font-size: var(--text-code);
+  }
+
+  .expressive-code .frame {
+    border-radius: var(--radius-md);
+    border: 1px solid var(--color-foreground-alt);
+    overflow: hidden;
+  }
+
+  .expressive-code pre {
+    margin: 0;
+    padding: var(--space-4);
+    background: var(--color-background-code) !important;
+    border: none;
+  }
+
+  .expressive-code code {
+    font-family: var(--font-family-mono);
+    font-size: var(--text-code);
+    line-height: 1.6;
+  }
+
+  /* Copy button styling */
+  .expressive-code .copy {
+    opacity: 0;
+    transition: opacity var(--transition-base);
+  }
+
+  .expressive-code:hover .copy {
+    opacity: 1;
+  }
+
+  /* Collapsible sections */
+  .expressive-code .ec-collapsed-section {
+    border-top: 1px dashed var(--color-foreground-alt);
+    background: var(--color-background-alt);
+  }
+
+  .expressive-code .ec-collapsed-section summary {
+    color: var(--color-accent-primary);
+    cursor: pointer;
+    padding: var(--space-2) var(--space-4);
+  }
+
+  .expressive-code .ec-collapsed-section summary:hover {
+    background: var(--color-background-hover);
   }
 
   /* Lists */

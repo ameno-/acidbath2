@@ -1,22 +1,27 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import BlogPostCard from '../components/BlogPostCard.astro';
+import { BlogPostCard } from '@/components/ui/BlogPostCard';
 import { getCollection } from 'astro:content';
 
 const allPosts = await getCollection('blog', ({ data }) => !data.draft);
 const recentPosts = allPosts
   .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
-  .slice(0, 3);
+  .slice(0, 6);
 ---
 
 <BaseLayout title="Production AI Engineering" description="Code-first deep dives on AI agents, context engineering, and production LLM patterns. No hype, just what works.">
 
-  <h1 class="page-title">Production AI Patterns for Senior Engineers</h1>
+  <section class="hero">
+    <h1 class="hero-title">Ship AI That Works</h1>
+    <p class="hero-subtitle">Production patterns for engineers who've seen their share of AI hype. Code-first tutorials, real benchmarks, honest failure modes.</p>
+  </section>
+
+  <hr />
 
   <section class="recent-posts">
-    <h2>Recent Posts</h2>
+    <h2>Latest Articles</h2>
     {recentPosts.length > 0 ? (
-      <div class="posts-list">
+      <div class="posts-grid">
         {recentPosts.map((post) => (
           <BlogPostCard
             title={post.data.title}
@@ -31,27 +36,64 @@ const recentPosts = allPosts
       <p class="text-alt">No posts yet. Check back soon.</p>
     )}
     {recentPosts.length > 0 && (
-      <p>
-        <a href="/blog">View all posts →</a>
+      <p class="view-all">
+        <a href="/blog">View all articles →</a>
       </p>
     )}
   </section>
 </BaseLayout>
 
 <style>
-  .page-title {
-    font-size: 1.1rem;
-    font-weight: 500;
-    color: var(--color-text-muted, #888);
-    margin-bottom: calc(var(--spacing-line) * 1.5);
-    letter-spacing: 0.02em;
+  .hero {
+    text-align: center;
+    padding: var(--space-8) 0;
+  }
+
+  .hero-title {
+    font-size: var(--text-3xl);
+    font-weight: 800;
+    color: var(--color-accent-primary);
+    margin: 0 0 var(--space-4);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .hero-subtitle {
+    font-size: var(--text-lg);
+    color: var(--color-foreground-muted);
+    max-width: 50ch;
+    margin: 0 auto;
+    line-height: 1.5;
   }
 
   .recent-posts h2 {
-    margin-bottom: var(--spacing-line);
+    margin-bottom: var(--space-6);
   }
 
-  .posts-list {
-    margin-bottom: calc(var(--spacing-line) * 2);
+  .posts-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: var(--space-6);
+    margin-bottom: var(--space-8);
+  }
+
+  @media (max-width: 768px) {
+    .posts-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .view-all {
+    text-align: center;
+  }
+
+  .view-all a {
+    font-weight: 600;
+    text-decoration: none;
+  }
+
+  .view-all a:hover {
+    text-decoration: underline;
+    text-decoration-thickness: 2px;
   }
 </style>

@@ -20,6 +20,12 @@ The workflow section is the most important thing you'll write in any agentic pro
 
 Not the metadata. Not the variables. Not the fancy control flow. The workflow—your step-by-step play for what the agent should do—drives 90% of the value you'll capture from AI-assisted engineering.
 
+import Callout from '../../components/Callout.astro';
+
+<Callout type="tip" title="The 90% Rule">
+Workflow sections are S-tier value with C-tier difficulty. They're the most valuable component AND the easiest to execute well. Numbered steps eliminate ambiguity.
+</Callout>
+
 Most developers write prompts like they're having a conversation. Then they wonder why their agents produce inconsistent results, skip steps, and require constant babysitting. The difference between prompts that work and prompts that require hand-holding is the workflow section.
 
 This post shows you how to build workflow prompts that actually work, with templates you can use today. It also covers the failure modes you'll encounter and how to calculate whether a workflow prompt is worth writing.
@@ -173,6 +179,10 @@ What makes workflow sections powerful:
    - Stop and inform user this isn't a Node project
 ```
 
+<Callout type="info" title="Break-Even Math">
+(Time to write prompt) / (Time saved per use) = minimum uses needed. A 60-minute workflow that saves 15 minutes per use pays off after 4 uses.
+</Callout>
+
 ## When Workflow Prompts Fail (Know This Before You Invest the Time)
 
 Workflow prompts are powerful, but they're not universal. Here are the failure modes I've hit in production—each one a lesson that cost real debugging time:
@@ -182,6 +192,10 @@ Workflow prompts are powerful, but they're not universal. Here are the failure m
 I tried building a workflow prompt for database migration planning. The prompt could analyze schema differences and generate SQL, but it couldn't decide which migrations were safe to auto-apply versus which needed DBA review. The decision tree had too many branches: data volume considerations, cross-region timing, rollback complexity, customer impact windows.
 
 The workflow kept requesting human input at steps 3, 5, 7, and 9 of a 12-step process. At that point, you're better off doing it interactively. Workflow prompts excel when the decision points are clear and the execution path is deterministic.
+
+<Callout type="warning" title="Human Checkpoint Limit">
+If your workflow has more than 2 "stop and ask the user" points, it's not a good fit. You're better off doing it interactively.
+</Callout>
 
 **Rule of thumb**: If your workflow has more than 2 "stop and ask the user" points, it's probably not a good fit.
 

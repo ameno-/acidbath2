@@ -1,6 +1,6 @@
 ---
 interface Props {
-  type: 'quote' | 'info' | 'warning' | 'danger' | 'success' | 'insight' | 'data';
+  type: 'note' | 'tip' | 'info' | 'warning' | 'danger' | 'quote';
   title?: string;
   author?: string;
 }
@@ -8,54 +8,47 @@ interface Props {
 const { type, title, author } = Astro.props;
 
 const variants = {
-  quote: {
-    icon: '"',
-    borderColor: 'var(--color-foreground-alt)',
-    bgColor: 'transparent',
-    textColor: 'var(--color-foreground-alt)',
-    defaultTitle: 'Quote'
+  note: {
+    icon: 'ℹ',
+    borderColor: '#1e3a8a', // blue-900
+    bgColor: 'rgba(23, 37, 84, 0.5)', // blue-950/50
+    textColor: '#60a5fa', // blue-400
+    defaultTitle: 'Note'
+  },
+  tip: {
+    icon: '💡',
+    borderColor: '#581c87', // purple-900
+    bgColor: 'rgba(59, 7, 100, 0.5)', // purple-950/50
+    textColor: '#c084fc', // purple-400
+    defaultTitle: 'Tip'
   },
   info: {
     icon: 'ℹ',
-    borderColor: 'var(--color-info)',
-    bgColor: 'var(--color-info-bg)',
-    textColor: 'var(--color-info)',
+    borderColor: '#1e3a8a', // blue-900
+    bgColor: 'rgba(23, 37, 84, 0.5)', // blue-950/50
+    textColor: '#60a5fa', // blue-400
     defaultTitle: 'Info'
   },
   warning: {
     icon: '⚠',
-    borderColor: 'var(--color-warning)',
-    bgColor: 'var(--color-warning-bg)',
-    textColor: 'var(--color-warning)',
+    borderColor: '#78350f', // amber-900
+    bgColor: 'rgba(69, 26, 3, 0.5)', // amber-950/50
+    textColor: '#fbbf24', // amber-400
     defaultTitle: 'Warning'
   },
   danger: {
-    icon: '✕',
-    borderColor: 'var(--color-danger)',
-    bgColor: 'var(--color-danger-bg)',
-    textColor: 'var(--color-danger)',
+    icon: '⛔',
+    borderColor: '#7f1d1d', // red-900
+    bgColor: 'rgba(69, 10, 10, 0.5)', // red-950/50
+    textColor: '#f87171', // red-400
     defaultTitle: 'Danger'
   },
-  success: {
-    icon: '✓',
-    borderColor: 'var(--color-success)',
-    bgColor: 'var(--color-success-bg)',
-    textColor: 'var(--color-success)',
-    defaultTitle: 'Success'
-  },
-  insight: {
-    icon: '★',
-    borderColor: 'var(--color-insight)',
-    bgColor: 'var(--color-insight-bg)',
-    textColor: 'var(--color-insight)',
-    defaultTitle: 'Key Insight'
-  },
-  data: {
-    icon: '#',
-    borderColor: 'var(--color-data)',
-    bgColor: 'var(--color-data-bg)',
-    textColor: 'var(--color-data)',
-    defaultTitle: 'Data'
+  quote: {
+    icon: '"',
+    borderColor: '#cbd5e1', // slate-300
+    bgColor: 'rgba(15, 23, 42, 0.5)', // slate-900/50
+    textColor: '#cbd5e1', // slate-300
+    defaultTitle: 'Quote'
   }
 };
 
@@ -96,19 +89,9 @@ const displayTitle = title || variant.defaultTitle;
   }
 
   .callout-quote {
-    border-left-width: 2px;
+    border-left-width: 4px;
     background: transparent;
     padding-left: var(--space-8);
-  }
-
-  .callout-insight {
-    border-left-width: 4px;
-    background: linear-gradient(
-      135deg,
-      var(--color-insight-bg) 0%,
-      transparent 100%
-    );
-    padding: var(--space-6);
   }
 
   .quote-mark {

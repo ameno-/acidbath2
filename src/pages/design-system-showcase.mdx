@@ -25,7 +25,7 @@ Let's explore each component.
 
 ## Callout Component
 
-Seven semantic variants highlight different content types.
+Six semantic variants highlight different content types.
 
 ### Quote Variant
 
@@ -65,29 +65,21 @@ TableOfContents now requires headings to have the depth, slug, and text properti
 
 **Usage**: Critical warnings, breaking changes, security issues
 
-### Success Variant
+### Note Variant
 
-<Callout type="success" title="Verified">
+<Callout type="note" title="Design Note">
 All components pass WCAG AA color contrast requirements (4.5:1 minimum). The acid-green accent achieves 12.3:1 against the dark background.
 </Callout>
 
-**Usage**: Confirmations, wins, verified solutions
+**Usage**: General notes, key information, design decisions
 
-### Insight Variant
+### Tip Variant
 
-<Callout type="insight" title="Key Takeaway">
+<Callout type="tip" title="Pro Tip">
 Fluid typography with clamp() eliminates breakpoint-specific font sizes. One declaration scales from mobile (320px) to desktop (1440px) while maintaining readability.
 </Callout>
 
-**Usage**: TLDR sections, key takeaways, critical insights
-
-### Data Variant
-
-<Callout type="data" title="Benchmark Results">
-Design system CSS adds 8KB gzipped. Bundle size increased 4.2% (target was under 10%). LCP improved from 2.1s to 1.8s due to font-display: swap strategy.
-</Callout>
-
-**Usage**: Metrics, benchmarks, numerical results
+**Usage**: Tips, best practices, actionable insights
 
 ## Collapse Component
 
@@ -297,12 +289,12 @@ Modular scale based on 0.25rem (4px) for 8px grid alignment:
 
 All semantic colors include foreground and background variants:
 
-- **Warning**: Orange (`#ff9800`) for gotchas
-- **Info**: Blue (`#2196f3`) for tips
-- **Success**: Green (`#4caf50`) for confirmations
-- **Danger**: Red (`#f44336`) for errors
-- **Insight**: Acid-green (`#39ff14`) for key takeaways
-- **Data**: Purple (`#9c27b0`) for metrics
+- **Note**: Blue for general information and design notes
+- **Tip**: Purple for helpful tips and best practices
+- **Info**: Blue for informational content
+- **Warning**: Amber for gotchas and performance considerations
+- **Danger**: Red for errors and critical warnings
+- **Quote**: Slate for quotes and testimonials
 
 ## Browser Compatibility
 
@@ -316,7 +308,7 @@ All semantic colors include foreground and background variants:
 
 ## Performance Impact
 
-<Callout type="data" title="Bundle Size Analysis">
+<Callout type="info" title="Bundle Size Analysis">
 
 - **Design System CSS**: 8KB gzipped
 - **Total Bundle Increase**: 4.2% (target: under 10%)
@@ -366,8 +358,8 @@ title: "My Post"
 import Callout from '../components/Callout.astro';
 import Collapse from '../components/Collapse.astro';
 
-<Callout type="insight">
-This is a key insight that will appear prominently.
+<Callout type="tip">
+This is a helpful tip that will appear prominently.
 </Callout>
 ```
 

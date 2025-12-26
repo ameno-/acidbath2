@@ -20,6 +20,12 @@ Document generation is the unsexy automation that saves hours.
 
 Not code generation. Not chat interfaces. Document generation—the Excel reports, PowerPoint decks, and PDFs that every business runs on. The work nobody wants to do, but everyone needs done.
 
+import Callout from '../../components/Callout.astro';
+
+<Callout type="tip" title="The Unsexy ROI">
+100 minutes manual → 10 minutes automated. That's 90 minutes per report. Do this quarterly and you've saved 6 hours/year per analyst. With 10 analysts, that's 60 hours/year on one workflow.
+</Callout>
+
 Claude Skills turn this from hours of manual work into minutes of automated execution. And here's the uncomfortable truth: while developers chase the latest AI code generation trends, the teams saving the most time are automating their document pipelines.
 
 This is Part 1 of a series on AI document skills. We'll cover the core pattern, build a working POC, and measure what actually happens in production. Financial reporting is the example, but the pattern applies anywhere you need structured documents from data. For a deeper dive into Skills architecture and when to use Skills vs MCP servers, see [Claude Skills Deep Dive](/blog/claude-skills-deep-dive).
@@ -72,7 +78,7 @@ This is the full code. Copy it, run it, modify it for your use case.
 
 Create `document_pipeline.py`:
 
-```python
+```python collapse={18-75}
 # github: https://github.com/ameno-/acidbath-code/blob/main/production-patterns/document-generation-skills/document-pipeline/document_pipeline.py
 #!/usr/bin/env -S uv run
 # /// script
@@ -187,7 +193,7 @@ Apply professional formatting with borders and clear sections.
 
 ### Step 3: PowerPoint Generation Function
 
-```python
+```python collapse={10-44}
 def generate_powerpoint(data: dict, output_dir: Path) -> dict:
     """
     Generate executive presentation from data.
@@ -281,7 +287,7 @@ Format as a professional business document with:
 
 ### Step 5: Pipeline Orchestration
 
-```python
+```python collapse={10-59}
 def run_pipeline(data_path: str, output_dir: str) -> dict:
     """
     Run complete document generation pipeline.
@@ -441,6 +447,10 @@ flowchart LR
     style T fill:#c8e6c9
     style B fill:#c8e6c9
 ```
+
+<Callout type="warning" title="Complexity Limits">
+Keep it simple: 2-3 Excel sheets, 5-7 PowerPoint slides, 10-15 PDF pages. Beyond these limits, reliability degrades and generation time explodes.
+</Callout>
 
 ## When This Fails: Know the Limits Before You Hit Them
 

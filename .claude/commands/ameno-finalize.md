@@ -63,7 +63,32 @@ For sections that benefit from Ameno voice:
 - Style without fluff
 - "The optimization is invisible. Your agent just works faster."
 
-### 4. Avoid Anti-Patterns
+### 4. Typography Review
+
+Before generating edit suggestions, verify typography compliance:
+
+**Callout Variants Check**:
+- Valid: `note`, `tip`, `info`, `warning`, `danger`, `quote`
+- Deprecated (flag for fix): `success`, `insight`, `data`
+
+**Code Block Check**:
+- Blocks >15 lines should have `collapse={lines}` meta-string
+- Example: ` ```python collapse={12-50} `
+
+If deprecated callouts or missing collapse are found, add to suggestions output:
+
+```markdown
+## Typography Issues Found
+
+**Deprecated Callout Variants**:
+- Line X: `type="success"` → Change to `type="tip"` or `type="note"`
+- Line Y: `type="insight"` → Change to `type="note"` or `type="tip"`
+
+**Code Blocks Missing Collapse**:
+- Lines A-B: 45-line Python block → Add `collapse={12-45}`
+```
+
+### 5. Avoid Anti-Patterns
 
 Do NOT suggest edits that:
 - [ ] Add forced metaphors where direct explanation works
@@ -72,7 +97,7 @@ Do NOT suggest edits that:
 - [ ] Add "Think of it like..." unnecessary analogies
 - [ ] Overuse "here's where things get weird" style phrases
 
-### 5. Output Suggestions Only
+### 6. Output Suggestions Only
 
 **NEVER write to the file**. Only output suggestions in suggest_edits format.
 

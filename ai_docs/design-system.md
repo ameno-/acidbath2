@@ -74,12 +74,12 @@ Uses `clamp()` for responsive scaling without media queries:
 
 | Type | Foreground | Background | Use Case |
 |------|------------|------------|----------|
+| Note | `#6b7280` | `rgba(107, 114, 128, 0.1)` | Supplementary info |
+| Tip | `#39ff14` | `rgba(57, 255, 20, 0.1)` | Helpful suggestions |
+| Info | `#2196f3` | `rgba(33, 150, 243, 0.1)` | Reference material |
 | Warning | `#ff9800` | `rgba(255, 152, 0, 0.1)` | Cautions, gotchas |
-| Info | `#2196f3` | `rgba(33, 150, 243, 0.1)` | Tips, references |
-| Success | `#4caf50` | `rgba(76, 175, 80, 0.1)` | Confirmations, wins |
 | Danger | `#f44336` | `rgba(244, 67, 54, 0.1)` | Errors, critical warnings |
-| Insight | `#39ff14` | `rgba(57, 255, 20, 0.1)` | Key takeaways |
-| Data | `#9c27b0` | `rgba(156, 39, 176, 0.1)` | Metrics, benchmarks |
+| Quote | `#888888` | `rgba(136, 136, 136, 0.1)` | Testimonials, citations |
 
 ## Spacing
 
@@ -102,42 +102,49 @@ Uses `clamp()` for responsive scaling without media queries:
 
 ## Components
 
-### CodeBlock
+### CodeBlock (Expressive Code)
 
-Enhanced code presentation with collapsibility, line numbers, and syntax highlighting.
+Code presentation powered by Astro Expressive Code integration. Features automatic collapsing, syntax highlighting, and copy functionality.
 
-**Props Interface**:
-```typescript
-interface Props {
-  code: string;
-  language?: string;
-  filename?: string;
-  highlightLines?: number[];
-  maxPreviewLines?: number;  // Default: 8
-  defaultExpanded?: boolean; // Default: false
-  showLineNumbers?: boolean; // Default: true
-}
+**Expressive Code Features**:
+- Automatic syntax highlighting for 100+ languages
+- Copy-to-clipboard button
+- Line highlighting with `{1,3-5}` syntax
+- File tabs with `// filename.js` comments
+- Diff highlighting with `+`/`-` prefixes
+- Collapsible sections with `collapse={lines}` meta-string
+
+**Collapse Meta-String**:
+```markdown
+```python collapse={12-50}
+# Lines 1-11 visible
+# Lines 12-50 collapsed by default
+```
 ```
 
-**Auto-collapse Behavior**: Triggers at 15+ lines, shows 8-line preview
+**Auto-collapse Behavior**: Blocks >15 lines auto-collapse
 
-**Usage**:
-```astro
-<CodeBlock
-  code={`function calculateMetrics() {
-  // Implementation
-}`}
-  language="javascript"
-  filename="metrics.js"
-  highlightLines={[2, 5]}
-/>
+**Line Highlighting**:
+```markdown
+```typescript {2,5-7}
+// Line 2 and lines 5-7 will be highlighted
+```
+```
+
+**File Tabs**:
+```markdown
+```typescript
+// src/utils/helpers.ts
+export function helper() {}
+```
 ```
 
 **Visual Features**:
-- Acid-green syntax theme (keywords: `#39ff14`, strings: warm orange, comments: muted green)
-- Fade gradient overlay for collapsed state
-- Copy-to-clipboard with visual feedback
-- Language/filename badges in header
+- Acid-green syntax theme matching ACIDBATH aesthetic
+- JetBrains Mono font (85-90% of body size)
+- Copy button with "Copied!" feedback
+- Expand/collapse toggle for long blocks
+- Line numbers (optional)
 
 ### Callout
 
@@ -146,23 +153,27 @@ Semantic callouts for emphasizing content by type.
 **Props Interface**:
 ```typescript
 interface Props {
-  type: 'quote' | 'info' | 'warning' | 'danger' | 'success' | 'insight' | 'data';
+  type: 'note' | 'tip' | 'info' | 'warning' | 'danger' | 'quote';
   title?: string;
   author?: string; // Quote variant only
 }
 ```
 
-**Variant Guide**:
+**Variant Guide (6 Semantic Variants)**:
 
 | Type | Border Color | Icon | When to Use |
 |------|--------------|------|-------------|
+| `note` | `#6b7280` | 📝 | Supplementary information |
+| `tip` | `#39ff14` | 💡 | Helpful suggestions, pro tips |
+| `info` | `#2196f3` | ℹ️ | Reference material, links |
+| `warning` | `#ff9800` | ⚠️ | Gotchas, edge cases |
+| `danger` | `#f44336` | ⛔ | Critical failures, errors |
 | `quote` | `#888888` | " | Testimonials, external quotes |
-| `info` | `#2196f3` | ℹ | Tips, reference material |
-| `warning` | `#ff9800` | ⚠ | Gotchas, edge cases |
-| `danger` | `#f44336` | ✕ | Critical failures, errors |
-| `success` | `#4caf50` | ✓ | Wins, confirmations |
-| `insight` | `#39ff14` | ★ | Key takeaways, TLDR |
-| `data` | `#9c27b0` | # | Metrics, benchmarks, numbers |
+
+**Deprecated Variants** (migrate to new types):
+- `success` → Use `tip` or `note`
+- `insight` → Use `tip` or `note`
+- `data` → Use `info` or `note`
 
 **Usage**:
 ```astro
@@ -296,14 +307,24 @@ All examples are copy-paste ready with realistic data.
 
 ## Performance Guidelines
 
-### Font Loading
-```html
-<link
-  href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700;800&display=swap"
-  rel="stylesheet"
-/>
+### Font Loading (Fontsource)
+
+Fonts are loaded via Fontsource npm packages (self-hosted, bundled automatically):
+
+```typescript
+// In BaseLayout.astro or similar
+import '@fontsource-variable/inter';
+import '@fontsource/jetbrains-mono/400.css';
+import '@fontsource/jetbrains-mono/500.css';
 ```
-**Strategy**: `font-display: swap` prevents FOIT (Flash of Invisible Text)
+
+**Benefits over CDN**:
+- Zero external network requests
+- Bundled with site assets
+- Better Core Web Vitals (no extra DNS lookup)
+- Works offline
+
+**Strategy**: `font-display: swap` configured in Fontsource prevents FOIT (Flash of Invisible Text)
 
 ### Animation
 - Use CSS `transform` (GPU-accelerated) over `left`/`top`
@@ -365,13 +386,14 @@ For existing ACIDBATH posts:
 
 ## Dependencies
 
-**Zero New Packages**: Built using existing infrastructure
+**Core Packages**:
 - Astro (component framework)
 - Tailwind v4 (styling foundation)
 - TypeScript (type safety)
 - Playwright (testing)
-
-**Font CDN**: Google Fonts (Inter, JetBrains Mono)
+- astro-expressive-code (code blocks)
+- @fontsource-variable/inter (body font)
+- @fontsource/jetbrains-mono (code font)
 
 ## Maintenance
 

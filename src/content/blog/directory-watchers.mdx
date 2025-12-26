@@ -20,6 +20,12 @@ Directory watchers turn your file system into an AI interface.
 
 Drag a file into a folder. An agent processes it automatically. You get results. No chat. No prompting. No human-in-the-loop.
 
+import Callout from '../../components/Callout.astro';
+
+<Callout type="tip" title="The Invisible Interface">
+The best interface is no interface. Drop zones have zero learning curve because you're already dragging files into folders.
+</Callout>
+
 The result? Tasks that used to require opening a browser, typing a prompt, and waiting for a response now happen in the background while you work on something else. Teams running this pattern report 6+ hours saved per week on repetitive processing.
 
 This post shows you how to build a complete drop zone system with working Python code, then walks through what breaks in production and how to fix it.
@@ -59,7 +65,7 @@ flowchart TB
 
 Create `drops.yaml`:
 
-```yaml
+```yaml collapse={15-53}
 # github: https://github.com/ameno-/acidbath-code/blob/main/production-patterns/directory-watchers/step-configuration-file/step-configuration-file.yaml
 # Drop Zone Configuration
 # Each zone watches a directory and triggers an agent on file events
@@ -118,7 +124,7 @@ agents:
 
 Create `drop_watcher.py`:
 
-```python
+```python collapse={20-220}
 # github: https://github.com/ameno-/acidbath-code/blob/main/production-patterns/directory-watchers/step-core-watcher/step_core_watcher.py
 #!/usr/bin/env -S uv run
 # /// script
@@ -421,7 +427,7 @@ Analyze the following data file and provide insights.
 
 Create `agents/image_gen.py`:
 
-```python
+```python collapse={20-78}
 # github: https://github.com/ameno-/acidbath-code/blob/main/production-patterns/directory-watchers/step-image-generation/step_image_generation.py
 #!/usr/bin/env -S uv run
 # /// script
@@ -533,6 +539,10 @@ flowchart LR
     style H fill:#e3f2fd
     style J fill:#fff3e0
 ```
+
+<Callout type="warning" title="Production Reality Check">
+The POC works for demos. Production needs race condition handling, error recovery, file validation, and monitoring. Budget 3x the POC time for production hardening.
+</Callout>
 
 ## When Drop Zones Fail (And How to Fix Each One)
 
@@ -896,6 +906,10 @@ def _check_disk_space(self) -> bool:
 ```
 
 Check before each file. Pause processing if disk is full. Alert on low space. For systems processing 50GB/day, check every 10 files and alert at 10GB free.
+
+<Callout type="danger" title="Security First">
+Never execute code from dropped files directly. Treat all input as untrusted. Validate, sanitize, then process.
+</Callout>
 
 ### Security: Validating File Contents
 

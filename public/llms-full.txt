@@ -2,7 +2,7 @@
 
 > This file contains the full text of all ACIDBATH blog posts,
 > formatted for AI consumption.
-> Last updated: 2025-12-25T22:48:41.671Z
+> Last updated: 2025-12-26T04:52:42.766Z
 
 
 ---
@@ -32,6 +32,12 @@ Skills use 100 tokens of metadata. Then load instructions only when triggered.
 
 That's a 99% reduction in upfront context cost compared to MCP servers. If you've been burning 10K-15K tokens on tool loading before your first message even lands, this is the architectural fix you didn't know existed.
 
+import Callout from '../../components/Callout.astro';
+
+<Callout type="tip" title="The Token Math">
+100 tokens vs 15,000 tokens. Skills load 150x less upfront. That's not an optimization—it's a different architecture.
+</Callout>
+
 Here's why it matters and when Skills should replace your MCP servers.
 
 The Token Economics Problem
@@ -51,7 +57,7 @@ MCP Token Cost (Upfront)
 
 Skills Token Cost (Progressive)
 • Metadata at startup: 100 tokens (64 char name + 1024 char description)
-• Full instructions when triggered: <5K tokens
+• Full instructions when triggered: less than 5K tokens
 • Reference files: 0 tokens until read
 
 The difference? Skills load on-demand. MCP loads everything upfront.
@@ -77,7 +83,7 @@ When Claude decides the Skill is relevant, it loads the full SKILL.md file. This
 • Error handling patterns
 • Links to reference files
 
-Recommended maximum: 500 lines. Typically costs <5K tokens.
+Recommended maximum: 500 lines. Typically costs under 5K tokens.
 
 Tier 3: Reference Files (Loaded on Demand)
 
@@ -91,7 +97,7 @@ Working Example: Document Generation Skill
 
 Here's a real Skill from Anthropic's cookbook that generates Excel, PowerPoint, and PDF files:
 
-[code block]python
+[code block]python collapse={10-47}
 from anthropic import Anthropic
 
 client = Anthropic(apikey=APIKEY)
@@ -284,6 +290,11 @@ Savings: 27,803 tokens per conversation (85.7% reduction)
 
 This matters when you hit Claude's 200K token context window. Every token saved in startup costs = more room for actual conversation.
 
+<Callout type="info" title="Skills vs MCP Decision">
+Use Skills for: Document generation, deterministic workflows, template-based tasks, offline operations.
+Use MCP for: External APIs, real-time data, bidirectional communication, complex state.
+</Callout>
+
 What Doesn't Work (Failures That Cost Me Hours)
 
 After converting 15+ workflows from MCP to Skills, here's what I learned the hard way—including the mistakes that cost me real debugging time:
@@ -323,6 +334,10 @@ API:
 • No automatic discovery
 
 Workaround: Test in both environments. Don't assume behavior transfers.
+
+<Callout type="danger" title="Version Pinning Required">
+Using "version": "latest" means Anthropic can update the Skill between runs. Pin to specific versions in production: "version": "1.2.0".
+</Callout>
 • File Lifetime Limitations
 
 Generated files expire quickly on Anthropic's servers:
@@ -524,6 +539,12 @@ One file. Zero config. Full functionality.
 
 Dolph is 1,015 lines of TypeScript that do what an MCP server does—without the 47 configuration files, process management headaches, and "why won't it connect" debugging sessions.
 
+import Callout from '../../components/Callout.astro';
+
+<Callout type="tip" title="The Simplicity Test">
+If you need more than 200 lines, you probably need a server. Most tools never reach that point. Start simple—graduate only when you must.
+</Callout>
+
 No daemon processes to babysit. No YAML to misconfigure. No type definitions scattered across five directories. Just bun dolph.ts --task list-tables or import it as a library.
 
 This is the single-file script pattern that senior engineers are quietly adopting for AI tooling.
@@ -657,6 +678,10 @@ The binary includes:
 
 Ship it to users who don't have Bun installed. It just works.
 
+<Callout type="info" title="Dual-Mode Power">
+Same file works as CLI tool AND library import. Use import.meta.main (Bun) or if name == "main" (Python) to detect execution mode. This saves 40% of integration code.
+</Callout>
+
 What Doesn't Work (Know When to Stop)
 
 Single-file scripts have limits. Here's when you've outgrown the pattern:
@@ -766,6 +791,12 @@ Document generation is the unsexy automation that saves hours.
 
 Not code generation. Not chat interfaces. Document generation—the Excel reports, PowerPoint decks, and PDFs that every business runs on. The work nobody wants to do, but everyone needs done.
 
+import Callout from '../../components/Callout.astro';
+
+<Callout type="tip" title="The Unsexy ROI">
+100 minutes manual → 10 minutes automated. That's 90 minutes per report. Do this quarterly and you've saved 6 hours/year per analyst. With 10 analysts, that's 60 hours/year on one workflow.
+</Callout>
+
 Claude Skills turn this from hours of manual work into minutes of automated execution. And here's the uncomfortable truth: while developers chase the latest AI code generation trends, the teams saving the most time are automating their document pipelines.
 
 This is Part 1 of a series on AI document skills. We'll cover the core pattern, build a working POC, and measure what actually happens in production. Financial reporting is the example, but the pattern applies anywhere you need structured documents from data. For a deeper dive into Skills architecture and when to use Skills vs MCP servers, see Claude Skills Deep Dive.
@@ -845,6 +876,10 @@ Token efficiency note: Skills use 90% fewer tokens than manually instructing Cla
 When This Works: Ideal Use Cases
 
 [code block]
+
+<Callout type="warning" title="Complexity Limits">
+Keep it simple: 2-3 Excel sheets, 5-7 PowerPoint slides, 10-15 PDF pages. Beyond these limits, reliability degrades and generation time explodes.
+</Callout>
 
 When This Fails: Know the Limits Before You Hit Them
 
@@ -999,6 +1034,12 @@ The system prompt is everything. Change it and you change the product entirely.
 
 Most developers treat Claude like a rental—borrowing default behavior, accepting generic responses, wondering why their agents feel interchangeable with everyone else's. Meanwhile, engineers shipping production AI systems discovered something: the file system is the most reliable context management system. Use it and delegation actually works.
 
+import Callout from '../../components/Callout.astro';
+
+<Callout type="tip" title="The Identity Principle">
+Same model, same API, completely different behavior. The system prompt defines agent identity. Custom agents are built for your codebase—default agents are built for everyone's.
+</Callout>
+
 This post shows you how to build custom agents that think like your team and delegate research without losing context—with complete working code.
 
 Why Custom Agents Matter
@@ -1039,6 +1080,10 @@ Custom agents enable specialization. Specialization enables delegation. But dele
 
 The parent agent has limited information about what the sub-agent actually did. When something isn't 100% correct and you want to fix it—that's where everything breaks down.
 
+<Callout type="warning" title="The Delegation Trap">
+Sub-agents as implementers fail because the parent can't see what they did. When something breaks, nobody knows why. Sub-agents should be researchers—they gather context, the parent implements.
+</Callout>
+
 File-Based Context: The Solution
 
 [code block]
@@ -1075,18 +1120,18 @@ Step 4: Putting It Together
 Parent agent's workflow for delegating research:
 
 [code block]
-   Write to ./tmp/context-{task}.md:
+   Write to ./tmp/context-[task].md:
 • Current state of the feature
 • Specific questions to answer
 • Constraints and requirements
 • Expected output format
    [code block]
-   Task: "Research [topic]. Read context from ./tmp/context-{task}.md.
-         Write report to ./tmp/research-{task}.md"
+   Task: "Research [topic]. Read context from ./tmp/context-[task].md.
+         Write report to ./tmp/research-[task].md"
    Agent: researcher
    Model: haiku (fast, cheap)
    [code block]
-   Read ./tmp/research-{task}.md
+   Read ./tmp/research-[task].md
    [code block]
 
 POC 4: Service-Specific Researchers
@@ -1329,6 +1374,12 @@ Context is finite. Every token your agent loads before it starts working is a ta
 
 Most developers don't notice this tax until their agent slows down, loses track of earlier conversation, or hits the context ceiling mid-task. By then, they've been paying it on every request.
 
+import Callout from '../../components/Callout.astro';
+
+<Callout type="tip" title="The 15% Rule">
+If your upfront context consumption exceeds 15% of your context window, you have an architecture problem. Four MCP servers at 10K tokens each = 20% gone before you type a single character.
+</Callout>
+
 This post shows you how to engineer context consumption—from basic token optimization with progressive disclosure, to large codebase mastery with semantic search. Working code, hard numbers, honest failure modes included.
 
 The Core Problem: Context is Precious
@@ -1468,6 +1519,10 @@ With semantic tools (5 minutes):
 
 [code block]
 
+<Callout type="warning" title="Semantic Search ≠ Silver Bullet">
+Semantic tools can't catch runtime-only issues, reflection-heavy code patterns, or cross-service boundaries. They excel at static analysis but won't save you from integration test failures.
+</Callout>
+
 When This Fails: Honest Limitations
 
 Both patterns have failure modes. Here's what doesn't work—learned through production deployments, not theory.
@@ -1589,6 +1644,12 @@ Directory watchers turn your file system into an AI interface.
 
 Drag a file into a folder. An agent processes it automatically. You get results. No chat. No prompting. No human-in-the-loop.
 
+import Callout from '../../components/Callout.astro';
+
+<Callout type="tip" title="The Invisible Interface">
+The best interface is no interface. Drop zones have zero learning curve because you're already dragging files into folders.
+</Callout>
+
 The result? Tasks that used to require opening a browser, typing a prompt, and waiting for a response now happen in the background while you work on something else. Teams running this pattern report 6+ hours saved per week on repetitive processing.
 
 This post shows you how to build a complete drop zone system with working Python code, then walks through what breaks in production and how to fix it.
@@ -1630,6 +1691,10 @@ Create agents/imagegen.py:
 Data Flow: File Drop to Result
 
 [code block]
+
+<Callout type="warning" title="Production Reality Check">
+The POC works for demos. Production needs race condition handling, error recovery, file validation, and monitoring. Budget 3x the POC time for production hardening.
+</Callout>
 
 When Drop Zones Fail (And How to Fix Each One)
 
@@ -1774,6 +1839,10 @@ When disk space is low:
 
 Check before each file. Pause processing if disk is full. Alert on low space. For systems processing 50GB/day, check every 10 files and alert at 10GB free.
 
+<Callout type="danger" title="Security First">
+Never execute code from dropped files directly. Treat all input as untrusted. Validate, sanitize, then process.
+</Callout>
+
 Security: Validating File Contents
 
 Users drop files. Users are unpredictable. Protect your system.
@@ -1897,6 +1966,12 @@ The workflow section is the most important thing you'll write in any agentic pro
 
 Not the metadata. Not the variables. Not the fancy control flow. The workflow—your step-by-step play for what the agent should do—drives 90% of the value you'll capture from AI-assisted engineering.
 
+import Callout from '../../components/Callout.astro';
+
+<Callout type="tip" title="The 90% Rule">
+Workflow sections are S-tier value with C-tier difficulty. They're the most valuable component AND the easiest to execute well. Numbered steps eliminate ambiguity.
+</Callout>
+
 Most developers write prompts like they're having a conversation. Then they wonder why their agents produce inconsistent results, skip steps, and require constant babysitting. The difference between prompts that work and prompts that require hand-holding is the workflow section.
 
 This post shows you how to build workflow prompts that actually work, with templates you can use today. It also covers the failure modes you'll encounter and how to calculate whether a workflow prompt is worth writing.
@@ -1933,6 +2008,10 @@ Conditional branches - Handle different scenarios:
 
 [code block]
 
+<Callout type="info" title="Break-Even Math">
+(Time to write prompt) / (Time saved per use) = minimum uses needed. A 60-minute workflow that saves 15 minutes per use pays off after 4 uses.
+</Callout>
+
 When Workflow Prompts Fail (Know This Before You Invest the Time)
 
 Workflow prompts are powerful, but they're not universal. Here are the failure modes I've hit in production—each one a lesson that cost real debugging time:
@@ -1942,6 +2021,10 @@ Overly complex tasks requiring human judgment mid-execution
 I tried building a workflow prompt for database migration planning. The prompt could analyze schema differences and generate SQL, but it couldn't decide which migrations were safe to auto-apply versus which needed DBA review. The decision tree had too many branches: data volume considerations, cross-region timing, rollback complexity, customer impact windows.
 
 The workflow kept requesting human input at steps 3, 5, 7, and 9 of a 12-step process. At that point, you're better off doing it interactively. Workflow prompts excel when the decision points are clear and the execution path is deterministic.
+
+<Callout type="warning" title="Human Checkpoint Limit">
+If your workflow has more than 2 "stop and ask the user" points, it's not a good fit. You're better off doing it interactively.
+</Callout>
 
 Rule of thumb: If your workflow has more than 2 "stop and ask the user" points, it's probably not a good fit.
 

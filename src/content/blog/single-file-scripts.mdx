@@ -20,6 +20,12 @@ One file. Zero config. Full functionality.
 
 Dolph is 1,015 lines of TypeScript that do what an MCP server does—without the 47 configuration files, process management headaches, and "why won't it connect" debugging sessions.
 
+import Callout from '../../components/Callout.astro';
+
+<Callout type="tip" title="The Simplicity Test">
+If you need more than 200 lines, you probably need a server. Most tools never reach that point. Start simple—graduate only when you must.
+</Callout>
+
 No daemon processes to babysit. No YAML to misconfigure. No type definitions scattered across five directories. Just `bun dolph.ts --task list-tables` or import it as a library.
 
 This is the single-file script pattern that senior engineers are quietly adopting for AI tooling.
@@ -117,7 +123,7 @@ export interface TableInfo {
 
 ### 3. Dual-Gate Security Pattern
 
-```typescript
+```typescript collapse={6-23}
 const WRITE_PATTERNS = /^(INSERT|UPDATE|DELETE|DROP|CREATE|ALTER|TRUNCATE|REPLACE)/i;
 
 async function runQueryImpl(sql: string, allowWrite = false): Promise<QueryResult> {
@@ -444,6 +450,10 @@ The binary includes:
 - Native modules
 
 Ship it to users who don't have Bun installed. It just works.
+
+<Callout type="info" title="Dual-Mode Power">
+Same file works as CLI tool AND library import. Use `import.meta.main` (Bun) or `if __name__ == "__main__"` (Python) to detect execution mode. This saves 40% of integration code.
+</Callout>
 
 ## What Doesn't Work (Know When to Stop)
 

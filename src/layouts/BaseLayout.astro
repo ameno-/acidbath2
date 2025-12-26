@@ -3,6 +3,10 @@ import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import '../styles/global.css';
 
+// Import Fontsource fonts
+import '@fontsource-variable/inter';
+import '@fontsource/jetbrains-mono';
+
 interface Props {
   title: string;
   description?: string;
@@ -24,9 +28,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site || 'https://blog.ame
     <link rel="canonical" href={canonicalURL.href} />
     <meta property="og:url" content={canonicalURL.href} />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <!-- Fonts are loaded via Fontsource imports (self-hosted, bundled automatically) -->
     <!-- AI crawler guidance -->
     <link rel="ai-content" href="/llms.txt" type="text/markdown" />
     <title>{title} | ACIDBATH</title>

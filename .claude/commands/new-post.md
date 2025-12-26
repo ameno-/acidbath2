@@ -122,6 +122,49 @@ This section builds trust and helps readers avoid your mistakes.]
 "In the next post, we'll explore..." or "For more on X, see [Related Post]"]
 ```
 
+## Typography Guidelines
+
+### Callout Variants
+
+Use exactly 6 semantic variants:
+
+| Variant | Icon | When to Use |
+|---------|------|-------------|
+| `note` | 📝 | Supplementary information |
+| `tip` | 💡 | Helpful suggestions |
+| `info` | ℹ️ | Reference material |
+| `warning` | ⚠️ | Gotchas, edge cases |
+| `danger` | ⛔ | Critical failures, errors |
+| `quote` | " | Testimonials, external quotes |
+
+**Example**:
+```astro
+<Callout type="warning" title="Performance Gotcha">
+This approach causes N+1 queries at scale.
+</Callout>
+```
+
+### Code Blocks
+
+Use Expressive Code `collapse` meta-string for blocks >15 lines:
+
+```markdown
+```python collapse={12-50}
+# Your long code here
+# Lines 1-11 visible, 12-50 collapsed
+```
+```
+
+**Auto-collapse behavior**: Expressive Code auto-collapses at 15+ lines.
+
+### Heading Hierarchy
+
+For proper TOC generation:
+- Use H2 for main sections
+- Use H3 for subsections within H2s
+- Never skip levels (H2 → H4 is invalid)
+- Keep H1 for title only (generated from frontmatter)
+
 ## Checklist Before Publishing
 
 Before setting `draft: false`:
@@ -133,6 +176,12 @@ Before setting `draft: false`:
 - [ ] 3-5 key takeaways, each specific and actionable
 - [ ] Code examples are complete and runnable
 - [ ] Benchmarks include real numbers
+
+### Typography
+- [ ] Callouts use only 6 variants (note, tip, info, warning, danger, quote)
+- [ ] No deprecated callout types (success, insight, data)
+- [ ] Code blocks >15 lines have `collapse={lines}` meta-string
+- [ ] Heading hierarchy is valid (H2 → H3, no skipped levels)
 
 ### AI Optimization
 - [ ] `tldr` field is filled (required for llms.txt)

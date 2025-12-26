@@ -20,6 +20,12 @@ The system prompt is everything. Change it and you change the product entirely.
 
 Most developers treat Claude like a rental—borrowing default behavior, accepting generic responses, wondering why their agents feel interchangeable with everyone else's. Meanwhile, engineers shipping production AI systems discovered something: the file system is the most reliable context management system. Use it and delegation actually works.
 
+import Callout from '../../components/Callout.astro';
+
+<Callout type="tip" title="The Identity Principle">
+Same model, same API, completely different behavior. The system prompt defines agent identity. Custom agents are built for your codebase—default agents are built for everyone's.
+</Callout>
+
 This post shows you how to build custom agents that think like your team and delegate research without losing context—with complete working code.
 
 ## Why Custom Agents Matter
@@ -50,7 +56,7 @@ Default agents are built for everyone's codebase. Custom agents are built for yo
 
 Create `agents/pong_agent.py`:
 
-```python
+```python collapse={12-43}
 # github: https://github.com/ameno-/acidbath-code/blob/main/agentic-patterns/agent-architecture/poc-simplest-custom/poc_simplest_custom.py
 #!/usr/bin/env -S uv run
 # /// script
@@ -113,7 +119,7 @@ The system prompt completely overrides default behavior. This is the foundation.
 
 Create `agents/calculator_agent.py`:
 
-```python
+```python collapse={15-134}
 # github: https://github.com/ameno-/acidbath-code/blob/main/agentic-patterns/agent-architecture/poc-agent-custom/poc_agent_custom.py
 #!/usr/bin/env -S uv run
 # /// script
@@ -283,6 +289,10 @@ sequenceDiagram
 
 The parent agent has limited information about what the sub-agent actually did. When something isn't 100% correct and you want to fix it—that's where everything breaks down.
 
+<Callout type="warning" title="The Delegation Trap">
+Sub-agents as implementers fail because the parent can't see what they did. When something breaks, nobody knows why. Sub-agents should be researchers—they gather context, the parent implements.
+</Callout>
+
 ## File-Based Context: The Solution
 
 ```mermaid
@@ -322,7 +332,7 @@ Parent reads file on-demand when ready to implement.
 
 Create `.claude/templates/context.md`:
 
-```markdown
+```markdown collapse={10-29}
 # Project Context
 
 ## Current State
@@ -357,7 +367,7 @@ Create `.claude/templates/context.md`:
 
 Create `.claude/agents/researcher.md`:
 
-```markdown
+```markdown collapse={12-50}
 ---
 name: researcher
 description: Research sub-agent that gathers information and creates implementation plans
@@ -449,7 +459,7 @@ Parent agent's workflow for delegating research:
 
 1. Create context file:
    ```
-   Write to ./tmp/context-{task}.md:
+   Write to ./tmp/context-[task].md:
    - Current state of the feature
    - Specific questions to answer
    - Constraints and requirements
@@ -458,15 +468,15 @@ Parent agent's workflow for delegating research:
 
 2. Spawn research sub-agent:
    ```
-   Task: "Research [topic]. Read context from ./tmp/context-{task}.md.
-         Write report to ./tmp/research-{task}.md"
+   Task: "Research [topic]. Read context from ./tmp/context-[task].md.
+         Write report to ./tmp/research-[task].md"
    Agent: researcher
    Model: haiku (fast, cheap)
    ```
 
 3. Wait for completion, then:
    ```
-   Read ./tmp/research-{task}.md
+   Read ./tmp/research-[task].md
    ```
 
 4. Implement based on research report
@@ -482,7 +492,7 @@ Build specialized research agents for services you use frequently:
 
 Create `.claude/agents/stripe-researcher.md`:
 
-```markdown
+```markdown collapse={12-45}
 ---
 name: stripe-researcher
 description: Research Stripe integration patterns and best practices
@@ -533,7 +543,7 @@ files_to_modify:
 
 Create `.claude/agents/supabase-researcher.md`:
 
-```markdown
+```markdown collapse={10-24}
 ---
 name: supabase-researcher
 description: Research Supabase database patterns and RLS policies
@@ -779,7 +789,7 @@ Conversation history compacts. Files don't. This is the key insight.
 
 Add these to your research agent definitions:
 
-```markdown
+```markdown collapse={8-22}
 ## Mandatory Rules
 
 1. **Always read context file first**

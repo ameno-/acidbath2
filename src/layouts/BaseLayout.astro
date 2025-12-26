@@ -28,9 +28,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site || 'https://blog.ame
     <link rel="canonical" href={canonicalURL.href} />
     <meta property="og:url" content={canonicalURL.href} />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <!-- Preload critical font files for zero CLS -->
-    <link rel="preload" href="/node_modules/@fontsource-variable/inter/files/inter-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin />
-    <link rel="preload" href="/node_modules/@fontsource/jetbrains-mono/files/jetbrains-mono-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin />
+    <!-- Fonts are loaded via Fontsource imports (self-hosted, bundled automatically) -->
     <!-- AI crawler guidance -->
     <link rel="ai-content" href="/llms.txt" type="text/markdown" />
     <title>{title} | ACIDBATH</title>

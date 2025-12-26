@@ -117,7 +117,7 @@ export interface TableInfo {
 
 ### 3. Dual-Gate Security Pattern
 
-```typescript
+```typescript collapse={6-23}
 const WRITE_PATTERNS = /^(INSERT|UPDATE|DELETE|DROP|CREATE|ALTER|TRUNCATE|REPLACE)/i;
 
 async function runQueryImpl(sql: string, allowWrite = false): Promise<QueryResult> {

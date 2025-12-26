@@ -90,7 +90,7 @@ This index costs ~200 tokens. The agent knows WHERE tools are without loading th
 Each tool is a UV single-file script with embedded dependencies:
 
 **`~/tools/market/search.py`**
-```python
+```python collapse={22-72}
 # github: https://github.com/ameno-/acidbath-code/blob/main/agentic-patterns/context-engineering/when-you-need/when_you_need.py
 #!/usr/bin/env -S uv run
 # /// script

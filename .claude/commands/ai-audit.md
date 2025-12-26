@@ -42,6 +42,15 @@ fields for llms.txt and structured data.
 | Code languages | All code blocks have language |
 | Key Takeaways section | Has `## Key Takeaways` heading |
 
+### Typography Compliance
+
+| Check | Description |
+|-------|-------------|
+| Callout variants | Only uses 6 valid types: note, tip, info, warning, danger, quote |
+| No deprecated callouts | No success, insight, or data variants |
+| Code block collapse | Blocks >15 lines have `collapse={lines}` meta-string |
+| Font references | No Google Fonts CDN references (use Fontsource imports) |
+
 ## Audit Process
 
 1. Scan all files in `src/content/blog/`
@@ -137,6 +146,22 @@ async function auditPosts() {
     // Simple check: shouldn't have H4 without H3
     if (body.includes('#### ') && !body.includes('### ')) {
       warnings.push('Heading hierarchy issue: H4 without H3');
+    }
+
+    // Typography compliance checks
+    const deprecatedCallouts = body.match(/type="(success|insight|data)"/g);
+    if (deprecatedCallouts && deprecatedCallouts.length > 0) {
+      issues.push(`Deprecated callout types: ${deprecatedCallouts.join(', ')}`);
+    }
+
+    // Check for long code blocks without collapse meta-string
+    const codeBlockMatches = body.matchAll(/```(\w+)?(?:\s+collapse=\{[^}]+\})?\n([\s\S]*?)```/g);
+    for (const match of codeBlockMatches) {
+      const hasCollapse = match[0].includes('collapse={');
+      const lines = (match[2] || '').split('\n').length;
+      if (lines > 15 && !hasCollapse) {
+        warnings.push(`Code block with ${lines} lines missing collapse meta-string`);
+      }
     }
     
     // Categorize result

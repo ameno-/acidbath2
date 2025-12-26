@@ -129,7 +129,7 @@ description: Creates professional Excel spreadsheets, PowerPoint presentations, 
 
 ### Excel with Charts
 
-```python
+```python collapse={10-47}
 from anthropic import Anthropic
 
 client = Anthropic(api_key=API_KEY)

@@ -72,7 +72,7 @@ This is the full code. Copy it, run it, modify it for your use case.
 
 Create `document_pipeline.py`:
 
-```python
+```python collapse={18-75}
 # github: https://github.com/ameno-/acidbath-code/blob/main/production-patterns/document-generation-skills/document-pipeline/document_pipeline.py
 #!/usr/bin/env -S uv run
 # /// script
@@ -187,7 +187,7 @@ Apply professional formatting with borders and clear sections.
 
 ### Step 3: PowerPoint Generation Function
 
-```python
+```python collapse={10-44}
 def generate_powerpoint(data: dict, output_dir: Path) -> dict:
     """
     Generate executive presentation from data.
@@ -281,7 +281,7 @@ Format as a professional business document with:
 
 ### Step 5: Pipeline Orchestration
 
-```python
+```python collapse={10-59}
 def run_pipeline(data_path: str, output_dir: str) -> dict:
     """
     Run complete document generation pipeline.

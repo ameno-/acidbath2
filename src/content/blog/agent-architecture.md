@@ -50,7 +50,7 @@ Default agents are built for everyone's codebase. Custom agents are built for yo
 
 Create `agents/pong_agent.py`:
 
-```python
+```python collapse={12-43}
 # github: https://github.com/ameno-/acidbath-code/blob/main/agentic-patterns/agent-architecture/poc-simplest-custom/poc_simplest_custom.py
 #!/usr/bin/env -S uv run
 # /// script
@@ -113,7 +113,7 @@ The system prompt completely overrides default behavior. This is the foundation.
 
 Create `agents/calculator_agent.py`:
 
-```python
+```python collapse={15-134}
 # github: https://github.com/ameno-/acidbath-code/blob/main/agentic-patterns/agent-architecture/poc-agent-custom/poc_agent_custom.py
 #!/usr/bin/env -S uv run
 # /// script
@@ -322,7 +322,7 @@ Parent reads file on-demand when ready to implement.
 
 Create `.claude/templates/context.md`:
 
-```markdown
+```markdown collapse={10-29}
 # Project Context
 
 ## Current State
@@ -357,7 +357,7 @@ Create `.claude/templates/context.md`:
 
 Create `.claude/agents/researcher.md`:
 
-```markdown
+```markdown collapse={12-50}
 ---
 name: researcher
 description: Research sub-agent that gathers information and creates implementation plans
@@ -482,7 +482,7 @@ Build specialized research agents for services you use frequently:
 
 Create `.claude/agents/stripe-researcher.md`:
 
-```markdown
+```markdown collapse={12-45}
 ---
 name: stripe-researcher
 description: Research Stripe integration patterns and best practices
@@ -533,7 +533,7 @@ files_to_modify:
 
 Create `.claude/agents/supabase-researcher.md`:
 
-```markdown
+```markdown collapse={10-24}
 ---
 name: supabase-researcher
 description: Research Supabase database patterns and RLS policies
@@ -779,7 +779,7 @@ Conversation history compacts. Files don't. This is the key insight.
 
 Add these to your research agent definitions:
 
-```markdown
+```markdown collapse={8-22}
 ## Mandatory Rules
 
 1. **Always read context file first**
